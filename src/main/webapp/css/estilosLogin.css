@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url(../img_svg/fondosuperior.svg) no-repeat center  fixed;
+    background-size:cover;
+    height: 100vh;
+    display: flex; 
+    align-items: center;
+}
+
+
+
+.login-container {
+    /* background: rgba(255, 255, 255, 0.9); */
+    background-image: url(../img/rectanguloDegradado.png);
+    padding: 20px;
+    height: rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 300px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    padding-left: 30px;
+    flex: 1;
+}
+
+.input-container i {
+    position: absolute;
+    left: 10px;
+    color: #999;
+}
+
+/* Responsivo: centrado en pantallas pequeñas */
+@media (max-width: 992px) {
+    .login-column {
+        justify-content: center;
+        margin-left: 0;
+    }
+}
+
