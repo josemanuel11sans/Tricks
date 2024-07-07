@@ -183,7 +183,7 @@
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
                 <table class="table" id="example">
                     <thead class="thead-light">
-                    <tr align="center">
+                    <tr>
                         <th>Folio</th>
                         <th>Nombre</th>
                         <th>CURP</th>
