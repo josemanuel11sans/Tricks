@@ -7,8 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
+<%@ page import="mx.edu.utez.tricks.dao.DivisionDao" %>
+<%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
+<%@ page import="mx.edu.utez.tricks.dao.UsuarioDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.tricks.model.Grupo" %>
+<%@ page import="mx.edu.utez.tricks.model.DivicionesAcademicas" %>
+<%@ page import="mx.edu.utez.tricks.model.Carreras" %>
+<%@ page import="mx.edu.utez.tricks.model.Usuario" %>
+
+<%
+    GrupoDao grupoDao = new GrupoDao();
+    ArrayList<Grupo> listaGrupos = grupoDao.getAll();
+
+    DivisionDao divisionDao = new DivisionDao();
+    ArrayList<DivicionesAcademicas> listaDivisiones = divisionDao.getAll();
+
+    CarreraDao carreraDao = new CarreraDao();
+    ArrayList<Carreras> listaCarreras = carreraDao.getAll();
+
+    UsuarioDao usuarioDao = new UsuarioDao();
+    ArrayList<Usuario> listaDocentes = usuarioDao.getDocentes();
+%>
 
 <html>
 <head>
@@ -212,15 +232,30 @@
                     </div>
                     <div class="form-group">
                         <label for="nombreDocente" class="col-form-label">Docente:</label>
-                        <input type="text" class="form-control" id="nombreDocente" name="nombreDocente" placeholder="Introduce el nombre del docente" required>
+                        <select class="form-control" id="nombreDocente" name="nombreDocente" required>
+                            <option value="">Selecciona un docente</option>
+                            <% for (Usuario docente : listaDocentes) { %>
+                            <option value="<%= docente.getId_usuario() %>"><%= docente.getNombre() %> <%= docente.getApellido() %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nombreCarrera" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce la carrera del grupo" required>
+                        <select class="form-control" id="nombreCarrera" name="nombreCarrera" required>
+                            <option value="">Selecciona una carrera</option>
+                            <% for (Carreras carrera : listaCarreras) { %>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nombreDivision" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce la división del grupo" required>
+                        <select class="form-control" id="nombreDivision" name="nombreDivision" required>
+                            <option value="">Selecciona una división</option>
+                            <% for (DivicionesAcademicas division : listaDivisiones) { %>
+                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -232,10 +267,8 @@
     </div>
 </div>
 
-
 <!-- Modal modificar grupo -->
-<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -245,32 +278,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form action="<%= request.getContextPath() %>/ModificarGrupoServlet" method="post">
+                    <input type="hidden" id="idGrupo" name="idGrupo">
                     <div class="form-group">
                         <label for="modNombreGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="modNombreGrupo" placeholder="Introduce el nombre del grupo">
+                        <input type="text" class="form-control" id="modNombreGrupo" name="modNombreGrupo" required>
                     </div>
                     <div class="form-group">
                         <label for="modNombreDocente" class="col-form-label">Docente:</label>
-                        <input type="text" class="form-control" id="modNombreDocente" placeholder="Introduce el nombre del docente">
+                        <select class="form-control" id="modNombreDocente" name="modNombreDocente" required>
+                            <option value="">Selecciona un docente</option>
+                            <% for (Usuario docente : listaDocentes) { %>
+                            <option value="<%= docente.getId_usuario() %>"><%= docente.getNombre() %> <%= docente.getApellido() %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="modNombreCarrera" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="modNombreCarrera" placeholder="Introduce la carrera del grupo">
+                        <select class="form-control" id="modNombreCarrera" name="modNombreCarrera" required>
+                            <option value="">Selecciona una carrera</option>
+                            <% for (Carreras carrera : listaCarreras) { %>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                            <% } %>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="modNombreDivision" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="modNombreDivision" placeholder="Introduce la división del grupo">
+                        <select class="form-control" id="modNombreDivision" name="modNombreDivision" required>
+                            <option value="">Selecciona una división</option>
+                            <% for (DivicionesAcademicas division : listaDivisiones) { %>
+                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -310,6 +360,23 @@
                 }
             }
         }
+    });
+</script>
+<script>
+    $('#modificarGrupo').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var idGrupo = button.data('id');
+        var nombreGrupo = button.data('nombre');
+        var docente = button.data('docente');
+        var carrera = button.data('carrera');
+        var division = button.data('division');
+
+        var modal = $(this);
+        modal.find('#idGrupo').val(idGrupo);
+        modal.find('#modNombreGrupo').val(nombreGrupo);
+        modal.find('#modNombreDocente').val(docente);
+        modal.find('#modNombreCarrera').val(carrera);
+        modal.find('#modNombreDivision').val(division);
     });
 </script>
 </body>

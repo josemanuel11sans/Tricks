@@ -216,4 +216,30 @@ public class UsuarioDao {
         return count;
     }
 
+    // NO MOVER - ORLANDO
+    public ArrayList<Usuario> getDocentes() {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String query = "SELECT * FROM Usuario WHERE rol = 2"; // Suponiendo que el rol 2 es de docente
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Usuario docente = new Usuario();
+                docente.setId_usuario(rs.getInt("id_usuario"));
+                docente.setNombre(rs.getString("nombre"));
+                docente.setApellido(rs.getString("apellido"));
+                lista.add(docente);
+            }
+            ps.close();
+            con.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
 }
