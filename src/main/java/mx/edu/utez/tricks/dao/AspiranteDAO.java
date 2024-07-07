@@ -95,7 +95,10 @@ public class AspiranteDAO {
             ps.setString(1, aspirante.getEstado());
             ps.setString(2, aspirante.getFolioAspirante());
 
+
             int rowsAffected = ps.executeUpdate();
+            con.close();
+            ps.close();
             return rowsAffected > 0;
 
         } catch (SQLException e) {
