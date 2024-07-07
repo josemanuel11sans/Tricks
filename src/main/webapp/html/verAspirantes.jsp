@@ -280,7 +280,7 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>gi
                         <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="Nuevo Folio">
                     </div>
                     <div class="form-group">
