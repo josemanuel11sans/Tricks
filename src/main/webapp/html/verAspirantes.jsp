@@ -52,6 +52,24 @@
         .form-group{
             margin-bottom: .5rem !important;
         }
+        .activo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .inactivo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: red;
+            cursor: pointer;
+        }
+        td{
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +142,16 @@
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Grupo</option>
                         <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="26">26</option>
                         <option value="27">27</option>
                         <option value="31">31</option>
                         <option value="32">32</option>
@@ -133,13 +161,15 @@
                         <option value="42">42</option>
                         <option value="46">46</option>
                         <option value="47">47</option>
+                        <option value="51">51</option>
+                        <option value="52">52</option>
                     </select>
                 </div>
                 <div class="col-md-2">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Estatus</option>
-                        <option value="1">1</option>
-                        <option value="0">0</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -156,7 +186,6 @@
                     <tr align="center">
                         <th>Folio</th>
                         <th>Nombre</th>
-                        <th>Apellidos</th>
                         <th>CURP</th>
                         <th>Grupo</th>
                         <th>Estado</th>
@@ -171,11 +200,16 @@
                     %>
                     <tr style="height: 10px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= aspirante.getFolioAspirante() %></td>
-                        <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %></td>
-                        <td style="padding: 0; margin: 0"><%= aspirante.getApellidos() %></td>
+                        <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getCurp() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getGrupo() %></td>
-                        <td style="padding: 0; margin: 0"><%= aspirante.getEstado() %></td>
+                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                            <% if (aspirante.getEstado().equals("1")){%>
+                            <div class="activo" data-estado="1"></div>
+                            <%} else{%>
+                            <div class="inactivo" data-estado="2"></div>
+                            <%}%>
+                        </td>
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
@@ -297,11 +331,11 @@
                 var cells = rows[i].getElementsByTagName('td');
                 var folio = cells[0].textContent.toLowerCase();  // Columna "Folio"
                 var name = cells[1].textContent.toLowerCase();   // Columna "Nombre"
-                var apellido = cells[2].textContent.toLowerCase(); // Columna "Apellido"
-                var career = cells[5].textContent.toLowerCase(); // Columna "Estado"
-                var division = cells[4].textContent.toLowerCase(); // Columna "Grupo"
+                var curp = cells[2].textContent.toLowerCase();   // Columna "CURP"
+                var division = cells[3].textContent.toLowerCase(); // Columna "Grupo"
+                var career = cells[4].textContent.toLowerCase(); // Columna "Estado"
 
-                var nameMatch = filterNameValue === '' || folio.includes(filterNameValue) || name.includes(filterNameValue) || apellido.includes(filterNameValue);
+                var nameMatch = filterNameValue === '' || folio.includes(filterNameValue) || name.includes(filterNameValue) || curp.includes(filterNameValue);
                 var careerMatch = filterCareerValue === '' || career === filterCareerValue;
                 var divisionMatch = filterDivisionValue === '' || division === filterDivisionValue;
 
