@@ -252,9 +252,7 @@
                     </div>
                     <div class="form-group">
                         <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
-                        <input type="text" class
-
-                                ="form-control" id="curpAspirante" name="curpAspirante" placeholder="CURP">
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="CURP">
                     </div>
                     <div class="form-group">
                         <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
@@ -268,6 +266,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal modificar aspirante -->
 <div class="modal fade" id="modificarAspirante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

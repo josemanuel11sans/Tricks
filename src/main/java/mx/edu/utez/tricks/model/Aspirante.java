@@ -1,5 +1,4 @@
 package mx.edu.utez.tricks.model;
-
 import java.util.Date;
 
 public class Aspirante {
