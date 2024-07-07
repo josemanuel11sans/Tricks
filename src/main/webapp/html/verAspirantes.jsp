@@ -198,17 +198,17 @@
                         List<Aspirante> aspirantes = dao.getAllAspirantes();
                         for (Aspirante aspirante : aspirantes) {
                     %>
-                    <tr style="height: 10px; font-size: 15px">
-                        <td style="padding: 0; margin: 0"><%= aspirante.getFolioAspirante() %></td>
+                    <tr style="height: 10px; font-size: 15px" data-folio="<%= aspirante.getFolioAspirante() %>">
+                        <td style="padding: 0; margin: 0" id="folio"><%= aspirante.getFolioAspirante() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getCurp() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getGrupo() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
-                            <% if (aspirante.getEstado().equals("1")){%>
-                            <div class="activo" data-estado="1"></div>
-                            <%} else{%>
-                            <div class="inactivo" data-estado="2"></div>
-                            <%}%>
+                            <% if (aspirante.getEstado().equals("1")) { %>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <% } else { %>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
@@ -240,7 +240,7 @@
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="Folio">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" value="Hola">
                     </div>
                     <div class="form-group">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
@@ -267,7 +267,6 @@
     </div>
 </div>
 
-
 <!-- Modal modificar aspirante -->
 <div class="modal fade" id="modificarAspirante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -282,7 +281,7 @@
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="Nuevo Folio">
                     </div>
                     <div class="form-group">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
@@ -308,6 +307,33 @@
         </div>
     </div>
 </div>
+<!-- Modificar estado del aspirante -->
+<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
+                <form action="../ActualizarEstadoServlet" method="post">
+                    <div class="form-group" style="display: none">
+                        <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
+                        <input type="text" class="form-control" id="folioAspirante2" name="folioAspirante2">
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label for="estadoAspirante" class="col-form-label">Estado del Aspirante:</label>
+                        <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn modalBoton2">Si,ctualizar</button>
+                        <button type="submit" class="btn modalBoton2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">No, Cancelar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -345,6 +371,18 @@
                 }
             }
         }
+
+        // Añadir evento a los botones para capturar el valor del folio y el estado
+        document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var folio = this.closest('tr').getAttribute('data-folio');
+                document.getElementById('folioAspirante2').value = folio;
+
+                var estadoActual = this.getAttribute('data-estado');
+                var estadoContrario = estadoActual === '1' ? '2' : '1';
+                document.getElementById('estadoAspirante').value = estadoContrario;
+            });
+        });
     });
 </script>
 

@@ -30,7 +30,7 @@ public class ActualizarAspiranteServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Aspirante aspirante = new Aspirante(folio, nombre, apellidos, curp, fechaNacimiento, "1", "1"); // Valores de grupo y estado temporales
+        Aspirante aspirante = new Aspirante(folio, nombre, apellidos, curp, fechaNacimiento, "1"); // Valores de grupo y estado temporales
 
         AspiranteDAO dao = new AspiranteDAO();
         boolean resultado = dao.actualizarAspirante(aspirante);

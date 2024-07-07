@@ -23,6 +23,22 @@ public class Aspirante {
         this.estado = estado;
     }
 
+    public Aspirante(String folioAspirante, String nombre, String apellidos, String curp, Date fechaNacimiento, String grupo) {
+        this.folioAspirante = folioAspirante;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.curp = curp;
+        this.fechaNacimiento = fechaNacimiento;
+        this.grupo = grupo;
+    }
+
+    public Aspirante(String folioAspirante, String estado) {
+        this.folioAspirante = folioAspirante;
+        this.estado = estado;
+    }
+
+
+
     public String getFolioAspirante() {
         return folioAspirante;
     }
