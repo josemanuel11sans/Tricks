@@ -38,4 +38,37 @@ public class GrupoDao {
 
         return lista;
     }
+
+    // Método para insertar un nuevo grupo
+    public boolean insert(Grupo grupo) {
+        boolean isSuccess = false;
+        String query = "INSERT INTO grupos (nombre_grupo, docente, carrera, division_academica) VALUES (?, ?, ?, ?)";
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, grupo.getNombreGrupo());
+            ps.setString(2, grupo.getDocente());
+            ps.setString(3, grupo.getCarrera());
+            ps.setString(4, grupo.getDivisionAcademica());
+
+            int result = ps.executeUpdate();
+            isSuccess = result > 0;
+
+            if (result > 0) {
+                System.out.println("Grupo registrado exitosamente: " + grupo.getNombreGrupo());
+            } else {
+                System.out.println("No se pudo registrar el grupo: " + grupo.getNombreGrupo());
+            }
+
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return isSuccess;
+    }
+
 }

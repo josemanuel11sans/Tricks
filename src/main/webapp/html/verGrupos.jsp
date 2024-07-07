@@ -20,6 +20,39 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconGrupo.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table{
+            margin-bottom: 0;
+        }
+        .modal-body{
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer{
+            border: none;
+        }
+        .form-group{
+            margin-bottom: .5rem !important;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -79,7 +112,7 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
+        <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Grupos</h1>
 
             <!-- Filtros y botón de registrar -->
@@ -110,7 +143,7 @@
             </div><br>
 
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table id="example" class="table table-striped" style="width:100%">
+                <table id="groupsTable" class="table table-striped" style="width:100%">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Grupo</th>
@@ -157,33 +190,12 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-2" data-page="Página 2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-3" data-page="Página 3">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
 
-<!-- Modal registrar aspirante nuevo  -->
-<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<!-- Modal registrar grupo -->
+<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -193,39 +205,41 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form action="<%= request.getContextPath() %>/RegistrarGrupoServlet" method="post">
                     <div class="form-group">
-                        <label for="asignarGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el nombre del grupo">
+                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Introduce el nombre del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="asignarGrupo" class="col-form-label">Docente:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el nombre del docente">
+                        <label for="nombreDocente" class="col-form-label">Docente:</label>
+                        <input type="text" class="form-control" id="nombreDocente" name="nombreDocente" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
-                        <label for="asignarGrupo" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce la carrera del grupo">
+                        <label for="nombreCarrera" class="col-form-label">Carrera:</label>
+                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce la carrera del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="asignarGrupo" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce la división del grupo">
+                        <label for="nombreDivision" class="col-form-label">División:</label>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce la división del grupo" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn modalBoton2">Registrar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal modificar datos del grupo -->
+
+<!-- Modal modificar grupo -->
 <div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar datos</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Grupo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -233,31 +247,35 @@
             <div class="modal-body">
                 <form action="" method="">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="modNombreGrupo" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="modNombreGrupo" placeholder="Introduce el nombre del grupo">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Docente:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="modNombreDocente" class="col-form-label">Docente:</label>
+                        <input type="text" class="form-control" id="modNombreDocente" placeholder="Introduce el nombre del docente">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="modNombreCarrera" class="col-form-label">Carrera:</label>
+                        <input type="text" class="form-control" id="modNombreCarrera" placeholder="Introduce la carrera del grupo">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <label for="modNombreDivision" class="col-form-label">División:</label>
+                        <input type="text" class="form-control" id="modNombreDivision" placeholder="Introduce la división del grupo">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn modalBoton2">Modificar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Script de la tabla de grupos -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../js/script.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
@@ -272,18 +290,20 @@
             var filterNameValue = filterName.value.toLowerCase();
             var filterCareerValue = filterCareer.value.toLowerCase();
             var filterDivisionValue = filterDivision.value.toLowerCase();
-            var table = document.getElementById('example');
+            var table = document.getElementById('groupsTable');
             var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
-                var name = cells[0].textContent.toLowerCase();
-                var career = cells[2].textContent.toLowerCase();
-                var division = cells[3].textContent.toLowerCase();
+                var groupName = cells[0].textContent.toLowerCase(); // Columna "Nombre del Grupo"
+                var career = cells[2].textContent.toLowerCase(); // Columna "Carrera"
+                var division = cells[3].textContent.toLowerCase(); // Columna "División Académica"
 
-                if ((name.indexOf(filterNameValue) > -1 || filterNameValue === '') &&
-                    (career.indexOf(filterCareerValue) > -1 || filterCareerValue === '') &&
-                    (division.indexOf(filterDivisionValue) > -1 || filterDivisionValue === '')) {
+                var nameMatch = filterNameValue === '' || groupName.includes(filterNameValue);
+                var careerMatch = filterCareerValue === '' || career.includes(filterCareerValue);
+                var divisionMatch = filterDivisionValue === '' || division.includes(filterDivisionValue);
+
+                if (nameMatch && careerMatch && divisionMatch) {
                     rows[i].style.display = '';
                 } else {
                     rows[i].style.display = 'none';
@@ -291,11 +311,6 @@
             }
         }
     });
-
 </script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/script.js"></script>
 </body>
 </html>
