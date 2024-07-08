@@ -7,28 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
-<%@ page import="mx.edu.utez.tricks.dao.DivisionDao" %>
-<%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
-<%@ page import="mx.edu.utez.tricks.dao.UsuarioDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.tricks.model.Grupo" %>
-<%@ page import="mx.edu.utez.tricks.model.DivicionesAcademicas" %>
-<%@ page import="mx.edu.utez.tricks.model.Carreras" %>
-<%@ page import="mx.edu.utez.tricks.model.Usuario" %>
-
-<%
-    GrupoDao grupoDao = new GrupoDao();
-    ArrayList<Grupo> listaGrupos = grupoDao.getAll();
-
-    DivisionDao divisionDao = new DivisionDao();
-    ArrayList<DivicionesAcademicas> listaDivisiones = divisionDao.getAll();
-
-    CarreraDao carreraDao = new CarreraDao();
-    ArrayList<Carreras> listaCarreras = carreraDao.getAll();
-
-    UsuarioDao usuarioDao = new UsuarioDao();
-    ArrayList<Usuario> listaDocentes = usuarioDao.getDocentes();
-%>
 
 <html>
 <head>
@@ -227,35 +207,20 @@
             <div class="modal-body">
                 <form action="<%= request.getContextPath() %>/RegistrarGrupoServlet" method="post">
                     <div class="form-group">
-                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        <label for="nombreGrupo" class="col-form-label">Nombre del Grupo:</label>
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Introduce el nombre del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreDocente" class="col-form-label">Docente:</label>
-                        <select class="form-control" id="nombreDocente" name="nombreDocente" required>
-                            <option value="">Selecciona un docente</option>
-                            <% for (Usuario docente : listaDocentes) { %>
-                            <option value="<%= docente.getId_usuario() %>"><%= docente.getNombre() %> <%= docente.getApellido() %></option>
-                            <% } %>
-                        </select>
+                        <label for="nombreDocente" class="col-form-label">Nombre del Docente:</label>
+                        <input type="text" class="form-control" id="nombreDocente" name="nombreDocente" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreCarrera" class="col-form-label">Carrera:</label>
-                        <select class="form-control" id="nombreCarrera" name="nombreCarrera" required>
-                            <option value="">Selecciona una carrera</option>
-                            <% for (Carreras carrera : listaCarreras) { %>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <% } %>
-                        </select>
+                        <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce el nombre de la carrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreDivision" class="col-form-label">División:</label>
-                        <select class="form-control" id="nombreDivision" name="nombreDivision" required>
-                            <option value="">Selecciona una división</option>
-                            <% for (DivicionesAcademicas division : listaDivisiones) { %>
-                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <% } %>
-                        </select>
+                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce el nombre de la división" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -281,35 +246,20 @@
                 <form action="<%= request.getContextPath() %>/ModificarGrupoServlet" method="post">
                     <input type="hidden" id="idGrupo" name="idGrupo">
                     <div class="form-group">
-                        <label for="modNombreGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="modNombreGrupo" name="modNombreGrupo" required>
+                        <label for="modNombreGrupo" class="col-form-label">Nombre del Grupo:</label>
+                        <input type="text" class="form-control" id="modNombreGrupo" name="modNombreGrupo" placeholder="Introduce el nuevo nombre del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDocente" class="col-form-label">Docente:</label>
-                        <select class="form-control" id="modNombreDocente" name="modNombreDocente" required>
-                            <option value="">Selecciona un docente</option>
-                            <% for (Usuario docente : listaDocentes) { %>
-                            <option value="<%= docente.getId_usuario() %>"><%= docente.getNombre() %> <%= docente.getApellido() %></option>
-                            <% } %>
-                        </select>
+                        <label for="modNombreDocente" class="col-form-label">Nombre del Docente:</label>
+                        <input type="text" class="form-control" id="modNombreDocente" name="modNombreDocente" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreCarrera" class="col-form-label">Carrera:</label>
-                        <select class="form-control" id="modNombreCarrera" name="modNombreCarrera" required>
-                            <option value="">Selecciona una carrera</option>
-                            <% for (Carreras carrera : listaCarreras) { %>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <% } %>
-                        </select>
+                        <label for="modNombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="modNombreCarrera" name="modNombreCarrera" placeholder="Introduce el nombre de la carrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDivision" class="col-form-label">División:</label>
-                        <select class="form-control" id="modNombreDivision" name="modNombreDivision" required>
-                            <option value="">Selecciona una división</option>
-                            <% for (DivicionesAcademicas division : listaDivisiones) { %>
-                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <% } %>
-                        </select>
+                        <label for="modNombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <input type="text" class="form-control" id="modNombreDivision" name="modNombreDivision" placeholder="Introduce el nombre de la división" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

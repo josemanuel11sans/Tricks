@@ -15,22 +15,24 @@ public class ModificarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
         String nombreGrupo = request.getParameter("modNombreGrupo");
-        String nombreDocente = request.getParameter("modNombreDocente");
-        String nombreCarrera = request.getParameter("modNombreCarrera");
-        String nombreDivision = request.getParameter("modNombreDivision");
+        String docente = request.getParameter("modNombreDocente");
+        String carrera = request.getParameter("modNombreCarrera");
+        String division = request.getParameter("modNombreDivision");
 
         Grupo grupo = new Grupo();
         grupo.setIdGrupo(idGrupo);
         grupo.setNombreGrupo(nombreGrupo);
-        grupo.setDocente(nombreDocente);
-        grupo.setCarrera(nombreCarrera);
-        grupo.setDivisionAcademica(nombreDivision);
+        grupo.setDocente(docente);
+        grupo.setCarrera(carrera);
+        grupo.setDivisionAcademica(division);
 
-        GrupoDao grupoDao = new GrupoDao();
-        if (grupoDao.update(grupo)) {
-            response.sendRedirect("verGrupo.jsp");
+        GrupoDao dao = new GrupoDao();
+        boolean isUpdated = dao.update(grupo);
+
+        if (isUpdated) {
+            response.sendRedirect("html/verGrupo.jsp"); // Cambia esto a la página que quieras mostrar tras éxito
         } else {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("error.jsp"); // Cambia esto a la página que quieras mostrar tras fallo
         }
     }
 

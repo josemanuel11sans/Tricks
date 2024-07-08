@@ -1,12 +1,12 @@
 package mx.edu.utez.tricks.model;
 
-public class DivicionesAcademicas {
+public class DivisionesAcademicas {
     private int idDivision;
     private  String nombreDivision;
     private String coordinadorDivision;
-    public DivicionesAcademicas() {
+    public DivisionesAcademicas() {
     }
-    public DivicionesAcademicas(int idDivision, String nombreDivision, String coordinadorDivision) {
+    public DivisionesAcademicas(int idDivision, String nombreDivision, String coordinadorDivision) {
         this.idDivision = idDivision;
         this.nombreDivision = nombreDivision;
         this.coordinadorDivision = coordinadorDivision;
