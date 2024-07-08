@@ -38,7 +38,7 @@ public class ActualizarAspiranteServlet extends HttpServlet {
         if (resultado) {
             response.sendRedirect("html/verAspirantes.jsp");
         } else {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("../error.jsp");
         }
     }
 }

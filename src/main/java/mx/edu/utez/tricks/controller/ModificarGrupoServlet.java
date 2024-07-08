@@ -30,9 +30,9 @@ public class ModificarGrupoServlet extends HttpServlet {
         boolean isUpdated = dao.update(grupo);
 
         if (isUpdated) {
-            response.sendRedirect("html/verGrupo.jsp"); // Cambia esto a la página que quieras mostrar tras éxito
+            response.sendRedirect("html/verGrupo.jsp");
         } else {
-            response.sendRedirect("error.jsp"); // Cambia esto a la página que quieras mostrar tras fallo
+            response.sendRedirect("../error.jsp");
         }
     }
 
