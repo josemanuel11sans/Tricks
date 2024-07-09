@@ -12,27 +12,19 @@ import java.util.ArrayList;
 public class UsuarioDao {
     // Read para un usuario
 
-    public Usuario getOne(String nombre, String contra){
-        //Crea una instancia vacía de la clase usuario para almacenar los datos del usuario encontrado.
+    public Usuario getOne(String nombre, String contra) {
         Usuario usuario = new Usuario();
-
-        String query = "select * from usuarios where mail = ? and contrasena = ?;";
+        String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = ?;";
         try {
-            //Intenta obtener una conexión a la base de datos usando DatabaseConnectionManager.getConnection().
             Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query); // forma de evitar que inyecten query
-            //Establece los parámetros de la consulta (nombre y contra) usando ps.setString().
-            ps.setString(1,nombre);
-            ps.setString(2,contra);
-            //Ejecuta la consulta con executeQuery() y obtiene el resultado en un objeto ResultSet.
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, nombre);
+            ps.setString(2, contra);
             ResultSet rs = ps.executeQuery();
-            //Si rs.next() devuelve true, significa que se encontró un usuario con el nombre y la contraseña proporcionados:
-            if (rs.next()){
+            if (rs.next()) {
                 usuario.setNombre(rs.getString("mail"));
                 usuario.setContra(rs.getString("contrasena"));
             }
-            //ALERTA///////////////////////////
-            //CERRAR LAS CONEXIONES CADA QUE SE TERMINA UNA CONSULTA !!!!!///
             ps.close();
             con.close();
         } catch (SQLException e) {
@@ -40,6 +32,28 @@ public class UsuarioDao {
         }
         return usuario;
     }
+
+
+
+    //metodo que verifica si el correo existe
+        public boolean emailExists(String nombre) {
+            String query = "SELECT COUNT(*) FROM usuarios WHERE mail = ?;";
+            try {
+                Connection con = DatabaseConnectionManager.getConnection();
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1, nombre);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    ps.close();
+                    con.close();
+                    return count > 0;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return false;
+        }
 
 
     //CRUD para usuario

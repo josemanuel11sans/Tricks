@@ -6,17 +6,25 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilosLogin.css">
 
-    //no borrar
+    <!-- Estso son los iconos -->
+    <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+
+    <!-- Estso son los estilos del login y de las alertas  -->
+    <link rel="stylesheet" href="../css/estilosLogin.css">
+    <link rel="stylesheet" href="../css/stiloAlertas.css">
+
+    <!-- no borrar esto es parte de la generacion de alertas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css " rel="stylesheet">
     <script src="../js/alertas.js"></script>
@@ -37,6 +45,50 @@
     </style>
 </head>
 <body>
+<%
+    String error = request.getParameter("error");
+    if (error != null) {
+        if ("email_error".equals(error)) {
+%>
+<script>
+    Swal.fire({
+        title: "ERROR",
+        text: "Correo no válido",
+        iconHtml: '<i class="fa-solid fa-triangle-exclamation"></i>',
+        background: '#00796b',
+        customClass: {
+            popup: 'colored-alert',
+            icon: 'custom-swal-icon',
+            confirmButton: 'custom-confirm-button-class'
+        },
+        buttonsStyling: true,
+        confirmButtonText: 'OK'
+    });
+</script>
+<%
+} else if ("password_error".equals(error)) {
+%>
+<script>
+    Swal.fire({
+        title: "Contraseña no válida",
+        text: "Verifica tu correo o contraseña",
+        iconHtml: '<i class="fa-solid fa-triangle-exclamation"></i>',
+        background: '#00796b',
+        customClass: {
+            popup: 'colored-alert',
+            icon: 'custom-swal-icon',
+            confirmButton: 'custom-confirm-button-class'
+        },
+        buttonsStyling: true,
+        confirmButtonText: 'OK'
+    });
+</script>
+<%
+        }
+    }
+%>
+
+
 
 <!-- a este div se le agrega la clase "login-column" que hace que el contenedor del login se centre en resolución para móviles -->
 <div class="container-fluid d-flex align-items-center login-column justify-content-center" id="aaa">
