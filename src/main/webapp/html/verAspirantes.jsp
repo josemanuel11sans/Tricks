@@ -199,7 +199,7 @@
                         for (Aspirante aspirante : aspirantes) {
                     %>
                     <tr style="height: 10px; font-size: 15px" data-folio="<%= aspirante.getFolioAspirante() %>">
-                        <td style="padding: 0; margin: 0" id="folio"><%= aspirante.getFolioAspirante() %></td>
+                        <td style="padding: 0; margin: 0"><%= aspirante.getFolioAspirante() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getCurp() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getGrupo() %></td>
@@ -213,7 +213,13 @@
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarAspirante" data-whatever="Modificar">
+                                    data-target="#modificarAspirante"
+                                    data-whatever="Modificar"
+                                    data-folio="<%= aspirante.getFolioAspirante() %>"
+                                    data-nombre="<%= aspirante.getNombre() %>"
+                                    data-apellido="<%= aspirante.getApellidos() %>"
+                                    data-curp="<%= aspirante.getCurp() %>"
+                                    data-fecha="<%= aspirante.getFechaNacimiento() %>">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -280,24 +286,24 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>gi
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="Nuevo Folio">
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" placeholder="Nuevo Folio">
                     </div>
                     <div class="form-group">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="Nuevo nombre">
+                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante" placeholder="Nuevo nombre">
                     </div>
                     <div class="form-group">
                         <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="Nuevo apellido">
+                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante" placeholder="Nuevo apellido">
                     </div>
                     <div class="form-group">
                         <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="Nuevo CURP">
+                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante" placeholder="Nuevo CURP">
                     </div>
                     <div class="form-group">
                         <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
-                        <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
+                        <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn modalBoton2">Actualizar</button>
@@ -381,9 +387,28 @@
                 var estadoActual = this.getAttribute('data-estado');
                 var estadoContrario = estadoActual === '1' ? '2' : '1';
                 document.getElementById('estadoAspirante').value = estadoContrario;
+
+            });
+        });
+
+        // Evento para modal de actualizar aspirante
+        document.querySelectorAll('.btn-modificar').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var folio = button.getAttribute('data-folio');
+                var nombre = button.getAttribute('data-nombre');
+                var apellido = button.getAttribute('data-apellido');
+                var curp = button.getAttribute('data-curp');
+                var fecha = button.getAttribute('data-fecha');
+
+                document.getElementById('folioAspirante3').value = folio;
+                document.getElementById('nombreAspirante3').value = nombre;
+                document.getElementById('apellidosAspirante3').value = apellido;
+                document.getElementById('curpAspirante3').value = curp;
+                document.getElementById('fechaNacimientoAspirante3').value = fecha;
             });
         });
     });
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
