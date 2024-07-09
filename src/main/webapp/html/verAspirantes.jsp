@@ -329,9 +329,9 @@
                         <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Si,ctualizar</button>
+                        <button type="submit" class="btn modalBoton2">Si</button>
                         <button type="submit" class="btn modalBoton2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">No, Cancelar</span>
+                            <span aria-hidden="true">No</span>
                         </button>
                     </div>
                 </form>

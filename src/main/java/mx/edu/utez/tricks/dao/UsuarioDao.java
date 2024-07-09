@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class UsuarioDao {
     // Read para un usuario
-
     public Usuario getOne(String nombre, String contra) {
         Usuario usuario = new Usuario();
         String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = ?;";
@@ -34,7 +33,7 @@ public class UsuarioDao {
     }
 
 
-<<<<<<< HEAD
+
 
     //metodo que verifica si el correo existe
         public boolean emailExists(String nombre) {
@@ -106,9 +105,7 @@ public class UsuarioDao {
 
     //Read pero para TODOS
     //esto se usa para mostra los datos en la tabla
-=======
-    // VER DOCENTES EN LA TABLA:
->>>>>>> ac7844a8ba8899684f432a62dceb9420673ad207
+
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> lista = new ArrayList<>();
         String query = "{ CALL verDocentes() }";
