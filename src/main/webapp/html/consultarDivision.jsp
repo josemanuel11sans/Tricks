@@ -113,8 +113,8 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
-            <h1 class="mb-4 text-light">Consultar Divison</h1>
+        <div class="container mt-4 text-left">
+            <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -160,24 +160,6 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
