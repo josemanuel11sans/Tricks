@@ -194,16 +194,24 @@
             <div class="modal-body">
                 <form action="" method="">
                     <div class="form-group">
+                        <label for="asignarGrupo" class="col-form-label">Matricula:</label>
+                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce la matricula del docente">
+                    </div>
+                    <div class="form-group">
                         <label for="asignarGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el nombre del grupo">
+                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el nombre del docente">
                     </div>
                     <div class="form-group">
                         <label for="asignarGrupo" class="col-form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el apellido del grupo">
+                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el apellido del docente">
                     </div>
                     <div class="form-group">
                         <label for="asignarGrupo" class="col-form-label">Correo Electronico:</label>
                         <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce el correo electronico del docente">
+                    </div>
+                    <div class="form-group">
+                        <label for="asignarGrupo" class="col-form-label">Contraseña:</label>
+                        <input type="text" class="form-control" id="asignarGrupo" placeholder="Introduce la contraseña del docente">
                     </div>
                 </form>
             </div>

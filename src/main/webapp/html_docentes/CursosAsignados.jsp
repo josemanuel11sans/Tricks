@@ -33,7 +33,7 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="inicioDocente.html" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/inicioDocente.jsp" class="sidebar-link">
                     <i class="fas fa-house"></i>
                     <span>Inicio</span>
                 </a>
@@ -41,15 +41,9 @@
 
             </li>
             <li class="sidebar-item">
-                <a href="CursosAsignados.html" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/CursosAsignados.jsp" class="sidebar-link">
                     <i class="fa-solid fa-circle-info"></i>
                     <span>Cursos</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="Calificaciones.html" class="sidebar-link">
-                    <i class="fa-regular fa-star"></i>
-                    <span>Calificaciones</span>
                 </a>
             </li>
 
@@ -89,7 +83,7 @@
             </div><br>
 
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table class="table">
+                <table id="10" class="table">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Grupo</th>
@@ -112,11 +106,13 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar1" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
+
                     </tr>
                     <tr>
                         <td>B</td>
@@ -131,7 +127,8 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar2" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -150,7 +147,8 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar3" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -169,7 +167,8 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar4" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -188,7 +187,8 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar5" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -207,7 +207,8 @@
                         </td>
 
                         <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                            <!-- Este es tu botón -->
+                            <button id="btnModificar6" class="btn btnIcono btn-modificar"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -328,7 +329,53 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="js/script.js"></script>
+<script src="../js/script.js"></script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar1').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar2').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar3').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar4').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar5').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+<script>
+    // JavaScript para redireccionar al hacer clic en el botón
+    document.getElementById('btnModificar6').addEventListener('click', function() {
+        // Redirige a la página deseada (en este ejemplo, a "otra_pagina.html")
+        window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
+    });
+</script>
+
+
+
+
 </body>
 
 </html>

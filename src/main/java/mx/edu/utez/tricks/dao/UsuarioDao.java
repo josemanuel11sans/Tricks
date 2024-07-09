@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class UsuarioDao {
     // Read para un usuario
+
     public Usuario getOne(String nombre, String contra) {
         Usuario usuario = new Usuario();
         String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = ?;";
@@ -105,6 +106,8 @@ public class UsuarioDao {
 
     //Read pero para TODOS
     //esto se usa para mostra los datos en la tabla
+
+    // VER DOCENTES EN LA TABLA:
 
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> lista = new ArrayList<>();

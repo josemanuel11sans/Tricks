@@ -11,11 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calificaciones</title>
+    <title>Cursos asignados</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="img/faviconEstrella.svg">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -24,7 +25,7 @@
     <aside id="sidebar">
         <div class="d-flex">
             <button class="toggle-btn" type="button">
-                <img src="img/logo.svg" alt="Toggle">
+                <img src="../img_svg/logo.svg" alt="Toggle">
             </button>
             <div class="sidebar-logo">
                 <a href="#">TRICKS</a>
@@ -32,22 +33,16 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="inicioDocente.html" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/inicioDocente.jsp" class="sidebar-link">
                     <i class="fas fa-house"></i>
                     <span>Inicio</span>
                 </a>
             </li>
             </li>
             <li class="sidebar-item">
-                <a href="CursosAsignados.html" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/CursosAsignados.jsp" class="sidebar-link">
                     <i class="fa-solid fa-circle-info"></i>
                     <span>Cursos</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="Calificaciones.html" class="sidebar-link">
-                    <i class="fa-regular fa-star"></i>
-                    <span>Calificaciones</span>
                 </a>
             </li>
 
@@ -227,7 +222,10 @@
 
     // Inicializar la visualización
     displayStudents(currentPage);
-</script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../js/script.js"></script>
 </body>
 </html>
