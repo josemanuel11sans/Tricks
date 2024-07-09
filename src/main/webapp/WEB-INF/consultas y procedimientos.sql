@@ -40,6 +40,25 @@ CALL verUsuarios(2);
 DROP PROCEDURE IF EXISTS verUsuarios ;
 -- -------------------------------------------------------------------------------------------------------------
 
+-- ----------------------------------------------------------------------------
+-- procedimiento para ver Docentes
+-- ------------------------------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE verDocentes ()
+BEGIN
+SELECT u.id_usuario AS matricula,
+       CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
+       u.mail AS correo,
+       e.estado AS estado
+FROM usuarios u
+         JOIN estado e ON u.id_estado = e.id_estado
+WHERE u.id_rol = 2;
+END //
+
+DELIMITER ;
+CALL verDocentes();
+
 
 -- ----------------------------------------------------------------------------
 -- procedimiento para ver grupos
