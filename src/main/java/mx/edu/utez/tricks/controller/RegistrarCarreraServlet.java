@@ -33,7 +33,7 @@ public class RegistrarCarreraServlet extends HttpServlet {
         boolean resultado = dao.agregarCarrera(carrera);
 
         if (resultado) {
-            resp.sendRedirect("verCarreras.jsp");
+            resp.sendRedirect("consultarCarrera.jsp");
         } else {
             resp.sendRedirect("error.jsp");
         }
@@ -50,7 +50,7 @@ public class RegistrarCarreraServlet extends HttpServlet {
         boolean resultado = dao.actualizarCarrera(carrera);
 
         if (resultado) {
-            resp.sendRedirect("verCarreras.jsp");
+            resp.sendRedirect("consultarCarrera.jsp");
         } else {
             resp.sendRedirect("error.jsp");
         }
