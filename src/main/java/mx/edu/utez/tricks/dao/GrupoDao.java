@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GrupoDao {
+
     // Read para todos los grupos
     public ArrayList<Grupo> getAll() {
         ArrayList<Grupo> lista = new ArrayList<>();
@@ -39,10 +40,10 @@ public class GrupoDao {
         return lista;
     }
 
-    // Método para insertar un nuevo grupo
+    // Insertar un nuevo grupo
     public boolean insert(Grupo grupo) {
-        boolean isSuccess = false;
-        String query = "INSERT INTO grupos (nombre_grupo, docente, carrera, division_academica) VALUES (?, ?, ?, ?)";
+        boolean isInserted = false;
+        String query = "INSERT INTO grupo (nombreGrupo, docente, carrera, divisionAcademica) VALUES (?, ?, ?, ?)";
 
         try {
             Connection con = DatabaseConnectionManager.getConnection();
@@ -51,24 +52,36 @@ public class GrupoDao {
             ps.setString(2, grupo.getDocente());
             ps.setString(3, grupo.getCarrera());
             ps.setString(4, grupo.getDivisionAcademica());
-
-            int result = ps.executeUpdate();
-            isSuccess = result > 0;
-
-            if (result > 0) {
-                System.out.println("Grupo registrado exitosamente: " + grupo.getNombreGrupo());
-            } else {
-                System.out.println("No se pudo registrar el grupo: " + grupo.getNombreGrupo());
-            }
-
+            isInserted = ps.executeUpdate() > 0;
             ps.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error SQL: " + e.getMessage());
             e.printStackTrace();
         }
 
-        return isSuccess;
+        return isInserted;
     }
 
+    // Modificar un grupo existente
+    public boolean update(Grupo grupo) {
+        boolean isUpdated = false;
+        String query = "UPDATE grupo SET nombreGrupo = ?, docente = ?, carrera = ?, divisionAcademica = ? WHERE idGrupo = ?";
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, grupo.getNombreGrupo());
+            ps.setString(2, grupo.getDocente());
+            ps.setString(3, grupo.getCarrera());
+            ps.setString(4, grupo.getDivisionAcademica());
+            ps.setInt(5, grupo.getIdGrupo());
+            isUpdated = ps.executeUpdate() > 0;
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return isUpdated;
+    }
 }

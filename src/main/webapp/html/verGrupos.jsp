@@ -207,20 +207,20 @@
             <div class="modal-body">
                 <form action="<%= request.getContextPath() %>/RegistrarGrupoServlet" method="post">
                     <div class="form-group">
-                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        <label for="nombreGrupo" class="col-form-label">Nombre del Grupo:</label>
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Introduce el nombre del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreDocente" class="col-form-label">Docente:</label>
+                        <label for="nombreDocente" class="col-form-label">Nombre del Docente:</label>
                         <input type="text" class="form-control" id="nombreDocente" name="nombreDocente" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreCarrera" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce la carrera del grupo" required>
+                        <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce el nombre de la carrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreDivision" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce la división del grupo" required>
+                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce el nombre de la división" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -232,10 +232,8 @@
     </div>
 </div>
 
-
 <!-- Modal modificar grupo -->
-<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -245,32 +243,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="">
+                <form action="<%= request.getContextPath() %>/ModificarGrupoServlet" method="post">
+                    <input type="hidden" id="idGrupo" name="idGrupo">
                     <div class="form-group">
-                        <label for="modNombreGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="modNombreGrupo" placeholder="Introduce el nombre del grupo">
+                        <label for="modNombreGrupo" class="col-form-label">Nombre del Grupo:</label>
+                        <input type="text" class="form-control" id="modNombreGrupo" name="modNombreGrupo" placeholder="Introduce el nuevo nombre del grupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDocente" class="col-form-label">Docente:</label>
-                        <input type="text" class="form-control" id="modNombreDocente" placeholder="Introduce el nombre del docente">
+                        <label for="modNombreDocente" class="col-form-label">Nombre del Docente:</label>
+                        <input type="text" class="form-control" id="modNombreDocente" name="modNombreDocente" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreCarrera" class="col-form-label">Carrera:</label>
-                        <input type="text" class="form-control" id="modNombreCarrera" placeholder="Introduce la carrera del grupo">
+                        <label for="modNombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="modNombreCarrera" name="modNombreCarrera" placeholder="Introduce el nombre de la carrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDivision" class="col-form-label">División:</label>
-                        <input type="text" class="form-control" id="modNombreDivision" placeholder="Introduce la división del grupo">
+                        <label for="modNombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <input type="text" class="form-control" id="modNombreDivision" name="modNombreDivision" placeholder="Introduce el nombre de la división" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -310,6 +310,23 @@
                 }
             }
         }
+    });
+</script>
+<script>
+    $('#modificarGrupo').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var idGrupo = button.data('id');
+        var nombreGrupo = button.data('nombre');
+        var docente = button.data('docente');
+        var carrera = button.data('carrera');
+        var division = button.data('division');
+
+        var modal = $(this);
+        modal.find('#idGrupo').val(idGrupo);
+        modal.find('#modNombreGrupo').val(nombreGrupo);
+        modal.find('#modNombreDocente').val(docente);
+        modal.find('#modNombreCarrera').val(carrera);
+        modal.find('#modNombreDivision').val(division);
     });
 </script>
 </body>

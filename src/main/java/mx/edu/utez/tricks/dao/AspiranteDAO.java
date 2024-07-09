@@ -63,7 +63,7 @@ public class AspiranteDAO {
     }
 
     public boolean actualizarAspirante(Aspirante aspirante) {
-        String query = "UPDATE aspirante SET nombre = ?, apellido = ?, curp = ?, fecha_nac = ?, grupos_id_grupo = ?, estado_id_estado = ? " +
+        String query = "UPDATE aspirante SET nombre = ?, apellido = ?, curp = ?, fecha_nac = ?, grupos_id_grupo = ? " +
                 "WHERE folio_aspirante = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -74,17 +74,9 @@ public class AspiranteDAO {
             ps.setString(3, aspirante.getCurp());
             ps.setDate(4, new java.sql.Date(aspirante.getFechaNacimiento().getTime()));
             ps.setString(5, aspirante.getGrupo());
-
-            ps.setString(6, aspirante.getEstado());
-            ps.setString(7, aspirante.getFolioAspirante());
-
-
             ps.setString(6, aspirante.getFolioAspirante());
 
-
             int rowsAffected = ps.executeUpdate();
-            con.close();
-            ps.close();
             return rowsAffected > 0;
 
         } catch (SQLException e) {
@@ -93,21 +85,20 @@ public class AspiranteDAO {
         }
     }
 
-
-    public boolean eliminarAspirante(String folioAspirante) {
-        String query = "DELETE FROM aspirante WHERE folio_aspirante = ?";
+    public boolean actualizarEstado(Aspirante aspirante) {
+        String query = "UPDATE aspirante SET estado_id_estado = ? " +
+                "WHERE folio_aspirante = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, folioAspirante);
-            // ps.setString(6, .getEstado());
-            //ps.setString(7, aspirante.getFolioAspirante());
-            ps.close();
-            con.close();
+            ps.setString(1, aspirante.getEstado());
+            ps.setString(2, aspirante.getFolioAspirante());
 
 
             int rowsAffected = ps.executeUpdate();
+            con.close();
+            ps.close();
             return rowsAffected > 0;
 
         } catch (SQLException e) {

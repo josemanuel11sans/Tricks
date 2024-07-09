@@ -10,24 +10,26 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/RegistrarGrupoServlet")
-public class RegistrarGrupoServlet extends HttpServlet {
+@WebServlet("/ModificarGrupoServlet")
+public class ModificarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nombreGrupo = request.getParameter("nombreGrupo");
-        String docente = request.getParameter("nombreDocente");
-        String carrera = request.getParameter("nombreCarrera");
-        String division = request.getParameter("nombreDivision");
+        int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
+        String nombreGrupo = request.getParameter("modNombreGrupo");
+        String docente = request.getParameter("modNombreDocente");
+        String carrera = request.getParameter("modNombreCarrera");
+        String division = request.getParameter("modNombreDivision");
 
         Grupo grupo = new Grupo();
+        grupo.setIdGrupo(idGrupo);
         grupo.setNombreGrupo(nombreGrupo);
         grupo.setDocente(docente);
         grupo.setCarrera(carrera);
         grupo.setDivisionAcademica(division);
 
         GrupoDao dao = new GrupoDao();
-        boolean isInserted = dao.insert(grupo);
+        boolean isUpdated = dao.update(grupo);
 
-        if (isInserted) {
+        if (isUpdated) {
             response.sendRedirect("html/verGrupo.jsp");
         } else {
             response.sendRedirect("../error.jsp");

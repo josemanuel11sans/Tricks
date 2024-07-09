@@ -20,6 +20,39 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table{
+            margin-bottom: 0;
+        }
+        .modal-body{
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer{
+            border: none;
+        }
+        .form-group{
+            margin-bottom: .5rem !important;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -79,7 +112,7 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
+        <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Docentes</h1>
 
             <!-- Filtros y botón de registrar -->
@@ -117,16 +150,23 @@
                         UsuarioDao dao = new UsuarioDao();
                         ArrayList<Usuario> lista = dao.getAll();
                         for (Usuario u : lista) {
+                            String estadoClase = u.getEstado().equals("1") ? "activo" : "inactivo";
                     %>
                     <tr style="height: 20px; font-size: 15px">
-                        <td style="padding: 0; margin: 0" ><%= u.getId_usuario() %></td>
-                        <td style="padding: 0; margin: 0"  > <%= u.getNombre() %></td>
-                        <td style="padding: 0; margin: 0"  ><%= u.getMail() %></td>
-                        <td style="padding: 0; margin: 0"  ><%= u.Estado() %></td>
-                        <td  style="padding: 0; margin: 0" >
+                        <td style="padding: 0; margin: 0"><%= u.getId_usuario() %></td>
+                        <td style="padding: 0; margin: 0"><%= u.getNombre() %></td>
+                        <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
+                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                            <% if (u.getEstado().equals("1")) { %>
+                            <button class="activo" data-id="<%= u.getId_usuario() %>" data-estado="2" data-toggle="modal" data-target="#modificarEstado"></button>
+                            <% } else { %>
+                            <button class="inactivo" data-id="<%= u.getId_usuario() %>" data-estado="1" data-toggle="modal" data-target="#modificarEstado"></button>
+                            <% } %>
+                        </td>
+                        <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarGrupo" data-whatever="Modificar"
+                                    data-target="#modificarDocente" data-whatever="Modificar"
                                     onclick="window.location.href='sign_in?id=<%= u.getId_usuario() %>'">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -136,26 +176,6 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-2" data-page="Página 2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-3" data-page="Página 3">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -232,6 +252,7 @@
     </div>
 </div>
 
+
 <!-- Script de la tabla de docentes -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -250,11 +271,10 @@
             for (let i = 0; i < rows.length; i++) {
                 let cells = rows[i].getElementsByTagName('td');
                 let name = cells[1].textContent.toLowerCase();
-                let state = cells[3].textContent.trim().toLowerCase();  // Asegura que no haya espacios en blanco alrededor del texto del estado
+                let state = cells[3].querySelector('button').className;
 
-                // Mostrar u ocultar la fila basada en los filtros
                 if ((name.indexOf(filterNameValue) > -1 || filterNameValue === '') &&
-                    (filterStateValue === '' || state === filterStateValue)) {
+                    (filterStateValue === '' || state.indexOf(filterStateValue) > -1)) {
                     rows[i].style.display = '';
                 } else {
                     rows[i].style.display = 'none';

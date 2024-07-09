@@ -6,17 +6,54 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
+<%@ page import="mx.edu.utez.tricks.model.Carrera" %>
+<%@ page import="java.util.List" %>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docentes</title>
+    <title>Carrera</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconCarrera.svg.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table{
+            margin-bottom: 0;
+        }
+        .modal-body{
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer{
+            border: none;
+        }
+        .form-group{
+            margin-bottom: .5rem !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,8 +114,8 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
-            <h1 class="mb-4 text-light">Consultar carrera</h1>
+        <div class="container mt-4 text-left">
+            <h1 class="mb-4 text-light">Carreras</h1>
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -100,99 +137,42 @@
                 </div>
             </div><br>
 
+            <!-- Tabla de carreras -->
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
                     <tr align="center">
-                        <th>Nombre de la carrera</th>
-                        <th>Division academica</th>
-                        <th>Modificar</th>
+                        <th>Nombre de la Carrera</th>
+                        <th>División Académica</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
-                    <tbody id="aspirantesTableBody">
+                    <tbody>
+                    <%
+                        CarreraDao carreraDao = new CarreraDao();
+                        List<Carrera> listaCarreras = carreraDao.getAllCarreras();
+                        for (Carrera carrera : listaCarreras) {
+                    %>
                     <tr>
-                        <td>ING. Desarrollo de software multiplataforma</td>
-                        <td>DATID</td>
+                        <td><%= carrera.getNombreCarrera() %></td>
+                        <td><%= carrera.getNombreDivision() %></td>
                         <td>
+                            <!-- Botón para modificar carrera -->
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
+                                    data-target="#modificarCarreraModal"
+                                    data-id="<%= carrera.getIdCarrera() %>"
+                                    data-nombre="<%= carrera.getNombreCarrera() %>"
+                                    data-idDivision="<%= carrera.getIdDivisionAcademica() %>">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>ING. Infraestructura de Redes Digitales</td>
-                        <td>DATID</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ING. Diseño Digital</td>
-                        <td>DATID</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ING. Procesos Industriales</td>
-                        <td>DAMI</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ING. Nanotecnología</td>
-                        <td>DAMI</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ING. Mecatrónica</td>
-                        <td>Mauro Bahena</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Añadir más filas aquí según sea necesario -->
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-2" data-page="Página 2">2</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>

@@ -6,18 +6,53 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
+<%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
+<%@ page import="java.util.List" %>
 
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docentes</title>
+    <title>Division</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconDivision.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table{
+            margin-bottom: 0;
+        }
+        .modal-body{
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer{
+            border: none;
+        }
+        .form-group{
+            margin-bottom: .5rem !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -78,8 +113,8 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
-            <h1 class="mb-4 text-light">Consultar Divison</h1>
+        <div class="container mt-4 text-left">
+            <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -95,18 +130,23 @@
             </div><br>
 
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table class="table">
+                <table id="groupsTable" class="table table-striped" style="width:100%">
                     <thead class="thead-light">
                     <tr align="center">
-                        <th>Nombre de la divison academica</th>
-                        <th>Coordinador de la division academica</th>
+                        <th>Nombre de la división académica</th>
+                        <th>Coordinador de la división académica</th>
                         <th>Modificar coordinador</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
+                    <%
+                        DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
+                        List<DivisionesAcademicas> lista = dao.getAllDivisiones();
+                        for (DivisionesAcademicas division : lista) {
+                    %>
                     <tr>
-                        <td>División Académica de Tecnologías de la Información y Diseño</td>
-                        <td>Dra. Martha Fabiola Wences Díaz</td>
+                        <td><%= division.getNombreDivision() %></td>
+                        <td><%= division.getCoordinadorDivision() %></td>
                         <td>
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
@@ -114,58 +154,12 @@
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>División Académica de Mecánica Industrial</td>
-                        <td>Jaime Vázquez Colín</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>División Académica Económica-Administrativa</td>
-                        <td>Jonathan Espinoza Mendoza</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>División Académica de Terapia Física</td>
-                        <td>Dennice Jaqueline García Mendoza</td>
-                        <td>
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <!-- Añadir más filas aquí según sea necesario -->
+                    <%
+                        }
+                    %>
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
