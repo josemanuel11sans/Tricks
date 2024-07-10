@@ -117,7 +117,7 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
+        <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Carreras</h1>
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -145,7 +145,7 @@
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
-                    <tr align="center">
+                    <tr>
                         <th>Nombre de la Carrera</th>
                         <th>División Académica</th>
                         <th>Acciones</th>
@@ -162,12 +162,13 @@
                         List<Carrera> listaCarreras = carreraDao.getAllCarreras();
                         for (Carrera carrera : listaCarreras) {
                     %>
-                    <tr>
-                        <td><%= carrera.getNombreCarrera() %></td>
-                        <td><%= carrera.getNombreDivision() %></td>
-                        <td>
+                    <tr style="height: 10px; font-size: 15px">
+                        <td style="padding: 0; margin: 0"><%= carrera.getNombreCarrera() %></td>
+                        <td style="padding: 0; margin: 0"><%= carrera.getNombreDivision() %></td>
+                        <td style="padding: 0; margin: 0">
                             <!-- Botón para modificar carrera -->
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
                                     data-target="#modificarCarreraModal"
                                     data-id="<%= carrera.getIdCarrera() %>"
                                     data-nombre="<%= carrera.getNombreCarrera() %>"

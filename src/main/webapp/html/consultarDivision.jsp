@@ -52,6 +52,9 @@
         .form-group{
             margin-bottom: .5rem !important;
         }
+        td{
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 
@@ -130,25 +133,26 @@
             </div><br>
 
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table id="groupsTable" class="table table-striped" style="width:100%">
+                <table class="table" id="example">
                     <thead class="thead-light">
-                    <tr align="center">
+                    <tr>
                         <th>Nombre de la división académica</th>
                         <th>Coordinador de la división académica</th>
                         <th>Modificar coordinador</th>
                     </tr>
                     </thead>
-                    <tbody id="aspirantesTableBody">
+                    <tbody>
                     <%
                         DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
                         List<DivisionesAcademicas> lista = dao.getAllDivisiones();
                         for (DivisionesAcademicas division : lista) {
                     %>
-                    <tr>
-                        <td><%= division.getNombreDivision() %></td>
-                        <td><%= division.getCoordinadorDivision() %></td>
-                        <td>
+                    <tr style="height: 10px; font-size: 15px">
+                    <td style="padding: 0; margin: 0"><%= division.getNombreDivision() %></td>
+                        <td style="padding: 0; margin: 0"><%= division.getCoordinadorDivision() %></td>
+                        <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
+                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
                                     data-target="#modificarGrupo" data-whatever="Modificar">
                                 <i class="fas fa-edit"></i>
                             </button>
@@ -220,10 +224,11 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="../js/script.js"></script>
+<script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
