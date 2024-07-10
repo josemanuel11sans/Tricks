@@ -67,6 +67,17 @@
             background-color: red;
             cursor: pointer;
         }
+        td{
+            vertical-align: middle !important;
+        }
+        .tabla{
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
     </style>
 </head>
 <body>
@@ -149,8 +160,8 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table id="example" class="table table-striped" style="width:100%">
+            <div class="container-xxl tabla">
+                <table class="table" id="example">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Matricula</th>
@@ -292,6 +303,41 @@
             modal.find('#idDocenteEstado').val(idDocente);
             modal.find('#nuevoEstado').val(nuevoEstado);
         });
+
+        $('#filterName').on('input', filterTable);
+        $('#filterState').on('change', filterTable);
+
+        function filterTable() {
+            var filterNameValue = $('#filterName').val().toLowerCase();
+            var filterStateValue = $('#filterState').val().toLowerCase();
+            var table = $('#example');
+            var rows = table.find('tbody tr');
+
+            rows.each(function() {
+                var cells = $(this).find('td');
+                var matricula = cells.eq(0).text().toLowerCase(); // Columna "Matricula"
+                var nombre = cells.eq(1).text().toLowerCase();    // Columna "Nombre"
+                var estado = cells.eq(3).find('div').data('estado'); // Columna "Estado"
+
+                var nameMatch = filterNameValue === '' || matricula.includes(filterNameValue) || nombre.includes(filterNameValue);
+
+                var stateMatch;
+                if (filterStateValue === 'activo') {
+                    stateMatch = estado == "1";
+                } else if (filterStateValue === 'noactivo') {
+                    stateMatch = estado == "2";
+                } else {
+                    stateMatch = true;
+                }
+
+                if (nameMatch && stateMatch) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
     });
 
     function cargarDatosDocente(idDocente, nombre, apellido, mail, contra) {

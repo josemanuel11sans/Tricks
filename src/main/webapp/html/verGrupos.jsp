@@ -39,18 +39,36 @@
         ::-webkit-scrollbar {
             display: none;
         }
-        .table{
+        .table {
             margin-bottom: 0;
         }
-        .modal-body{
+        .modal-body {
             padding: 0 1.5rem;
             border-radius: .3rem;
         }
-        .modal-footer{
+        .modal-footer {
             border: none;
         }
-        .form-group{
+        .form-group {
             margin-bottom: .5rem !important;
+        }
+        .activo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .inactivo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: red;
+            cursor: pointer;
+        }
+        td{
+            vertical-align: middle !important;
         }
         .tabla{
             background-color: #fff;
@@ -151,7 +169,7 @@
             </div><br>
 
             <div class="container-xxl tabla">
-                <table id="groupsTable" class="table table-striped" style="width:100%">
+                <table class="table" id="example">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Grupo</th>
