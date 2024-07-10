@@ -14,7 +14,7 @@ public class AspiranteDAO {
 
     public List<Aspirante> getAllAspirantes() {
         List<Aspirante> aspirantes = new ArrayList<>();
-        String query = "SELECT folio_aspirante, nombre, apellido, curp, grupos_id_grupo, estado_id_estado, fecha_nac FROM aspirante";
+        String query = "{ CALL verAspirantes() }";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -26,7 +26,7 @@ public class AspiranteDAO {
                 aspirante.setNombre(rs.getString("nombre"));
                 aspirante.setApellidos(rs.getString("apellido"));
                 aspirante.setCurp(rs.getString("curp"));
-                aspirante.setGrupo(rs.getString("grupos_id_grupo"));
+                aspirante.setGrupo(rs.getString("grupo"));
                 aspirante.setEstado(rs.getString("estado_id_estado"));
                 aspirante.setFechaNacimiento(rs.getDate("fecha_nac"));
 

@@ -109,16 +109,17 @@ DROP PROCEDURE IF EXISTS verGrupos ;
 DELIMITER //
 CREATE PROCEDURE verAspirantes()
 BEGIN
-SELECT
-    folio_aspirante,
-    nombre,
-    apellido,
-    curp,
-    grupos_id_grupo,
-    estado_id_estado
-FROM aspirante
-ORDER BY folio_aspirante ASC
-    LIMIT 30;
+SELECT DISTINCT a.folio_aspirante AS folio_aspirante,
+                a.nombre AS nombre,
+                a.apellido AS apellido,
+                a.curp AS curp,
+                a.grupos_id_grupo AS grupos_id_grupo,
+                a.estado_id_estado AS estado_id_estado,
+                a.fecha_nac AS fecha_nac,
+                g.nombre_grupo AS grupo
+FROM aspirante a
+         INNER JOIN grupos g ON a.grupos_id_grupo = g.id_grupo
+ORDER BY folio_aspirante ASC;
 END //
 DELIMITER ;
 
