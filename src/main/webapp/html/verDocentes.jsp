@@ -52,6 +52,21 @@
         .form-group {
             margin-bottom: .5rem !important;
         }
+        .activo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .inactivo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: red;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -150,7 +165,6 @@
                         UsuarioDao dao = new UsuarioDao();
                         ArrayList<Usuario> lista = dao.getAll();
                         for (Usuario u : lista) {
-                            String estadoClase = u.getEstado().equals("1") ? "activo" : "inactivo";
                     %>
                     <tr style="height: 20px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= u.getId_usuario() %></td>
@@ -158,9 +172,9 @@
                         <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (u.getEstado().equals("1")) { %>
-                            <button class="activo" data-id="<%= u.getId_usuario() %>" data-estado="2" data-toggle="modal" data-target="#modificarEstado"></button>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
                             <% } else { %>
-                            <button class="inactivo" data-id="<%= u.getId_usuario() %>" data-estado="1" data-toggle="modal" data-target="#modificarEstado"></button>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
                             <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">

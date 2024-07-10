@@ -69,7 +69,7 @@ public class UsuarioDao {
                 u.setId_usuario(rs.getInt("matricula"));
                 u.setNombre(rs.getString("nombre_completo"));
                 u.setMail(rs.getString("correo"));
-                u.setEstado(rs.getString("estado"));
+                u.setEstado(rs.getString("estadoCorrecto"));
                 lista.add(u);
             }
             ps.close();

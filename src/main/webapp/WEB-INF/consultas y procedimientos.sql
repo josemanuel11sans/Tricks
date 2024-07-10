@@ -50,6 +50,7 @@ BEGIN
 SELECT u.id_usuario AS matricula,
        CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
        u.mail AS correo,
+       u.id_estado AS estadoCorrecto,
        e.estado AS estado
 FROM usuarios u
          JOIN estado e ON u.id_estado = e.id_estado
