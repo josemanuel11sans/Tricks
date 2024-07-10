@@ -17,6 +17,47 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .modal-body {
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer {
+            border: none;
+        }
+        .form-group {
+            margin-bottom: .5rem !important;
+        }
+        .tabla {
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+    </style>
 </head>
 
 <body>
@@ -57,7 +98,7 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
+        <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Cursos asignados</h1>
 
             <!-- Filtros y botón de registrar -->
@@ -82,8 +123,8 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table id="10" class="table">
+            <div class="container-xxl tabla">
+                <table id="groupsTable" class="table table-striped" style="width:100%">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Grupo</th>
@@ -218,26 +259,6 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="antes" id="paginaAnterior" data-page="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-1" data-page="Página 1">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-2" data-page="Página 2">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" id="page-3" data-page="Página 3">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="despues" id="paginaSiguiente"
-                           data-page="Posterior">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Posterior</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -372,9 +393,6 @@
         window.location.href = 'http://localhost:8080/tricks_war_exploded/html_docentes/Calificaciones.jsp';
     });
 </script>
-
-
-
 
 </body>
 
