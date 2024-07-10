@@ -405,6 +405,7 @@
                 document.getElementById('apellidosAspirante3').value = apellido;
                 document.getElementById('curpAspirante3').value = curp;
                 document.getElementById('fechaNacimientoAspirante3').value = fecha;
+                console.log(fecha);
             });
         });
     });
