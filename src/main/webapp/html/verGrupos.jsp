@@ -52,6 +52,14 @@
         .form-group{
             margin-bottom: .5rem !important;
         }
+        .tabla{
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
     </style>
 </head>
 <body>
@@ -142,7 +150,7 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl tabla">
                 <table id="groupsTable" class="table table-striped" style="width:100%">
                     <thead class="thead-light">
                     <tr align="center">

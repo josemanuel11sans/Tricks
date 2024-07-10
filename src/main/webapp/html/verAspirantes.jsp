@@ -66,16 +66,13 @@
         td{
             vertical-align: middle !important;
         }
-        .table-responsive {
-            overflow-y: auto;
-        }
-
-        .table-responsive{
-            max-height: 70vh !important;
-        }
-
-        .table-responsive{
-            max-height: 70vh !important;
+        .tabla{
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
         }
     </style>
 </head>
@@ -187,7 +184,7 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl tabla">
                 <table class="table" id="example">
                     <thead class="thead-light">
                     <tr>
