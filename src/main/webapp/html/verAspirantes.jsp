@@ -22,8 +22,11 @@
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <style>
         .table-responsive {
-            max-height: 70vh;
+            max-height: 70vh !important;
             overflow-y: auto;
+        }
+        #tabla{
+            max-height: 70vh !important;
         }
         table {
             border-collapse: separate;
@@ -180,7 +183,7 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl table-responsive" id="tabla" style="background-color: #fff; border-radius: 20px;">
                 <table class="table" id="example">
                     <thead class="thead-light">
                     <tr>
@@ -364,7 +367,7 @@
                 var name = cells[1].textContent.toLowerCase();   // Columna "Nombre"
                 var curp = cells[2].textContent.toLowerCase();   // Columna "CURP"
                 var division = cells[3].textContent.toLowerCase(); // Columna "Grupo"
-                var career = cells[4].textContent.toLowerCase(); // Columna "Estado"
+                var career = cells[4].querySelector('div').getAttribute('data-estado'); // Columna "Estado"
 
                 var nameMatch = filterNameValue === '' || folio.includes(filterNameValue) || name.includes(filterNameValue) || curp.includes(filterNameValue);
                 var careerMatch = filterCareerValue === '' || career === filterCareerValue;

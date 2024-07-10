@@ -501,5 +501,9 @@ a.sidebar-link:hover {
 }
 
 .table-responsive{
-    height: 100vh !important;
+    max-height: 70vh !important;
+}
+
+#tabla{
+    max-height: 70vh !important;
 }
