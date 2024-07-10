@@ -34,8 +34,6 @@ public class UsuarioDao {
     }
 
 
-
-
     //metodo que verifica si el correo existe
         public boolean emailExists(String nombre) {
             String query = "SELECT COUNT(*) FROM usuarios WHERE mail = ?;";
@@ -56,56 +54,6 @@ public class UsuarioDao {
             return false;
         }
 
-
-    //CRUD para usuario
-
-    //Primera parte de modificar usuario
-    public Usuario getOne(int id){
-        Usuario usuario = new Usuario();
-        String query = "select * from usuarios where id_usuario = ?;";
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,id);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                usuario.setId_usuario(rs.getInt("id"));
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setContra(rs.getString("contra"));
-                usuario.setMail(rs.getString("correo"));
-                usuario.setEstado(rs.getString("estado"));
-            }
-            ps.close();
-            con.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return usuario;
-    }
-
-    //Insert para un nuevo usuario
-    public boolean insert(Usuario u){
-        boolean flag = false;
-        String query = "insert into usuarios(nombre,contrasena,mail) values (?,sha2(?,256),?);";
-        try{
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,u.getNombre());
-            ps.setString(2,u.getContra());
-            ps.setString(3,u.getMail());
-            if(ps.executeUpdate()>0){
-                flag = true;
-            }
-            ps.close();
-            con.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    //Read pero para TODOS
-    //esto se usa para mostra los datos en la tabla
 
     // VER DOCENTES EN LA TABLA:
 
@@ -131,6 +79,56 @@ public class UsuarioDao {
         }
         return lista;
     }
+
+    // INSERTAR DOCENTE
+    public boolean insert(Usuario usuario) {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DatabaseConnectionManager.getConnection();
+            String query = "INSERT INTO usuarios (id_usuario, nombre, apellido, mail, contrasena, id_estado, id_rol, grupos_id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, usuario.getId_usuario());
+            ps.setString(2, usuario.getNombre());
+            ps.setString(3, usuario.getApellido());
+            ps.setString(4, usuario.getMail());
+            ps.setString(5, usuario.getContra());
+            ps.setInt(6, usuario.getId_estado());
+            ps.setInt(7, usuario.getId_rol());
+            ps.setInt(8, usuario.getGrupos_id_grupo());
+
+            result = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseConnectionManager.close(con, ps);
+        }
+        return result;
+    }
+
+    // Método para actualizar datos del docente
+    public boolean actualizarUsuario(Usuario usuario) {
+        String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contra = ? WHERE id_usuario = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getApellido());
+            ps.setString(3, usuario.getMail());
+            ps.setString(4, usuario.getContra());
+            ps.setInt(5, usuario.getId_usuario());
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     // ESTADISTICAS DE LAS CARDS DEL INICIO - NO MOVER -
 

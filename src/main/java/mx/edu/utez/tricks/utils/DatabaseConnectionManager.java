@@ -3,6 +3,7 @@ package mx.edu.utez.tricks.utils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
@@ -41,5 +42,9 @@ public class DatabaseConnectionManager {
     // Esto asegura que la clase solo se utilice de manera estática.
     private DatabaseConnectionManager() {
         // Private constructor to prevent instantiation
+    }
+
+    public static void close(Connection con, PreparedStatement ps) {
+
     }
 }
