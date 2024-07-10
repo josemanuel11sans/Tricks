@@ -18,6 +18,47 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .table-responsive {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .modal-body {
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer {
+            border: none;
+        }
+        .form-group {
+            margin-bottom: .5rem !important;
+        }
+        .tabla {
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+    </style>
 </head>
 <body>
 <!-- menu lateral docente calificaciones -->
@@ -56,7 +97,7 @@
     </aside>
 
     <div class="main">
-        <div class="container mt-5 text-left">
+        <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Calificaciones</h1>
 
             <!-- Filtros y botón de registrar -->
@@ -72,8 +113,8 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table class="table">
+            <div class="container-xxl tabla">
+                <table id="groupsTable" class="table table-striped" style="width:100%">
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Folio</th>
@@ -88,11 +129,6 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center" id="pagination">
-                    <!-- Los botones de paginación se generarán con JavaScript -->
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
