@@ -21,13 +21,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <style>
-        .table-responsive {
-            max-height: 70vh !important;
-            overflow-y: auto;
-        }
-        #tabla{
-            max-height: 70vh !important;
-        }
         table {
             border-collapse: separate;
             border-spacing: 0;
@@ -72,6 +65,17 @@
         }
         td{
             vertical-align: middle !important;
+        }
+        .table-responsive {
+            overflow-y: auto;
+        }
+
+        .table-responsive{
+            max-height: 70vh !important;
+        }
+
+        .table-responsive{
+            max-height: 70vh !important;
         }
     </style>
 </head>
@@ -183,7 +187,7 @@
                 </div>
             </div><br>
 
-            <div class="container-xxl table-responsive" id="tabla" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
                 <table class="table" id="example">
                     <thead class="thead-light">
                     <tr>
