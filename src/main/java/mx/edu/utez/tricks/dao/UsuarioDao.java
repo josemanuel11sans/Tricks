@@ -109,7 +109,7 @@ public class UsuarioDao {
 
     // Método para actualizar datos del docente
     public boolean actualizarUsuario(Usuario usuario) {
-        String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contra = ? WHERE id_usuario = ?";
+        String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contrasena = ? WHERE id_usuario = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

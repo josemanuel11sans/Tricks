@@ -191,8 +191,12 @@
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarDocente" data-whatever="Modificar"
-                                    onclick="cargarDatosDocente('<%= u.getId_usuario() %>', '<%= u.getNombre() %>', '<%= u.getApellido() %>', '<%= u.getMail() %>', '<%= u.getContra() %>')">
+                                    data-target="#modificarDocente"
+                                    data-id="<%= u.getId_usuario() %>"
+                                    data-nombre="<%= u.getNombre() %>"
+                                    data-apellido="<%= u.getApellido() %>"
+                                    data-mail="<%= u.getMail() %>"
+                                    data-contra="<%= u.getContra() %>">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -294,6 +298,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+    document.querySelectorAll('.btn-modificar').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var id = button.getAttribute('data-id');
+            var nombre = button.getAttribute('data-nombre');
+            var apellido = button.getAttribute('data-apellido');
+            var mail = button.getAttribute('data-mail');
+            var contra = button.getAttribute('data-contra');
+
+            document.getElementById('idDocenteMod').value = id;
+            document.getElementById('nombreMod').value = nombre;
+            document.getElementById('apellidoMod').value = apellido;
+            document.getElementById('mailMod').value = mail;
+            document.getElementById('contraMod').value = contra;
+        });
+    });
+</script>
+
+<script>
     $(document).ready(function () {
         $('#modificarEstado').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -340,13 +362,6 @@
 
     });
 
-    function cargarDatosDocente(idDocente, nombre, apellido, mail, contra) {
-        $('#idDocenteMod').val(idDocente);
-        $('#nombreMod').val(nombre);  // Asigna el nombre al campo de nombre
-        $('#apellidoMod').val(apellido);  // Asigna el apellido al campo de apellido
-        $('#mailMod').val(mail);  // Asigna el mail al campo de mail
-        $('#contraMod').val(contra);  // Asigna la contraseña al campo de contraseña
-    }
 </script>
 <script src="../js/script.js"></script>
 </body>
