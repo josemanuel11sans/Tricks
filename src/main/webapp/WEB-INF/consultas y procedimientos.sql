@@ -48,7 +48,8 @@ DELIMITER //
 CREATE PROCEDURE verDocentes ()
 BEGIN
 SELECT u.id_usuario AS matricula,
-       CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
+       u.nombre AS nombre,
+       u.apellido AS apellido,
        u.mail AS correo,
        u.id_estado AS estadoCorrecto,
        e.estado AS estado
