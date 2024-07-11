@@ -1,5 +1,6 @@
 package mx.edu.utez.tricks.dao;
 
+import mx.edu.utez.tricks.model.Aspirante;
 import mx.edu.utez.tricks.model.Usuario;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
@@ -204,4 +205,26 @@ public class UsuarioDao {
         }
         return count;
     }
+    public boolean actualizarEstado(Usuario usuario) {
+        String query = "UPDATE usuarios SET id_estado = ? " +
+                "WHERE id_usuario = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, usuario.getEstado());
+            ps.setInt(2, usuario.getId_usuario());
+
+
+            int rowsAffected = ps.executeUpdate();
+            con.close();
+            ps.close();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

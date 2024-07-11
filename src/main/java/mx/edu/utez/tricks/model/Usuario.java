@@ -27,6 +27,11 @@ public class Usuario {
     public Usuario(String idUsuario, String nombre, String apellido, String mail, String contra, String number) {
     }
 
+    public Usuario(int idUsuario, String estado) {
+        this.id_usuario = idUsuario;
+        this.estado = estado;
+    }
+
     public String getNombre() {
         return nombre;
     }

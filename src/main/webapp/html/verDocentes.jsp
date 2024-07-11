@@ -177,15 +177,15 @@
                         ArrayList<Usuario> lista = dao.getAll();
                         for (Usuario u : lista) {
                     %>
-                    <tr style="height: 20px; font-size: 15px">
+                    <tr style="height: 20px; font-size: 15px" data-id="<%= u.getId_usuario() %>">
                         <td style="padding: 0; margin: 0"><%= u.getId_usuario() %></td>
                         <td style="padding: 0; margin: 0"><%= u.getNombre() %> <%= u.getApellido()%></td>
                         <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (u.getEstado().equals("1")) { %>
-                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
                             <% } else { %>
-                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
                             <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">
@@ -293,6 +293,37 @@
     </div>
 </div>
 
+<!-- Modal modificar datos del docente -->
+<div class="modal fade" id="modificarEstadoDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar datos del docente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="../ModificarEstadoDocServlet" method="post">
+                    <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
+                    <div class="form-group" style="display: none">
+                        <label for="idDocente2" class="col-form-label">Matrícula:</label>
+                        <input type="text" class="form-control" id="idDocente2" name="idDocente2" placeholder="Matrícula" required>
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label for="estadoDocente" class="col-form-label">Estado:</label>
+                        <input type="text" class="form-control" id="estadoDocente" name="estadoDocente" placeholder="Estado" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn modalBoton2">Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -311,6 +342,18 @@
             document.getElementById('apellidoMod').value = apellido;
             document.getElementById('mailMod').value = mail;
             document.getElementById('contraMod').value = contra;
+        });
+    });
+
+    document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var folio = this.closest('tr').getAttribute('data-id');
+            document.getElementById('idDocente2').value = folio;
+
+            var estadoActual = this.getAttribute('data-estado');
+            var estadoContrario = estadoActual === '1' ? '2' : '1';
+            document.getElementById('estadoDocente').value = estadoContrario;
+
         });
     });
 </script>
