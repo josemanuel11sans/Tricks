@@ -59,7 +59,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> lista = new ArrayList<>();
-        String query = "{ CALL verDocentes() }";
+        String query = " CALL verDocentes(); ";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -67,7 +67,8 @@ public class UsuarioDao {
             while(rs.next()){
                 Usuario u = new Usuario();
                 u.setId_usuario(rs.getInt("matricula"));
-                u.setNombre(rs.getString("nombre_completo"));
+                u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
                 u.setMail(rs.getString("correo"));
                 u.setEstado(rs.getString("estadoCorrecto"));
                 lista.add(u);

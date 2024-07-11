@@ -179,7 +179,7 @@
                     %>
                     <tr style="height: 20px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= u.getId_usuario() %></td>
-                        <td style="padding: 0; margin: 0"><%= u.getNombre() %></td>
+                        <td style="padding: 0; margin: 0"><%= u.getNombre() %> <%= u.getApellido()%></td>
                         <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (u.getEstado().equals("1")) { %>
