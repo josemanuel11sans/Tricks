@@ -82,61 +82,10 @@
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
-    <aside id="sidebar">
-        <div class="d-flex">
-            <button class="toggle-btn" type="button">
-                <img src="../img_svg/logo.svg" alt="Toggle">
-            </button>
-            <div class="sidebar-logo">
-                <a href="#">TRICKS</a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a href="inicioAdmin.jsp" class="sidebar-link">
-                    <i class="fas fa-house"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="consultarDivision.jsp" class="sidebar-link">
-                    <i class="fas fa-school-flag"></i>
-                    <span>División académica</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="consultarCarrera.jsp" class="sidebar-link">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Carrera</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="verAspirantes.jsp" class="sidebar-link">
-                    <i class="fas fa-users"></i>
-                    <span>Aspirantes</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="verDocentes.jsp" class="sidebar-link">
-                    <i class="fas fa-chalkboard-user"></i>
-                    <span>Docentes</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="verGrupos.jsp" class="sidebar-link">
-                    <i class="fas fa-users-rectangle"></i>
-                    <span>Grupos</span>
-                </a>
-            </li>
-        </ul>
-        <div class="sidebar-footer background-color">
-            <a href="../index.jsp" class="sidebar-link">
-                <i class="fas fa-right-from-bracket"></i>
-                <span>Salir</span>
-            </a>
-        </div>
-    </aside>
+    <!-- Componente de menú lateral -->
+    <jsp:include page="../componentes/menuLateral.jsp" />
 
+    <!-- Cuerpo de la página -->
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Docentes</h1>
@@ -160,6 +109,7 @@
                 </div>
             </div><br>
 
+            <!-- Tabla de datos del docente -->
             <div class="container-xxl tabla">
                 <table class="table" id="example">
                     <thead class="thead-light">
@@ -209,12 +159,12 @@
     </div>
 </div>
 
-<!-- Modal registrar maestro nuevo  -->
+<!-- Modal registrar maestro nuevo -->
 <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Maestro</h5>
+                <h5 class="modal-title">Registrar Maestro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -256,7 +206,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar datos del docente</h5>
+                <h5 class="modal-title">Modificar datos del docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -298,7 +248,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar datos del docente</h5>
+                <h5 class="modal-title">Modificar datos del docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -324,10 +274,6 @@
     </div>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     document.querySelectorAll('.btn-modificar').forEach(function(button) {
         button.addEventListener('click', function() {
@@ -406,6 +352,10 @@
     });
 
 </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 </body>
 </html>
