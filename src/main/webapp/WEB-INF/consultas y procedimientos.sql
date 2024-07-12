@@ -130,3 +130,25 @@ CALL verAspirantes();
 
 -- Si deseas eliminar el procedimiento después de usarlo
 DROP PROCEDURE IF EXISTS verAspirantes;
+
+-- Consulta los grupos asignados del docente
+
+DELIMITER //
+
+CREATE PROCEDURE GetGroupCareerInfo()
+BEGIN
+SELECT
+    g.nombre_grupo AS grupo,
+    c.nombre_carrera AS carrera,
+    g.estado_id_estado AS estado,
+    asi.id_asistencia AS asistencia,
+    ca.id_calificacion AS calificacion
+FROM
+    grupos g
+        INNER JOIN carreras c ON g.carreras_id_carrera = c.id_carrera
+        INNER JOIN aspirante a ON g.id_grupo = a.grupos_id_grupo
+        INNER JOIN asistencias asi ON a.folio_aspirante = asi.aspirante_folio_aspirante
+        INNER JOIN calificaciones ca ON a.folio_aspirante = ca.aspirante_folio_aspirante;
+END //
+
+DELIMITER ;
