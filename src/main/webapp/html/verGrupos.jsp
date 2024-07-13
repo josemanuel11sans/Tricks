@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: RuuizOr
-  Date: 28/06/2024
-  Time: 11:19 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
@@ -52,21 +45,6 @@
         .form-group {
             margin-bottom: .5rem !important;
         }
-        .activo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: green;
-            cursor: pointer;
-        }
-
-        .inactivo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: red;
-            cursor: pointer;
-        }
         td{
             vertical-align: middle !important;
         }
@@ -77,6 +55,68 @@
             width: 100%;
             overflow-x: auto;
             max-height: 70vh;
+        }
+
+        .modal-content-custom {
+            background-color: #2D6655;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .modal-header-custom {
+            border-bottom: none;
+        }
+
+        .modal-title-custom {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .modal-body-custom {
+            padding: 2rem;
+        }
+
+        .modal-footer-custom {
+            border-top: none;
+            justify-content: center;
+        }
+
+        .form-control-custom {
+            background-color: #fff;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-custom {
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 4px;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: bold;
+        }
+        .btn-files {
+            background-color: gray;
+            color: white;
+            border-radius: 4px;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: bold;
+        }
+
+        .btn-link-custom {
+            background-color: purple;
+            color: white;
+            border-radius: 4px;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: bold;
+        }
+
+        .btn-link-custom:hover {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -141,14 +181,17 @@
                         <td style="padding: 0; margin: 0"  >
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#asignarMasivo" data-whatever="Aspirantes">
+                                    data-target="#asignarMasivo"
+                                    onclick="setGrupoInfoMasivo(${grupo.idGrupo}, '${grupo.nombreGrupo}')">
                                 <i class="fas fa-users"></i>
                             </button>
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#asignarIndividual" data-whatever="Agregar Aspirante">
+                                    data-target="#asignarIndividual" data-whatever="Agregar Aspirante"
+                                    onclick="setGrupoInfo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
                                 <i class="fas fa-user-plus"></i>
                             </button>
+
                         </td >
                         <td style="padding: 0; margin: 0"  >
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
@@ -169,32 +212,39 @@
 
 <!-- Modal registrar grupo -->
 <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Grupo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Registrar grupo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<%= request.getContextPath() %>/RegistrarGrupoServlet" method="post">
+                <form method="post" action="RegistrarGrupoServlet">
                     <div class="form-group">
-                        <label for="nombreGrupo" class="col-form-label">Nombre del Grupo:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Introduce el nombre del grupo" required>
+                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombreDocente" class="col-form-label">Nombre del Docente:</label>
-                        <input type="text" class="form-control" id="nombreDocente" name="nombreDocente" placeholder="Introduce el nombre del docente" required>
+                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
+                        <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
+                            <option value="DATID">DATID</option>
+                            <option value="DAMI">DAMI</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder="Introduce el nombre de la carrera" required>
+                        <label for="carrera" class="col-form-label">Carrera:</label>
+                        <select class="custom-select" id="carrera" name="carrera" required>
+                            <option value="Desarrollo de Software">Desarrollo de Software</option>
+                            <option value="Redes">Redes</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="Introduce el nombre de la división" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="docente" class="col-form-label">Docente asignado:</label>
+                            <input type="text" class="form-control" id="docente" name="docente" required>
+                        </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Registrar</button>
@@ -207,32 +257,40 @@
 
 <!-- Modal modificar grupo -->
 <div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Grupo</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modificar grupo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<%= request.getContextPath() %>/ModificarGrupoServlet" method="post">
-                    <input type="hidden" id="idGrupo" name="idGrupo">
+                <form method="post" action="ModificarGrupoServlet">
                     <div class="form-group">
-                        <label for="modNombreGrupo" class="col-form-label">Nombre del Grupo:</label>
-                        <input type="text" class="form-control" id="modNombreGrupo" name="modNombreGrupo" placeholder="Introduce el nuevo nombre del grupo" required>
+                        <label for="nombreGrupo" class="col-form-label">Nuevo nombre:</label>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDocente" class="col-form-label">Nombre del Docente:</label>
-                        <input type="text" class="form-control" id="modNombreDocente" name="modNombreDocente" placeholder="Introduce el nombre del docente" required>
+                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
+                        <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
+                            <option value="DATID">DATID</option>
+                            <option value="DAMI">DAMI</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" id="modNombreCarrera" name="modNombreCarrera" placeholder="Introduce el nombre de la carrera" required>
+                        <label for="carrera" class="col-form-label">Carrera:</label>
+                        <select class="custom-select" id="carrera" name="carrera" required>
+                            <option value="Desarrollo de Software">Desarrollo de Software</option>
+                            <option value="Redes">Redes</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="modNombreDivision" class="col-form-label">Nombre de la División:</label>
-                        <input type="text" class="form-control" id="modNombreDivision" name="modNombreDivision" placeholder="Introduce el nombre de la división" required>
+                        <label for="docente" class="col-form-label">Docente asignado:</label>
+                        <select class="custom-select" id="docente" name="docente" required>
+                            <option value="Juan Pérez">Juan Pérez</option>
+                            <option value="María López">María López</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -244,63 +302,131 @@
     </div>
 </div>
 
+<!-- Modal asignar aspirante -->
+<div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Asignar aspirante al grupo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
+                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="">
+                    <div class="form-group">
+                        <label for="nombreGrupo">Grupo seleccionado:</label>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="folioAspirante">Folio del aspirante:</label>
+                        <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
+                            <option value="folio1">Aspirante1</option>
+                            <option value="folio2">Aspirante2</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Asignar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Modal para carga masiva de datos -->
+<div class="modal fade" id="asignarMasivo" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title modal-title-custom" id="exampleModalLabel">Asignar aspirantes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-body-custom">
+                <form method="post" action="CargaMasivaServlet" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="grupoNombreMasivo">Grupo:</label>
+                        <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                        <label for="archivoCargaMasiva">Asignación masiva</label>
+                            <hr>
+                            <label class="btn-files"> Selecciona tus archivos
+                        <input
+                                type="file"
+                                id="archivoCargaMasiva"
+                                name="archivoCargaMasiva"
+                                accept=".text/csv" />
+                            </label>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer modal-footer-custom">
+                <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
+                <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
+                <button type="submit" class="btn btn-custom">Asignar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap y scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var filterName = document.getElementById('filterName');
-        var filterCareer = document.getElementById('filterCareer');
-        var filterDivision = document.getElementById('filterDivision');
+    $(document).ready(function () {
+        $('#filterName').on('input', function () {
+            var searchText = $(this).val().toLowerCase();
+            filterTable(searchText, '#example');
+        });
 
-        filterName.addEventListener('input', filterTable);
-        filterCareer.addEventListener('change', filterTable);
-        filterDivision.addEventListener('change', filterTable);
+        $('#filterCareer').on('change', function () {
+            var searchText = $(this).val().toLowerCase();
+            filterTable(searchText, '#example');
+        });
 
-        function filterTable() {
-            var filterNameValue = filterName.value.toLowerCase();
-            var filterCareerValue = filterCareer.value.toLowerCase();
-            var filterDivisionValue = filterDivision.value.toLowerCase();
-            var table = document.getElementById('groupsTable');
-            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        $('#filterDivision').on('change', function () {
+            var searchText = $(this).val().toLowerCase();
+            filterTable(searchText, '#example');
+        });
 
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td');
-                var groupName = cells[0].textContent.toLowerCase(); // Columna "Nombre del Grupo"
-                var career = cells[2].textContent.toLowerCase(); // Columna "Carrera"
-                var division = cells[3].textContent.toLowerCase(); // Columna "División Académica"
-
-                var nameMatch = filterNameValue === '' || groupName.includes(filterNameValue);
-                var careerMatch = filterCareerValue === '' || career.includes(filterCareerValue);
-                var divisionMatch = filterDivisionValue === '' || division.includes(filterDivisionValue);
-
-                if (nameMatch && careerMatch && divisionMatch) {
-                    rows[i].style.display = '';
+        function filterTable(searchText, tableSelector) {
+            $(tableSelector + ' tbody tr').each(function () {
+                var found = false;
+                $(this).find('td').each(function () {
+                    if ($(this).text().toLowerCase().includes(searchText)) {
+                        found = true;
+                    }
+                });
+                if (found) {
+                    $(this).show();
                 } else {
-                    rows[i].style.display = 'none';
+                    $(this).hide();
                 }
-            }
+            });
         }
     });
-</script>
-<script>
-    $('#modificarGrupo').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var idGrupo = button.data('id');
-        var nombreGrupo = button.data('nombre');
-        var docente = button.data('docente');
-        var carrera = button.data('carrera');
-        var division = button.data('division');
+    <!-- JavaScript adicional para manejar la información del grupo -->
 
-        var modal = $(this);
-        modal.find('#idGrupo').val(idGrupo);
-        modal.find('#modNombreGrupo').val(nombreGrupo);
-        modal.find('#modNombreDocente').val(docente);
-        modal.find('#modNombreCarrera').val(carrera);
-        modal.find('#modNombreDivision').val(division);
-    });
+        function setGrupoInfo(IdGrupo, nombreGrupo) {
+        document.getElementById('IdGrupo').value = IdGrupo;
+        document.getElementById('nombreGrupo').textContent = nombreGrupo;
+    }
+
+
+    function setGrupoInfoMasivo(grupoId, nombreGrupo) {
+        // Setear los valores del grupo en el modal
+        document.getElementById('grupoIdMasivo').value = grupoId;
+        document.getElementById('nombreGrupoMasivo').textContent = nombreGrupo;
+    }
+
+
 </script>
 </body>
 </html>

@@ -11,15 +11,14 @@ import java.util.ArrayList;
 
 public class GrupoDao {
 
-    // Read para todos los grupos
+    // Obtener todos los grupos
     public ArrayList<Grupo> getAll() {
         ArrayList<Grupo> lista = new ArrayList<>();
         String query = "{ CALL verGrupos() }";
 
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Grupo g = new Grupo();
@@ -30,9 +29,7 @@ public class GrupoDao {
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
                 lista.add(g);
             }
-            ps.close();
-            con.close();
-            rs.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,19 +39,19 @@ public class GrupoDao {
 
     // Insertar un nuevo grupo
     public boolean insert(Grupo grupo) {
-        boolean isInserted = false;
         String query = "INSERT INTO grupo (nombreGrupo, docente, carrera, divisionAcademica) VALUES (?, ?, ?, ?)";
+        boolean isInserted = false;
 
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, grupo.getNombreGrupo());
             ps.setString(2, grupo.getDocente());
             ps.setString(3, grupo.getCarrera());
             ps.setString(4, grupo.getDivisionAcademica());
+
             isInserted = ps.executeUpdate() > 0;
-            ps.close();
-            con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,22 +59,22 @@ public class GrupoDao {
         return isInserted;
     }
 
-    // Modificar un grupo existente
+    // Actualizar un grupo existente
     public boolean update(Grupo grupo) {
-        boolean isUpdated = false;
         String query = "UPDATE grupo SET nombreGrupo = ?, docente = ?, carrera = ?, divisionAcademica = ? WHERE idGrupo = ?";
+        boolean isUpdated = false;
 
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, grupo.getNombreGrupo());
             ps.setString(2, grupo.getDocente());
             ps.setString(3, grupo.getCarrera());
             ps.setString(4, grupo.getDivisionAcademica());
             ps.setInt(5, grupo.getIdGrupo());
+
             isUpdated = ps.executeUpdate() > 0;
-            ps.close();
-            con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
