@@ -416,3 +416,8 @@
 <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+select a.folio_aspirante,a.nombre,c.nombre_carrera,a.estado_id_estado,a.calificacion from aspirante a
+inner join estado e on a.estado_id_estado = e.id_estado
+inner join carreras c on e.id_estado = c.estado_id_estado;
