@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "ModificarDocenteServlet", value = "/ModificarDocenteServlet")
 public class ModificarDocenteServlet extends HttpServlet {
@@ -30,7 +29,7 @@ public class ModificarDocenteServlet extends HttpServlet {
         if (resultado) {
             response.sendRedirect("html/verDocentes.jsp");
         } else {
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("../error.jsp");
         }
     }
 }

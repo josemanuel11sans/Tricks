@@ -1,6 +1,5 @@
 package mx.edu.utez.tricks.dao;
 
-import mx.edu.utez.tricks.model.Aspirante;
 import mx.edu.utez.tricks.model.Usuario;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 
 public class UsuarioDao {
     // Read para un usuario
-
     public Usuario getOne(String nombre, String contra) {
         Usuario usuario = new Usuario();
         String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = ?;";
@@ -35,7 +33,7 @@ public class UsuarioDao {
     }
 
 
-    //metodo que verifica si el correo existe
+    // Método que verifica si el correo existe
         public boolean emailExists(String nombre) {
             String query = "SELECT COUNT(*) FROM usuarios WHERE mail = ?;";
             try {
@@ -56,8 +54,7 @@ public class UsuarioDao {
         }
 
 
-    // VER DOCENTES EN LA TABLA:
-
+    // Método para ver la información de un docente en la tabla
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> lista = new ArrayList<>();
         String query = " CALL verDocentes(); ";
@@ -82,7 +79,7 @@ public class UsuarioDao {
         return lista;
     }
 
-    // INSERTAR DOCENTE
+    // Método para registrar un docente
     public boolean insert(Usuario usuario) {
         boolean result = false;
         Connection con = null;
@@ -131,9 +128,31 @@ public class UsuarioDao {
         }
     }
 
+    // Método para actualizar el estado del docente
+    public boolean actualizarEstado(Usuario usuario) {
+        String query = "UPDATE usuarios SET id_estado = ? " +
+                "WHERE id_usuario = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, usuario.getEstado());
+            ps.setInt(2, usuario.getId_usuario());
+
+
+            int rowsAffected = ps.executeUpdate();
+            con.close();
+            ps.close();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     // ESTADISTICAS DE LAS CARDS DEL INICIO - NO MOVER -
-
     public int getAspirantesCount() {
         int count = 0;
         String query = "SELECT COUNT(*) AS count FROM aspirante";
@@ -205,26 +224,4 @@ public class UsuarioDao {
         }
         return count;
     }
-    public boolean actualizarEstado(Usuario usuario) {
-        String query = "UPDATE usuarios SET id_estado = ? " +
-                "WHERE id_usuario = ?";
-
-        try (Connection con = DatabaseConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(query)) {
-
-            ps.setString(1, usuario.getEstado());
-            ps.setInt(2, usuario.getId_usuario());
-
-
-            int rowsAffected = ps.executeUpdate();
-            con.close();
-            ps.close();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
 }
