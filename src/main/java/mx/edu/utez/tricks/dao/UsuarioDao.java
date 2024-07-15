@@ -130,7 +130,7 @@ public class UsuarioDao {
 
     // Método para actualizar el estado del docente
     public boolean actualizarEstado(Usuario usuario) {
-        String query = "UPDATE usuarios SET id_estado = ? " +
+        String query = "UPDATE usuarios SET estado = ? " +
                 "WHERE id_usuario = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -155,7 +155,7 @@ public class UsuarioDao {
     // ESTADISTICAS DE LAS CARDS DEL INICIO - NO MOVER -
     public int getAspirantesCount() {
         int count = 0;
-        String query = "SELECT COUNT(*) AS count FROM aspirante";
+        String query = "SELECT COUNT(*) AS count FROM aspirantes";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -173,7 +173,7 @@ public class UsuarioDao {
 
     public int getDocentesCount() {
         int count = 0;
-        String query = "SELECT COUNT(*) AS count FROM usuarios WHERE id_rol = 2"; // Suponiendo que el rol de docente es 2
+        String query = "SELECT COUNT(*) AS count FROM usuarios WHERE rol = 2"; // Suponiendo que el rol de docente es 2
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);

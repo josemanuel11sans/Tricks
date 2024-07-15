@@ -175,7 +175,7 @@
                     %>
                     <tr style="height: 10px; font-size: 15px" >
                         <td  style="padding: 0; margin: 0" ><%= g.getNombreGrupo() %></td>
-                        <td style="padding: 0; margin: 0" ><%= g.getDocente() %></td>
+                        <td style="padding: 0; margin: 0" ><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getCarrera() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getDivisionAcademica() %></td>
                         <td style="padding: 0; margin: 0"  >

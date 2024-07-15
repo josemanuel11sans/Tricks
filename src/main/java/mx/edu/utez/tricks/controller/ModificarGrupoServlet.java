@@ -15,14 +15,16 @@ public class ModificarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
         String nombreGrupo = request.getParameter("modNombreGrupo");
-        String docente = request.getParameter("modNombreDocente");
+        String nombre = request.getParameter("modNombreDocente");
+        String apellido = request.getParameter("modApellidoDocente");
         String carrera = request.getParameter("modNombreCarrera");
         String division = request.getParameter("modNombreDivision");
 
         Grupo grupo = new Grupo();
         grupo.setIdGrupo(idGrupo);
         grupo.setNombreGrupo(nombreGrupo);
-        grupo.setDocente(docente);
+        grupo.setNombreDocente(nombre);
+        grupo.setCarrera(apellido);
         grupo.setCarrera(carrera);
         grupo.setDivisionAcademica(division);
 

@@ -12,7 +12,7 @@ public class DatabaseConnectionManager {
     //define el  username de la base de datos
     private static final String USERNAME = "root";
     //define la contraseña de la base de datos
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root";
     // Crea una instancia de configuración de HikariCP.
     private static final HikariConfig config = new HikariConfig();
     //Declara el HikariDataSource que gestionará el pool de conexiones.
@@ -29,9 +29,9 @@ public class DatabaseConnectionManager {
         config.setUsername(USERNAME);//Configura el nombre de usuario en HikariConfig.
         config.setPassword(PASSWORD); //Configura la contraseña en HikariConfig.
         // Ajustes del pool
-        config.setMinimumIdle(1000); //Número mínimo de conexiones inactivas en el pool.
-        config.setMaximumPoolSize(10000); //Número máximo de conexiones en el pool.
-        config.setConnectionTimeout(30000); // Tiempo máximo de espera para obtener una conexión del pool (30 segundos).
+        config.setMinimumIdle(10000); //Número mínimo de conexiones inactivas en el pool.
+        config.setMaximumPoolSize(100000); //Número máximo de conexiones en el pool.
+        config.setConnectionTimeout(300000); // Tiempo máximo de espera para obtener una conexión del pool (30 segundos).
         dataSource = new HikariDataSource(config); //Crea el HikariDataSource con la configuración proporcionada.
     }
     //Método público y estático que devuelve una conexión a la base de datos

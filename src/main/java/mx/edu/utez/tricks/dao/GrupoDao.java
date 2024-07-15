@@ -24,7 +24,8 @@ public class GrupoDao {
                 Grupo g = new Grupo();
                 g.setIdGrupo(rs.getInt("idGrupo"));
                 g.setNombreGrupo(rs.getString("nombreGrupo"));
-                g.setDocente(rs.getString("docente"));
+                g.setNombreDocente(rs.getString("nombre"));
+                g.setApellidoDocente(rs.getString("apellido"));
                 g.setCarrera(rs.getString("carrera"));
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
                 lista.add(g);
@@ -39,16 +40,17 @@ public class GrupoDao {
 
     // Insertar un nuevo grupo
     public boolean insert(Grupo grupo) {
-        String query = "INSERT INTO grupo (nombreGrupo, docente, carrera, divisionAcademica) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO grupo (nombreGrupo, nombre,apellido, carrera, divisionAcademica) VALUES (?, ?, ?, ?,?)";
         boolean isInserted = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, grupo.getNombreGrupo());
-            ps.setString(2, grupo.getDocente());
-            ps.setString(3, grupo.getCarrera());
-            ps.setString(4, grupo.getDivisionAcademica());
+            ps.setString(2, grupo.getNombreDocente());
+            ps.setString(3, grupo.getApellidoDocente());
+            ps.setString(4, grupo.getCarrera());
+            ps.setString(5, grupo.getDivisionAcademica());
 
             isInserted = ps.executeUpdate() > 0;
 
@@ -61,17 +63,18 @@ public class GrupoDao {
 
     // Actualizar un grupo existente
     public boolean update(Grupo grupo) {
-        String query = "UPDATE grupo SET nombreGrupo = ?, docente = ?, carrera = ?, divisionAcademica = ? WHERE idGrupo = ?";
+        String query = "UPDATE grupo SET nombreGrupo = ?, nombre = ?, apellido = ?, carrera = ?, divisionAcademica = ? WHERE idGrupo = ?";
         boolean isUpdated = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, grupo.getNombreGrupo());
-            ps.setString(2, grupo.getDocente());
-            ps.setString(3, grupo.getCarrera());
-            ps.setString(4, grupo.getDivisionAcademica());
-            ps.setInt(5, grupo.getIdGrupo());
+            ps.setString(2, grupo.getNombreDocente());
+            ps.setString(3, grupo.getApellidoDocente());
+            ps.setString(4, grupo.getCarrera());
+            ps.setString(5, grupo.getDivisionAcademica());
+            ps.setInt(6, grupo.getIdGrupo());
 
             isUpdated = ps.executeUpdate() > 0;
 
