@@ -127,6 +127,7 @@ public class UsuarioDao {
         }
     }
 
+
     // Método para actualizar el estado del docente
     public boolean actualizarEstado(Usuario usuario) {
         String query = "UPDATE usuarios SET estado = ? WHERE id_usuario = ?";

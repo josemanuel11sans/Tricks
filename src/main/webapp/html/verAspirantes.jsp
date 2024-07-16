@@ -131,27 +131,27 @@
             <div class="modal-body">
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" value="Hola">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder=" ">
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="Nombre">
+                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder=" ">
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="Apellidos">
+                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder=" ">
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="CURP">
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder=" ">
+                        <label for="curpAspirante" class="col-form-label">Curp:</label>
                     </div>
                     <div class="form-group">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
-                        <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
+                        <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante" placeholder=" ">
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Registrar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -164,7 +164,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Actualizar Aspirante</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Aspirante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -172,53 +172,58 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" placeholder="Nuevo Folio">
+                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" placeholder=" ">
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
-                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante" placeholder="Nuevo nombre">
+                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante" placeholder=" ">
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
-                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante" placeholder="Nuevo apellido">
+                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante" placeholder=" ">
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
-                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante" placeholder="Nuevo CURP">
+                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante" placeholder=" ">
+                        <label for="curpAspirante" class="col-form-label">Curp:</label>
                     </div>
                     <div class="form-group">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
-                        <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
+                        <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante" placeholder=" ">
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Modificar estado del aspirante -->
-<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
+<!-- Modal modificar estado del docente -->
+<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content custom-modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body custom-modal-body">
                 <form action="../ActualizarEstadoServlet" method="post">
-                    <div class="form-group" style="display: none">
-                        <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioAspirante2" name="folioAspirante2">
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del aspirante?</h6>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="folioAspirante2" class="col-form-label custom-col-form-label">Folio del Aspirante:</label>
+                        <input type="text" class="form-control custom-form-control" id="folioAspirante2" name="folioAspirante2">
                     </div>
-                    <div class="form-group" style="display: none">
-                        <label for="estadoAspirante" class="col-form-label">Estado del Aspirante:</label>
-                        <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="estadoAspirante" class="col-form-label custom-col-form-label">Estado del Aspirante:</label>
+                        <input type="text" class="form-control custom-form-control" id="estadoAspirante" name="estadoAspirante">
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Si</button>
-                        <button type="submit" class="btn modalBoton2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">No</span>
-                        </button>
+                    <div class="modal-footer custom-modal-footer">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
             </div>

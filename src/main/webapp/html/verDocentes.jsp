@@ -148,7 +148,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modificar Docente</h5>
+                <h5 class="modal-title">Modificar Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -197,7 +197,7 @@
             </div>
             <div class="modal-body custom-modal-body">
                 <form action="../ModificarEstadoDocServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del aspirante?</h6>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del docente?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idDocente2" class="col-form-label custom-col-form-label">Matrícula:</label>
                         <input type="text" class="form-control custom-form-control" id="idDocente2" name="idDocente2" placeholder="Matrícula" required>
