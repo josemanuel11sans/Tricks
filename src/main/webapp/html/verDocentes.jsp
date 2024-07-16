@@ -20,66 +20,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
+    <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-    <style>
-        .table-responsive {
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-        table {
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        thead th {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1;
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-        .table {
-            margin-bottom: 0;
-        }
-        .modal-body {
-            padding: 0 1.5rem;
-            border-radius: .3rem;
-        }
-        .modal-footer {
-            border: none;
-        }
-        .form-group {
-            margin-bottom: .5rem !important;
-        }
-        .activo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: green;
-            cursor: pointer;
-        }
-
-        .inactivo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: red;
-            cursor: pointer;
-        }
-        td{
-            vertical-align: middle !important;
-        }
-        .tabla{
-            background-color: #fff;
-            border-radius: 20px;
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            max-height: 70vh;
-        }
-    </style>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
