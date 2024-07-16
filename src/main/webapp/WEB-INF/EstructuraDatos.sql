@@ -274,11 +274,7 @@ CREATE TABLE `usuarios` (
                             `grupos_id_grupo` int DEFAULT NULL,
                             `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                             PRIMARY KEY (`id_usuario`),
-                            KEY `id_estado` (`estado`),
-                            KEY `id_rol` (`rol`),
                             KEY `grupos_id_grupo` (`grupos_id_grupo`),
-                            CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`),
-                            CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`rol`) REFERENCES `tipousuario` (`id_rol`),
                             CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`grupos_id_grupo`) REFERENCES `grupos` (`id_grupo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

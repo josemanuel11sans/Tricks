@@ -1,101 +1,101 @@
 package mx.edu.utez.tricks.model;
 
+import java.util.Date;
+
 public class Usuario {
-     private int id_usuario;
+    private int id_usuario;
     private String nombre;
-    private  String apellido;
+    private String apellido;
     private String mail;
     private String contra;
-    private String estado;
-    private int id_rol, id_estado, grupos_id_grupo;
+    private int estado;
+    private int rol;
+    private int grupos_id_grupo;
+    private Date fecha_creacion;
 
-    public Usuario(int id_usuario, String nombre, String apellido, String mail, String contra) {
+    public Usuario(int id_usuario, String nombre, String apellido, String mail, String contra, int estado, int rol, int grupos_id_grupo, Date fecha_creacion) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.contra = contra;
+        this.estado = estado;
+        this.rol = rol;
+        this.grupos_id_grupo = grupos_id_grupo;
+        this.fecha_creacion = fecha_creacion;
     }
 
     public Usuario() {
     }
+
     public Usuario(String nombre, String contra) {
         this.nombre = nombre;
         this.contra = contra;
     }
 
-    public Usuario(String idUsuario, String nombre, String apellido, String mail, String contra, String number) {
+    public Usuario(int id_usuario, int estado) {
+        this.id_usuario = id_usuario;
+        this.estado = estado;
     }
 
-    public Usuario(int idUsuario, String estado) {
-        this.id_usuario = idUsuario;
-        this.estado = estado;
+    public Usuario(int idUsuario, String nombre, String apellido, String mail, String contra) {
+    }
+
+    // Getters y setters
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getContra() {
-        return contra;
-    }
-    public void setContra(String contra) {
-        this.contra = contra;
-    }
-    public Usuario(int id_usuario, String nombre, String apellido, String mail, String telefono, String fechaNacimiento, String contra) {
-        this.id_usuario = id_usuario;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.contra = contra;
-    }
+
     public String getApellido() {
         return apellido;
     }
+
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+
     public String getMail() {
         return mail;
     }
+
     public void setMail(String mail) {
         this.mail = mail;
     }
-    public int getId_usuario() {
-        return id_usuario;
-    }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+
+    public String getContra() {
+        return contra;
     }
 
-    public String Estado() {
+    public void setContra(String contra) {
+        this.contra = contra;
+    }
+
+    public int getEstado() {
         return estado;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
-    public int getId_rol() {
-        return id_rol;
+    public int getRol() {
+        return rol;
     }
 
-    public void setId_rol(int id_rol) {
-        this.id_rol = id_rol;
-    }
-
-    public int getId_estado() {
-        return id_estado;
-    }
-
-    public void setId_estado(int id_estado) {
-        this.id_estado = id_estado;
+    public void setRol(int rol) {
+        this.rol = rol;
     }
 
     public int getGrupos_id_grupo() {
@@ -105,5 +105,12 @@ public class Usuario {
     public void setGrupos_id_grupo(int grupos_id_grupo) {
         this.grupos_id_grupo = grupos_id_grupo;
     }
-}
 
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+}

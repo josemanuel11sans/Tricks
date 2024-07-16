@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <style>
         .table-responsive {
@@ -104,7 +105,7 @@
                 </div>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
-                        Registrar Maestro
+                        Registrar Docente
                     </button>
                 </div>
             </div><br>
@@ -132,7 +133,7 @@
                         <td style="padding: 0; margin: 0"><%= u.getNombre() %> <%= u.getApellido()%></td>
                         <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
-                            <% if (u.getEstado().equals("1")) { %>
+                            <% if (u.getEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
                             <% } else { %>
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
@@ -164,7 +165,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar Maestro</h5>
+                <h5 class="modal-title">Registrar Docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -172,27 +173,26 @@
             <div class="modal-body">
                 <form action="../RegistrarDocenteServlet" method="post">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder=" " required>
                         <label for="idDocente" class="col-form-label">Matrícula:</label>
-                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder="Introduce la matrícula del docente" required>
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder=" " required>
                         <label for="nombre" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce el nombre del docente" required>
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder=" " required>
                         <label for="apellido" class="col-form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Introduce el apellido del docente" required>
                     </div>
                     <div class="form-group">
+                        <input type="email" class="form-control" id="mail" name="mail" placeholder=" " required>
                         <label for="mail" class="col-form-label">Correo Electrónico:</label>
-                        <input type="email" class="form-control" id="mail" name="mail" placeholder="Introduce el correo electrónico del docente" required>
                     </div>
                     <div class="form-group">
+                        <input type="password" class="form-control" id="contra" name="contra" placeholder=" " required>
                         <label for="contra" class="col-form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="contra" name="contra" placeholder="Introduce la contraseña del docente" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
@@ -206,7 +206,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modificar datos del docente</h5>
+                <h5 class="modal-title">Modificar Docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -214,28 +214,27 @@
             <div class="modal-body">
                 <form action="../ModificarDocenteServlet" method="post">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" " readonly>
                         <label for="idDocenteMod" class="col-form-label">Matrícula:</label>
-                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder="Matrícula" readonly>
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreMod" name="nombre" placeholder=" " required>
                         <label for="nombreMod" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreMod" name="nombre" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" " required>
                         <label for="apellidoMod" class="col-form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder="Apellido" required>
                     </div>
                     <div class="form-group">
+                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" " required>
                         <label for="mailMod" class="col-form-label">Correo Electrónico:</label>
-                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder="Correo Electrónico" required>
                     </div>
                     <div class="form-group">
+                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder=" " required>
                         <label for="contraMod" class="col-form-label">Contraseña:</label>
-                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder="Contraseña" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn modalBoton2">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
             </div>
@@ -243,36 +242,38 @@
     </div>
 </div>
 
-<!-- Modal modificar datos del docente -->
-<div class="modal fade" id="modificarEstadoDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modificar datos del docente</h5>
+
+<!-- Modal modificar estado del docente -->
+<div class="modal fade" id="modificarEstadoDocente" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content custom-modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body custom-modal-body">
                 <form action="../ModificarEstadoDocServlet" method="post">
-                    <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
-                    <div class="form-group" style="display: none">
-                        <label for="idDocente2" class="col-form-label">Matrícula:</label>
-                        <input type="text" class="form-control" id="idDocente2" name="idDocente2" placeholder="Matrícula" required>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del aspirante?</h6>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="idDocente2" class="col-form-label custom-col-form-label">Matrícula:</label>
+                        <input type="text" class="form-control custom-form-control" id="idDocente2" name="idDocente2" placeholder="Matrícula" required>
                     </div>
-                    <div class="form-group" style="display: none">
-                        <label for="estadoDocente" class="col-form-label">Estado:</label>
-                        <input type="text" class="form-control" id="estadoDocente" name="estadoDocente" placeholder="Estado" required>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="estadoDocente" class="col-form-label custom-col-form-label">Estado:</label>
+                        <input type="text" class="form-control custom-form-control" id="estadoDocente" name="estadoDocente" placeholder="Estado" required>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn modalBoton2">Modificar</button>
+                    <div class="modal-footer custom-modal-footer">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

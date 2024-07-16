@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ModificarDocenteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idUsuarioStr = request.getParameter("idDocente");
-        int idUsuario = Integer.parseInt(idUsuarioStr);  // Asegúrate de que idDocente sea un entero
+        int idUsuario = Integer.parseInt(idUsuarioStr);
 
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -31,5 +31,9 @@ public class ModificarDocenteServlet extends HttpServlet {
         } else {
             response.sendRedirect("../error.jsp");
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 }

@@ -68,7 +68,7 @@ public class UsuarioDao {
                 u.setNombre(rs.getString("nombre"));
                 u.setApellido(rs.getString("apellido"));
                 u.setMail(rs.getString("correo"));
-                u.setEstado(rs.getString("estadoCorrecto"));
+                u.setEstado(Integer.parseInt(rs.getString("estadoCorrecto")));
                 lista.add(u);
             }
             ps.close();
@@ -80,31 +80,30 @@ public class UsuarioDao {
     }
 
     // Método para registrar un docente
-    public boolean insert(Usuario usuario) {
-        boolean result = false;
-        Connection con = null;
-        PreparedStatement ps = null;
-        try {
-            con = DatabaseConnectionManager.getConnection();
-            String query = "INSERT INTO usuarios (id_usuario, nombre, apellido, mail, contrasena, id_estado, id_rol, grupos_id_grupo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            ps = con.prepareStatement(query);
+    public boolean insert(Usuario usuario) throws SQLException {
+        String query = "INSERT INTO usuarios (id_usuario, nombre, apellido, mail, contrasena, estado, rol, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setInt(1, usuario.getId_usuario());
             ps.setString(2, usuario.getNombre());
             ps.setString(3, usuario.getApellido());
             ps.setString(4, usuario.getMail());
             ps.setString(5, usuario.getContra());
-            ps.setInt(6, usuario.getId_estado());
-            ps.setInt(7, usuario.getId_rol());
-            ps.setInt(8, usuario.getGrupos_id_grupo());
+            ps.setInt(6, usuario.getEstado());
+            ps.setInt(7, usuario.getRol());
+            ps.setTimestamp(8, new java.sql.Timestamp(usuario.getFecha_creacion().getTime()));
 
-            result = ps.executeUpdate() > 0;
+            boolean result = ps.executeUpdate() > 0;
+            System.out.println("Usuario insertado correctamente");
+            return result;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DatabaseConnectionManager.close(con, ps);
+            System.err.println("Error al insertar usuario: " + e.getMessage());
+            throw e;
         }
-        return result;
     }
+
 
     // Método para actualizar datos del docente
     public boolean actualizarUsuario(Usuario usuario) {
@@ -130,19 +129,15 @@ public class UsuarioDao {
 
     // Método para actualizar el estado del docente
     public boolean actualizarEstado(Usuario usuario) {
-        String query = "UPDATE usuarios SET estado = ? " +
-                "WHERE id_usuario = ?";
+        String query = "UPDATE usuarios SET estado = ? WHERE id_usuario = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, usuario.getEstado());
+            ps.setInt(1, usuario.getEstado());
             ps.setInt(2, usuario.getId_usuario());
 
-
             int rowsAffected = ps.executeUpdate();
-            con.close();
-            ps.close();
             return rowsAffected > 0;
 
         } catch (SQLException e) {

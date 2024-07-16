@@ -28,6 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css " rel="stylesheet">
     <script src="../js/alertas.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/inicioSesion.svg">
 
     <style>
         .input-container {
