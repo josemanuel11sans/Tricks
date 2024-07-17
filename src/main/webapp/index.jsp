@@ -33,7 +33,7 @@
     }
 
     .nav-link:hover {
-      color: #107863;
+      color: white;
       border-bottom: 2px solid #107863;
     }
 

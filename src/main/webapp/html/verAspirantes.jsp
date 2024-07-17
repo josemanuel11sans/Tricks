@@ -205,7 +205,7 @@
                         <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Registrar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -246,7 +246,7 @@
                         <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -258,7 +258,7 @@
     <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
         <div class="modal-content">
             <div class="modal-body">
-                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
+                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">¿Estas seguro de cambiar el estado del aspirante?</h6>
                 <form action="../ActualizarEstadoServlet" method="post">
                     <div class="form-group" style="display: none">
                         <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
@@ -269,10 +269,7 @@
                         <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn modalBoton2">Si</button>
-                        <button type="submit" class="btn modalBoton2" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">No</span>
-                        </button>
+                        <button type="submit" class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
             </div>
