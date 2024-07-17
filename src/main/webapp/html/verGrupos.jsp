@@ -118,7 +118,7 @@
                     <thead class="thead-light">
                     <tr align="center">
                         <th>Grupo</th>
-                        <th>Docente asignado</th>
+                        <th>Docente</th>
                         <th>Carrera</th>
                         <th>División</th>
                         <th>Asignar aspirantes</th>

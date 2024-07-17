@@ -22,9 +22,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconGrupo.svg">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/estilosModal.css">
-    <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilosModal.css">
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .table{
+            margin-bottom: 0;
+        }
+        .modal-body{
+            padding: 0 1.5rem;
+            border-radius: .3rem;
+        }
+        .modal-footer{
+            border: none;
+        }
+        .form-group{
+            margin-bottom: .5rem !important;
+        }
+        .activo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .inactivo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: red;
+            cursor: pointer;
+        }
+        td{
+            vertical-align: middle !important;
+        }
+        .tabla{
+            background-color: #fff;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -131,27 +185,27 @@
             <div class="modal-body">
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder=" ">
-                        <label for="folioAspirante" class="col-form-label">Folio:</label>
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante">
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder=" ">
-                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante">
+                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder=" ">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante">
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder=" ">
-                        <label for="curpAspirante" class="col-form-label">Curp:</label>
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante">
+                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante" placeholder=" ">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="submit" class="btn modalBoton2">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -164,7 +218,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Aspirante</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Actualizar Aspirante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -172,58 +226,53 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" placeholder=" ">
-                        <label for="folioAspirante" class="col-form-label">Folio:</label>
+                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" disabled>
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante" placeholder=" ">
-                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
+                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante" placeholder=" ">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante" placeholder=" ">
-                        <label for="curpAspirante" class="col-form-label">Curp:</label>
+                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
+                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante" placeholder=" ">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" class="btn modalBoton2">Actualizar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Modificar estado del aspirante -->
-<!-- Modal modificar estado del docente -->
-<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
-    <div class="modal-dialog custom-modal-dialog" role="document">
-        <div class="modal-content custom-modal-content">
-            <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body custom-modal-body">
+<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">Estas seguro de cambiar el estado del aspirante?</h6>
                 <form action="../ActualizarEstadoServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del aspirante?</h6>
-                    <div class="form-group custom-form-group" style="display: none">
-                        <label for="folioAspirante2" class="col-form-label custom-col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control custom-form-control" id="folioAspirante2" name="folioAspirante2">
+                    <div class="form-group" style="display: none">
+                        <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
+                        <input type="text" class="form-control" id="folioAspirante2" name="folioAspirante2">
                     </div>
-                    <div class="form-group custom-form-group" style="display: none">
-                        <label for="estadoAspirante" class="col-form-label custom-col-form-label">Estado del Aspirante:</label>
-                        <input type="text" class="form-control custom-form-control" id="estadoAspirante" name="estadoAspirante">
+                    <div class="form-group" style="display: none">
+                        <label for="estadoAspirante" class="col-form-label">Estado del Aspirante:</label>
+                        <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
                     </div>
-                    <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn modalBoton2">Si</button>
+                        <button type="submit" class="btn modalBoton2" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">No</span>
+                        </button>
                     </div>
                 </form>
             </div>
