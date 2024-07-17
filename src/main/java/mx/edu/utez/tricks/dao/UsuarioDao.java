@@ -13,7 +13,8 @@ public class UsuarioDao {
     // Read para un usuario
     public Usuario getOne(String nombre, String contra) {
         Usuario usuario = new Usuario();
-        String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = ?;";
+        //de esta forma se hace una consulta de contraseña encriptada usando SHA2
+        String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = SHA2(?, 256);";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
