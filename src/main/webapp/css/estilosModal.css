@@ -7,6 +7,7 @@
     overflow: hidden !important;
     background: linear-gradient(135deg, #107863, #0e6a58) !important;
     animation: fadeIn 0.5s !important;
+    text-align: center !important;
 }
 
 @keyframes fadeIn {
@@ -19,7 +20,9 @@
     border-bottom: none !important;
     color: white !important;
     padding: 1.5rem !important;
-    text-align: center !important;
+    display: flex !important; /* Añadido */
+    justify-content: center !important; /* Añadido */
+    align-items: center !important; /* Añadido */
     position: relative !important;
 }
 
@@ -27,6 +30,7 @@
     margin: 0 !important;
     font-weight: 900 !important;
     width: 100% !important;
+    text-align: center !important;
 }
 
 .close {
@@ -47,6 +51,7 @@
 .modal-body {
     padding: 2rem !important;
     background-color: rgba(0, 0, 0, 0.1) !important;
+    text-align: center !important;
 }
 
 .modal-body .form-group {
@@ -128,6 +133,7 @@
     align-items: center !important;
     justify-content: center !important;
     min-height: 80vh !important;
+    text-align: center !important;
 }
 
 .custom-modal-content {
@@ -138,6 +144,7 @@
     overflow: hidden !important;
     background: linear-gradient(135deg, #107863, #0e6a58) !important;
     animation: fadeIn 0.5s !important;
+    text-align: center !important;
 }
 
 @keyframes fadeIn {
@@ -158,6 +165,7 @@
     margin: 0 !important;
     font-weight: 900 !important;
     width: 100% !important;
+    text-align: center !important;
 }
 
 .custom-modal-body {
