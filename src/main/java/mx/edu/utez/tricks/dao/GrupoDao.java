@@ -24,8 +24,7 @@ public class GrupoDao {
                 Grupo g = new Grupo();
                 g.setIdGrupo(rs.getInt("idGrupo"));
                 g.setNombreGrupo(rs.getString("nombreGrupo"));
-                g.setNombreDocente(rs.getString("nombre"));
-                g.setApellidoDocente(rs.getString("apellido"));
+                g.setNombreDocente(rs.getString("docente"));
                 g.setCarrera(rs.getString("carrera"));
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
                 lista.add(g);
