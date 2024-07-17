@@ -20,7 +20,8 @@ public class usuarioServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
 
         HttpSession session = req.getSession();
-
+        UsuarioDao usuarioDao = new UsuarioDao();
+        Usuario usuario = usuarioDao.getOne(nombre, contra);
         // Validar primero el correo
         if (!dao.emailExists(nombre)) {
             System.out.println("El correo " + nombre + " no existe en la base de datos");
@@ -36,10 +37,34 @@ public class usuarioServlet extends HttpServlet {
             return;
         }
 
+        if (usuario != null) {
+            if (usuario.getRol() == 1) {
+                // Usuario administrador
+                System.out.println("entras como admin");
+                session.setAttribute("username", usr.getNombre());
+                resp.sendRedirect("html/inicioAdmin.jsp");
+            } else if (usuario.getRol() == 2) {
+                // Usuario maestro
+                System.out.println("entras como docente");
+                session.setAttribute("username", usr.getNombre());
+                resp.sendRedirect("html_docentes/inicioDocente.jsp");
+            } else {
+                // Rol desconocido o no autorizado
+                //Nota falta realizar estos Jsp
+                System.out.println("rol desconocido");
+                resp.sendRedirect("unauthorized.jsp");
+            }
+        } else { //Nota falta realizar estos Jsp
+
+            System.out.println("usuario no encontrado o credenciales incorrectas");
+            // Usuario no encontrado o credenciales incorrectas
+            resp.sendRedirect("loginError.jsp");
+        }
+
         // Si el usuario y la contraseña son correctos
-        session.setAttribute("username", usr.getNombre());
-        System.out.println("El usuario " + nombre + " sí está en la base de datos");
-        resp.sendRedirect("html/inicioAdmin.jsp");
+       // session.setAttribute("username", usr.getNombre());
+        //System.out.println("El usuario " + nombre + " sí está en la base de datos");
+        //resp.sendRedirect("html/inicioAdmin.jsp");
     }
 
     @Override

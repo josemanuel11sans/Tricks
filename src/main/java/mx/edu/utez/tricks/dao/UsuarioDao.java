@@ -24,6 +24,9 @@ public class UsuarioDao {
             if (rs.next()) {
                 usuario.setNombre(rs.getString("mail"));
                 usuario.setContra(rs.getString("contrasena"));
+
+                //aqui recuperamos el rol de cada uno de los usuarios ya que la consulta esta trallendo toda la tabla
+                usuario.setRol(rs.getInt("rol"));
             }
             ps.close();
             con.close();
