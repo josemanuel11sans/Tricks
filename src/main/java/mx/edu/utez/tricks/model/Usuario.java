@@ -38,7 +38,12 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public Usuario(int idUsuario, String nombre, String apellido, String mail, String contra) {
+    public Usuario(int id_usuario, String nombre, String apellido, String mail, String contra) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.contra = contra;
     }
 
     // Getters y setters

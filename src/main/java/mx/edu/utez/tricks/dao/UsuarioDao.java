@@ -109,7 +109,7 @@ public class UsuarioDao {
     }
 
 
-    // Método para actualizar datos del docente
+    // Método para actualizar los datos del usuario
     public boolean actualizarUsuario(Usuario usuario) {
         String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contrasena = ? WHERE id_usuario = ?";
 
@@ -126,6 +126,7 @@ public class UsuarioDao {
             return rowsAffected > 0;
 
         } catch (SQLException e) {
+            System.out.println("Error en actualización de usuario");
             e.printStackTrace();
             return false;
         }

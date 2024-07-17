@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<!-- Modal registrar maestro nuevo -->
+<!-- Modal registrar docente nuevo -->
 <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -148,7 +148,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modificar Estado</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -157,7 +157,7 @@
                 <form action="../ModificarDocenteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" " readonly>
-                        <label for="idDocenteMod" class="col-form-label">Matrícula:</label>
+                        <label for="idDocenteMod" class="col-form-label">ID Docente:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreMod" name="nombre" placeholder=" " required>
