@@ -101,18 +101,18 @@
                                             <path d="M23.5 0.018852C32.3 8.81885 33.8333 20.6855 33.5 25.5189V25.7518C34.1667 21.0075 34.8 10.3189 32 5.51885C29.2 0.718852 25.1667 -0.147815 23.5 0.018852Z" fill="white" />
                                         </svg>
                                         <!-- Formulario de Login Docente -->
-                                        <form class="login-form" action="../usuarioServlet" method="post">
+                                        <form class="login-form" action="../DocenteServlet" method="post">
                                             <div class="form-group align-items-center">
                                                 <div class="input-container">
                                                     <i class="fas fa-user input-icon"></i>
-                                                    <input type="text" id="usernameDocente" name="username" class="form-style" placeholder="Correo electrónico" required>
+                                                    <input type="text" id="usernameDocente" name="mailDoc" class="form-style" placeholder="Correo electrónico" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="passwordDocente"></label>
                                                 <div class="input-group">
                                                     <i class="fas fa-lock input-icon"></i>
-                                                    <input type="password" id="passwordDocente" name="password" class="form-style" placeholder="Contraseña" required>
+                                                    <input type="password" id="passwordDocente" name="contraDoc" class="form-style" placeholder="Contraseña" required>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-block w-60">Acceder</button><br>
@@ -132,18 +132,18 @@
                                             <path d="M23.5 0.018852C32.3 8.81885 33.8333 20.6855 33.5 25.5189V25.7518C34.1667 21.0075 34.8 10.3189 32 5.51885C29.2 0.718852 25.1667 -0.147815 23.5 0.018852Z" fill="white" />
                                         </svg>
                                         <!-- Formulario de Login Administrador -->
-                                        <form class="login-form" action="../usuarioServlet" method="post">
+                                        <form class="login-form" action="../AdministradorServlet" method="post">
                                             <div class="form-group align-items-center">
                                                 <div class="input-container">
                                                     <i class="fas fa-user input-icon"></i>
-                                                    <input type="text" id="usernameAdmin" name="username" class="form-style" placeholder="Correo electrónico" required>
+                                                    <input type="text" id="usernameAdmin" name="mailAdm" class="form-style" placeholder="Correo electrónico" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="passwordAdmin"></label>
                                                 <div class="input-group">
                                                     <i class="fas fa-lock input-icon"></i>
-                                                    <input type="password" id="passwordAdmin" name="password" class="form-style" placeholder="Contraseña" required>
+                                                    <input type="password" id="passwordAdmin" name="contraAdm" class="form-style" placeholder="Contraseña" required>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-block w-60">Acceder</button><br>
