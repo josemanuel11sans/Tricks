@@ -3,6 +3,8 @@ package mx.edu.utez.tricks.dao;
 import mx.edu.utez.tricks.model.Usuario;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -86,9 +88,25 @@ public class UsuarioDao {
         return lista;
     }
 
+    // Método para encriptar contraseña
+    public String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al encriptar la contraseña", e);
+        }
+    }
+
     // Método para registrar un docente
     public boolean insert(Usuario usuario) throws SQLException {
         String query = "INSERT INTO usuarios (id_usuario, nombre, apellido, mail, contrasena, estado, rol, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String hashedPassword = hashPassword(usuario.getContra());
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
@@ -97,7 +115,7 @@ public class UsuarioDao {
             ps.setString(2, usuario.getNombre());
             ps.setString(3, usuario.getApellido());
             ps.setString(4, usuario.getMail());
-            ps.setString(5, usuario.getContra());
+            ps.setString(5, hashedPassword);
             ps.setInt(6, usuario.getEstado());
             ps.setInt(7, usuario.getRol());
             ps.setTimestamp(8, new java.sql.Timestamp(usuario.getFecha_creacion().getTime()));
@@ -111,7 +129,6 @@ public class UsuarioDao {
         }
     }
 
-
     // Método para actualizar los datos del usuario
     public boolean actualizarUsuario(Usuario usuario) {
         String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contrasena = ? WHERE id_usuario = ?";
@@ -122,7 +139,13 @@ public class UsuarioDao {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getMail());
-            ps.setString(4, usuario.getContra());
+
+            // Verificar si la contraseña ha cambiado y encriptarla si es necesario
+            String nuevaContra = usuario.getContra();
+            if (nuevaContra != null && !nuevaContra.isEmpty()) {
+                nuevaContra = hashPassword(nuevaContra);
+            }
+            ps.setString(4, nuevaContra);
             ps.setInt(5, usuario.getId_usuario());
 
             int rowsAffected = ps.executeUpdate();
