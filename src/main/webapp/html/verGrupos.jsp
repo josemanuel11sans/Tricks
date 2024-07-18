@@ -5,6 +5,9 @@
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
+<%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
+<%@ page import="mx.edu.utez.tricks.model.Carrera" %>
+
 
 <html>
 <head>
@@ -16,6 +19,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconGrupo.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <style>
         .modal-content-custom {
@@ -97,8 +101,15 @@
                 <div class="col-md-3">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Selecciona una carrera</option>
-                        <option value="Desarrollo de Software">Desarrollo de Software</option>
-                        <option value="Redes">Redes</option>
+                        <%
+                            CarreraDao carreraDao = new CarreraDao();
+                            List<Carrera> carreraList = carreraDao.getAllCarreras();
+                            for (Carrera carrera : carreraList ) {
+                        %>
+                        <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -189,7 +200,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="RegistrarGrupoServlet">
+                <form method="post" action="../RegistrarGrupoServlet">
                     <div class="form-group">
                         <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
@@ -197,7 +208,7 @@
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label">División académica:</label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" "> selecciona </option>>
+                            <option value=" "> </option>>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -210,7 +221,14 @@
                     <div class="form-group">
                         <label for="carrera" class="col-form-label">Carrera:</label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" ">Selecciona</option>
+                            <option value=" "></option>
+                            <%
+                                for ( Carrera carrera : carreraList) {
+                            %>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                            <%
+                                }
+                            %>
 
                         </select>
                     </div>
@@ -248,6 +266,7 @@
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label">División académica:</label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
+                            <option value=" "></option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -260,15 +279,21 @@
                     <div class="form-group">
                         <label for="carrera" class="col-form-label">Carrera:</label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value="Desarrollo de Software">Desarrollo de Software</option>
-                            <option value="Redes">Redes</option>
+                            <option value=" "></option>
+                            <%
+                                for ( Carrera carrera : carreraList) {
+                            %>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                            <%
+                                }
+                            %>
+
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="docente" class="col-form-label">Docente asignado:</label>
                         <select class="custom-select" id="docente" name="docente" required>
-                            <option value="Juan Pérez">Juan Pérez</option>
-                            <option value="María López">María López</option>
+                            <option value=" "></option>
                         </select>
                     </div>
                     <div class="modal-footer">

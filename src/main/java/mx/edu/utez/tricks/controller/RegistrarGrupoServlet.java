@@ -14,17 +14,15 @@ import java.io.IOException;
 public class RegistrarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreGrupo = request.getParameter("nombreGrupo");
-        String nombre = request.getParameter("modNombreDocente");
-        String apellido = request.getParameter("modApellidoDocente");
         String carrera = request.getParameter("nombreCarrera");
         String division = request.getParameter("nombreDivision");
+        String docente = request.getParameter("nombreDocente");
 
         Grupo grupo = new Grupo();
         grupo.setNombreGrupo(nombreGrupo);
-        grupo.setNombreDocente(nombre);
-        grupo.setApellidoDocente(apellido);
         grupo.setCarrera(carrera);
         grupo.setDivisionAcademica(division);
+        grupo.setNombreDocente(docente);  // Corregido
 
         GrupoDao dao = new GrupoDao();
         boolean isInserted = dao.insert(grupo);
