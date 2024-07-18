@@ -279,6 +279,42 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+
+CREATE TABLE IF NOT EXISTS `tricks`.`registrogrupos` (
+                                                         `id_registro` INT NOT NULL AUTO_INCREMENT,
+                                                         `grupos_id_grupo` INT NOT NULL,
+                                                         `divisiones_academicas_id_division` INT NOT NULL,
+                                                         `carreras_id_carrera` INT NOT NULL,
+                                                         `usuarios_id_usuario` INT NOT NULL,
+                                                         PRIMARY KEY (`id_registro`),
+    INDEX `fk_registrogrupos_grupos1_idx` (`grupos_id_grupo` ASC) VISIBLE,
+    INDEX `fk_registrogrupos_divisiones_academicas1_idx` (`divisiones_academicas_id_division` ASC) VISIBLE,
+    INDEX `fk_registrogrupos_carreras1_idx` (`carreras_id_carrera` ASC) VISIBLE,
+    INDEX `fk_registrogrupos_usuarios1_idx` (`usuarios_id_usuario` ASC) VISIBLE,
+    CONSTRAINT `fk_registrogrupos_grupos1`
+    FOREIGN KEY (`grupos_id_grupo`)
+    REFERENCES `tricks`.`grupos` (`id_grupo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_registrogrupos_divisiones_academicas1`
+    FOREIGN KEY (`divisiones_academicas_id_division`)
+    REFERENCES `tricks`.`divisiones_academicas` (`id_division`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_registrogrupos_carreras1`
+    FOREIGN KEY (`carreras_id_carrera`)
+    REFERENCES `tricks`.`carreras` (`id_carrera`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_registrogrupos_usuarios1`
+    FOREIGN KEY (`usuarios_id_usuario`)
+    REFERENCES `tricks`.`usuarios` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 --
 -- Dumping data for table `usuarios`
 --
