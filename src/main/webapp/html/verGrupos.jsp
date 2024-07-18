@@ -2,6 +2,9 @@
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.tricks.model.Grupo" %>
+<%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
+<%@ page import="java.util.List" %>
+<%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
 
 <html>
 <head>
@@ -101,8 +104,15 @@
                 <div class="col-md-3">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Selecciona una división</option>
-                        <option value="DATID">DATID</option>
-                        <option value="DAMI">DAMI</option>
+                        <%
+                            DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
+                            List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
+                            for (DivisionesAcademicas division : listaDivisiones) {
+                        %>
+                        <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -187,15 +197,21 @@
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label">División académica:</label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value="DATID">DATID</option>
-                            <option value="DAMI">DAMI</option>
+                            <option value=" "> selecciona </option>>
+                            <%
+                                for (DivisionesAcademicas division : listaDivisiones) {
+                            %>
+                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                            <%
+                                }
+                            %>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="carrera" class="col-form-label">Carrera:</label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value="Desarrollo de Software">Desarrollo de Software</option>
-                            <option value="Redes">Redes</option>
+                            <option value=" ">Selecciona</option>
+
                         </select>
                     </div>
                         <div class="form-group">
@@ -232,8 +248,13 @@
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label">División académica:</label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value="DATID">DATID</option>
-                            <option value="DAMI">DAMI</option>
+                            <%
+                                for (DivisionesAcademicas division : listaDivisiones) {
+                            %>
+                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                            <%
+                                }
+                            %>
                         </select>
                     </div>
                     <div class="form-group">
