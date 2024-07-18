@@ -41,9 +41,16 @@
                 </div>
                 <div class="col-md-3">
                     <select class="custom-select" required>
-                        <option value="">Divison Académica</option>
-                        <option value="1">DAMI</option>
-                        <option value="2">DATID</option>
+                        <option value=""> división académica</option>
+                        <%
+                            DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
+                            List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
+                            for (DivisionesAcademicas division : listaDivisiones) {
+                        %>
+                        <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
 
@@ -67,10 +74,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%
-                        DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
-                        List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
-                    %>
+
 
                     <%
                         CarreraDao carreraDao = new CarreraDao();

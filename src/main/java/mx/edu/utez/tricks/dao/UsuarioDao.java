@@ -27,6 +27,9 @@ public class UsuarioDao {
 
                 //aqui recuperamos el rol de cada uno de los usuarios ya que la consulta esta trallendo toda la tabla
                 usuario.setRol(rs.getInt("rol"));
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
             }
             ps.close();
             con.close();
