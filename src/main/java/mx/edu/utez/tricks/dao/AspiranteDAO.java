@@ -40,7 +40,7 @@ public class AspiranteDAO {
     }
 
     public boolean agregarAspirante(Aspirante aspirante) {
-        String query = "INSERT INTO aspirante (folio_aspirante, nombre, apellido, curp, fecha_nac, grupos_id_grupo, estado_id_estado) " +
+        String query = "INSERT INTO aspirante (folio_aspirante, nombre, apellido, curp, fecha_nac, grupos_id_grupo, estado) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -87,7 +87,7 @@ public class AspiranteDAO {
     }
 
     public boolean actualizarEstado(Aspirante aspirante) {
-        String query = "UPDATE aspirante SET estado_id_estado = ? " +
+        String query = "UPDATE aspirante SET estado = ? " +
                 "WHERE folio_aspirante = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
