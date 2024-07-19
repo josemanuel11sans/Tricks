@@ -17,7 +17,7 @@ import java.util.Date;
 public class ActualizarEstadoServlet extends HelloServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String folio = request.getParameter("folioAspirante2");
-        String estado = request.getParameter("estadoAspirante");
+        int estado = Integer.parseInt(request.getParameter("estadoAspirante"));
 
         Aspirante aspirante = new Aspirante(folio,estado); // Valores de grupo y estado temporales
 

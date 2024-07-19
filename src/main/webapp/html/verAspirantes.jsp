@@ -142,9 +142,9 @@
                         <td style="padding: 0; margin: 0"><%= aspirante.getFolioAspirante() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getCurp() %></td>
-                        <td style="padding: 0; margin: 0"><%= aspirante.getGrupo() %></td>
+                        <td style="padding: 0; margin: 0"><%= aspirante.getGrupo2() %></td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
-                            <% if (aspirante.getEstado().equals("1")) { %>
+                            <% if (aspirante.getEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
                             <% } else { %>
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
@@ -226,7 +226,7 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" disabled>
+                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
