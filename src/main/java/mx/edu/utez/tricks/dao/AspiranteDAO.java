@@ -26,8 +26,8 @@ public class AspiranteDAO {
                 aspirante.setNombre(rs.getString("nombre"));
                 aspirante.setApellidos(rs.getString("apellido"));
                 aspirante.setCurp(rs.getString("curp"));
-                aspirante.setGrupo(rs.getString("grupo"));
-                aspirante.setEstado(rs.getString("estado_id_estado"));
+                aspirante.setGrupo2(rs.getString("grupo"));
+                aspirante.setEstado(rs.getInt("estado_id_estado"));
                 aspirante.setFechaNacimiento(rs.getDate("fecha_nac"));
 
                 aspirantes.add(aspirante);
@@ -40,7 +40,7 @@ public class AspiranteDAO {
     }
 
     public boolean agregarAspirante(Aspirante aspirante) {
-        String query = "INSERT INTO aspirante (folio_aspirante, nombre, apellido, curp, fecha_nac, grupos_id_grupo, estado) " +
+        String query = "INSERT INTO aspirantes (folio_aspirante, nombre, apellido, curp, fecha_nac, grupos_id_grupo, estado) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -51,8 +51,8 @@ public class AspiranteDAO {
             ps.setString(3, aspirante.getApellidos());
             ps.setString(4, aspirante.getCurp());
             ps.setDate(5, new java.sql.Date(aspirante.getFechaNacimiento().getTime()));
-            ps.setString(6, aspirante.getGrupo());
-            ps.setString(7, aspirante.getEstado());
+            ps.setInt(6, aspirante.getGrupo());
+            ps.setInt(7, aspirante.getEstado());
 
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
@@ -64,7 +64,7 @@ public class AspiranteDAO {
     }
 
     public boolean actualizarAspirante(Aspirante aspirante) {
-        String query = "UPDATE aspirante SET nombre = ?, apellido = ?, curp = ?, fecha_nac = ?, grupos_id_grupo = ? " +
+        String query = "UPDATE aspirantes SET nombre = ?, apellido = ?, curp = ?, fecha_nac = ?" +
                 "WHERE folio_aspirante = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -74,8 +74,7 @@ public class AspiranteDAO {
             ps.setString(2, aspirante.getApellidos());
             ps.setString(3, aspirante.getCurp());
             ps.setDate(4, new java.sql.Date(aspirante.getFechaNacimiento().getTime()));
-            ps.setString(5, aspirante.getGrupo());
-            ps.setString(6, aspirante.getFolioAspirante());
+            ps.setString(5, aspirante.getFolioAspirante());
 
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
@@ -87,13 +86,13 @@ public class AspiranteDAO {
     }
 
     public boolean actualizarEstado(Aspirante aspirante) {
-        String query = "UPDATE aspirante SET estado = ? " +
+        String query = "UPDATE aspirantes SET estado = ? " +
                 "WHERE folio_aspirante = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setString(1, aspirante.getEstado());
+            ps.setInt(1, aspirante.getEstado());
             ps.setString(2, aspirante.getFolioAspirante());
 
 

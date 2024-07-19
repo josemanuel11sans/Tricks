@@ -8,13 +8,14 @@ public class Aspirante {
     private String apellidos;
     private String curp;
     private Date fechaNacimiento;
-    private String grupo;
-    private String estado;
+    private int grupo;
+    private String grupo2;
+    private int estado;
 
     public Aspirante() {
     }
 
-    public Aspirante(String folioAspirante, String nombre, String apellidos, String curp, Date fechaNacimiento, String grupo, String estado) {
+    public Aspirante(String folioAspirante, String nombre, String apellidos, String curp, Date fechaNacimiento, int grupo, int estado) {
         this.folioAspirante = folioAspirante;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -24,16 +25,15 @@ public class Aspirante {
         this.estado = estado;
     }
 
-    public Aspirante(String folioAspirante, String nombre, String apellidos, String curp, Date fechaNacimiento, String grupo) {
+    public Aspirante(String folioAspirante, String nombre, String apellidos, String curp, Date fechaNacimiento) {
         this.folioAspirante = folioAspirante;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.curp = curp;
         this.fechaNacimiento = fechaNacimiento;
-        this.grupo = grupo;
     }
 
-    public Aspirante(String folioAspirante, String estado) {
+    public Aspirante(String folioAspirante, int estado) {
         this.folioAspirante = folioAspirante;
         this.estado = estado;
     }
@@ -80,15 +80,22 @@ public class Aspirante {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getGrupo() {
+    public int getGrupo() {
         return grupo;
     }
 
-    public void setGrupo(String grupo) {
+    public void setGrupo(int grupo) {
         this.grupo = grupo;
     }
+    public String getGrupo2() {
+        return grupo2;
+    }
 
-    public String getEstado() {return estado;}
+    public void setGrupo2(String grupo2) {
+        this.grupo2 = grupo2;
+    }
 
-    public void setEstado(String estado) {this.estado = estado;}
+    public int getEstado() {return estado;}
+
+    public void setEstado(int estado) {this.estado = estado;}
 }
