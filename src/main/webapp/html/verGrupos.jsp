@@ -326,32 +326,28 @@
                 </button>
             </div>
             <div class="modal-body modal-body-custom">
-                <form method="post" action="CargaMasivaServlet" enctype="multipart/form-data">
+                <form action="../uploadexcel" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="grupoNombreMasivo">Grupo:</label>
                         <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" value="" readonly>
                     </div>
                     <div class="form-group">
                         <p>
-                        <label for="archivoCargaMasiva">Asignación masiva</label>
-                            <hr>
-                            <label class="btn-files"> Selecciona tus archivos
-                        <input
-                                type="file"
-                                id="archivoCargaMasiva"
-                                name="archivoCargaMasiva"
-                                accept=".text/csv" />
-                            </label>
+                            <label for="archivoCargaMasiva">Asignación masiva</label>
+                        <hr>
+                        <label class="btn-files">Selecciona tus archivos
+                            <input type="file" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" />
+                        </label>
                         </p>
                     </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
+                        <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
+                        <button type="submit" class="btn btn-custom">Asignar</button>
+                    </div>
                 </form>
+
             </div>
-            <div class="modal-footer modal-footer-custom">
-                <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
-                <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
-                <button type="submit" class="btn btn-custom">Asignar</button>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Bootstrap y scripts -->
