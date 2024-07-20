@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import mx.edu.utez.tricks.dao.AspiranteDAO;
+
 import mx.edu.utez.tricks.dao.CargaMasivaDAO;
 import mx.edu.utez.tricks.model.Aspirante;
 import org.apache.commons.csv.CSVFormat;
@@ -108,16 +108,12 @@ public class uploadexcel extends HttpServlet {
                 String curp = obtenerValorCelda(celdaCurp);
                 Date fechaNacimiento = obtenerFechaCelda(celdaFechaNacimiento);
 
-                Aspirante aspirante = new Aspirante(folio, nombre, apellido, curp, fechaNacimiento, "0", "1");
+                Aspirante aspirante = new Aspirante(folio, nombre, apellido, curp, fechaNacimiento, 0, 1);
 
                 CargaMasivaDAO doa = new CargaMasivaDAO();
                 boolean resultado = doa.CargaMasiva(aspirante);
                 // Imprimir valores
-                System.out.println("Folio: " + folio);
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Apellido: " + apellido);
-                System.out.println("Curp: " + curp);
-                System.out.println("Fecha de Nacimiento: " + fechaNacimiento);
+
 
             }
         }
