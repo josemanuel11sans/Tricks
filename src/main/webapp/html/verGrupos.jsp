@@ -21,69 +21,6 @@
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-    <style>
-        .modal-content-custom {
-            background-color: #2D6655;
-            color: white;
-            border-radius: 8px;
-        }
-
-        .modal-header-custom {
-            border-bottom: none;
-        }
-
-        .modal-title-custom {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .modal-body-custom {
-            padding: 2rem;
-        }
-
-        .modal-footer-custom {
-            border-top: none;
-            justify-content: center;
-        }
-
-        .form-control-custom {
-            background-color: #fff;
-            color: black;
-            border: none;
-            border-radius: 4px;
-            padding: 0.5rem 1rem;
-        }
-
-        .btn-custom {
-            background-color: dodgerblue;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: bold;
-        }
-        .btn-files {
-            background-color: gray;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: bold;
-        }
-
-        .btn-link-custom {
-            background-color: purple;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: bold;
-        }
-
-        .btn-link-custom:hover {
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -202,43 +139,34 @@
             <div class="modal-body">
                 <form method="post" action="../RegistrarGrupoServlet">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                         <label for="nombreGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
+                        <label for="divisionAcademica" class="col-form-label"></label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" "> </option>>
-                            <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
-                            %>
+                            <option value=" ">División académica:</option>
+                            <% for (DivisionesAcademicas division : listaDivisiones) { %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <%
-                                }
-                            %>
+                            <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="carrera" class="col-form-label">Carrera:</label>
+                        <label for="carrera" class="col-form-label"></label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" "></option>
-                            <%
-                                for ( Carrera carrera : carreraList) {
-                            %>
+                            <option value=" ">Carrera:</option>
+                            <% for (Carrera carrera : carreraList) { %>
                             <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <%
-                                }
-                            %>
-
+                            <% } %>
                         </select>
                     </div>
-                        <div class="form-group">
-                            <label for="docente" class="col-form-label">Docente asignado:</label>
-                            <input type="text" class="form-control" id="docente" name="docente" required>
-                        </div>
-
+                    <div class="form-group">
+                        <label for="docente" class="col-form-label"></label>
+                        <select class="custom-select" id="docente" name="docente" required>
+                            <option value=" ">Docente asignado:</option>
+                        </select>
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
@@ -260,44 +188,34 @@
             <div class="modal-body">
                 <form method="post" action="ModificarGrupoServlet">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                         <label for="nombreGrupo" class="col-form-label">Nuevo nombre:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                     </div>
                     <div class="form-group">
-                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
+                        <label for="divisionAcademica" class="col-form-label"></label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" "></option>
-                            <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
-                            %>
+                            <option value=" ">División académica:</option>
+                            <% for (DivisionesAcademicas division : listaDivisiones) { %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <%
-                                }
-                            %>
+                            <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="carrera" class="col-form-label">Carrera:</label>
+                        <label for="carrera" class="col-form-label"></label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" "></option>
-                            <%
-                                for ( Carrera carrera : carreraList) {
-                            %>
+                            <option value=" ">Carrera:</option>
+                            <% for (Carrera carrera : carreraList) { %>
                             <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <%
-                                }
-                            %>
-
+                            <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="docente" class="col-form-label">Docente asignado:</label>
+                        <label for="docente" class="col-form-label"></label>
                         <select class="custom-select" id="docente" name="docente" required>
-                            <option value=" "></option>
+                            <option value=" ">Docente asignado:</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                 </form>
@@ -320,18 +238,16 @@
                 <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
                     <input type="hidden" id="IdGrupo" name="IdGrupo" value="">
                     <div class="form-group">
-                        <label for="nombreGrupo">Grupo seleccionado:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " readonly>
+                        <label for="nombreGrupo" class="col-form-label">Grupo:</label>
                     </div>
                     <div class="form-group">
-                        <label for="folioAspirante">Folio del aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label"></label>
                         <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
-                            <option value="folio1">Aspirante1</option>
-                            <option value="folio2">Aspirante2</option>
+                            <option value="folio1">Aspirante:</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Asignar</button>
                     </div>
                 </form>
@@ -353,34 +269,29 @@
             <div class="modal-body modal-body-custom">
                 <form action="../uploadexcel" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-
-                        <label for="grupoNombreMasivo">Grupo:</label>
-                        <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" value="" readonly>
-
+                        <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" placeholder=" " readonly>
+                        <label for="grupoNombreMasivo" class="col-form-label">Grupo:</label>
                     </div>
                     <div class="form-group">
-                        <p>
-                            <label for="archivoCargaMasiva">Asignación masiva</label>
-                        <hr>
-
-
-                        <label class="btn-files">Selecciona tus archivos
-                            <input type="file" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" />
-                        </label>
-
-
-                        </p>
+                        <input type="file" class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
+                        <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
                     </div>
                     <div class="modal-footer modal-footer-custom">
-                        <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
-                        <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
-                        <button type="submit" class="btn btn-custom">Asignar</button>
+                        <a href="../img/rectanguloDegradado.png" class="btn btnFormatos" data-toggle="lightbox" data-title="Ejemplo de formato">
+                            Ejemplo de formato
+                        </a>
+                        <a href="../formatos/Prueba.xlsx" class="btn btnFormatos" download>
+                            Descargar formato
+                        </a>
+                        <button type="submit" class="btn btn-primary">Asignar</button>
                     </div>
                 </form>
-
             </div>
+        </div>
     </div>
 </div>
+
+
 <!-- Bootstrap y scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

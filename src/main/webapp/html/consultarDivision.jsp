@@ -20,6 +20,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconDivision.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </head>
 
@@ -86,24 +87,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Asignar division</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Asignar división</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="asignarGrupo" class="col-form-label">Nombre de la division academica:</label>
-                    <input type="text" class="form-control" id="asignarDivison" value="Agregue nombre de la carrera" disabled>
+                    <input type="text" class="form-control" id="asignarDivison" placeholder=" " disabled>
+                    <label for="asignarDivison" class="col-form-label">Nombre de la division academica:</label>
                 </div>
                 <div class="form-group">
-                    <label for="asignarGrupo" class="col-form-label">Nombre del coordinador:</label>
-                    <input type="text" class="form-control" id="asignarCoordinador" value="Agregue nombre del coordinador" disabled>
+                    <input type="text" class="form-control" id="asignarCoordinador" placeholder=" " disabled>
+                    <label for="asignarCoordinador" class="col-form-label">Nombre del coordinador:</label>
                 </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn modalBoton2">Crear</button>
+                <button type="button" class="btn btn-primary">Crear</button>
             </div>
         </div>
     </div>
@@ -124,13 +125,13 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="asignarCoordinador" placeholder=" " disabled>
                         <label for="asignarCoordinador" class="col-form-label">Nombre del coordinador:</label>
-                        <input type="text" class="form-control" id="asignarCoordinador" value="Agregue el nombre del coordinador" disabled>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn modalBoton2">Modificar</button>
+                <button type="button" class="btn btn-primary">Modificar</button>
             </div>
         </div>
     </div>

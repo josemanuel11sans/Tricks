@@ -24,6 +24,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconCarrera.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </head>
 
@@ -121,13 +122,13 @@
                 <div class="modal-body">
                     <input type="hidden" name="action" value="agregar">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder=" " required>
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademica" class="col-form-label">División Académica:</label>
+                        <label for="idDivisionAcademica" class="col-form-label"></label>
                         <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica" required>
-                            <option value="">Seleccione división académica</option>
+                            <option value="">División Académica:</option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -139,7 +140,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn modalBoton2">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
             </form>
         </div>
@@ -164,13 +165,13 @@
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" placeholder=" " required>
                         <label for="nombreCarreraModificar" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label">División Académica:</label>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
                         <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
-                            <option value="">Seleccione división académica</option>
+                            <option value="">División Académica:</option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -182,7 +183,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn modalBoton2">Modificar</button>
+                    <button type="submit" class="btn btn-primary">Modificar</button>
                 </div>
             </form>
         </div>
