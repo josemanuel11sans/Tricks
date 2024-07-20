@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <script src="../js/script.js"></script>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -329,9 +330,10 @@
             });
         }
     });
+
     <!-- JavaScript adicional para manejar la información del grupo -->
 
-        function setGrupoInfo(IdGrupo, nombreGrupo) {
+    function setGrupoInfo(IdGrupo, nombreGrupo) {
         document.getElementById('IdGrupo').value = IdGrupo;
         document.getElementById('nombreGrupo').textContent = nombreGrupo;
     }
