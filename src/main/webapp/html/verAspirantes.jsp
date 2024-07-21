@@ -322,7 +322,7 @@
                 document.getElementById('folioAspirante2').value = folio;
 
                 var estadoActual = this.getAttribute('data-estado');
-                var estadoContrario = estadoActual === '1|' ? '2' : '1';
+                var estadoContrario = estadoActual === '1' ? '2' : '1';
                 document.getElementById('estadoAspirante').value = estadoContrario;
 
             });
