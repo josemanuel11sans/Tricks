@@ -14,7 +14,7 @@ public class DivisionesAcademicasDAO {
 
     public List<DivisionesAcademicas> getAllDivisiones() {
         List<DivisionesAcademicas> divisiones = new ArrayList<>();
-        String query = "SELECT id_division, nombre_division, coordinador_division FROM divisiones_academicas";
+        String query = "{ call verDivisionesAcademicas()}";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query);
@@ -25,6 +25,9 @@ public class DivisionesAcademicasDAO {
                 division.setIdDivision(rs.getInt("id_division"));
                 division.setNombreDivision(rs.getString("nombre_division"));
                 division.setCoordinadorDivision(rs.getString("coordinador_division"));
+                division.setSiglas(rs.getString("siglas"));
+                division.setEstado(rs.getInt("estado"));
+
 
                 divisiones.add(division);
             }

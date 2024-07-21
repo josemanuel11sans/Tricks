@@ -66,3 +66,13 @@
     END //
     DELIMITER ;
 
+
+        -- procedimeinto para ver divisiones academiscas
+DELIMITER //
+
+    CREATE PROCEDURE verDivisionesAcademicas()
+    BEGIN
+    SELECT * FROM divisiones_academicas;
+    END //
+
+DELIMITER ;
