@@ -28,7 +28,6 @@ public class DivisionesAcademicasDAO {
                 division.setSiglas(rs.getString("siglas"));
                 division.setEstado(rs.getInt("estado"));
 
-
                 divisiones.add(division);
             }
         } catch (SQLException e) {
@@ -39,13 +38,14 @@ public class DivisionesAcademicasDAO {
     }
 
     public boolean agregarDivision(DivisionesAcademicas division) {
-        String query = "INSERT INTO divisiones_academicas (nombre_division, coordinador_division) VALUES (?, ?)";
+        String query = "INSERT INTO divisiones_academicas (nombre_division, siglas, coordinador_division) VALUES (?, ?, ?)";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, division.getNombreDivision());
-            ps.setString(2, division.getCoordinadorDivision());
+            ps.setString(2, division.getSiglas());
+            ps.setString(3, division.getCoordinadorDivision());
 
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
@@ -57,14 +57,15 @@ public class DivisionesAcademicasDAO {
     }
 
     public boolean actualizarDivision(DivisionesAcademicas division) {
-        String query = "UPDATE divisiones_academicas SET nombre_division = ?, coordinador_division = ? WHERE id_division = ?";
+        String query = "UPDATE divisiones_academicas SET nombre_division = ?, siglas = ?, coordinador_division = ? WHERE id_division = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, division.getNombreDivision());
-            ps.setString(2, division.getCoordinadorDivision());
-            ps.setInt(3, division.getIdDivision());
+            ps.setString(2, division.getSiglas());
+            ps.setString(3, division.getCoordinadorDivision());
+            ps.setInt(4, division.getIdDivision());
 
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;

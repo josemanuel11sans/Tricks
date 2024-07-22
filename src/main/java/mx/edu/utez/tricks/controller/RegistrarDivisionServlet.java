@@ -10,18 +10,26 @@ import mx.edu.utez.tricks.model.DivisionesAcademicas;
 
 import java.io.IOException;
 
-@WebServlet(name = "RegistrarDivisonServlet", value = "/RegistrarDivisonServlet")
-public class RegistrarDivisonServlet extends HttpServlet {
+@WebServlet(name = "RegistrarDivisionServlet", value = "/RegistrarDivisionServlet")
+public class RegistrarDivisionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Recibiendo parámetros del formulario
         String nombre = req.getParameter("nombreDivision");
+        String siglas = req.getParameter("siglas");
         String coordinador = req.getParameter("coordinadorDivision");
 
-        DivisionesAcademicas division = new DivisionesAcademicas(nombre, coordinador);
+        // Creando una instancia de DivisionesAcademicas con los datos recibidos
+        DivisionesAcademicas division = new DivisionesAcademicas();
+        division.setNombreDivision(nombre);
+        division.setSiglas(siglas);
+        division.setCoordinadorDivision(coordinador);
 
+        // Agregando la división
         DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
         boolean resultado = dao.agregarDivision(division);
 
+        // Redireccionando según el resultado de la adición
         if (resultado) {
             resp.sendRedirect("success.jsp"); // Redirige a una página de éxito
         } else {

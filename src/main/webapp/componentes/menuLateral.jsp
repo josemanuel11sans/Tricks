@@ -24,13 +24,13 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="consultarDivision.jsp" class="sidebar-link">
+            <a href="verDivision.jsp" class="sidebar-link">
                 <i class="fas fa-school-flag"></i>
                 <span>División académica</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="consultarCarrera.jsp" class="sidebar-link">
+            <a href="verCarrera.jsp" class="sidebar-link">
                 <i class="fas fa-graduation-cap"></i>
                 <span>Carrera</span>
             </a>

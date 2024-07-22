@@ -3,35 +3,23 @@ package mx.edu.utez.tricks.model;
 public class DivisionesAcademicas {
     private int idDivision;
     private String nombreDivision;
-    private String coordinadorDivision;
     private String siglas;
+    private String coordinadorDivision;
     private int estado;
-    private String fecha_creacion;
 
-    // Constructores
-    public DivisionesAcademicas() {}
-
-    public DivisionesAcademicas(String nombreDivision, String coordinadorDivision) {
+    // Constructor con todos los campos
+    public DivisionesAcademicas(String nombreDivision, String siglas, String coordinadorDivision, int estado) {
         this.nombreDivision = nombreDivision;
-        this.coordinadorDivision = coordinadorDivision;
-    }
-
-    public DivisionesAcademicas(int idDivision, String nombreDivision, String coordinadorDivision) {
-        this.idDivision = idDivision;
-        this.nombreDivision = nombreDivision;
-        this.coordinadorDivision = coordinadorDivision;
-    }
-
-    public DivisionesAcademicas(int idDivision, String nombreDivision, String coordinadorDivision, String siglas, int estado, String fecha_creacion) {
-        this.idDivision = idDivision;
-        this.nombreDivision = nombreDivision;
-        this.coordinadorDivision = coordinadorDivision;
         this.siglas = siglas;
+        this.coordinadorDivision = coordinadorDivision;
         this.estado = estado;
-        this.fecha_creacion = fecha_creacion;
     }
 
-    // Getters y Setters
+    public DivisionesAcademicas() {
+        // Constructor vacío
+    }
+
+    // Getters y setters
     public int getIdDivision() {
         return idDivision;
     }
@@ -48,14 +36,6 @@ public class DivisionesAcademicas {
         this.nombreDivision = nombreDivision;
     }
 
-    public String getCoordinadorDivision() {
-        return coordinadorDivision;
-    }
-
-    public void setCoordinadorDivision(String coordinadorDivision) {
-        this.coordinadorDivision = coordinadorDivision;
-    }
-
     public String getSiglas() {
         return siglas;
     }
@@ -64,19 +44,19 @@ public class DivisionesAcademicas {
         this.siglas = siglas;
     }
 
+    public String getCoordinadorDivision() {
+        return coordinadorDivision;
+    }
+
+    public void setCoordinadorDivision(String coordinadorDivision) {
+        this.coordinadorDivision = coordinadorDivision;
+    }
+
     public int getEstado() {
         return estado;
     }
 
     public void setEstado(int estado) {
         this.estado = estado;
-    }
-
-    public String getFecha_creacion() {
-        return fecha_creacion;
-    }
-
-    public void setFecha_creacion(String fecha_creacion) {
-        this.fecha_creacion = fecha_creacion;
     }
 }
