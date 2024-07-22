@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `tricks` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `tricks`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tricks
 -- ------------------------------------------------------
--- Server version	8.0.37
+-- Server version	8.4.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -64,6 +62,7 @@ CREATE TABLE `aspirantes` (
                               PRIMARY KEY (`folio_aspirante`),
                               KEY `estado_id_estado` (`estado`),
                               KEY `grupos_id_grupo` (`grupos_id_grupo`),
+                              CONSTRAINT `aspirantes_ibfk_1` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`),
                               CONSTRAINT `aspirantes_ibfk_2` FOREIGN KEY (`grupos_id_grupo`) REFERENCES `grupos` (`id_grupo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -235,15 +234,14 @@ DROP TABLE IF EXISTS `historial`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `historial` (
-                             `id_historial` int NOT NULL,
+                             `id_historial` int NOT NULL AUTO_INCREMENT,
                              `descripcion` varchar(100) DEFAULT NULL,
-                             `fecha` datetime DEFAULT NULL,
                              `usuarios_id_usuario` int DEFAULT NULL,
-                             `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+                             `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
                              PRIMARY KEY (`id_historial`),
                              KEY `usuarios_id_usuario` (`usuarios_id_usuario`),
                              CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`usuarios_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +250,42 @@ CREATE TABLE `historial` (
 
 LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+INSERT INTO `historial` VALUES (1,'Se registró el docente Lalo',123,'2024-07-21 00:00:00'),(2,'Se registró el docente Jose ',123,'2024-07-22 00:00:00');
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `registrogrupos`
+--
+
+DROP TABLE IF EXISTS `registrogrupos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `registrogrupos` (
+                                  `id_registro` int NOT NULL AUTO_INCREMENT,
+                                  `grupos_id_grupo` int NOT NULL,
+                                  `divisiones_academicas_id_division` int NOT NULL,
+                                  `carreras_id_carrera` int NOT NULL,
+                                  `usuarios_id_usuario` int NOT NULL,
+                                  PRIMARY KEY (`id_registro`),
+                                  KEY `fk_registrogrupos_grupos1_idx` (`grupos_id_grupo`),
+                                  KEY `fk_registrogrupos_divisiones_academicas1_idx` (`divisiones_academicas_id_division`),
+                                  KEY `fk_registrogrupos_carreras1_idx` (`carreras_id_carrera`),
+                                  KEY `fk_registrogrupos_usuarios1_idx` (`usuarios_id_usuario`),
+                                  CONSTRAINT `fk_registrogrupos_carreras1` FOREIGN KEY (`carreras_id_carrera`) REFERENCES `carreras` (`id_carrera`),
+                                  CONSTRAINT `fk_registrogrupos_divisiones_academicas1` FOREIGN KEY (`divisiones_academicas_id_division`) REFERENCES `divisiones_academicas` (`id_division`),
+                                  CONSTRAINT `fk_registrogrupos_grupos1` FOREIGN KEY (`grupos_id_grupo`) REFERENCES `grupos` (`id_grupo`),
+                                  CONSTRAINT `fk_registrogrupos_usuarios1` FOREIGN KEY (`usuarios_id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registrogrupos`
+--
+
+LOCK TABLES `registrogrupos` WRITE;
+/*!40000 ALTER TABLE `registrogrupos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registrogrupos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -278,49 +311,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
-
-CREATE TABLE IF NOT EXISTS `tricks`.`registrogrupos` (
-                                                         `id_registro` INT NOT NULL AUTO_INCREMENT,
-                                                         `grupos_id_grupo` INT NOT NULL,
-                                                         `divisiones_academicas_id_division` INT NOT NULL,
-                                                         `carreras_id_carrera` INT NOT NULL,
-                                                         `usuarios_id_usuario` INT NOT NULL,
-                                                         PRIMARY KEY (`id_registro`),
-    INDEX `fk_registrogrupos_grupos1_idx` (`grupos_id_grupo` ASC) VISIBLE,
-    INDEX `fk_registrogrupos_divisiones_academicas1_idx` (`divisiones_academicas_id_division` ASC) VISIBLE,
-    INDEX `fk_registrogrupos_carreras1_idx` (`carreras_id_carrera` ASC) VISIBLE,
-    INDEX `fk_registrogrupos_usuarios1_idx` (`usuarios_id_usuario` ASC) VISIBLE,
-    CONSTRAINT `fk_registrogrupos_grupos1`
-    FOREIGN KEY (`grupos_id_grupo`)
-    REFERENCES `tricks`.`grupos` (`id_grupo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_registrogrupos_divisiones_academicas1`
-    FOREIGN KEY (`divisiones_academicas_id_division`)
-    REFERENCES `tricks`.`divisiones_academicas` (`id_division`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_registrogrupos_carreras1`
-    FOREIGN KEY (`carreras_id_carrera`)
-    REFERENCES `tricks`.`carreras` (`id_carrera`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_registrogrupos_usuarios1`
-    FOREIGN KEY (`usuarios_id_usuario`)
-    REFERENCES `tricks`.`usuarios` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
 --
 -- Dumping data for table `usuarios`
 --
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (123,'Jose','Saldaña','ejemplo1@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',1,1,NULL,'2024-07-13 00:41:42'),(124,'Orlanddo','ruiz','ejemplo2@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',1,1,NULL,'2024-07-13 00:41:42'),(125,'pepe','sanchez','ejemplo3@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',2,1,NULL,'2024-07-13 00:41:42'),(126,'Mauro2','Bahena','ejemplo4@gmial.com','null',1,2,22,'2024-07-13 00:41:42'),(127,'Sebastian','Sota','ejemplo5@gmial.com','233e1cded61ace811d7a930947b06acb18cda1dc7b67e215941e1830fdec3b7c',1,2,NULL,'2024-07-13 00:41:42'),(128,'Carlos','Hernandez','carlos.hernandez@example.com','0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e',1,1,NULL,'2024-07-13 00:41:42'),(129,'Laura','Martinez','laura.martinez@example.com','6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4',2,2,26,'2024-07-13 00:41:42'),(130,'Miguel','Lopez','miguel.lopez@example.com','5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764',1,2,NULL,'2024-07-13 00:41:42'),(131,'Ana','Gomez','ana.gomez@example.com','b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b',2,1,NULL,'2024-07-13 00:41:42'),(132,'Luis','Perez','luis.perez@example.com','8b2c86ea9cf2ea4eb517fd1e06b74f399e7fec0fef92e3b482a6cf2e2b092023',1,2,22,'2024-07-13 00:41:42'),(133,'Isabel','Diaz','isabel.diaz@example.com','598a1a400c1dfdf36974e69d7e1bc98593f2e15015eed8e9b7e47a83b31693d5',2,2,NULL,'2024-07-13 00:41:42'),(134,'David','Ramirez','david.ramirez@example.com','5860836e8f13fc9837539a597d4086bfc0299e54ad92148d54538b5c3feefb7c',1,1,NULL,'2024-07-13 00:41:42'),(135,'Sofia','Torres','sofia.torres@example.com','57f3ebab63f156fd8f776ba645a55d96360a15eeffc8b0e4afe4c05fa88219aa',2,2,26,'2024-07-13 00:41:42'),(136,'Andres','Sanchez','andres.sanchez@example.com','9323dd6786ebcbf3ac87357cc78ba1abfda6cf5e55cd01097b90d4a286cac90e',1,2,NULL,'2024-07-13 00:41:42'),(137,'Maria','Ortiz','maria.ortiz@example.com','aa4a9ea03fcac15b5fc63c949ac34e7b0fd17906716ac3b8e58c599cdc5a52f0',2,1,NULL,'2024-07-13 00:41:42'),(138,'Jorge','Morales','jorge.morales@example.com','53d453b0c08b6b38ae91515dc88d25fbecdd1d6001f022419629df844f8ba433',1,2,22,'2024-07-13 00:41:42'),(139,'Natalia','Mendoza','natalia.mendoza@example.com','b3d17ebbe4f2b75d27b6309cfaae1487b667301a73951e7d523a039cd2dfe110',2,2,NULL,'2024-07-13 00:41:42'),(140,'Pablo','Vargas','pablo.vargas@example.com','48caafb68583936afd0d78a7bfd7046d2492fad94f3c485915f74bb60128620d',1,1,NULL,'2024-07-13 00:41:42'),(141,'Lucia','Rojas','lucia.rojas@example.com','c6863e1db9b396ed31a36988639513a1c73a065fab83681f4b77adb648fac3d6',2,2,NULL,'2024-07-13 00:41:42'),(142,'Enrique','Cruz','enrique.cruz@example.com','c63c2d34ebe84032ad47b87af194fedd17dacf8222b2ea7f4ebfee3dd6db2dfb',1,2,NULL,'2024-07-13 00:41:42'),(143,'Valeria','Herrera','valeria.herrera@example.com','17a3379984b560dc311bb921b7a46b28aa5cb495667382f887a44a7fdbca7a7a',2,1,NULL,'2024-07-13 00:41:42'),(144,'Adrian','Ibañez','adrian.ibanez@example.com','69bfb918de05145fba9dcee9688dfb23f6115845885e48fa39945eebb99d8527',1,2,22,'2024-07-13 00:41:42'),(145,'Laura','Garcia','laura.garcia@example.com','d2042d75a67922194c045da2600e1c92ff6d87e8fb6e0208606665f2d1dfa892',2,2,NULL,'2024-07-13 00:41:42'),(146,'Roberto','Castro','roberto.castro@example.com','5790ac3d0b8ae8afc72c2c6fb97654f2b73651c328de0a3b74854ade562dd17a',1,1,NULL,'2024-07-13 00:41:42'),(147,'Carolina','Silva','carolina.silva@example.com','7535d8f2d8c35d958995610f971287288ab5e8c82a3c4fdc2b6fb5d757a5b9f8',2,2,NULL,'2024-07-13 00:41:42'),(321312332,'geze','sanchez','hola@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,2,32,'2024-07-13 00:41:42');
+INSERT INTO `usuarios` VALUES (123,'Jose','Saldaña','ejemplo1@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',1,1,NULL,'2024-07-13 00:41:42'),(124,'Orlanddo','ruiz','ejemplo2@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',1,1,NULL,'2024-07-13 00:41:42'),(125,'pepe','sanchez','ejemplo3@gmial.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',2,1,NULL,'2024-07-13 00:41:42'),(126,'Mauro2','Bahena','ejemplo4@gmial.com','null',1,2,22,'2024-07-13 00:41:42'),(127,'Sebastian','Sota','ejemplo5@gmial.com','233e1cded61ace811d7a930947b06acb18cda1dc7b67e215941e1830fdec3b7c',1,2,NULL,'2024-07-13 00:41:42'),(128,'Carlos','Hernandez','carlos.hernandez@example.com','0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e',1,1,NULL,'2024-07-13 00:41:42'),(129,'Laura','Martinez','laura.martinez@example.com','6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4',2,2,26,'2024-07-13 00:41:42'),(130,'Miguel','Lopez','miguel.lopez@example.com','5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764',1,2,NULL,'2024-07-13 00:41:42'),(131,'Ana','Gomez','ana.gomez@example.com','b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b',2,1,NULL,'2024-07-13 00:41:42'),(132,'Luis','Perez','luis.perez@example.com','8b2c86ea9cf2ea4eb517fd1e06b74f399e7fec0fef92e3b482a6cf2e2b092023',1,2,22,'2024-07-13 00:41:42'),(133,'Isabel','Diaz','isabel.diaz@example.com','598a1a400c1dfdf36974e69d7e1bc98593f2e15015eed8e9b7e47a83b31693d5',2,2,NULL,'2024-07-13 00:41:42'),(134,'David','Ramirez','david.ramirez@example.com','5860836e8f13fc9837539a597d4086bfc0299e54ad92148d54538b5c3feefb7c',1,1,NULL,'2024-07-13 00:41:42'),(135,'Sofia','Torres','sofia.torres@example.com','57f3ebab63f156fd8f776ba645a55d96360a15eeffc8b0e4afe4c05fa88219aa',2,2,26,'2024-07-13 00:41:42'),(136,'Andres','Sanchez','andres.sanchez@example.com','9323dd6786ebcbf3ac87357cc78ba1abfda6cf5e55cd01097b90d4a286cac90e',1,2,NULL,'2024-07-13 00:41:42'),(137,'Maria','Ortiz','maria.ortiz@example.com','aa4a9ea03fcac15b5fc63c949ac34e7b0fd17906716ac3b8e58c599cdc5a52f0',2,1,NULL,'2024-07-13 00:41:42'),(138,'Jorge','Morales','jorge.morales@example.com','53d453b0c08b6b38ae91515dc88d25fbecdd1d6001f022419629df844f8ba433',1,2,22,'2024-07-13 00:41:42'),(139,'Natalia','Mendoza','natalia.mendoza@example.com','b3d17ebbe4f2b75d27b6309cfaae1487b667301a73951e7d523a039cd2dfe110',2,2,NULL,'2024-07-13 00:41:42'),(140,'Pablo','Vargas','pablo.vargas@example.com','48caafb68583936afd0d78a7bfd7046d2492fad94f3c485915f74bb60128620d',1,1,NULL,'2024-07-13 00:41:42'),(141,'Lucia','Rojas','lucia.rojas@example.com','c6863e1db9b396ed31a36988639513a1c73a065fab83681f4b77adb648fac3d6',2,2,NULL,'2024-07-13 00:41:42'),(142,'Enrique','Cruz','enrique.cruz@example.com','c63c2d34ebe84032ad47b87af194fedd17dacf8222b2ea7f4ebfee3dd6db2dfb',1,2,NULL,'2024-07-13 00:41:42'),(143,'Valeria','Herrera','valeria.herrera@example.com','17a3379984b560dc311bb921b7a46b28aa5cb495667382f887a44a7fdbca7a7a',2,1,NULL,'2024-07-13 00:41:42'),(144,'Adrian','Ibañez','adrian.ibanez@example.com','69bfb918de05145fba9dcee9688dfb23f6115845885e48fa39945eebb99d8527',1,2,22,'2024-07-13 00:41:42'),(145,'Laura','Garcia','laura.garcia@example.com','d2042d75a67922194c045da2600e1c92ff6d87e8fb6e0208606665f2d1dfa892',2,2,NULL,'2024-07-13 00:41:42'),(146,'Roberto','Castro','roberto.castro@example.com','5790ac3d0b8ae8afc72c2c6fb97654f2b73651c328de0a3b74854ade562dd17a',1,1,NULL,'2024-07-13 00:41:42'),(147,'Carolina','Silva','carolina.silva@example.com','7535d8f2d8c35d958995610f971287288ab5e8c82a3c4fdc2b6fb5d757a5b9f8',2,2,NULL,'2024-07-13 00:41:42'),(199,'Roberto','Bahena','ro@gmial.com','a4f27f84d7ec58cc4c0caca7d46f98c240f9fbf2951636c1d1b766c27547e12e',1,2,NULL,'2024-07-21 17:35:52'),(1999,'Roberto','Ruiz','bhbh3@gmial.com','f969fdbe811d8a66010d6f8973246763147a2a0914afc8087839e29b563a5af0',1,2,NULL,'2024-07-21 17:39:25'),(2007,'Lalo','Ruiz','ruizo@gmial.com','163f86a55db0f4c22963002b04f5a8707954ca431f07258c0bf9a432258ab358',1,2,NULL,'2024-07-21 17:46:01'),(6666,'Roberto','Santos','ro@gmial.com','049a68c15c0d6e26c8b4a0743e6b87f074864c2fae5983c88956cb2882d608f5',1,2,NULL,'2024-07-21 17:34:06'),(123455,'Jose ','Santos','fdsfdsfds@gmial.com','2aee6d2709a30a20bbb3e99607d2936a8172c3c45be61c9c7e662adc0c5c6e53',1,2,NULL,'2024-07-22 23:10:39'),(322323,'Orladn','Ruiiz','fdsd@gmial.com','74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b',2,2,NULL,'2024-07-20 14:42:48'),(321312332,'geze','sanchez','hola@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,2,32,'2024-07-13 00:41:42');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -333,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-15  0:03:16
+-- Dump completed on 2024-07-22 17:23:43

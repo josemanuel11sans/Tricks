@@ -1,6 +1,9 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.http.HttpSession;
+import mx.edu.utez.tricks.dao.HistorialDao;
 import mx.edu.utez.tricks.dao.UsuarioDao;
+import mx.edu.utez.tricks.model.Historial;
 import mx.edu.utez.tricks.model.Usuario;
 
 import jakarta.servlet.ServletException;
@@ -8,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
@@ -25,6 +29,7 @@ public class RegistrarDocenteServlet extends HttpServlet {
             int estado = 1;
             int rol = 2;
             java.util.Date fechaCreacion = new java.util.Date(); // Fecha y hora actuales
+            HistorialDao historialDao = new HistorialDao();
 
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setId_usuario(idDocente);
@@ -42,7 +47,19 @@ public class RegistrarDocenteServlet extends HttpServlet {
 
             // Redirigir según el resultado de la inserción
             if (isInserted) {
-                response.sendRedirect("html/verDocentes.jsp?success=true");
+                Historial historial = new Historial();
+                historial.setDescripcion("Se registró el docente " + nombre);
+                historial.setFecha_creacion(fechaCreacion);
+                HttpSession session = request.getSession();
+
+                historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+
+                isInserted = historialDao.insert(historial);
+                if (isInserted) {
+                    response.sendRedirect("html/verDocentes.jsp?success=true");
+                } else {
+                    response.sendRedirect("error.jsp?error=insertion_failed");
+                }
             } else {
                 response.sendRedirect("error.jsp?error=insertion_failed");
             }

@@ -43,35 +43,35 @@ public class UsuarioDao {
 
 
     // Método que verifica si el correo existe
-        public boolean emailExists(String nombre) {
-            String query = "SELECT COUNT(*) FROM usuarios WHERE mail = ?;";
-            try {
-                Connection con = DatabaseConnectionManager.getConnection();
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setString(1, nombre);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    ps.close();
-                    con.close();
-                    return count > 0;
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+    public boolean emailExists(String nombre) {
+        String query = "SELECT COUNT(*) FROM usuarios WHERE mail = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                ps.close();
+                con.close();
+                return count > 0;
             }
-            return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return false;
+    }
 
 
     // Método para ver la información de un docente en la tabla
-    public ArrayList<Usuario> getAll(){
+    public ArrayList<Usuario> getAll() {
         ArrayList<Usuario> lista = new ArrayList<>();
         String query = " CALL verDocentes(); ";
-        try{
+        try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId_usuario(rs.getInt("matricula"));
                 u.setNombre(rs.getString("nombre"));
@@ -82,7 +82,7 @@ public class UsuarioDao {
             }
             ps.close();
             con.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return lista;

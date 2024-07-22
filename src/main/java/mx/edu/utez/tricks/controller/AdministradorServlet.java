@@ -40,6 +40,9 @@ public class AdministradorServlet extends HttpServlet {
             System.out.println("Entro como administrador");
             HttpSession session = req.getSession();
             session.setAttribute("username", usuario.getNombre());
+            session.setAttribute("idUsuarioSession", usuario.getId_usuario());
+
+            System.out.println("Tiene este ID " + session.getAttribute("idUsuarioSession"));
             resp.sendRedirect("html/inicioAdmin.jsp");
         } else {
             resp.sendRedirect("html/login.jsp?error=role_error");

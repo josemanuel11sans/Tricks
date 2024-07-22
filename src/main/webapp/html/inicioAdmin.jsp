@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.UsuarioDao" %>
+<%@ page import="mx.edu.utez.tricks.dao.HistorialDao" %>
+<%@ page import="mx.edu.utez.tricks.model.Historial" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
     UsuarioDao usuarioDao = new UsuarioDao();
@@ -83,6 +86,7 @@
             </div>
 
             <h3 class="mb-4 text-light text-center">Historial de acciones</h3>
+            <!-- Tabla de datos del historial -->
             <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
@@ -93,26 +97,23 @@
                     </tr>
                     </thead>
                     <tbody id="actividadesTableBody">
+                    <%
+                        HistorialDao historialDao = new HistorialDao();
+                        ArrayList<Historial> historialList = historialDao.getAll();
+                        for (Historial h : historialList) {
+                    %>
                     <tr>
-                        <td>Admin</td>
-                        <td>Se ha registrado Juan Pérez como nuevo aspirante</td>
-                        <td>20/08/24</td>
+                        <td><%= h.getUsuarioIdusuario() %></td>
+                        <td><%= h.getDescripcion() %></td>
+                        <td><%= h.getFecha_creacion() %></td>
                     </tr>
-                    <tr>
-                        <td>Admin</td>
-                        <td>Se ha modificado una carrera</td>
-                        <td>15/08/24</td>
-                    </tr>
-                    <tr>
-                        <td>Admin</td>
-                        <td>Se ha creado un nuevo grupo llamado B</td>
-                        <td>11/06/24</td>
-                    </tr>
-                    <!-- Puedes agregar más registros aquí -->
+                    <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
+
+    </div>
     </div>
 </div>
 
