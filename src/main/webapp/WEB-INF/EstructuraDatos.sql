@@ -18,6 +18,8 @@
 --
 -- Table structure for table `asistencias`
 --
+create database tricks;
+use tricks;
 
 DROP TABLE IF EXISTS `asistencias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

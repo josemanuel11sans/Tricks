@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.tricks.model.Grupo" %>
@@ -138,39 +140,39 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="../RegistrarGrupoServlet">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="divisionAcademica" class="col-form-label"></label>
-                        <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" ">División académica:</option>
-                            <% for (DivisionesAcademicas division : listaDivisiones) { %>
-                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <% } %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="carrera" class="col-form-label"></label>
-                        <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" ">Carrera:</option>
-                            <% for (Carrera carrera : carreraList) { %>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <% } %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="docente" class="col-form-label"></label>
-                        <select class="custom-select" id="docente" name="docente" required>
-                            <option value=" ">Docente asignado:</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
+                    <form method="post" action="../RegistrarGrupoServlet">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
+                            <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="divisionAcademica" class="col-form-label"></label>
+                            <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
+                                <option value=" ">División académica:</option>
+                                <% for (DivisionesAcademicas division : listaDivisiones) { %>
+                                <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carrera" class="col-form-label"></label>
+                            <select class="custom-select" id="carrera" name="carrera" required>
+                                <option value=" ">Carrera:</option>
+                                <% for (Carrera carrera : carreraList) { %>
+                                <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="docente" class="col-form-label"></label>
+                            <select class="custom-select" id="docente" name="docente" required>
+                                <option value=" ">Docente asignado:</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
