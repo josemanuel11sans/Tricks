@@ -185,19 +185,19 @@
             <div class="modal-body">
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante">
+                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante">
+                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="">
                         <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante">
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="">
                         <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
@@ -226,7 +226,7 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante">
+                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
