@@ -131,7 +131,7 @@
 
 <!-- Modal registrar grupo -->
 <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Registrar grupo</h5>
@@ -140,59 +140,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <form method="post" action="../RegistrarGrupoServlet">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                            <label for="nombreGrupo" class="col-form-label">Nombre:</label>
-                        </div>
-                        <div class="form-group">
-                            <label for="divisionAcademica" class="col-form-label"></label>
-                            <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                                <option value=" ">División académica:</option>
-                                <% for (DivisionesAcademicas division : listaDivisiones) { %>
-                                <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="carrera" class="col-form-label"></label>
-                            <select class="custom-select" id="carrera" name="carrera" required>
-                                <option value=" ">Carrera:</option>
-                                <% for (Carrera carrera : carreraList) { %>
-                                <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                                <% } %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="docente" class="col-form-label"></label>
-                            <select class="custom-select" id="docente" name="docente" required>
-                                <option value=" ">Docente asignado:</option>
-                            </select>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Registrar</button>
-                        </div>
-                    </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal modificar grupo -->
-<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar grupo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="ModificarGrupoServlet">
+                <form method="post" action="../RegistrarGrupoServlet">
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                        <label for="nombreGrupo" class="col-form-label">Nuevo nombre:</label>
+                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label"></label>
@@ -219,6 +170,55 @@
                         </select>
                     </div>
                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal modificar grupo -->
+<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar grupo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="ModificarGrupoServlet">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nombreGrupoMod" name="nombreGrupoMod" placeholder=" " required>
+                        <label for="nombreGrupo" class="col-form-label">Nuevo nombre:</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="divisionAcademica" class="col-form-label"></label>
+                        <select class="custom-select" id="divisionAcademicaMod" name="divisionAcademicaMod" required>
+                            <option value=" ">División académica:</option>
+                            <% for (DivisionesAcademicas division : listaDivisiones) { %>
+                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="carrera" class="col-form-label"></label>
+                        <select class="custom-select" id="carreraMod" name="carreraMod" required>
+                            <option value=" ">Carrera:</option>
+                            <% for (Carrera carrera : carreraList) { %>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="docente" class="col-form-label"></label>
+                        <select class="custom-select" id="docenteMod" name="docenteMod" required>
+                            <option value=" ">Docente asignado:</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </div>
                 </form>
@@ -227,9 +227,10 @@
     </div>
 </div>
 
+
 <!-- Modal asignar aspirante -->
 <div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Asignar aspirante al grupo</h5>
@@ -241,7 +242,7 @@
                 <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
                     <input type="hidden" id="IdGrupo" name="IdGrupo" value="">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " readonly>
+                        <input type="text" class="form-control" id="nombreGrupoAsig" name="nombreGrupoAsig" placeholder=" " readonly>
                         <label for="nombreGrupo" class="col-form-label">Grupo:</label>
                     </div>
                     <div class="form-group">
@@ -280,10 +281,10 @@
                         <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
                     </div>
                     <div class="modal-footer modal-footer-custom">
-                        <a href="../img/rectanguloDegradado.png" class="btn btnFormatos" data-toggle="lightbox" data-title="Ejemplo de formato">
+                        <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
                         </a>
-                        <a href="../formatos/Prueba.xlsx" class="btn btnFormatos" download>
+                        <a href="../formatos/asignarAspirantes.xlsx" class="btn btnFormatos" download>
                             Descargar formato
                         </a>
                         <button type="submit" class="btn btn-primary">Asignar</button>
@@ -299,6 +300,16 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+<!-- Script para abrir la imagen de carga masiva de ejemplo -->
+<script>
+    function openImagePopup(url, title) {
+        var width = 800;
+        var height = 600;
+        var left = (screen.width - width) / 2;
+        var top = (screen.height - height) / 2;
+        window.open(url, title, 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+    }
+</script>
 <script>
     $(document).ready(function () {
         $('#filterName').on('input', function () {

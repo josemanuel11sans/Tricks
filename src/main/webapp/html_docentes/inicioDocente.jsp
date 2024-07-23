@@ -49,7 +49,7 @@
 
         </ul>
         <div class="sidebar-footer background-color">
-            <a href="#" class="sidebar-link">
+            <a href="../index.jsp" class="sidebar-link">
                 <i class="fas fa-right-from-bracket"></i>
                 <span>Salir</span>
             </a>
@@ -71,28 +71,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-primary card-custom">
-                        <div class="card-body text-center">
-                            <div class="icon-container mb-2">
-                                <i class="fas fa-chalkboard-teacher icon-custom"></i>
-                            </div>
-                            <h5 class="card-title card-title-custom">Grupos por calificar</h5>
-                            <p class="card-text card-text-custom">2</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="col-md-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-info card-custom">
-                        <div class="card-body text-center">
-                            <div class="icon-container mb-2">
-                                <i class="fas fa-graduation-cap icon-custom"></i>
-                            </div>
-                            <h5 class="card-title card-title-custom">Carreras registradas</h5>
-                            <p class="card-text card-text-custom">71</p>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="col-md-6 col-sm-12 mb-3">
                     <div class="card text-white bg-success card-custom">
                         <div class="card-body text-left" style="width: 100%;">
@@ -106,37 +84,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <h3 class="mb-4 text-light text-center">Historial de acciones</h3>
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
-                <table class="table">
-                    <thead class="thead-light">
-                    <tr align="center">
-                        <th>Usuario</th>
-                        <th>Descripción</th>
-                        <th>Fecha</th>
-                    </tr>
-                    </thead>
-                    <tbody id="actividadesTableBody">
-                    <tr>
-                        <td>Admin</td>
-                        <td>Se ha registrado Juan Pérez como nuevo aspirante</td>
-                        <td>20/08/24</td>
-                    </tr>
-                    <tr>
-                        <td>Admin</td>
-                        <td>Se ha modificado una carrera</td>
-                        <td>15/08/24</td>
-                    </tr>
-                    <tr>
-                        <!-- <td>Admin</td>
-                        <td>Se ha creado un nuevo grupo llamado B</td>
-                        <td>11/06/24</td> -->
-                    </tr>
-                    <!-- Puedes agregar más filas según necesites -->
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

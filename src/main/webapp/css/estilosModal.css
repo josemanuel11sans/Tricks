@@ -75,7 +75,7 @@
     width: 100% !important;
     font-size: 1rem !important;
     color: #495057 !important;
-    padding: 1.6rem 1rem 1rem !important;
+    /* padding: 1.6rem 1rem 1rem !important; */
     border: 1px solid #ced4da !important;
     border-radius: .5rem !important;
     transition: all .3s ease-in-out !important;
@@ -206,7 +206,6 @@
     width: 100% !important;
     font-size: 1rem !important;
     color: #495057 !important;
-    padding: 1.6rem 1rem 1rem !important;
     border: 1px solid #ced4da !important;
     border-radius: .5rem !important;
     transition: all .3s ease-in-out !important;

@@ -90,7 +90,7 @@
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <input type="text" id="filterName" class="form-control" placeholder="Nombre o Matricula">
                 </div>
                 <div class="col-md-2">
@@ -116,6 +116,12 @@
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirante">
                         Registrar aspirante
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal"
+                            data-target="#registrarAspirantes">
+                        Registrar aspirantes
                     </button>
                 </div>
             </div><br>
@@ -253,6 +259,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modificar estado del aspirante -->
 <div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
@@ -277,7 +284,47 @@
     </div>
 </div>
 
+<!-- Modal para carga masiva de aspirantes-->
+<div class="modal fade" id="registrarAspirantes" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title modal-title-custom" id="exampleModalLabel">Registrar aspirantes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-body-custom">
+                <form action="../uploadexcel" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
+                        <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/ejemploAspirantes.png', 'Ejemplo de formato'); return false;">
+                            Ejemplo de formato
+                        </a>
+                        <a href="../formatos/registrarAspirantes.xlsx" class="btn btnFormatos" download>
+                            Descargar formato
+                        </a>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Script para abrir la imagen de carga masiva de ejemplo -->
+<script>
+    function openImagePopup(url, title) {
+        var width = 800;
+        var height = 600;
+        var left = (screen.width - width) / 2;
+        var top = (screen.height - height) / 2;
+        window.open(url, title, 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+    }
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
