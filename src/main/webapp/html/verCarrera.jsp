@@ -53,7 +53,7 @@
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
                             for (DivisionesAcademicas division : listaDivisiones) {
                         %>
-                        <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                        <option value="<%= division.getSiglas() %>"><%= division.getSiglas() %></option>
                         <%
                             }
                         %>
@@ -76,7 +76,7 @@
                     <tr>
                         <th>Nombre de la Carrera</th>
                         <th>División Académica</th>
-                        <th>Acciones</th>
+                        <th>Modificar</th>
                     </tr>
                     </thead>
                     <tbody>
