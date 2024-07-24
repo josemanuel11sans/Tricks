@@ -14,32 +14,32 @@ import java.util.ArrayList;
 public class UsuarioDao {
     // Read para un usuario
     public Usuario getOne(String nombre, String contra) {
-        Usuario usuario = new Usuario();
-        //de esta forma se hace una consulta de contraseña encriptada usando SHA2
+        Usuario usuario = null; // Cambia a null por defecto
         String query = "SELECT * FROM usuarios WHERE mail = ? AND contrasena = SHA2(?, 256);";
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
             ps.setString(1, nombre);
             ps.setString(2, contra);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                usuario.setNombre(rs.getString("mail"));
-                usuario.setContra(rs.getString("contrasena"));
-
-                //aqui recuperamos el rol de cada uno de los usuarios ya que la consulta esta trallendo toda la tabla
-                usuario.setRol(rs.getInt("rol"));
-                usuario.setId_usuario(rs.getInt("id_usuario"));
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setApellido(rs.getString("apellido"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    usuario = new Usuario(); // Crear una nueva instancia si existe el usuario
+                    usuario.setId_usuario(rs.getInt("id_usuario"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setApellido(rs.getString("apellido"));
+                    usuario.setMail(rs.getString("mail"));
+                    usuario.setContra(rs.getString("contrasena"));
+                    usuario.setEstado(rs.getInt("estado")); // Recuperar estado
+                    usuario.setRol(rs.getInt("rol"));
+                }
             }
-            ps.close();
-            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return usuario;
     }
+
 
 
     // Método que verifica si el correo existe

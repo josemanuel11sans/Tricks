@@ -41,6 +41,9 @@
             case "rolMal":
                 mensajeAlerta = "No tienes permiso para acceder.";
                 break;
+            case "estadoInactivo":
+                mensajeAlerta = "Tu cuenta está inactiva. Contacta al administrador.";
+                break;
             default:
                 mensajeAlerta = "";
                 break;
@@ -51,12 +54,9 @@
 
             switch (tipoAlerta) {
                 case "correoMal":
-                    iconoAlerta = "fa-exclamation-triangle";
-                    break;
                 case "contraMal":
-                    iconoAlerta = "fa-exclamation-triangle";
-                    break;
                 case "rolMal":
+                case "estadoInactivo":
                     iconoAlerta = "fa-exclamation-triangle";
                     break;
                 default:
@@ -76,6 +76,7 @@
         }
     }
 %>
+
 
 
 <a class="btnSalir" href="../index.jsp">

@@ -37,6 +37,14 @@ public class DocenteServlet extends HttpServlet {
             return;
         }
 
+        // Validar el estado del usuario
+        if (usuario.getEstado() == 2) {
+            session.setAttribute("alerta", "estadoInactivo");
+            resp.sendRedirect("html/login.jsp");
+            return;
+        }
+
+        // Validar el rol del usuario
         if (usuario.getRol() == 2) {
             // Usuario docente
             session.setAttribute("username", usuario.getNombre());
@@ -47,3 +55,4 @@ public class DocenteServlet extends HttpServlet {
         }
     }
 }
+

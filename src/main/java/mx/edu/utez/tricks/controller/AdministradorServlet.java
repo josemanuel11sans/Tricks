@@ -37,6 +37,14 @@ public class AdministradorServlet extends HttpServlet {
             return;
         }
 
+        // Validar el estado del usuario
+        if (usuario.getEstado() == 2) {
+            session.setAttribute("alerta", "estadoInactivo");
+            resp.sendRedirect("html/login.jsp");
+            return;
+        }
+
+        // Validar el rol del usuario
         if (usuario.getRol() == 1) {
             // Usuario administrador
             session.setAttribute("username", usuario.getNombre());
