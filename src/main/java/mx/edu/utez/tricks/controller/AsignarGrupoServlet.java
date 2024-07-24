@@ -27,8 +27,8 @@ import java.util.Date;
 import java.util.List;
 
 @MultipartConfig  // indica que el servlet puede manejar envíos de archivos
-@WebServlet(name = "uploadexcel", value = "/uploadexcel") // mapea este servlet a la URL /subirExcel
-public class uploadexcel extends HttpServlet {
+@WebServlet(name = "AsignarGrupoServlet", value = "/asignargrupo") // mapea este servlet a la URL /subirExcel
+public class AsignarGrupoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +51,6 @@ public class uploadexcel extends HttpServlet {
                             procesarCSV(flujoEntrada);
                         } else if (nombreArchivo.endsWith(".xls") || nombreArchivo.endsWith(".xlsx")) {
                             procesarExcel(flujoEntrada);
-
                         } else {
                             mensajeError = "No podemos procesar ese tipo de archivo";
                         }
@@ -94,46 +93,26 @@ public class uploadexcel extends HttpServlet {
             Row fila = hoja.getRow(i);
 
             if (fila != null) {
-                // Leer cada celda de la fila
-                Cell celdaFolio = fila.getCell(0); // Columna A (Folio)
-                Cell celdaNombre = fila.getCell(1); // Columna B (Nombre)
-                Cell celdaApellido = fila.getCell(2); // Columna C (Apellido)
-                Cell celdaCurp = fila.getCell(3); // Columna D (Curp)
-                Cell celdaFechaNacimiento = fila.getCell(4); // Columna E (Fecha de nacimiento)
+                // Leer la celda de la columna C (índice 2)
+                Cell celdaFolio = fila.getCell(2); // Columna C (Folio)
 
-                // Obtener valores de las celdas
+                // Obtener el valor de la celda
                 String folio = obtenerValorCelda(celdaFolio);
-                String nombre = obtenerValorCelda(celdaNombre);
-                String apellido = obtenerValorCelda(celdaApellido);
-                String curp = obtenerValorCelda(celdaCurp);
-                Date fechaNacimiento = obtenerFechaCelda(celdaFechaNacimiento);
 
-                Aspirante aspirante = new Aspirante(folio, nombre, apellido, curp, fechaNacimiento, 0, 1);
+                // Imprimir el folio
+                System.out.println("Folio: " + folio);
 
-                CargaMasivaDAO doa = new CargaMasivaDAO();
-                boolean resultado = doa.CargaMasiva(aspirante);
-                // Imprimir valores
+                // Aquí puedes agregar el código para guardar los folios o cualquier otra lógica necesaria.
 
+               // Aspirante aspirante = new Aspirante(folio);
 
+                //CargaMasivaDAO doa = new CargaMasivaDAO();
+                //boolean resultado = doa.CargaMasiva(aspirante);
             }
         }
 
         libro.close();
     }
-
-    private Date obtenerFechaCelda(Cell celda) {
-        if (celda == null) {
-            return null;
-        }
-
-        if (celda.getCellType() == CellType.NUMERIC && DateUtil.isCellDateFormatted(celda)) {
-            return celda.getDateCellValue();
-        }
-
-        // Si no es una fecha, retornar null o manejar el error de acuerdo a tus necesidades
-        return null;
-    }
-
 
     private String obtenerValorCelda(Cell celda) {
         if (celda == null) {

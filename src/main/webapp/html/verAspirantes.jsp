@@ -103,7 +103,9 @@
                         %>
                         <option value="<%= g.getNombreGrupo() %>"><%= g.getNombreGrupo() %></option>
                         <% } %>
+                        <option value="null">null</option>
                     </select>
+
                 </div>
                 <div class="col-md-2">
                     <select class="custom-select" id="filterCareer" required>
@@ -295,7 +297,7 @@
                 </button>
             </div>
             <div class="modal-body modal-body-custom">
-                <form action="../uploadexcel" method="post" enctype="multipart/form-data">
+                <form action="../cargaraspirantes" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="file" class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
                         <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
@@ -304,7 +306,7 @@
                         <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/ejemploAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
                         </a>
-                        <a href="../formatos/registrarAspirantes.xlsx" class="btn btnFormatos" download>
+                        <a href="../formatos/FormatoRegistroMasivo.xlsx" class="btn btnFormatos" download>
                             Descargar formato
                         </a>
                         <button type="submit" class="btn btn-primary">Registrar</button>

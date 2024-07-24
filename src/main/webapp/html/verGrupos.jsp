@@ -271,7 +271,7 @@
                 </button>
             </div>
             <div class="modal-body modal-body-custom">
-                <form action="../uploadexcel" method="post" enctype="multipart/form-data">
+                <form action="../asignargrupo" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" placeholder=" " readonly>
                         <label for="grupoNombreMasivo" class="col-form-label">Grupo:</label>

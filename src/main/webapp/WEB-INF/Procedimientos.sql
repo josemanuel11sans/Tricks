@@ -69,10 +69,21 @@
 
         -- procedimeinto para ver divisiones academiscas
 DELIMITER //
-
     CREATE PROCEDURE verDivisionesAcademicas()
     BEGIN
     SELECT * FROM divisiones_academicas;
     END //
+DELIMITER ;
 
+
+
+
+DELIMITER //
+    CREATE PROCEDURE GetAllAspirantes()
+    BEGIN
+    SELECT a.folio_aspirante, a.nombre, a.apellido, a.curp, a.estado, a.fecha_nac, g.nombre_grupo
+    FROM aspirantes a
+             LEFT JOIN grupos g
+                       ON g.id_grupo = a.grupos_id_grupo;
+    END //
 DELIMITER ;
