@@ -40,22 +40,7 @@
 
 
 
-       DELIMITER //
-    CREATE PROCEDURE verAspirantes()
-    BEGIN
-    SELECT DISTINCT a.folio_aspirante AS folio_aspirante,
-                    a.nombre AS nombre,
-                    a.apellido AS apellido,
-                    a.curp AS curp,
-                    a.grupos_id_grupo AS grupos_id_grupo,
-                    a.estado AS estado_id_estado,
-                    a.fecha_nac AS fecha_nac,
-                    g.nombre_grupo AS grupo
-    FROM aspirantes a
-             INNER JOIN grupos g ON a.grupos_id_grupo = g.id_grupo
-    ORDER BY folio_aspirante ASC;
-    END //
-    DELIMITER ;
+    
 
     DELIMITER //
     CREATE PROCEDURE verCarreras()
