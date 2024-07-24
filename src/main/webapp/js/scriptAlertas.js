@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Esperar la animación de desvanecimiento antes de eliminar el elemento
             setTimeout(function() {
                 alerta.remove();
-            }, 500); // Tiempo para la animación de desvanecimiento
+            }, 150); // Tiempo para la animación de desvanecimiento
         });
     });
 });

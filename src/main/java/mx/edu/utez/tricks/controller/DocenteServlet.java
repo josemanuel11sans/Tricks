@@ -21,28 +21,29 @@ public class DocenteServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.getOne(mailDoc, contraDoc);
 
+        HttpSession session = req.getSession();
+
         // Validar primero el correo
         if (!dao.emailExists(mailDoc)) {
-            System.out.println("El correo " + mailDoc + " no existe en la base de datos");
-            resp.sendRedirect("html/login.jsp?error=email_error");
+            session.setAttribute("alerta", "correoMal");
+            resp.sendRedirect("html/login.jsp");
             return;
         }
 
         // Validar la combinación de correo y contraseña
         if (usuario == null || usuario.getNombre() == null) {
-            System.out.println("La contraseña es incorrecta");
-            resp.sendRedirect("html/login.jsp?error=password_error");
+            session.setAttribute("alerta", "contraMal");
+            resp.sendRedirect("html/login.jsp");
             return;
         }
 
         if (usuario.getRol() == 2) {
             // Usuario docente
-            System.out.println("Entro como docente");
-            HttpSession session = req.getSession();
             session.setAttribute("username", usuario.getNombre());
             resp.sendRedirect("html_docentes/inicioDocente.jsp");
         } else {
-            resp.sendRedirect("html/login.jsp?error=role_error");
+            session.setAttribute("alerta", "rolMal");
+            resp.sendRedirect("html/login.jsp");
         }
     }
 }
