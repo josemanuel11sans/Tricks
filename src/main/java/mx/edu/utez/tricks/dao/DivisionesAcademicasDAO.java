@@ -75,14 +75,14 @@ public class DivisionesAcademicasDAO {
             return false;
         }
     }
-
-    public boolean eliminarDivision(int idDivision) {
-        String query = "DELETE FROM divisiones_academicas WHERE id_division = ?";
+    public boolean actualizarEstado(DivisionesAcademicas division) {
+        String query = "UPDATE divisiones_academicas SET estado = ? WHERE id_division = ?";
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
-            ps.setInt(1, idDivision);
+            ps.setInt(1, division.getEstado());
+            ps.setInt(2, division.getIdDivision());
 
             int rowsAffected = ps.executeUpdate();
             return rowsAffected > 0;
@@ -91,5 +91,6 @@ public class DivisionesAcademicasDAO {
             e.printStackTrace();
             return false;
         }
+
     }
 }

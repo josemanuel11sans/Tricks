@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Josem
+  User: RuuizOr
   Date: 25/06/2024
   Time: 09:08 PM
   To change this template use File | Settings | File Templates.
@@ -13,9 +13,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Docentes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -24,14 +21,89 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
+    <link rel="stylesheet" href="../css/estilosAlertas.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-
-
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
     <!-- Componente de menú lateral -->
     <jsp:include page="../componentes/menuLateral.jsp" />
+
+    <!-- Alertas de validaciones -->
+    <%
+        String tipoAlerta = (String) session.getAttribute("alerta");
+        String mensajeAlerta = "";
+
+        if (tipoAlerta != null) {
+            switch (tipoAlerta) {
+                case "exito":
+                    mensajeAlerta = "Registro exitoso.";
+                    break;
+                case "correoExistente":
+                    mensajeAlerta = "El correo ya está registrado.";
+                    break;
+                case "matriculaExistente":
+                    mensajeAlerta = "La matrícula ya está registrada.";
+                    break;
+                case "falloRegistro":
+                    mensajeAlerta = "No se pudo registrar al docente.";
+                    break;
+                case "actualizacionExitosa":
+                    mensajeAlerta = "Modificación exitosa.";
+                    break;
+                case "actualizacionExitosaEsta":
+                    mensajeAlerta = "Modificación de estado exitosa.";
+                    break;
+                case "falloActualizacion":
+                    mensajeAlerta = "No se pudo modificar al docente.";
+                    break;
+                case "error":
+                    mensajeAlerta = "Se produjo un error.";
+                    break;
+                default:
+                    mensajeAlerta = "";
+                    break;
+            }
+
+            if (!mensajeAlerta.isEmpty()) {
+                String iconoAlerta = "";
+
+                switch (tipoAlerta) {
+                    case "exito":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosa":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosaEsta":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "falloActualizacion":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "falloRegistro":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "error":
+                        iconoAlerta = "fa-times-circle";
+                        break;
+                    default:
+                        iconoAlerta = "fa-info-circle";
+                        break;
+                }
+    %>
+    <div class="alerta alerta-dismissible mostrar" role="alert">
+        <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+        <span class="texto"><%= mensajeAlerta %></span>
+        <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <%
+                session.removeAttribute("alerta");
+            }
+        }
+    %>
 
     <!-- Cuerpo de la página -->
     <div class="main">
@@ -220,13 +292,16 @@
     </div>
 </div>
 
-
-
+<!-- Scripts utilizados -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/scriptDocentes.js"></script>
+<script src="../js/scriptAlertas.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
 

@@ -195,6 +195,57 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var filterName = document.getElementById('filterName');
+        var filterDivision = document.querySelector('select.custom-select');
+
+        // Agregar eventos para aplicar los filtros
+        filterName.addEventListener('input', filterTable);
+        filterDivision.addEventListener('change', filterTable);
+
+        function filterTable() {
+            var filterNameValue = filterName.value.toLowerCase();
+            var filterDivisionValue = filterDivision.value.toLowerCase();
+            var table = document.querySelector('table');
+            var rows = table.querySelector('tbody').getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var nombreCarrera = cells[0].textContent.toLowerCase();  // Columna "Nombre de la Carrera"
+                var divisionAcademica = cells[1].textContent.toLowerCase(); // Columna "División Académica"
+
+                var nameMatch = filterNameValue === '' || nombreCarrera.includes(filterNameValue);
+                var divisionMatch = filterDivisionValue === '' || divisionAcademica.includes(filterDivisionValue);
+
+                if (nameMatch && divisionMatch) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    });
+</script>
+
+
+<script>
+        // Llenar datos del modal de modificar carrera al hacer clic en el botón
+        $('.btn-modificar').click(function () {
+            var idCarrera = $(this).data('id');
+            var nombreCarrera = $(this).data('nombre');
+            var idDivisionAcademica = $(this).data('iddivision');
+
+            $('#idCarrera').val(idCarrera);
+            $('#nombreCarreraModificar').val(nombreCarrera);
+            $('#idDivisionAcademicaModificar').val(idDivisionAcademica);
+
+            $('#modificarCarreraModal').modal('show');
+        });
+    });
+</script>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -178,6 +178,53 @@ public class UsuarioDao {
         }
     }
 
+    // Método para ver si la matricula del docente ya existe
+    public boolean matriculaExists(int idUsuario) {
+        String query = "SELECT COUNT(*) FROM usuarios WHERE id_usuario = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Devuelve verdadero si la matrícula ya existe
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al verificar la existencia de la matrícula", e);
+        }
+        return false; // Devuelve falso si la matrícula no existe
+    }
+
+    // Método para ver que ningun usuario tiene ese email
+    public Usuario buscarEmail(int idUsuario) {
+        String query = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        Usuario usuario = null;
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setMail(rs.getString("mail"));
+                usuario.setContra(rs.getString("contrasena"));
+                usuario.setEstado(rs.getInt("estado"));
+                usuario.setRol(rs.getInt("rol"));
+                usuario.setFecha_creacion(rs.getTimestamp("fecha_creacion"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return usuario;
+    }
+
 
     // ESTADISTICAS DE LAS CARDS DEL INICIO - NO MOVER -
     public int getAspirantesCount() {

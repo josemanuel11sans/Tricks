@@ -87,7 +87,7 @@
 
             <h3 class="mb-4 text-light text-center">Historial de acciones</h3>
             <!-- Tabla de datos del historial -->
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl table2" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
                     <tr align="center">
