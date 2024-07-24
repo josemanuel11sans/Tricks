@@ -53,7 +53,7 @@
                         <th>Coordinador de la división académica</th>
                         <th>Siglas</th>
                         <th>Estado</th>
-                        <th>Modificar coordinador</th>
+                        <th>Modificar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,15 +62,27 @@
                         List<DivisionesAcademicas> lista = dao.getAllDivisiones();
                         for (DivisionesAcademicas division : lista) {
                     %>
-                    <tr style="height: 10px; font-size: 15px">
+                    <tr data-id-division="<%= division.getIdDivision() %>" style="height: 10px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= division.getNombreDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getCoordinadorDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getSiglas() %></td>
-                        <td style="padding: 0; margin: 0"><%= division.getEstado() %></td>
+                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                            <% if (division.getEstado() == 1) { %>
+                            <div class="activo" data-id="<%= division.getIdDivision() %>" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <% } else { %>
+                            <div class="inactivo" data-id="<%= division.getIdDivision() %>" data-estado="0" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <% } %>
+                        </td>
+
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarGrupo" data-whatever="Modificar">
+                                    data-target="#modificarGrupo"
+                                    data-id="<%= division.getIdDivision() %>"
+                                    data-nombre="<%= division.getNombreDivision() %>"
+                                    data-siglas="<%= division.getSiglas() %>"
+                                    data-coordinador="<%= division.getCoordinadorDivision() %>"
+                                    data-estado="<%= division.getEstado() %>">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -109,7 +121,6 @@
 </form>
 
 
-
 <!-- Modal modificar Division -->
 <div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -146,6 +157,98 @@
     </div>
 </div>
 
+<!-- Modal para actualizar estado -->
+<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6 id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">
+                    ¿Estás seguro de cambiar el estado de la división?
+                </h6>
+                <form action="${pageContext.request.contextPath}/ActualizarEstadoDivisionServlet" method="post">
+                    <div class="form-group" style="display: none;">
+                        <label for="idDivision" class="col-form-label">ID de la División:</label>
+                        <input type="text" class="form-control" id="idDivision" name="idDivision">
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label for="estadoDivision" class="col-form-label">Estado de la División:</label>
+                        <input type="text" class="form-control" id="estadoDivision" name="estadoDivision">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var filterName = document.getElementById('filterName');
+        var filterCareer = document.getElementById('filterCareer');
+        var filterDivision = document.getElementById('filterDivision');
+
+        filterName.addEventListener('input', filterTable);
+        filterCareer.addEventListener('change', filterTable);
+        filterDivision.addEventListener('change', filterTable);
+
+        function filterTable() {
+            var filterNameValue = filterName.value.toLowerCase();
+            var filterCareerValue = filterCareer ? filterCareer.value.toLowerCase() : '';
+            var filterDivisionValue = filterDivision ? filterDivision.value.toLowerCase() : '';
+            var table = document.getElementById('example');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].getElementsByTagName('td');
+                var name = cells[0].textContent.toLowerCase();   // Columna "Nombre"
+                var coordinator = cells[1].textContent.toLowerCase();   // Columna "Coordinador"
+                var siglas = cells[2].textContent.toLowerCase();   // Columna "Siglas"
+                var estado = cells[3].querySelector('div') ? cells[3].querySelector('div').getAttribute('data-estado').toLowerCase() : ''; // Columna "Estado"
+
+                var nameMatch = filterNameValue === '' || name.includes(filterNameValue) || coordinator.includes(filterNameValue) || siglas.includes(filterNameValue);
+                var careerMatch = filterCareerValue === '' || estado === filterCareerValue;
+                var divisionMatch = filterDivisionValue === '' || estado === filterDivisionValue;
+
+                if (nameMatch && careerMatch && divisionMatch) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Inicializar DataTables
+        $('#example').DataTable({
+            "paging": true,
+            "searching": false, // Desactivar la búsqueda integrada de DataTables ya que usaremos un filtro personalizado
+            "info": false
+        });
+
+        // Configurar el modal de modificar estado
+        $('#modificarEstado').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            var idDivision = button.attr('data-id');
+            var estado = button.attr('data-estado');
+            $('#idDivision').val(idDivision);
+            $('#estadoDivision').val(estado === '1' ? '0' : '1');
+        });
+
+        // Configurar el modal de modificar grupo
+        $('#modificarGrupo').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            $('#idDivision').val(button.data('id'));
+            $('#nombreDivision').val(button.data('nombre'));
+            $('#siglas').val(button.data('siglas'));
+            $('#coordinadorDivision').val(button.data('coordinador'));
+        });
+    });
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
