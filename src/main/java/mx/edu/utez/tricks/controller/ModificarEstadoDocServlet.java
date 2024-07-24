@@ -34,13 +34,13 @@ public class ModificarEstadoDocServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         boolean resultado = dao.actualizarEstado(usuario);
 
-        // Redireccionar según el resultado de la actualización
+        HttpSession session = request.getSession();
+
         if (resultado) {
             // Insertar un registro en el historial
             Historial historial = new Historial();
             historial.setDescripcion("Se actualizó el estado del docente con ID " + idUsuario);
             historial.setFecha_creacion(new java.sql.Timestamp(System.currentTimeMillis()));
-            HttpSession session = request.getSession();
             historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 
             HistorialDao historialDao = new HistorialDao();
@@ -52,13 +52,16 @@ public class ModificarEstadoDocServlet extends HttpServlet {
             }
 
             if (isInserted) {
-                response.sendRedirect("html/verDocentes.jsp?success=true");
+                session.setAttribute("alerta", "actualizacionExitosaEsta");
+                response.sendRedirect("html/verDocentes.jsp");
             } else {
-                response.sendRedirect("error.jsp?error=insertion_failed");
+                session.setAttribute("alerta", "error");
+                response.sendRedirect("error.jsp");
             }
         } else {
-            response.sendRedirect("../error.jsp?error=update_failed");
+            session.setAttribute("alerta", "falloActualizacion");
+            response.sendRedirect("html/verDocentes.jsp");
         }
-
     }
 }
+

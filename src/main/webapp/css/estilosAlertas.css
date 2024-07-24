@@ -1,0 +1,52 @@
+.alerta {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: auto;
+    max-width: 400px; /* Aumenta el max-width para hacer la alerta más ancha */
+    z-index: 1050; /* Asegúrate de que esté por encima de otros elementos */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px; /* Ajusta el padding si es necesario para mantener el espacio alrededor del contenido */
+    color: #fff; /* Texto blanco para un mejor contraste */
+    font-family: Arial, sans-serif;
+    background: repeating-linear-gradient(45deg, #081E33, #107863 100px);
+}
+
+.alerta.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alerta.ocultar {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.alerta .btn-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit; /* Asegura que el color del botón sea el mismo que el de la alerta */
+}
+
+.alerta .btn-cerrar .fa {
+    font-size: 1.2em;
+}
+
+.alerta .icono {
+    margin-right: 15px;
+    font-size: 1.5em; /* Tamaño de ícono ajustado */
+}
+
+.alerta .texto {
+    margin-right: 30px; /* Espacio adicional para separar el texto del ícono de cerrar */
+}

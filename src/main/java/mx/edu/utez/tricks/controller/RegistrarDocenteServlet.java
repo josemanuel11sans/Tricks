@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 
 @WebServlet(name = "RegistrarDocenteServlet", urlPatterns = {"/RegistrarDocenteServlet"})
 public class RegistrarDocenteServlet extends HttpServlet {
@@ -29,7 +28,7 @@ public class RegistrarDocenteServlet extends HttpServlet {
             int estado = 1;
             int rol = 2;
             java.util.Date fechaCreacion = new java.util.Date(); // Fecha y hora actuales
-            HistorialDao historialDao = new HistorialDao();
+            HttpSession session = request.getSession();
 
             Usuario nuevoUsuario = new Usuario();
             nuevoUsuario.setId_usuario(idDocente);
@@ -41,31 +40,49 @@ public class RegistrarDocenteServlet extends HttpServlet {
             nuevoUsuario.setRol(rol);
             nuevoUsuario.setFecha_creacion(fechaCreacion);
 
-            // Insertar el usuario en la base de datos
             UsuarioDao usuarioDao = new UsuarioDao();
+            HistorialDao historialDao = new HistorialDao();
+
+            // Verificar si el correo o la matrícula ya existen
+            if (usuarioDao.emailExists(mail)) {
+                session.setAttribute("alerta", "correoExistente");
+                response.sendRedirect("html/verDocentes.jsp");
+                return;
+            }
+
+            if (usuarioDao.matriculaExists(idDocente)) {
+                session.setAttribute("alerta", "matriculaExistente");
+                response.sendRedirect("html/verDocentes.jsp");
+                return;
+            }
+
+            // Insertar el usuario en la base de datos
             boolean isInserted = usuarioDao.insert(nuevoUsuario);
 
-            // Redirigir según el resultado de la inserción
+            // Insertar en el historial y redirigir según el resultado de la inserción
             if (isInserted) {
                 Historial historial = new Historial();
                 historial.setDescripcion("Se registró el docente " + nombre);
                 historial.setFecha_creacion(fechaCreacion);
-                HttpSession session = request.getSession();
-
                 historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 
-                isInserted = historialDao.insert(historial);
-                if (isInserted) {
-                    response.sendRedirect("html/verDocentes.jsp?success=true");
+                boolean isHistorialInserted = historialDao.insert(historial);
+
+                if (isHistorialInserted) {
+                    session.setAttribute("alerta", "exito");
                 } else {
-                    response.sendRedirect("error.jsp?error=insertion_failed");
+                    session.setAttribute("alerta", "falloRegistro");
                 }
             } else {
-                response.sendRedirect("error.jsp?error=insertion_failed");
+                session.setAttribute("alerta", "falloRegistro");
             }
+
+            response.sendRedirect("html/verDocentes.jsp");
         } catch (NumberFormatException | SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp?error=" + e.getMessage());
+            HttpSession session = request.getSession();
+            session.setAttribute("alerta", "error");
+            response.sendRedirect("html/verDocentes.jsp");
         }
     }
 

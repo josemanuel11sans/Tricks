@@ -26,9 +26,17 @@ public class ModificarDocenteServlet extends HttpServlet {
             String mail = request.getParameter("mail");
             String contra = request.getParameter("contra");
 
-            Usuario usuario = new Usuario(idUsuario, nombre, apellido, mail, contra);
-
             UsuarioDao dao = new UsuarioDao();
+
+            // Verificar si el correo ya existe para otro usuario
+            if (dao.emailExists(mail) && !dao.buscarEmail(idUsuario).getMail().equals(mail)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("alerta", "correoExistente");
+                response.sendRedirect("html/verDocentes.jsp");
+                return;
+            }
+
+            Usuario usuario = new Usuario(idUsuario, nombre, apellido, mail, contra);
             boolean resultado = dao.actualizarUsuario(usuario);
 
             if (resultado) {
@@ -41,16 +49,21 @@ public class ModificarDocenteServlet extends HttpServlet {
                 HistorialDao historialDao = new HistorialDao();
                 boolean isInserted = historialDao.insert(historial);
                 if (isInserted) {
-                    response.sendRedirect("html/verDocentes.jsp?success=true");
+                    session.setAttribute("alerta", "actualizacionExitosa");
                 } else {
-                    response.sendRedirect("error.jsp?error=insertion_failed");
+                    session.setAttribute("alerta", "falloActualizacion");
                 }
             } else {
-                response.sendRedirect("error.jsp?error=update_failed");
+                HttpSession session = request.getSession();
+                session.setAttribute("alerta", "falloActualizacion");
             }
+
+            response.sendRedirect("html/verDocentes.jsp");
         } catch (NumberFormatException | SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("error.jsp?error=" + e.getMessage());
+            HttpSession session = request.getSession();
+            session.setAttribute("alerta", "error");
+            response.sendRedirect("html/verDocentes.jsp");
         }
     }
 
