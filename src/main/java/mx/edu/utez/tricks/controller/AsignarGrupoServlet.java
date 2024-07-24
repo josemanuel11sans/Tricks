@@ -6,146 +6,125 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import mx.edu.utez.tricks.dao.CargaMasivaDAO;
 import mx.edu.utez.tricks.model.Aspirante;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.core.FileUploadException;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-@MultipartConfig  // indica que el servlet puede manejar envíos de archivos
-@WebServlet(name = "AsignarGrupoServlet", value = "/asignargrupo") // mapea este servlet a la URL /subirExcel
+@MultipartConfig
+@WebServlet(name = "AsignarGrupoServlet", value = "/asignargrupo")
 public class AsignarGrupoServlet extends HttpServlet {
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String mensajeError = "";
 
-        if (JakartaServletFileUpload.isMultipartContent(request)) { // comprueba si la solicitud contiene datos en el archivo
-            try {
-                // configura el manejo de archivos subidos
-                DiskFileItemFactory fabrica = DiskFileItemFactory.builder().get();
-                JakartaServletFileUpload carga = new JakartaServletFileUpload(fabrica);
+        if (JakartaServletFileUpload.isMultipartContent(request)) {
 
-                // verifica si el archivo no es un campo de formulario
-                // se obtiene el nombre del archivo y procesa el archivo según su tipo
-                List<FileItem> archivos = carga.parseRequest(request);
-                for (FileItem item : archivos) {
+            try {
+
+                DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
+                JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
+
+                List<FileItem> multiparts = upload.parseRequest(request);
+                for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
-                        String nombreArchivo = item.getName();
-                        InputStream flujoEntrada = item.getInputStream();
-                        if (nombreArchivo.endsWith(".csv")) {
-                            procesarCSV(flujoEntrada);
-                        } else if (nombreArchivo.endsWith(".xls") || nombreArchivo.endsWith(".xlsx")) {
-                            procesarExcel(flujoEntrada);
+                        String fileName = item.getName();
+                        System.out.println("Nombre del archivo: " + fileName);
+                        InputStream inputStream = item.getInputStream();
+                        if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+                            String idGrupo = request.getParameter("grupoIdMasivo");
+                            System.out.println(idGrupo);
+
+                            procesarExcel(inputStream, idGrupo);
                         } else {
                             mensajeError = "No podemos procesar ese tipo de archivo";
+                            System.out.println(mensajeError);
                         }
                     }
                 }
             } catch (FileUploadException e) {
                 mensajeError = "Error al procesar el archivo de carga: " + e.getMessage();
+                System.out.println(mensajeError);
             } catch (Exception e) {
                 mensajeError = "Ocurrió un error inesperado: " + e.getMessage();
+                System.out.println(mensajeError);
             }
         } else {
             mensajeError = "Este servlet solo atiende envío de archivos";
+            System.out.println(mensajeError);
         }
 
-        // Configura el mensaje de error y redirige al JSP
         request.setAttribute("mensajeError", mensajeError);
         response.sendRedirect("html/verGrupos.jsp");
     }
 
-    private void procesarCSV(InputStream flujoEntrada) throws IOException {
-        try (InputStreamReader lector = new InputStreamReader(flujoEntrada);
-             CSVParser parserCSV = new CSVParser(lector, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
-            for (CSVRecord registroCSV : parserCSV) { // Itera cada fila del archivo sin contar la primera
-                // Selecciona el valor de la celda con la cabecera que se llama Column1
-                String columna1 = registroCSV.get("Column1");
-                // Selecciona el valor de la celda con la cabecera que se llama Column2
-                String columna2 = registroCSV.get("Column2");
-                System.out.println("Columna1: " + columna1);
-                System.out.println("Columna2: " + columna2);
-            }
-        }
-    }
+    private void procesarExcel(InputStream inputStream, String idGrupo) throws IOException {
+        Workbook workbook = new XSSFWorkbook(inputStream);
+        Sheet sheet = workbook.getSheetAt(0); // Obtener la primera hoja
 
-    private void procesarExcel(InputStream flujoEntrada) throws IOException {
-        Workbook libro = new XSSFWorkbook(flujoEntrada);
-        Sheet hoja = libro.getSheetAt(0); // Obtener la primera hoja
+        System.out.println("Procesando archivo Excel para el grupo ID: " + idGrupo);
 
         // Iterar sobre las filas empezando desde la segunda fila (índice 1)
-        for (int i = 1; i <= hoja.getLastRowNum(); i++) {
-            Row fila = hoja.getRow(i);
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
 
-            if (fila != null) {
-                // Leer la celda de la columna C (índice 2)
-                Cell celdaFolio = fila.getCell(2); // Columna C (Folio)
+            if (row != null) {
+                Cell cellFolio = row.getCell(0); // Columna A (Folio)
+                String folio = obtenerValorCelda(cellFolio);
+                String grupo = idGrupo;
+                System.out.println("Fila " + i + ": Folio = " + folio + ", Grupo = " + grupo);
 
-                // Obtener el valor de la celda
-                String folio = obtenerValorCelda(celdaFolio);
+                // Crear objeto Aspirante con solo el folio y el idGrupo
+                Aspirante aspirante = new Aspirante(folio, grupo);
 
-                // Imprimir el folio
-                System.out.println("Folio: " + folio);
+                CargaMasivaDAO cargaMasivaDAO = new CargaMasivaDAO();
+                boolean resultado = cargaMasivaDAO.asignarGrupo(aspirante);
+                System.out.println("Resultado de asignar grupo: " + resultado);
 
-                // Aquí puedes agregar el código para guardar los folios o cualquier otra lógica necesaria.
-
-               // Aspirante aspirante = new Aspirante(folio);
-
-                //CargaMasivaDAO doa = new CargaMasivaDAO();
-                //boolean resultado = doa.CargaMasiva(aspirante);
+                if (!resultado) {
+                    throw new IOException("Error al asignar el grupo para el folio: " + folio);
+                }
             }
         }
 
-        libro.close();
+        workbook.close();
     }
 
-    private String obtenerValorCelda(Cell celda) {
-        if (celda == null) {
+    private String obtenerValorCelda(Cell cell) {
+        if (cell == null) {
             return "";
         }
 
-        String valorCelda = "";
-        switch (celda.getCellType()) {
+        String cellValue;
+        switch (cell.getCellType()) {
             case STRING:
-                valorCelda = celda.getStringCellValue();
+                cellValue = cell.getStringCellValue();
                 break;
             case NUMERIC:
-                if (DateUtil.isCellDateFormatted(celda)) {
-                    // Convertir la fecha a String en el formato deseado
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Cambia el formato según tus necesidades
-                    valorCelda = sdf.format(celda.getDateCellValue());
-                } else {
-                    valorCelda = String.valueOf(celda.getNumericCellValue());
-                }
+                cellValue = String.valueOf((int) cell.getNumericCellValue());
                 break;
             case BOOLEAN:
-                valorCelda = String.valueOf(celda.getBooleanCellValue());
+                cellValue = String.valueOf(cell.getBooleanCellValue());
                 break;
             case FORMULA:
-                valorCelda = celda.getCellFormula();
+                cellValue = cell.getCellFormula();
                 break;
             case BLANK:
-                valorCelda = "";
+                cellValue = "";
                 break;
             default:
-                valorCelda = "Tipo de Celda Desconocido";
+                cellValue = "Tipo de Celda Desconocido";
                 break;
         }
-        return valorCelda;
+        System.out.println("Valor de la celda: " + cellValue);
+        return cellValue;
     }
 }
