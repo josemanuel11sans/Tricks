@@ -38,7 +38,10 @@ public class Aspirante {
         this.estado = estado;
     }
 
-
+    public Aspirante(String grupo2, String folioAspirante) {
+        this.grupo2 = grupo2;
+        this.folioAspirante = folioAspirante;
+    }
 
     public String getFolioAspirante() {
         return folioAspirante;

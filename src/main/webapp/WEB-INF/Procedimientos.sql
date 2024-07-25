@@ -40,7 +40,7 @@
 
 
 
-    
+
 
     DELIMITER //
     CREATE PROCEDURE verCarreras()
