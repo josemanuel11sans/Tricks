@@ -112,10 +112,10 @@
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Nombre o Matricula">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Grupo</option>
                         <%
@@ -129,7 +129,7 @@
                     </select>
 
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Estatus</option>
                         <option value="1">Activo</option>
