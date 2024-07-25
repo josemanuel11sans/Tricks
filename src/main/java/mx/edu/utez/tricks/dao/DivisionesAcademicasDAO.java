@@ -38,7 +38,7 @@ public class DivisionesAcademicasDAO {
     }
 
     public boolean agregarDivision(DivisionesAcademicas division) {
-        String query = "INSERT INTO divisiones_academicas (nombre_division, siglas, coordinador_division) VALUES (?, ?, ?)";
+        String query = "INSERT INTO divisiones_academicas (nombre_division, siglas, coordinador_division, estado) VALUES (?, ?, ?, 1)"; // Estado por defecto 1 (Activo)
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {

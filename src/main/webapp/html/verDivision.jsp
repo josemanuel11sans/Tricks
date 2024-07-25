@@ -14,7 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docentes</title>
+    <title>Divsiones Academicas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
@@ -37,12 +37,20 @@
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
                 </div>
+                <div class="col-md-2">
+                    <select class="custom-select" id="filterCareer" required>
+                        <option value="">Estatus</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                </div>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarGrupo">
+                            data-target="#registrarDivisionModal">
                         Agregar division
                     </button>
                 </div>
+
             </div><br>
 
             <div class="container-xxl tabla">
@@ -98,58 +106,66 @@
 </div>
 
 
-<!-- Modal para actualizar division -->
-<form action="ActualizarDivisionServlet" method="post">
-    <input type="hidden" name="idDivision" value="${division.idDivision}">
-
-    <div class="form-group">
-        <label for="nombreDivision">Nombre de la división:</label>
-        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" value="${division.nombreDivision}">
-    </div>
-
-    <div class="form-group">
-        <label for="siglas">Siglas:</label>
-        <input type="text" class="form-control" id="siglas" name="siglas" value="${division.siglas}">
-    </div>
-
-    <div class="form-group">
-        <label for="coordinadorDivision">Coordinador:</label>
-        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" value="${division.coordinadorDivision}">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Actualizar</button>
-</form>
-
-
-<!-- Modal modificar Division -->
-<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<!-- Modal para Agregar división -->
+<div class="modal fade" id="registrarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar division</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar división</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="ActualizarDivisionServlet" method="post">
+                <form action="../RegistrarDivisionServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nombreDivision" id="nombreDivision" placeholder=" " required>
-                        <label for="nombreDivision" class="col-form-label">Nuevo nombre de la division:</label>
+                        <label for="nombreDivision">Nombre de la división:</label>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="siglas" id="siglas" placeholder=" " required>
-                        <label for="siglas" class="col-form-label">Ingrese las nuevas siglas de la division:</label>
+                        <label for="siglas">Siglas:</label>
+                        <input type="text" class="form-control" id="siglas" name="siglas" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="coordinadorDivision" id="coordinadorDivision" placeholder=" " required>
-                        <label for="coordinadorDivision" class="col-form-label">Nombre del coordinador:</label>
+                        <label for="coordinadorDivision">Coordinador:</label>
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" required>
                     </div>
-                    <input type="hidden" name="idDivision" id="idDivision">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal para Agregar división -->
+<div class="modal fade" id="registrarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar división</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="../RegistrarDivisionServlet" method="post">
+                    <div class="form-group">
+                        <label for="nombreDivision" class="col-form-label">Nombre de la división:</label>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="siglas" class="col-form-label">Siglas:</label>
+                        <input type="text" class="form-control" id="siglas" name="siglas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" required>
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
                 </form>
             </div>
@@ -157,7 +173,7 @@
     </div>
 </div>
 
-<!-- Modal para actualizar estado -->
+<!-- Modal para modifcar  estado -->
 <div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
         <div class="modal-content">
@@ -165,7 +181,7 @@
                 <h6 id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">
                     ¿Estás seguro de cambiar el estado de la división?
                 </h6>
-                <form action="${pageContext.request.contextPath}/ActualizarEstadoDivisionServlet" method="post">
+                <form action="../ActualizarDivisionServlet" method="post">
                     <div class="form-group" style="display: none;">
                         <label for="idDivision" class="col-form-label">ID de la División:</label>
                         <input type="text" class="form-control" id="idDivision" name="idDivision">
@@ -236,7 +252,7 @@
             var idDivision = button.attr('data-id');
             var estado = button.attr('data-estado');
             $('#idDivision').val(idDivision);
-            $('#estadoDivision').val(estado === '1' ? '0' : '1');
+            $('#estadoDivision').val(estado === '1' ? '2' : '1');
         });
 
         // Configurar el modal de modificar grupo

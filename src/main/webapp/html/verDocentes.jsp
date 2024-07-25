@@ -27,7 +27,7 @@
 <body>
 <div class="wrapper" style="height: 100vh;">
     <!-- Componente de menú lateral -->
-    <jsp:include page="../componentes/menuLateral.jsp" />
+    <jsp:include page="../componentes/menuLateral.jsp"/>
 
     <!-- Alertas de validaciones -->
     <%
@@ -127,7 +127,8 @@
                         Registrar Docente
                     </button>
                 </div>
-            </div><br>
+            </div>
+            <br>
 
             <!-- Tabla de datos del docente -->
             <div class="container-xxl tabla">
@@ -148,14 +149,19 @@
                         for (Usuario u : lista) {
                     %>
                     <tr style="height: 20px; font-size: 15px" data-id="<%= u.getId_usuario() %>">
-                        <td style="padding: 0; margin: 0"><%= u.getId_usuario() %></td>
-                        <td style="padding: 0; margin: 0"><%= u.getNombre() %> <%= u.getApellido()%></td>
-                        <td style="padding: 0; margin: 0"><%= u.getMail() %></td>
+                        <td style="padding: 0; margin: 0"><%= u.getId_usuario() %>
+                        </td>
+                        <td style="padding: 0; margin: 0"><%= u.getNombre() %> <%= u.getApellido()%>
+                        </td>
+                        <td style="padding: 0; margin: 0"><%= u.getMail() %>
+                        </td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (u.getEstado() == 1) { %>
-                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
+                            <div class="activo" data-estado="1" data-toggle="modal"
+                                 data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
                             <% } else { %>
-                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
+                            <div class="inactivo" data-estado="2" data-toggle="modal"
+                                 data-target="#modificarEstadoDocente" data-whatever="ModificarEstadoDocente"></div>
                             <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">
@@ -180,7 +186,8 @@
 </div>
 
 <!-- Modal registrar docente nuevo -->
-<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -192,7 +199,8 @@
             <div class="modal-body">
                 <form action="../RegistrarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder=" " required>
+                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder=" "
+                               required>
                         <label for="idDocente" class="col-form-label">Matrícula:</label>
                     </div>
                     <div class="form-group">
@@ -221,7 +229,8 @@
 </div>
 
 <!-- Modal modificar datos del docente -->
-<div class="modal fade" id="modificarDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modificarDocente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -233,7 +242,8 @@
             <div class="modal-body">
                 <form action="../ModificarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" " readonly>
+                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" "
+                               readonly>
                         <label for="idDocenteMod" class="col-form-label">ID Docente:</label>
                     </div>
                     <div class="form-group">
@@ -241,7 +251,8 @@
                         <label for="nombreMod" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" " required>
+                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" "
+                               required>
                         <label for="apellidoMod" class="col-form-label">Apellido:</label>
                     </div>
                     <div class="form-group">
@@ -249,7 +260,8 @@
                         <label for="mailMod" class="col-form-label">Correo Electrónico:</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder=" " required>
+                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder=" "
+                               required>
                         <label for="contraMod" class="col-form-label">Contraseña:</label>
                     </div>
                     <div class="modal-footer">
@@ -263,7 +275,8 @@
 
 
 <!-- Modal modificar estado del docente -->
-<div class="modal fade" id="modificarEstadoDocente" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+<div class="modal fade" id="modificarEstadoDocente" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
@@ -274,14 +287,17 @@
             </div>
             <div class="modal-body custom-modal-body">
                 <form action="../ModificarEstadoDocServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del docente?</h6>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                        docente?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idDocente2" class="col-form-label custom-col-form-label">Matrícula:</label>
-                        <input type="text" class="form-control custom-form-control" id="idDocente2" name="idDocente2" placeholder="Matrícula" required>
+                        <input type="text" class="form-control custom-form-control" id="idDocente2" name="idDocente2"
+                               placeholder="Matrícula" required>
                     </div>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="estadoDocente" class="col-form-label custom-col-form-label">Estado:</label>
-                        <input type="text" class="form-control custom-form-control" id="estadoDocente" name="estadoDocente" placeholder="Estado" required>
+                        <input type="text" class="form-control custom-form-control" id="estadoDocente"
+                               name="estadoDocente" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
                         <button type="submit" class="btn btn-primary">Modificar</button>

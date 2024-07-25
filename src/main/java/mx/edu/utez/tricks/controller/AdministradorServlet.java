@@ -21,31 +21,38 @@ public class AdministradorServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.getOne(mailAdm, contraAdm);
 
+        HttpSession session = req.getSession();
+
         // Validar primero el correo
         if (!dao.emailExists(mailAdm)) {
-            System.out.println("El correo " + mailAdm + " no existe en la base de datos");
-            resp.sendRedirect("html/login.jsp?error=email_error");
+            session.setAttribute("alerta", "correoMal");
+            resp.sendRedirect("html/login.jsp");
             return;
         }
 
         // Validar la combinación de correo y contraseña
         if (usuario == null || usuario.getNombre() == null) {
-            System.out.println("La contraseña es incorrecta");
-            resp.sendRedirect("html/login.jsp?error=password_error");
+            session.setAttribute("alerta", "contraMal");
+            resp.sendRedirect("html/login.jsp");
             return;
         }
 
+        // Validar el estado del usuario
+        if (usuario.getEstado() == 2) {
+            session.setAttribute("alerta", "estadoInactivo");
+            resp.sendRedirect("html/login.jsp");
+            return;
+        }
+
+        // Validar el rol del usuario
         if (usuario.getRol() == 1) {
             // Usuario administrador
-            System.out.println("Entro como administrador");
-            HttpSession session = req.getSession();
             session.setAttribute("username", usuario.getNombre());
             session.setAttribute("idUsuarioSession", usuario.getId_usuario());
-
-            System.out.println("Tiene este ID " + session.getAttribute("idUsuarioSession"));
             resp.sendRedirect("html/inicioAdmin.jsp");
         } else {
-            resp.sendRedirect("html/login.jsp?error=role_error");
+            session.setAttribute("alerta", "rolMal");
+            resp.sendRedirect("html/login.jsp");
         }
     }
 }
