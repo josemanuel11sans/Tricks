@@ -23,26 +23,37 @@ import java.util.List;
 @WebServlet(name = "AsignarGrupoServlet", value = "/asignargrupo")
 public class AsignarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String mensajeError = "";
+        String idGrupo = null;
 
         if (JakartaServletFileUpload.isMultipartContent(request)) {
-
             try {
-
                 DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
                 JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
-
                 List<FileItem> multiparts = upload.parseRequest(request);
+
+                for (FileItem item : multiparts) {
+                    if (item.isFormField() && item.getFieldName().equals("grupoIdMasivo")) {
+                        idGrupo = item.getString();
+                        System.out.println("Valor de idGrupo: " + idGrupo);
+                    }
+                }
+
+                if (idGrupo == null || idGrupo.isEmpty()) {
+                    mensajeError = "El parámetro grupoIdMasivo es requerido.";
+                    System.out.println(mensajeError);
+                    request.setAttribute("mensajeError", mensajeError);
+                    response.sendRedirect("html/verGrupos.jsp");
+                    return;
+                }
+
                 for (FileItem item : multiparts) {
                     if (!item.isFormField()) {
                         String fileName = item.getName();
                         System.out.println("Nombre del archivo: " + fileName);
                         InputStream inputStream = item.getInputStream();
                         if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
-                            String idGrupo = request.getParameter("grupoIdMasivo");
-                            System.out.println(idGrupo);
-
+                            System.out.println("Procesando archivo Excel con idGrupo: " + idGrupo);
                             procesarExcel(inputStream, idGrupo);
                         } else {
                             mensajeError = "No podemos procesar ese tipo de archivo";
@@ -61,7 +72,6 @@ public class AsignarGrupoServlet extends HttpServlet {
             mensajeError = "Este servlet solo atiende envío de archivos";
             System.out.println(mensajeError);
         }
-
         request.setAttribute("mensajeError", mensajeError);
         response.sendRedirect("html/verGrupos.jsp");
     }
@@ -69,32 +79,22 @@ public class AsignarGrupoServlet extends HttpServlet {
     private void procesarExcel(InputStream inputStream, String idGrupo) throws IOException {
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet sheet = workbook.getSheetAt(0); // Obtener la primera hoja
-
         System.out.println("Procesando archivo Excel para el grupo ID: " + idGrupo);
-
         // Iterar sobre las filas empezando desde la segunda fila (índice 1)
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
-
             if (row != null) {
                 Cell cellFolio = row.getCell(0); // Columna A (Folio)
                 String folio = obtenerValorCelda(cellFolio);
                 String grupo = idGrupo;
                 System.out.println("Fila " + i + ": Folio = " + folio + ", Grupo = " + grupo);
-
                 // Crear objeto Aspirante con solo el folio y el idGrupo
-                Aspirante aspirante = new Aspirante(folio, grupo);
-
+                Aspirante aspirante = new Aspirante(grupo, folio);
                 CargaMasivaDAO cargaMasivaDAO = new CargaMasivaDAO();
                 boolean resultado = cargaMasivaDAO.asignarGrupo(aspirante);
-                System.out.println("Resultado de asignar grupo: " + resultado);
 
-                if (!resultado) {
-                    throw new IOException("Error al asignar el grupo para el folio: " + folio);
-                }
             }
         }
-
         workbook.close();
     }
 

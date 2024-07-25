@@ -43,8 +43,9 @@
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
-    <jsp:include page="../componentes/menuLateral.jsp" />
 
+    <jsp:include page="../componentes/menuLateral.jsp" />
+    <%int g2 = 0; %>
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Grupos</h1>
@@ -117,8 +118,9 @@
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
                                     data-target="#asignarMasivo"
-                                    onclick="setGrupoInfoMasivo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
+                                    onclick="setGrupoInfoMasivo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>') <%  g2 = g.getIdGrupo();%>">
                                 <i class="fas fa-users"></i>
+
                             </button>
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
@@ -301,9 +303,10 @@
                         <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
                         </a>
-                        <a href="../formatos/asignarAspirantes.xlsx" class="btn btnFormatos" download>
+                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn btnFormatos" download>
                             Descargar formato
                         </a>
+
                         <button type="submit" class="btn btn-primary">Asignar</button>
                     </div>
                 </form>

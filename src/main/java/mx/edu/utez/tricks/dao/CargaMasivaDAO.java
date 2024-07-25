@@ -37,8 +37,9 @@ public class CargaMasivaDAO {
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+            System.out.println(aspirante.getGrupo2());
             stmt.setInt(1, Integer.parseInt(aspirante.getGrupo2()));
+            System.out.println(aspirante.getFolioAspirante());
             stmt.setString(2, aspirante.getFolioAspirante());
 
             int rowsAffected = stmt.executeUpdate();
