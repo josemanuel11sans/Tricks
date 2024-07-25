@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosAspirantes.css">
     <link rel="stylesheet" href="../css/estilosAlertas.css">
+    <script src="https://kit.fontawesome.com/18fc318c24.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <%
@@ -138,14 +139,16 @@
                 </div>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarAspirante">
+                            data-target="#registrarAspirante" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar aspirante
+                        <i class="fa-solid fa-user fa-lg"></i>
                     </button>
                 </div>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarAspirantes">
+                            data-target="#registrarAspirantes" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar aspirantes
+                        <i class="fa-solid fa-users fa-lg"></i>
                     </button>
                 </div>
             </div><br>
@@ -346,7 +349,7 @@
 <script src="../js/jsAspirantes.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/scriptAlertas.js"></script>
-<script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/18fc318c24.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
