@@ -59,7 +59,7 @@
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
-                        <th>Nombre de la Carrera</th>
+                        <th>Nombre</th>
                         <th>División Académica</th>
                         <th>Estado</th> <!-- Nuevo encabezado de columna -->
                         <th>Modificar</th>

@@ -194,23 +194,23 @@
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
@@ -235,23 +235,23 @@
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Actualizar</button>

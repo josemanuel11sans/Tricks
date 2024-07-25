@@ -57,8 +57,8 @@
                 <table class="table" id="example">
                     <thead class="thead-light">
                     <tr>
-                        <th>Nombre de la división académica</th>
-                        <th>Coordinador de la división académica</th>
+                        <th>Nombre</th>
+                        <th>Coordinador</th>
                         <th>Siglas</th>
                         <th>Estado</th>
                         <th>Modificar</th>

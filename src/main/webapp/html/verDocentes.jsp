@@ -209,7 +209,7 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellido" name="apellido" placeholder=" " required>
-                        <label for="apellido" class="col-form-label">Apellido:</label>
+                        <label for="apellido" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control" id="mail" name="mail" placeholder=" " required>
@@ -253,7 +253,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" "
                                required>
-                        <label for="apellidoMod" class="col-form-label">Apellido:</label>
+                        <label for="apellidoMod" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" " required>

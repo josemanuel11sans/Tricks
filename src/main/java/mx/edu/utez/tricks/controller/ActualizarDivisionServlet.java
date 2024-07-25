@@ -33,7 +33,7 @@ public class ActualizarDivisionServlet extends HttpServlet {
 
         // Redireccionando según el resultado de la actualización
         if (resultado) {
-            resp.sendRedirect("html/verAspirantes.jsp"); // Redirige a una página de éxito
+            resp.sendRedirect("html/verDivision.jsp"); // Redirige a una página de éxito
         } else {
             resp.sendRedirect("../error.jsp"); // Redirige a una página de error
         }
