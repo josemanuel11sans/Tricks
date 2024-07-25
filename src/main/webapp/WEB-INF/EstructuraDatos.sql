@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `carreras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carreras` (
-                            `id_carrera` int NOT NULL,
+                            `id_carrera` int NOT NULL auto_increment,
                             `nombre_carrera` varchar(100) DEFAULT NULL,
                             `divisiones_academicas_id_division` int DEFAULT NULL,
                             `estado` int DEFAULT NULL,
@@ -173,7 +173,7 @@ DROP TABLE IF EXISTS `divisiones_academicas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `divisiones_academicas` (
-                                         `id_division` int NOT NULL,
+                                         `id_division` int NOT NULL auto_increment,
                                          `nombre_division` varchar(61) DEFAULT NULL,
                                          `coordinador_division` varchar(45) DEFAULT NULL,
                                          `siglas` varchar(45) DEFAULT NULL,

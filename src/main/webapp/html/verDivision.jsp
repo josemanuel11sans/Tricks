@@ -85,7 +85,7 @@
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarGrupo"
+                                    data-target="#modificarDivisionModal"
                                     data-id="<%= division.getIdDivision() %>"
                                     data-nombre="<%= division.getNombreDivision() %>"
                                     data-siglas="<%= division.getSiglas() %>"
@@ -140,7 +140,7 @@
 
 
 <!-- Modal para Agregar división -->
-<div class="modal fade" id="registrarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

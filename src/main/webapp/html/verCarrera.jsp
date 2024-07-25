@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Joseb
-  Date: 02/07/2024
-  Time: 12:27 p. m.
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
@@ -12,14 +5,10 @@
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
 
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carreras</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -29,8 +18,6 @@
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-
-
 </head>
 
 <body>
@@ -47,7 +34,7 @@
                 </div>
                 <div class="col-md-3">
                     <select class="custom-select" required>
-                        <option value=""> división académica</option>
+                        <option value="">División académica</option>
                         <%
                             DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
@@ -59,11 +46,9 @@
                         %>
                     </select>
                 </div>
-
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarCarreraModal">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">
                         Agregar Carrera
                     </button>
                 </div>
@@ -76,19 +61,26 @@
                     <tr>
                         <th>Nombre de la Carrera</th>
                         <th>División Académica</th>
+                        <th>Estado</th> <!-- Nuevo encabezado de columna -->
                         <th>Modificar</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     <%
                         CarreraDao carreraDao = new CarreraDao();
                         List<Carrera> listaCarreras = carreraDao.getAllCarreras();
                         for (Carrera carrera : listaCarreras) {
                     %>
-                    <tr style="height: 10px; font-size: 15px">
+                    <tr style="height: 10px; font-size: 15px" data-folio="<%= carrera.getIdCarrera() %>">
                         <td style="padding: 0; margin: 0"><%= carrera.getNombreCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= carrera.getNombreDivision() %></td>
+                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                            <% if (carrera.getIdEstado() == 1) { %>
+                            <div class="activo" data-id="<%= carrera.getIdCarrera() %>" data-toggle="modal" data-target="#modificarEstadoModal"></div>
+                            <% } else { %>
+                            <div class="inactivo" data-id="<%= carrera.getIdCarrera() %>" data-toggle="modal" data-target="#modificarEstadoModal"></div>
+                            <% } %>
+                        </td>
                         <td style="padding: 0; margin: 0">
                             <!-- Botón para modificar carrera -->
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
@@ -112,8 +104,7 @@
 </div>
 
 <!-- Modal registrar nueva carrera -->
-<div class="modal fade" id="registrarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="registrarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -142,6 +133,13 @@
                             %>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="estado" class="col-form-label">Estado:</label>
+                        <select class="custom-select" id="estado" name="estado" required>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Registrar</button>
@@ -151,11 +149,8 @@
     </div>
 </div>
 
-
-
 <!-- Modal modificar carrera -->
-<div class="modal fade" id="modificarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="modificarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -185,6 +180,13 @@
                             %>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="estadoModificar" class="col-form-label">Estado:</label>
+                        <select class="custom-select" id="estadoModificar" name="estado" required>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Modificar</button>
@@ -193,6 +195,61 @@
         </div>
     </div>
 </div>
+
+<!-- Modal modificar estado -->
+<div class="modal fade" id="modificarEstadoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h6 class="text-center" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0;">
+                    ¿Estás seguro de cambiar el estado de la carrera?
+                </h6>
+                <form action="ActualizarEstadoServlet" method="post">
+                    <div class="form-group" style="display: none">
+                        <label for="idCarreraEstado" class="col-form-label">ID de la Carrera:</label>
+                        <input type="text" class="form-control" id="idCarreraEstado" name="idCarrera">
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label for="estadoCarrera" class="col-form-label">Estado de la Carrera:</label>
+                        <input type="text" class="form-control" id="estadoCarrera" name="estadoCarrera">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#modificarEstadoModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botón que abrió el modal
+            var idCarrera = button.data('id'); // Extraer la información de atributos data-*
+
+            // Actualiza los campos del modal.
+            var modal = $(this);
+            modal.find('.modal-body #idCarreraEstado').val(idCarrera);
+        });
+
+        // Este código abre el modal de modificar carrera con los datos correspondientes
+        $('#modificarCarreraModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botón que abrió el modal
+            var idCarrera = button.data('id');
+            var nombreCarrera = button.data('nombre');
+            var idDivisionAcademica = button.data('iddivision');
+
+            var modal = $(this);
+            modal.find('.modal-body #idCarrera').val(idCarrera);
+            modal.find('.modal-body #nombreCarreraModificar').val(nombreCarrera);
+            modal.find('.modal-body #idDivisionAcademicaModificar').val(idDivisionAcademica);
+        });
+    });
+</script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -224,50 +281,42 @@
                 }
             }
         }
-    });
-</script>
 
+        // Añadir eventos a los botones para capturar el valor del id y el estado de la carrera
+        document.querySelectorAll('.activo, .inactivo').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var idCarrera = this.closest('tr').getAttribute('data-folio');
+                document.getElementById('idCarrera2').value = idCarrera;
 
-<script>
-        // Llenar datos del modal de modificar carrera al hacer clic en el botón
-        $('.btn-modificar').click(function () {
-            var idCarrera = $(this).data('id');
-            var nombreCarrera = $(this).data('nombre');
-            var idDivisionAcademica = $(this).data('iddivision');
+                var estadoActual = this.getAttribute('data-estado');
+                var estadoContrario = estadoActual === '1' ? '2' : '1';
+                document.getElementById('estadoCarrera').value = estadoContrario;
+            });
+        });
 
-            $('#idCarrera').val(idCarrera);
-            $('#nombreCarreraModificar').val(nombreCarrera);
-            $('#idDivisionAcademicaModificar').val(idDivisionAcademica);
+        // Evento para modal de modificar carrera
+        document.querySelectorAll('.btn-modificar').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var idCarrera = button.getAttribute('data-id');
+                var nombreCarrera = button.getAttribute('data-nombre');
+                var idDivisionAcademica = button.getAttribute('data-idDivision');
 
-            $('#modificarCarreraModal').modal('show');
+                document.getElementById('idCarrera').value = idCarrera;
+                document.getElementById('nombreCarreraModificar').value = nombreCarrera;
+                document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
+
+                // Llenar el estado en el modal de modificar
+                var estado = this.closest('tr').querySelector('.activo, .inactivo').getAttribute('data-estado');
+                var estadoTexto = estado === '1' ? 'Activo' : 'Inactivo';
+                document.getElementById('estadoModificar').value = estadoTexto;
+            });
         });
     });
 </script>
-
-<script>
-    $(document).ready(function () {
-        // Llenar datos del modal de modificar carrera al hacer clic en el botón
-        $('.btn-modificar').click(function () {
-            var idCarrera = $(this).data('id');
-            var nombreCarrera = $(this).data('nombre');
-            var idDivisionAcademica = $(this).data('iddivision');
-
-            $('#idCarrera').val(idCarrera);
-            $('#nombreCarreraModificar').val(nombreCarrera);
-            $('#idDivisionAcademicaModificar').val(idDivisionAcademica);
-
-            $('#modificarCarreraModal').modal('show');
-        });
-    });
-</script>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 </body>
-
 </html>
