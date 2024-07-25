@@ -25,8 +25,84 @@
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosAspirantes.css">
+    <link rel="stylesheet" href="../css/estilosAlertas.css">
 </head>
 <body>
+<%
+    String tipoAlerta = (String) session.getAttribute("alerta");
+    String mensajeAlerta = "";
+
+    if (tipoAlerta != null) {
+        switch (tipoAlerta) {
+            case "exito":
+                mensajeAlerta = "Registro exitoso.";
+                break;
+            case "folioExistente":
+                mensajeAlerta = "El folio ya está registrado.";
+                break;
+            case "curpExistente":
+                mensajeAlerta = "El curp ya está registrado.";
+                break;
+            case "falloRegistro":
+                mensajeAlerta = "No se pudo registrar al docente.";
+                break;
+            case "actualizacionExitosa":
+                mensajeAlerta = "Modificación exitosa.";
+                break;
+            case "actualizacionExitosaEsta":
+                mensajeAlerta = "Modificación de estado exitosa.";
+                break;
+            case "falloActualizacion":
+                mensajeAlerta = "No se pudo modificar al docente.";
+                break;
+            case "error":
+                mensajeAlerta = "Se produjo un error.";
+                break;
+            default:
+                mensajeAlerta = "";
+                break;
+        }
+
+        if (!mensajeAlerta.isEmpty()) {
+            String iconoAlerta = "";
+
+            switch (tipoAlerta) {
+                case "exito":
+                    iconoAlerta = "fa-check-circle";
+                    break;
+                case "actualizacionExitosa":
+                    iconoAlerta = "fa-check-circle";
+                    break;
+                case "actualizacionExitosaEsta":
+                    iconoAlerta = "fa-check-circle";
+                    break;
+                case "falloActualizacion":
+                    iconoAlerta = "fa-exclamation-triangle";
+                    break;
+                case "falloRegistro":
+                    iconoAlerta = "fa-exclamation-triangle";
+                    break;
+                case "error":
+                    iconoAlerta = "fa-times-circle";
+                    break;
+                default:
+                    iconoAlerta = "fa-info-circle";
+                    break;
+            }
+%>
+<div class="alerta alerta-dismissible mostrar" role="alert">
+    <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+    <span class="texto"><%= mensajeAlerta %></span>
+    <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+</div>
+<%
+            session.removeAttribute("alerta");
+        }
+    }
+%>
+
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
@@ -140,23 +216,23 @@
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="">
-                        <label for="folioAspirante" class="col-form-label">Folio:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="">
-                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="">
-                        <label for="curpAspirante" class="col-form-label">CURP:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
@@ -181,23 +257,23 @@
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
-                        <label for="folioAspirante" class="col-form-label">Folio:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
-                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
-                        <label for="curpAspirante" class="col-form-label">CURP:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -262,11 +338,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/aspirantes.js"></script>
+<script src="../js/jsAspirantes.js"></script>
 <script src="../js/script.js"></script>
-<script src="../js/jsAspirantes.js.js"></script>
+<script src="../js/scriptAlertas.js"></script>
 <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

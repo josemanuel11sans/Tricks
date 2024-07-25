@@ -1,6 +1,7 @@
 package mx.edu.utez.tricks.dao;
 
 import mx.edu.utez.tricks.model.Aspirante;
+import mx.edu.utez.tricks.model.Usuario;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -105,5 +106,41 @@ public class AspiranteDAO {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean folioExistente(String folio) {
+        String query = "SELECT COUNT(*) FROM aspirantes WHERE folio_aspirante = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, folio);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Devuelve verdadero si el folio ya existe
+            }
+        } catch (SQLException a) {
+            throw new RuntimeException("Error al verificar la existencia de la matrícula", a);
+        }
+        return false; // Devuelve falso si la matrícula no existe
+    }
+
+    public boolean curpExistente(String curp) {
+        String query = "SELECT COUNT(*) FROM aspirantes WHERE curp = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, curp);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                ps.close();
+                con.close();
+                return count > 0;
+            }
+        } catch (SQLException a) {
+            throw new RuntimeException(a);
+        }
+        return false;
     }
 }
