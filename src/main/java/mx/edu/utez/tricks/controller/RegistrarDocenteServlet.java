@@ -62,7 +62,7 @@ public class RegistrarDocenteServlet extends HttpServlet {
             // Insertar en el historial y redirigir según el resultado de la inserción
             if (isInserted) {
                 Historial historial = new Historial();
-                historial.setDescripcion("Se registró el docente " + nombre);
+                historial.setDescripcion("Se registró el docente " + nombre + " con matricula: " + idDocente);
                 historial.setFecha_creacion(fechaCreacion);
                 historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 

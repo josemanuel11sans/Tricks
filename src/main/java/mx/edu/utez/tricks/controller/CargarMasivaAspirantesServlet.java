@@ -7,8 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.tricks.dao.CargaMasivaDAO;
+import mx.edu.utez.tricks.dao.HistorialDao;
 import mx.edu.utez.tricks.model.Aspirante;
+import mx.edu.utez.tricks.model.Historial;
 import org.apache.commons.fileupload2.core.DiskFileItemFactory;
 import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.fileupload2.core.FileUploadException;
@@ -45,6 +48,17 @@ public class CargarMasivaAspirantesServlet extends HttpServlet {
                         InputStream flujoEntrada = item.getInputStream();
                         if (nombreArchivo.endsWith(".xls") || nombreArchivo.endsWith(".xlsx")) {
                             procesarExcel(flujoEntrada);
+
+                            // Aquí es donde agregas el código del historial
+                            Historial historial = new Historial();
+                            historial.setDescripcion("Carga masiva de aspirantes realizada");
+                            historial.setFecha_creacion(new java.sql.Timestamp(System.currentTimeMillis()));
+                            HttpSession session = request.getSession();
+                            historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+
+                            HistorialDao historialDao = new HistorialDao();
+                            boolean isInserted = historialDao.insert(historial);
+
                         } else {
                             mensajeError = "No podemos procesar ese tipo de archivo";
                         }

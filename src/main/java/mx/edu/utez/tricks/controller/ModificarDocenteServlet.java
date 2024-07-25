@@ -41,7 +41,7 @@ public class ModificarDocenteServlet extends HttpServlet {
 
             if (resultado) {
                 Historial historial = new Historial();
-                historial.setDescripcion("Se actualizó el docente " + nombre);
+                historial.setDescripcion("Se actualizó el docente " + nombre + " con matricula: " + idUsuarioStr);
                 historial.setFecha_creacion(new java.sql.Timestamp(System.currentTimeMillis()));
                 HttpSession session = request.getSession();
                 historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));

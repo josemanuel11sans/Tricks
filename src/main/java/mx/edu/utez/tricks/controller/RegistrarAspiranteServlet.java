@@ -1,6 +1,8 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.tricks.dao.AspiranteDAO;
+import mx.edu.utez.tricks.dao.HistorialDao;
 import mx.edu.utez.tricks.model.Aspirante;
 
 import jakarta.servlet.ServletException;
@@ -8,7 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mx.edu.utez.tricks.model.Historial;
+
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +41,27 @@ public class RegistrarAspiranteServlet extends HttpServlet {
         boolean resultado = dao.agregarAspirante(aspirante);
 
         if (resultado) {
-            response.sendRedirect("html/verAspirantes.jsp");
+            try {
+                // Insertar el mensaje en el historial
+                Historial historial = new Historial();
+                historial.setDescripcion("Se registró el aspirante " + nombre + " con ID " + folio);
+                historial.setFecha_creacion(new Date());
+
+                HttpSession session = request.getSession();
+                historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+
+                HistorialDao historialDao = new HistorialDao();
+                boolean isInserted = historialDao.insert(historial);
+
+                if (isInserted) {
+                    response.sendRedirect("html/verAspirantes.jsp?success=true");
+                } else {
+                    response.sendRedirect("error.jsp?error=historial_insertion_failed");
+                }
+            } catch (NumberFormatException | SQLException e) {
+                e.printStackTrace();
+                response.sendRedirect("error.jsp?error=" + e.getMessage());
+            }
         } else {
             response.sendRedirect("../error.jsp");
         }

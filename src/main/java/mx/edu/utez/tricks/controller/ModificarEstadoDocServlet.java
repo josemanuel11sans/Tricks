@@ -39,7 +39,7 @@ public class ModificarEstadoDocServlet extends HttpServlet {
         if (resultado) {
             // Insertar un registro en el historial
             Historial historial = new Historial();
-            historial.setDescripcion("Se actualizó el estado del docente con ID " + idUsuario);
+            historial.setDescripcion("Se actualizó el estado del docente con matricula " + idUsuario + " a " + (estado == 1 ? "activo" : "inactivo"));
             historial.setFecha_creacion(new java.sql.Timestamp(System.currentTimeMillis()));
             historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 
