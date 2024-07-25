@@ -24,61 +24,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilosModal.css">
-    <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        thead th {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1;
-        }
-        ::-webkit-scrollbar {
-            display: none;
-        }
-        .table{
-            margin-bottom: 0;
-        }
-        .modal-body{
-            padding: 0 1.5rem;
-            border-radius: .3rem;
-        }
-        .modal-footer{
-            border: none;
-        }
-        .form-group{
-            margin-bottom: .5rem !important;
-        }
-        .activo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: green;
-            cursor: pointer;
-        }
-
-        .inactivo{
-            width: 15px;
-            height: 15px;
-            border-radius: 100%;
-            background-color: red;
-            cursor: pointer;
-        }
-        td{
-            vertical-align: middle !important;
-        }
-        .tabla{
-            background-color: #fff;
-            border-radius: 20px;
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            max-height: 70vh;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/estilosAspirantes.css">
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -316,92 +262,11 @@
         </div>
     </div>
 </div>
-
-<!-- Script para abrir la imagen de carga masiva de ejemplo -->
-<script>
-    function openImagePopup(url, title) {
-        var width = 800;
-        var height = 600;
-        var left = (screen.width - width) / 2;
-        var top = (screen.height - height) / 2;
-        window.open(url, title, 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
-    }
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var filterName = document.getElementById('filterName');
-        var filterCareer = document.getElementById('filterCareer');
-        var filterDivision = document.getElementById('filterDivision');
-
-        filterName.addEventListener('input', filterTable);
-        filterCareer.addEventListener('change', filterTable);
-        filterDivision.addEventListener('change', filterTable);
-
-        function filterTable() {
-            var filterNameValue = filterName.value.toLowerCase();
-            var filterCareerValue = filterCareer.value.toLowerCase();
-            var filterDivisionValue = filterDivision.value.toLowerCase();
-            var table = document.getElementById('example');
-            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
-            for (var i = 0; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName('td');
-                var folio = cells[0].textContent.toLowerCase();  // Columna "Folio"
-                var name = cells[1].textContent.toLowerCase();   // Columna "Nombre"
-                var curp = cells[2].textContent.toLowerCase();   // Columna "CURP"
-                var division = cells[3].textContent.toLowerCase(); // Columna "Grupo"
-                var career = cells[4].querySelector('div').getAttribute('data-estado'); // Columna "Estado"
-
-                var nameMatch = filterNameValue === '' || folio.includes(filterNameValue) || name.includes(filterNameValue) || curp.includes(filterNameValue);
-                var careerMatch = filterCareerValue === '' || career === filterCareerValue;
-                var divisionMatch = filterDivisionValue === '' || division === filterDivisionValue;
-
-                if (nameMatch && careerMatch && divisionMatch) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-
-        // Añadir evento a los botones para capturar el valor del folio y el estado
-        document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var folio = this.closest('tr').getAttribute('data-folio');
-                document.getElementById('folioAspirante2').value = folio;
-
-                var estadoActual = this.getAttribute('data-estado');
-                var estadoContrario = estadoActual === '1' ? '2' : '1';
-                document.getElementById('estadoAspirante').value = estadoContrario;
-
-            });
-        });
-
-        // Evento para modal de actualizar aspirante
-        document.querySelectorAll('.btn-modificar').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var folio = button.getAttribute('data-folio');
-                var nombre = button.getAttribute('data-nombre');
-                var apellido = button.getAttribute('data-apellido');
-                var curp = button.getAttribute('data-curp');
-                var fecha = button.getAttribute('data-fecha');
-
-                document.getElementById('folioAspirante3').value = folio;
-                document.getElementById('nombreAspirante3').value = nombre;
-                document.getElementById('apellidosAspirante3').value = apellido;
-                document.getElementById('curpAspirante3').value = curp;
-                document.getElementById('fechaNacimientoAspirante3').value = fecha;
-                console.log(fecha);
-            });
-        });
-    });
-
-</script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/aspirantes.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/jsAspirantes.js.js"></script>
 <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </body>
 </html>
