@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Alerta de ayuda del HOME
+// Alerta de ayuda del HOME del ADMINISTRADOR
 document.getElementById('help-icon').onclick = function () {
   Swal.fire({
     title: '¿Cómo usar el sistema?',
