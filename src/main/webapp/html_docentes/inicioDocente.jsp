@@ -17,44 +17,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 <div class="wrapper" style="height: 100vh;">
-    <aside id="sidebar">
-
-        <div class="d-flex">
-            <button class="toggle-btn" type="button">
-                <img src="../img_svg/logo.svg" alt="Toggle">
-            </button>
-            <div class="sidebar-logo">
-                <a href="#">TRICKS</a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/inicioDocente.jsp" class="sidebar-link">
-                    <i class="fas fa-house"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/CursosAsignados.jsp" class="sidebar-link">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Cursos</span>
-                </a>
-            </li>
-
-
-        </ul>
-        <div class="sidebar-footer background-color">
-            <a href="../index.jsp" class="sidebar-link">
-                <i class="fas fa-right-from-bracket"></i>
-                <span>Salir</span>
-            </a>
-        </div>
-    </aside>
+    <jsp:include page="../componentes/menuLateralDocente.jsp" />
 
     <div class="main">
         <div class="container mt-5 text-left">
@@ -78,13 +46,17 @@
                             <p class="card-text">docente@ejemplo.com</p>
                             <p class="card-text"> Información adicional sobre el docente.</p>
                             <!-- este boton muestra el modal de cambiar contraseña   -->
-                            <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#cambairContrasena">
+                            <button type="button" class="btn btnIcono w-100" data-toggle="modal"
+                                    data-target="#cambairContrasena">
                                 Cambiar contraseña
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="position: fixed; bottom: 20px; right: 20px;">
+            <img src="../img_svg/ayuda.svg" id="help-icon" style="cursor: pointer;" alt="Ayuda">
         </div>
     </div>
 
@@ -111,7 +83,8 @@
                                 </button>
                             </div>
                             <div class="input-group ">
-                                <input type="password" class="form-control" id="nuevaContrasena" placeholder="Introduce la contraseña" >
+                                <input type="password" class="form-control" id="nuevaContrasena"
+                                       placeholder="Introduce la contraseña">
                             </div>
                         </div>
 
@@ -124,7 +97,8 @@
                             </div>
 
                             <div class="input-group">
-                                <input type="password" class="form-control" id="confirmaContrasena" placeholder="Introduce la contraseña"  >
+                                <input type="password" class="form-control" id="confirmaContrasena"
+                                       placeholder="Introduce la contraseña">
 
                             </div>
                         </div>

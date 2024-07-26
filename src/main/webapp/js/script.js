@@ -6,48 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector("#sidebar").classList.toggle("expand");
   });
 
-  // Paginación
-  const registrosPorPagina = 10;
-  let paginaActual = 1;
-  const rows = document.querySelectorAll('#aspirantesTableBody tr');
-  const totalPaginas = Math.ceil(rows.length / registrosPorPagina);
-
-  function showPage(page) {
-    paginaActual = page;
-    rows.forEach((row, index) => {
-      row.style.display = (index >= (paginaActual - 1) * registrosPorPagina && index < paginaActual * registrosPorPagina) ? '' : 'none';
-    });
-
-    document.querySelector('#paginaAnterior').parentElement.classList.toggle('disabled', paginaActual === 1);
-    document.querySelector('#paginaSiguiente').parentElement.classList.toggle('disabled', paginaActual === totalPaginas);
-  }
-
-  document.querySelector('#paginaAnterior').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (paginaActual > 1) {
-      showPage(paginaActual - 1);
-    }
-  });
-
-  document.querySelector('#paginaSiguiente').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (paginaActual < totalPaginas) {
-      showPage(paginaActual + 1);
-    }
-  });
-
-  document.querySelectorAll('.pagination .page-item .page-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = parseInt(link.textContent);
-      if (!isNaN(page)) {
-        showPage(page);
-      }
-    });
-  });
-
-  showPage(paginaActual);
-
   // Modals
   $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -57,3 +15,31 @@ document.addEventListener('DOMContentLoaded', function () {
     modal.find('.modal-body input').val(recipient);
   });
 });
+
+// Alerta de ayuda del HOME del ADMINISTRADOR
+document.getElementById('help-icon').onclick = function () {
+  Swal.fire({
+    title: '¿Cómo usar el sistema?',
+    html: `
+            Pasos:<br>
+            1. Registrar una división.<br>
+            2. Registrar una carrera.<br>
+            3. Registrar los docentes.<br>
+            4. Registrar aspirantes.<br>
+            5. Registrar el grupo.<br>
+            Siguiendo estos pasos, se hará uso correcto del sistema.
+        `,
+    imageUrl: '../img_svg/usoSistema.svg',
+    imageWidth: 100,
+    imageHeight: 100,
+    imageAlt: 'Img',
+    customClass: {
+      popup: 'swal2-popup',
+      image: 'swal2-image',
+      confirmButton: 'swal2-confirm'
+    },
+    width: 450,
+    confirmButtonText: 'Aceptar',
+    confirmButtonColor: '#003366'
+  });
+}
