@@ -108,7 +108,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Nueva Carrera</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,13 +131,6 @@
                             <%
                                 }
                             %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="estado" class="col-form-label">Estado:</label>
-                        <select class="custom-select" id="estado" name="estado" required>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
                         </select>
                     </div>
                 </div>
@@ -168,7 +161,7 @@
                         <label for="nombreCarreraModificar" class="col-form-label">Nombre de la Carrera:</label>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label">División Académica:</label>
                         <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
                             <option value="">División Académica:</option>
                             <%
@@ -180,13 +173,6 @@
                             %>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="estadoModificar" class="col-form-label">Estado:</label>
-                        <select class="custom-select" id="estadoModificar" name="estado" required>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Modificar</button>
@@ -195,6 +181,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal modificar estado -->
 <div class="modal fade" id="modificarEstadoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

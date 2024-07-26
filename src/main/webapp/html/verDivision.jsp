@@ -111,7 +111,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar división</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar División</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -119,52 +119,18 @@
             <div class="modal-body">
                 <form action="../RegistrarDivisionServlet" method="post">
                     <div class="form-group">
-                        <label for="nombreDivision">Nombre de la división:</label>
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" required>
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="">
+                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
                     </div>
                     <div class="form-group">
-                        <label for="siglas">Siglas:</label>
-                        <input type="text" class="form-control" id="siglas" name="siglas" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="coordinadorDivision">Coordinador:</label>
-                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Modal para Agregar división -->
-<div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar división</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="../RegistrarDivisionServlet" method="post">
-                    <div class="form-group">
-                        <label for="nombreDivision" class="col-form-label">Nombre de la división:</label>
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" required>
-                    </div>
-                    <div class="form-group">
+                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder="">
                         <label for="siglas" class="col-form-label">Siglas:</label>
-                        <input type="text" class="form-control" id="siglas" name="siglas" required>
                     </div>
                     <div class="form-group">
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder="">
                         <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
-                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
                 </form>
@@ -172,6 +138,43 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para Modificar división -->
+<div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar División</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="../ActualizarDivisionServlet" method="post">
+                    <div class="form-group">
+                        <input type="hidden" id="idDivision" name="idDivision">
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="">
+                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder="">
+                        <label for="siglas" class="col-form-label">Siglas:</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder="">
+                        <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Modal para modifcar  estado -->
 <div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -198,6 +201,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        $('#modificarDivisionModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            var idDivision = button.data('id');
+            var nombre = button.data('nombre');
+            var siglas = button.data('siglas');
+            var coordinador = button.data('coordinador');
+
+            // Actualizar los campos del modal con los datos actuales
+            $('#idDivision').val(idDivision);
+            $('#nombreDivision').val(nombre);
+            $('#siglas').val(siglas);
+            $('#coordinadorDivision').val(coordinador);
+        });
+    });
+</script>
+
 
 
 
