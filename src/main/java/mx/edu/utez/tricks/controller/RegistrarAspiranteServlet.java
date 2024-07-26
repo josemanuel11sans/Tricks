@@ -70,8 +70,10 @@ public class RegistrarAspiranteServlet extends HttpServlet {
 
                     if (isInserted) {
                         response.sendRedirect("html/verAspirantes.jsp?success=true");
+                        session.setAttribute("alerta", "exito");
                     } else {
                         response.sendRedirect("error.jsp?error=historial_insertion_failed");
+                        session.setAttribute("alerta", "falloRegistro");
                     }
                 } catch (NumberFormatException | SQLException e) {
                     e.printStackTrace();
