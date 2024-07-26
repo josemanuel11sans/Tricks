@@ -280,3 +280,64 @@ a.sidebar-link:hover {
 .activo{
     color: green;
 }
+
+/* Estilo para el icono de ayuda de los home */
+#help-icon {
+    width: 35px; /* Ancho del ícono */
+    height: 35px; /* Alto del ícono */
+    transition: all 0.3s ease; /* Transición suave para todas las propiedades */
+    filter: brightness(1); /* Color verde original del ícono */
+}
+
+#help-icon:hover {
+    animation: bounce 0.5s; /* Animación de salto */
+    animation-iteration-count: infinite; /* Repetir la animación infinitamente */
+    filter: brightness(0.7); /* Oscurecer el color del ícono al pasar el ratón */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Estilos para la alerta personalizada */
+.swal2-popup {
+    background: linear-gradient(180deg, #003366, #107863);
+    color: white; /* Color del texto */
+    padding: 15px; /* Espaciado interno para dar más espacio al contenido */
+    border-radius: 25px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que el fondo no se desborde */
+    font-family: 'Poppins', sans-serif !important; /* Aplicar la tipografía Poppins */
+}
+
+.swal2-title {
+    font-size: 1.4em; /* Tamaño del título */
+}
+
+.swal2-html-container {
+    font-size: 1em !important; /* Tamaño del texto del contenido */
+}
+
+.swal2-confirm {
+    background-color: #003366; /* Color del botón */
+    color: #FFFFFF;
+    border: none; /* Sin borde */
+    font-size: 0.9em; /* Tamaño del texto del botón */
+    padding: 10px 18px; /* Tamaño del botón */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.swal2-confirm:hover {
+    color: #FFFFFF;
+    background-color: #074687; /* Color del botón al pasar el ratón */
+}
+
+.swal2-image {
+    background-color: transparent; /* Fondo transparente para la imagen */
+    width: 100px; /* Tamaño del ícono */
+    height: 100px; /* Tamaño del ícono */
+}
