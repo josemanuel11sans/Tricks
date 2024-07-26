@@ -177,7 +177,7 @@ CREATE TABLE `divisiones_academicas` (
                                          `nombre_division` varchar(61) DEFAULT NULL,
                                          `coordinador_division` varchar(45) DEFAULT NULL,
                                          `siglas` varchar(45) DEFAULT NULL,
-                                         `estado` int DEFAULT NULL,
+                                         `estado` int DEFAULT 1,
                                          `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                                          PRIMARY KEY (`id_division`),
                                          KEY `estado_id_estado` (`estado`),
@@ -185,6 +185,7 @@ CREATE TABLE `divisiones_academicas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE divisiones_academicas DROP FOREIGN KEY divisiones_academicas_ibfk_1;
 --
 -- Dumping data for table `divisiones_academicas`
 --
