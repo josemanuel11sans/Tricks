@@ -1,20 +1,24 @@
 package mx.edu.utez.tricks.model;
 
 public class Grupo {
-    private int idGrupo, estadoIdEstado;
-    private String  nombreGrupo;
-    private String nombreDocente,apellidoDocente, carrera, divisionAcademica;
+    private int idGrupo;
+    private int estadoIdEstado;
+    private String nombreGrupo;
+    private String nombreDocente;
+    private String apellidoDocente;
+    private String carrera;
+    private String divisionAcademica;
 
     public Grupo() {
     }
 
-    public Grupo(int idGrupo, int estadoIdEstado, String apellidoDocente, String carrera, String nombreDocente, String nombreGrupo, String divisionAcademica) {
+    public Grupo(int idGrupo, int estadoIdEstado, String nombreGrupo, String nombreDocente, String apellidoDocente, String carrera, String divisionAcademica) {
         this.idGrupo = idGrupo;
         this.estadoIdEstado = estadoIdEstado;
+        this.nombreGrupo = nombreGrupo;
+        this.nombreDocente = nombreDocente;
         this.apellidoDocente = apellidoDocente;
         this.carrera = carrera;
-        this.nombreDocente = nombreDocente;
-        this.nombreGrupo = nombreGrupo;
         this.divisionAcademica = divisionAcademica;
     }
 
@@ -42,6 +46,21 @@ public class Grupo {
         this.nombreGrupo = nombreGrupo;
     }
 
+    public String getNombreDocente() {
+        return nombreDocente;
+    }
+
+    public void setNombreDocente(String nombreDocente) {
+        this.nombreDocente = nombreDocente;
+    }
+
+    public String getApellidoDocente() {
+        return apellidoDocente;
+    }
+
+    public void setApellidoDocente(String apellidoDocente) {
+        this.apellidoDocente = apellidoDocente;
+    }
 
     public String getCarrera() {
         return carrera;
@@ -58,20 +77,5 @@ public class Grupo {
     public void setDivisionAcademica(String divisionAcademica) {
         this.divisionAcademica = divisionAcademica;
     }
-
-    public String getNombreDocente() {
-        return nombreDocente;
-    }
-
-    public void setNombreDocente(String nombreDocente) {
-        this.nombreDocente = nombreDocente;
-    }
-
-    public String getApellidoDocente() {
-        return apellidoDocente;
-    }
-
-    public void setApellidoDocente(String apellidoDocente) {
-        this.apellidoDocente = apellidoDocente;
-    }
 }
+

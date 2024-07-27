@@ -29,7 +29,7 @@ public class ModificarGrupoServlet extends HttpServlet {
         grupo.setDivisionAcademica(division);
 
         GrupoDao dao = new GrupoDao();
-        boolean isUpdated = dao.update(grupo);
+        boolean isUpdated = dao.updateGrupo(grupo);
 
         if (isUpdated) {
             response.sendRedirect("html/verGrupo.jsp");
