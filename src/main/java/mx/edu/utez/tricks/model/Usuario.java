@@ -12,8 +12,9 @@ public class Usuario {
     private int rol;
     private int grupos_id_grupo;
     private Date fecha_creacion;
+    private String codigo;
 
-    public Usuario(int id_usuario, String nombre, String apellido, String mail, String contra, int estado, int rol, int grupos_id_grupo, Date fecha_creacion) {
+    public Usuario(int id_usuario, String nombre, String apellido, String mail, String contra, int estado, int rol, int grupos_id_grupo, Date fecha_creacion, String codigo) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -23,6 +24,7 @@ public class Usuario {
         this.rol = rol;
         this.grupos_id_grupo = grupos_id_grupo;
         this.fecha_creacion = fecha_creacion;
+        this.codigo = codigo;
     }
 
     public Usuario() {
@@ -117,5 +119,13 @@ public class Usuario {
 
     public void setFecha_creacion(Date fecha_creacion) {
         this.fecha_creacion = fecha_creacion;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }

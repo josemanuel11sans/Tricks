@@ -30,6 +30,7 @@ public class UsuarioDao {
                     usuario.setApellido(rs.getString("apellido"));
                     usuario.setMail(rs.getString("mail"));
                     usuario.setContra(rs.getString("contrasena"));
+
                     usuario.setEstado(rs.getInt("estado")); // Recuperar estado
                     usuario.setRol(rs.getInt("rol"));
                 }
@@ -39,8 +40,6 @@ public class UsuarioDao {
         }
         return usuario;
     }
-
-
 
     // Método que verifica si el correo existe
     public boolean emailExists(String nombre) {
@@ -61,8 +60,6 @@ public class UsuarioDao {
         }
         return false;
     }
-
-
     // Método para ver la información de un docente en la tabla
     public ArrayList<Usuario> getAll() {
         ArrayList<Usuario> lista = new ArrayList<>();
@@ -87,7 +84,6 @@ public class UsuarioDao {
         }
         return lista;
     }
-
     // Método para encriptar contraseña
     public String hashPassword(String password) {
         try {
@@ -102,7 +98,6 @@ public class UsuarioDao {
             throw new RuntimeException("Error al encriptar la contraseña", e);
         }
     }
-
     // Método para registrar un docente
     public boolean insert(Usuario usuario) throws SQLException {
         String query = "INSERT INTO usuarios (id_usuario, nombre, apellido, mail, contrasena, estado, rol, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -128,7 +123,6 @@ public class UsuarioDao {
             throw e;
         }
     }
-
     // Método para actualizar los datos del usuario
     public boolean actualizarUsuario(Usuario usuario) {
         String query = "UPDATE usuarios SET nombre = ?, apellido = ?, mail = ?, contrasena = ? WHERE id_usuario = ?";
@@ -157,8 +151,6 @@ public class UsuarioDao {
             return false;
         }
     }
-
-
     // Método para actualizar el estado del docente
     public boolean actualizarEstado(Usuario usuario) {
         String query = "UPDATE usuarios SET estado = ? WHERE id_usuario = ?";
@@ -177,7 +169,6 @@ public class UsuarioDao {
             return false;
         }
     }
-
     // Método para ver si la matricula del docente ya existe
     public boolean matriculaExists(int idUsuario) {
         String query = "SELECT COUNT(*) FROM usuarios WHERE id_usuario = ?";
@@ -195,7 +186,6 @@ public class UsuarioDao {
         }
         return false; // Devuelve falso si la matrícula no existe
     }
-
     // Método para ver que ningun usuario tiene ese email
     public Usuario buscarEmail(int idUsuario) {
         String query = "SELECT * FROM usuarios WHERE id_usuario = ?";
@@ -224,8 +214,6 @@ public class UsuarioDao {
 
         return usuario;
     }
-
-
     // ESTADISTICAS DE LAS CARDS DEL INICIO - NO MOVER -
     public int getAspirantesCount() {
         int count = 0;
@@ -244,7 +232,6 @@ public class UsuarioDao {
         }
         return count;
     }
-
     public int getDocentesCount() {
         int count = 0;
         String query = "SELECT COUNT(*) AS count FROM usuarios WHERE rol = 2"; // Suponiendo que el rol de docente es 2
@@ -262,7 +249,6 @@ public class UsuarioDao {
         }
         return count;
     }
-
     public int getCarrerasCount() {
         int count = 0;
         String query = "SELECT COUNT(*) AS count FROM carreras";
@@ -280,7 +266,6 @@ public class UsuarioDao {
         }
         return count;
     }
-
     public int getGruposCount() {
         int count = 0;
         String query = "SELECT COUNT(*) AS count FROM grupos";
@@ -297,5 +282,89 @@ public class UsuarioDao {
             throw new RuntimeException(e);
         }
         return count;
+    }
+
+
+
+    //esta parte se traer la info del usuario si el correo existe
+    public Usuario getOne2(String correo) {
+        Usuario usuario = new Usuario();
+        String query = "select * from usuarios where mail = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,correo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setContra(rs.getString("contrasena"));
+                usuario.setMail(rs.getString("mail"));
+                usuario.setEstado(rs.getInt("estado"));
+                usuario.setRol(rs.getInt("rol"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
+   //esto solo actualiza el codigo
+    public boolean updateCodigo(Usuario u, String codigo) {
+        boolean flag = false;
+        String query = "update usuarios set codigo = ? where id_usuario = ?";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,codigo);
+            ps.setInt(2,u.getId_usuario());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    //este metoo verifica si el codigo generado es el mismo que el del usuario
+    public boolean existe(String codigo) {
+        boolean flag = false;
+        String query = "select * from usuarios where codigo = ?";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,codigo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                flag = true;
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+   //este metodo se usa para actualizar la contraseña  donde el codigoo sea igual al ingresado
+    public boolean updateContrasena(String contra, String codigo) {
+        boolean flag = false;
+        String query = "update usuarios set contrasena = sha2(?,256), codigo = null where codigo = ?";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,contra);
+            ps.setString(2, codigo);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

@@ -129,7 +129,9 @@
                                             <button type="submit" class="btn btn-block w-60">Acceder</button>
                                             <br>
                                             <div class="container d-flex align-items-center justify-content-center">
-                                                <a href="" class="link">¿Olvidaste tu contraseña?</a>
+                                                <a  type="button" class="link"  data-toggle="modal" data-target="#registrarGrupo">
+                                                    ¿Olvidaste tu contraseña?
+                                                </a>
                                             </div>
                                         </form>
                                     </div>
@@ -173,6 +175,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal solicitud de recuperacion -->
+<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Solicitud de recuperacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="../solicitudRecuperacion">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="nombreGrupo" name="correo" placeholder="" required>
+                        <label for="nombreGrupo" class="col-form-label">Correo</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Solicitar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
