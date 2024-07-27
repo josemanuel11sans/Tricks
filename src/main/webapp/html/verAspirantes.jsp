@@ -20,15 +20,22 @@
     <title>Aspirantes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconGrupo.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconAspirante.svg">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilosModal.css">
-    <link rel="stylesheet" href="../css/estilosAspirantes.css">
+    <link rel="stylesheet" href="../css/estilosTabla.css">
     <link rel="stylesheet" href="../css/estilosAlertas.css">
-    <script src="https://kit.fontawesome.com/18fc318c24.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilosAspirantes.css">
+    <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <style>
+        .sidebar-nav a{
+            line-height: 0;
+        }
+    </style>
 </head>
 <body>
+<div class="wrapper" style="height: 100vh;">
+    <jsp:include page="../componentes/menuLateral.jsp" />
 <%
     String tipoAlerta = (String) session.getAttribute("alerta");
     String mensajeAlerta = "";
@@ -104,9 +111,6 @@
     }
 %>
 
-<div class="wrapper" style="height: 100vh;">
-    <jsp:include page="../componentes/menuLateral.jsp" />
-
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Aspirantes</h1>
@@ -151,7 +155,8 @@
                         <i class="fa-solid fa-users fa-lg"></i>
                     </button>
                 </div>
-            </div><br>
+            </div>
+            <br>
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -346,10 +351,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/jsAspirantes.js"></script>
+<script src="../js/verAspirantes.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/scriptAlertas.js"></script>
-<script src="https://kit.fontawesome.com/18fc318c24.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

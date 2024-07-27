@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -112,7 +113,9 @@
                 </table>
             </div>
         </div>
-
+        <div style="position: fixed; bottom: 20px; right: 20px;">
+            <img src="../img_svg/ayuda.svg" id="help-icon" style="cursor: pointer;" alt="Ayuda">
+        </div>
     </div>
     </div>
 </div>

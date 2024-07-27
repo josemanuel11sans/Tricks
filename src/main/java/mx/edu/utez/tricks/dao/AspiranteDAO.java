@@ -143,4 +143,32 @@ public class AspiranteDAO {
         }
         return false;
     }
+
+    // Método para ver que ningun usuario tiene ese curp
+    public Aspirante buscarCurp(String folio) {
+        String query = "SELECT * FROM aspirantes WHERE folio_aspirante = ?";
+        Aspirante aspirante = null;
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, folio);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                aspirante = new Aspirante();
+                aspirante.setFolioAspirante(rs.getString("folio_aspirante"));
+                aspirante.setNombre(rs.getString("nombre"));
+                aspirante.setApellidos(rs.getString("apellido"));
+                aspirante.setCurp(rs.getString("curp"));
+                aspirante.setEstado(rs.getInt("estado"));
+                aspirante.setFechaNacimiento(rs.getTimestamp("fecha_nac"));
+                aspirante.setGrupo(rs.getInt("grupos_id_grupo"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return aspirante;
+    }
 }

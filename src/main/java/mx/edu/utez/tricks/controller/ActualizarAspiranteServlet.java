@@ -37,16 +37,17 @@ public class ActualizarAspiranteServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            Aspirante aspirante = new Aspirante(folio, nombre, apellidos, curp, fechaNacimiento);
-
             AspiranteDAO dao = new AspiranteDAO();
 
-            if (dao.curpExistente(curp)) {
-                session2.setAttribute("alerta", "curpExistente");
+            // Verificar si el correo ya existe para otro usuario
+            if (dao.curpExistente(curp) && !dao.buscarCurp(folio).getCurp().equals(curp)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("alerta", "curpExistente");
                 response.sendRedirect("html/verAspirantes.jsp");
                 return;
             }
 
+            Aspirante aspirante = new Aspirante(folio, nombre, apellidos, curp, fechaNacimiento);
             boolean resultado = dao.actualizarAspirante(aspirante);
 
             if (resultado) {
@@ -56,30 +57,30 @@ public class ActualizarAspiranteServlet extends HttpServlet {
                     historial.setDescripcion("Se actualizó el aspirante " + nombre + " con ID " + folio);
                     historial.setFecha_creacion(new Date());
 
-                    HttpSession session = request.getSession();
-                    historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+                    historial.setUsuarioIdusuario(Integer.parseInt(session2.getAttribute("idUsuarioSession").toString()));
 
                     HistorialDao historialDao = new HistorialDao();
                     boolean isInserted = historialDao.insert(historial);
 
                     if (isInserted) {
                         response.sendRedirect("html/verAspirantes.jsp?success=true");
+                        session2.setAttribute("alerta", "actualizacionExitosa");
                     } else {
                         response.sendRedirect("error.jsp?error=historial_insertion_failed");
+                        session2.setAttribute("alerta", "falloActualizacion");
                     }
                 } catch (NumberFormatException | SQLException e) {
                     e.printStackTrace();
                     response.sendRedirect("error.jsp?error=" + e.getMessage());
                 }
             } else {
-                response.sendRedirect("../error.jsp");
+                response.sendRedirect("error.jsp");
             }
-        }catch (NumberFormatException a) {
-            a.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
             HttpSession session = request.getSession();
             session.setAttribute("alerta", "error");
             response.sendRedirect("html/verAspirantes.jsp");
         }
     }
 }
-
