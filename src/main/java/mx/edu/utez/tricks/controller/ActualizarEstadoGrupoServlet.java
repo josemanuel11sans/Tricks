@@ -8,27 +8,44 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
-@WebServlet(name = "ActualizarEstadoGrupoServlet", urlPatterns = {"/ActualizarEstadoGrupoServlet"})
+@WebServlet("/actualizarEstadoGrupo")
 public class ActualizarEstadoGrupoServlet extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idGrupo = request.getParameter("folioGrupo2");
-        String estadoGrupo = request.getParameter("estadoGrupo");
+        // Obtén el parámetro del ID del grupo y del estado
+        String idGrupoStr = request.getParameter("idGrupo");
+        String estadoIdEstadoStr = request.getParameter("estadoIdEstado");
 
-        GrupoDao grupoDao = new GrupoDao();
-        Grupo grupo = grupoDao.getGrupoById(Integer.parseInt(idGrupo));
-        if (grupo != null) {
-            grupo.setEstadoIdEstado(Integer.parseInt(estadoGrupo));
-            boolean isUpdated = grupoDao.updateGrupo(grupo);
-            if (isUpdated) {
-                response.sendRedirect("verGrupo.jsp");
-            } else {
-                response.sendRedirect("error.jsp");
+        if (idGrupoStr == null || idGrupoStr.isEmpty() || estadoIdEstadoStr == null || estadoIdEstadoStr.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de grupo y estado son requeridos.");
+            return;
+        }
+
+        try {
+            int idGrupo = Integer.parseInt(idGrupoStr);
+            int estadoIdEstado = Integer.parseInt(estadoIdEstadoStr);
+
+            GrupoDao grupoDao = new GrupoDao();
+            Grupo grupo = grupoDao.getGrupoById(idGrupo);
+
+            if (grupo == null) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Grupo no encontrado.");
+                return;
             }
-        } else {
-            response.sendRedirect("error.jsp");
+
+            grupo.setEstadoIdEstado(estadoIdEstado);
+            boolean isUpdated = grupoDao.updateGrupo(grupo);
+
+            if (isUpdated) {
+                response.sendRedirect("success.jsp");
+            } else {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el grupo.");
+            }
+
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de grupo y estado deben ser números.");
         }
     }
 
@@ -36,4 +53,3 @@ public class ActualizarEstadoGrupoServlet extends HttpServlet {
         doPost(request, response);
     }
 }
-

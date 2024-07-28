@@ -7,6 +7,7 @@
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
 <%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.tricks.model.Carrera" %>
+<%@ page import="mx.edu.utez.tricks.model.Usuario" %>
 
 
 <html>
@@ -239,7 +240,7 @@
                     <div class="form-group">
                         <label for="divisionAcademica" class="col-form-label">División académica:</label>
                         <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" "> </option>>
+                            <option value=""></option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -252,22 +253,21 @@
                     <div class="form-group">
                         <label for="carrera" class="col-form-label">Carrera:</label>
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" "></option>
-                            <%
-                                for ( Carrera carrera : carreraList) {
-                            %>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <%
-                                }
-                            %>
-
+                            <option value="">Seleccionar</option>
+                            <% for (Carrera carrera : carreraList) { %>
+                            <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>"><%= carrera.getNombreCarrera() %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="docente" class="col-form-label">Docente asignado:</label>
-                        <input type="text" class="form-control" id="docente" name="docente" required>
+                        <select class="custom-select" id="docente" name="docente" required>
+                            <option value="">Seleccionar</option>
+                            <% for (Usuario docente : docenteList) { %>
+                            <option value="<%= docente.getIdDocente() %>" data-division="<%= docente.getIdDivision() %>"><%= docente.getNombreDocente() %></option>
+                            <% } %>
+                        </select>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Registrar</button>
@@ -346,17 +346,13 @@
             <div class="modal-body">
                 <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">¿Estas seguro de cambiar el estado del grupo?</h6>
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
-                    <div class="form-group" style="display: none">
-                        <label for="folioGrupo2" class="col-form-label">Folio del Aspirante:</label>
-                        <input type="text" class="form-control" id="folioGrupo2" name="folioGrupo2">
-                    </div>
-                    <div class="form-group" style="display: none">
-                        <label for="estadoGrupo" class="col-form-label">Estado del Aspirante:</label>
-                        <input type="text" class="form-control" id="estadoGrupo" name="estadoGrupo">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
-                    </div>
+                    <label for="idGrupo">ID del Grupo:</label>
+                    <input type="text" id="idGrupo" name="idGrupo" required>
+                    <br>
+                    <label for="estadoIdEstado">Estado del Grupo:</label>
+                    <input type="text" id="estadoIdEstado" name="estadoIdEstado" required>
+                    <br>
+                    <input type="submit" value="Actualizar Estado">
                 </form>
             </div>
         </div>
