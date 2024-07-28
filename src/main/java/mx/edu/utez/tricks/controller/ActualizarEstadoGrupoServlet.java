@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "ActualizarEstadoGrupoServlet", urlPatterns = {"/ActualizarEstadoServlet"})
+@WebServlet(name = "ActualizarEstadoGrupoServlet", urlPatterns = {"/ActualizarEstadoGrupoServlet"})
 public class ActualizarEstadoGrupoServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
