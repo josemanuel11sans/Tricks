@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -75,38 +76,27 @@
                 <div class="modal-body">
 
                     <form>
-                        <div class="form-group">
-                            <div class="containerme">
-                                <label for="nuevaContrasena" class="col-form-label">Nueva contraseña</label>
-                                <button class="boton" type="button" id="toggleNuevaContrasena">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                            <div class="input-group ">
-                                <input type="password" class="form-control" id="nuevaContrasena"
-                                       placeholder="Introduce la contraseña">
-                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="contraseñaAnterior" name="ContraseñaAnterior" placeholder="" required>
+                                <label for="contraseñaAnterior" class="col-form-label">Contraseña anterior</label>
                         </div>
 
                         <div class="form-group">
-                            <div class="containerme">
-                                <label for="confirmaContrasena" class="col-form-label">Confirma tu contraseña</label>
-                                <button class="boton " type="button" id="toggleConfirmaContrasena">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
+                            <input type="text" class="form-control" id="contraseñaNueva" name="ContraseñaNueva" placeholder="" required>
+                            <label for="contraseñaNueva" class="col-form-label">Contraseña nueva</label>
+                        </div>
 
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="confirmaContrasena"
-                                       placeholder="Introduce la contraseña">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="confirmarContraseña" name="confirmarContraseña" placeholder="" required>
+                            <label for="confirmarContraseña" class="col-form-label">Confirma la contraseña</label>
+                        </div>
 
-                            </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Crear</button>
                         </div>
                     </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn modalBoton2">Crear</button>
                 </div>
             </div>
         </div>

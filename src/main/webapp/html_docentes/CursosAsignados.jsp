@@ -93,44 +93,22 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-item">
-                <a href="inicioAdmin.jsp" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/inicioDocente.jsp" class="sidebar-link">
                     <i class="fas fa-house"></i>
                     <span>Inicio</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a href="consultarDivision.jsp" class="sidebar-link">
-                    <i class="fas fa-school-flag"></i>
-                    <span>División académica</span>
-                </a>
             </li>
             <li class="sidebar-item">
-                <a href="consultarCarrera.jsp" class="sidebar-link">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Carrera</span>
+                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/CursosAsignados.jsp" class="sidebar-link">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Cursos</span>
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a href="verAspirantes.jsp" class="sidebar-link">
-                    <i class="fas fa-users"></i>
-                    <span>Aspirantes</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="verDocentes.jsp" class="sidebar-link">
-                    <i class="fas fa-chalkboard-user"></i>
-                    <span>Docentes</span>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="verGrupos.jsp" class="sidebar-link">
-                    <i class="fas fa-users-rectangle"></i>
-                    <span>Grupos</span>
-                </a>
-            </li>
+
         </ul>
         <div class="sidebar-footer background-color">
-            <a href="../index.jsp" class="sidebar-link">
+            <a href="#" class="sidebar-link">
                 <i class="fas fa-right-from-bracket"></i>
                 <span>Salir</span>
             </a>
@@ -144,7 +122,7 @@
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <input type="text" id="filterName" class="form-control" placeholder="Nombre o Matricula">
+                    <input type="text" id="filterName" class="form-control" placeholder="Carrera">
                 </div>
                 <div class="col-md-2">
                     <select class="custom-select" id="filterDivision" required>
@@ -157,19 +135,6 @@
                         <option value="<%= g.getNombreGrupo() %>"><%= g.getNombreGrupo() %></option>
                         <% } %>
                     </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="custom-select" id="filterCareer" required>
-                        <option value="">Estatus</option>
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarAspirante">
-                        Registrar aspirante
-                    </button>
                 </div>
             </div><br>
 
