@@ -31,7 +31,7 @@ public class ActualizarCarreraServlet extends HttpServlet {
         boolean resultado = dao.actualizarCarrera(carrera);
 
         if (resultado) {
-            resp.sendRedirect("consultarCarrera.jsp");
+            resp.sendRedirect("html/verCarrera.jsp");
         } else {
             resp.sendRedirect("../error.jsp");
         }

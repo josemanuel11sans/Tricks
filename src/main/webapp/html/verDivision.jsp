@@ -272,14 +272,15 @@
             $('#estadoDivision').val(estado === '1' ? '2' : '1');
         });
 
-        // Configurar el modal de modificar grupo
-        $('#modificarGrupo').on('show.bs.modal', function(event) {
+        // Configurar el modal de modificar division
+        $('#modificarDivisionModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
             $('#idDivision').val(button.data('id'));
             $('#nombreDivision').val(button.data('nombre'));
             $('#siglas').val(button.data('siglas'));
             $('#coordinadorDivision').val(button.data('coordinador'));
         });
+
     });
 </script>
 
