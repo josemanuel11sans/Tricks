@@ -196,9 +196,9 @@
 
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (g.getEstadoIdEstado() == 1) { %>
-                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } else { %>
-                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } %>
 
                         </td >
