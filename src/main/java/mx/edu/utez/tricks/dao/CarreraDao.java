@@ -66,21 +66,29 @@ public class CarreraDao {
 
 
     public boolean actualizarCarrera(Carrera carrera) {
-        String query = "UPDATE carreras SET nombre_carrera = ?, siglas = ?, estado = ? WHERE id_carrera = ?";
+        String query = "UPDATE carreras SET nombre_carrera = ?, divisiones_academicas_id_division = ? WHERE id_carrera = ?";
+        System.out.println("Query: " + query);
+        System.out.println("ID Carrera: " + carrera.getIdCarrera());
+        System.out.println("Nombre Carrera: " + carrera.getNombreCarrera());
+        System.out.println("ID División Académica: " + carrera.getIdDivisionAcademica());
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, carrera.getNombreCarrera());
             ps.setInt(2, carrera.getIdDivisionAcademica());
-            ps.setInt(3, carrera.getIdEstado());
-            ps.setInt(4, carrera.getIdCarrera());
+            ps.setInt(3, carrera.getIdCarrera());
 
+            System.out.println("PreparedStatement: " + ps);
             int rowsAffected = ps.executeUpdate();
+            System.out.println("Rows Affected: " + rowsAffected);
             return rowsAffected > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("Código de error SQL: " + e.getErrorCode());
+            System.out.println("Estado SQL: " + e.getSQLState());
             return false;
         }
     }
