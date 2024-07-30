@@ -17,17 +17,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Alerta de ayuda del HOME del DOCENTE
-document.getElementById('help-icon-Docente').onclick = function () {
+document.getElementById('ayudaD').onclick = function () {
     Swal.fire({
         title: '¿Cómo usar el sistema?',
         html: `
-            Pasos:<br>
-            1. Selecciona un grupo.<br>
-            2. Registrar una calificacion o asistencia.<br>
-            3. Descarga la lista de asistencia.<br>
-            4. Descarga la lista de calificaciones.<br>
-            Siguiendo estos pasos, se hará uso correcto del sistema.
-        `,
+                Pasos:<br>
+                1. Selecciona un grupo.<br>
+                2. Registrar una calificacion o asistencia.<br>
+                3. Descarga la lista de asistencia.<br>
+                4. Descarga la lista de calificaciones.<br>
+                Siguiendo estos pasos, se hará uso correcto del sistema.
+            `,
         imageUrl: '../img_svg/usoSistema.svg',
         imageWidth: 100,
         imageHeight: 100,
@@ -41,4 +41,4 @@ document.getElementById('help-icon-Docente').onclick = function () {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#003366'
     });
-}
+};

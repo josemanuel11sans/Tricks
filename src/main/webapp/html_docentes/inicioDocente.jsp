@@ -57,7 +57,7 @@
             </div>
         </div>
         <div style="position: fixed; bottom: 20px; right: 20px;">
-            <img src="../img_svg/ayuda.svg" id="help-icon-Docente" style="cursor: pointer;" alt="Ayuda">
+            <img src="../img_svg/ayuda.svg" id="ayudaD" style="cursor: pointer;" alt="Ayuda">
         </div>
     </div>
 
@@ -105,7 +105,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../js/script.js"></script>
+        <script src="../js/scripDocente.js"></script>
+        <script src="../js/script.js"></script>
+
 </body>
 
 </html>
