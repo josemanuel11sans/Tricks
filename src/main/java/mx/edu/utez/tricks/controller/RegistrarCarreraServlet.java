@@ -6,9 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mx.edu.utez.tricks.dao.CarreraDao;
+import mx.edu.utez.tricks.dao.DivisionesAcademicasDAO;
 import mx.edu.utez.tricks.model.Carrera;
+import mx.edu.utez.tricks.model.DivisionesAcademicas;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "RegistrarCarreraServlet", value = "/RegistrarCarreraServlet")
 public class RegistrarCarreraServlet extends HttpServlet {
@@ -54,5 +57,18 @@ public class RegistrarCarreraServlet extends HttpServlet {
         } else {
             resp.sendRedirect("../error.jsp");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Obteniendo todas las divisiones académicas para el formulario
+        DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
+        List<DivisionesAcademicas> divisionesList = divisionesAcademicasDAO.getAllDivisiones();
+
+        // Pasando la lista de divisiones académicas a la JSP
+        req.setAttribute("divisionesList", divisionesList);
+
+        // Redirigiendo al formulario de registro de carreras
+        req.getRequestDispatcher("html/registrarCarrera.jsp").forward(req, resp);
     }
 }

@@ -220,11 +220,6 @@
     });
 </script>
 
-
-
-
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
