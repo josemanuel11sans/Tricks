@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/actualizarEstadoGrupo")
+@WebServlet(name = "ActualizarEstadoGrupoServlet", value = "/ActualizarEstadoGrupoServlet")
 public class ActualizarEstadoGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtén el parámetro del ID del grupo y del estado
