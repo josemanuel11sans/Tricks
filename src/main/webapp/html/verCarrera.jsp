@@ -103,6 +103,7 @@
     </div>
 </div>
 
+
 <!-- Modal registrar nueva carrera -->
 <div class="modal fade" id="registrarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -113,17 +114,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="RegistrarCarreraServlet" method="post">
+            <form action="../RegistrarCarreraServlet" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="agregar">
+                    <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" placeholder=" " required>
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademica" class="col-form-label"></label>
+                        <label for="idDivisionAcademica" class="col-form-label">División Académica:</label>
                         <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica" required>
-                            <option value="">División Académica:</option>
+                            <option value="">Seleccione una división</option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -142,6 +144,7 @@
     </div>
 </div>
 
+
 <!-- Modal modificar carrera -->
 <div class="modal fade" id="modificarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -152,18 +155,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../ActualizarDivisionServlet" method="post">
+            <form action="../ActualizarCarreraServlet" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" placeholder=" " required>
                         <label for="nombreCarreraModificar" class="col-form-label">Nombre de la Carrera:</label>
+                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
                         <label for="idDivisionAcademicaModificar" class="col-form-label">División Académica:</label>
                         <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
-                            <option value="">División Académica:</option>
+                            <option value="">Seleccione División Académica</option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -175,12 +178,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Modificar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 
 <!-- Modal modificar estado -->

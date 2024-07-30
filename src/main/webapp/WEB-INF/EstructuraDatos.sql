@@ -115,7 +115,7 @@ CREATE TABLE `carreras` (
                             `id_carrera` int NOT NULL auto_increment,
                             `nombre_carrera` varchar(100) DEFAULT NULL,
                             `divisiones_academicas_id_division` int DEFAULT NULL,
-                            `estado` int DEFAULT NULL,
+                            `estado` int DEFAULT 1,
                             `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                             PRIMARY KEY (`id_carrera`),
                             KEY `divisiones_academicas_id_division` (`divisiones_academicas_id_division`),
@@ -124,6 +124,8 @@ CREATE TABLE `carreras` (
                             CONSTRAINT `carreras_ibfk_2` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+ALTER TABLE carreras DROP FOREIGN KEY carreras_ibfk_2;
 
 --
 -- Dumping data for table `carreras`

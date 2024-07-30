@@ -43,3 +43,4 @@ document.getElementById('help-icon').onclick = function () {
     confirmButtonColor: '#003366'
   });
 }
+

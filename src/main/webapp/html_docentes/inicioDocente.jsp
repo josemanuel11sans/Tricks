@@ -57,7 +57,7 @@
             </div>
         </div>
         <div style="position: fixed; bottom: 20px; right: 20px;">
-            <img src="../img_svg/ayuda.svg" id="help-icon" style="cursor: pointer;" alt="Ayuda">
+            <img src="../img_svg/ayuda.svg" id="help-icon-Docente" style="cursor: pointer;" alt="Ayuda">
         </div>
     </div>
 
