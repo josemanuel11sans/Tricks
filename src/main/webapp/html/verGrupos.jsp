@@ -8,6 +8,7 @@
 <%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.tricks.model.Carrera" %>
 <%@ page import="mx.edu.utez.tricks.model.Usuario" %>
+<%@ page import="mx.edu.utez.tricks.dao.UsuarioDao" %>
 
 
 <html>
@@ -263,9 +264,15 @@
                         <label for="docente" class="col-form-label">Docente asignado:</label>
                         <select class="custom-select" id="docente" name="docente" required>
                             <option value="">Seleccionar</option>
-                            <% for (Usuario docente : docenteList) { %>
-                            <option value="<%= docente.getIdDocente() %>" data-division="<%= docente.getIdDivision() %>"><%= docente.getNombreDocente() %></option>
-                            <% } %>
+
+                            <%
+                                for (Grupo user : lista) {
+                            %>
+                            <option value="<%= user.getNombreDocente() %>"></option>
+                            <%
+                                }
+                            %>
+
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -340,25 +347,38 @@
 
 
 <!-- Modificar estado del grupo -->
-<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">¿Estas seguro de cambiar el estado del grupo?</h6>
+<div class="modal fade" id="modificarEstadoGrupo" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content custom-modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body custom-modal-body">
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
-                    <label for="idGrupo">ID del Grupo:</label>
-                    <input type="text" id="idGrupo" name="idGrupo" required>
-                    <br>
-                    <label for="estadoIdEstado">Estado del Grupo:</label>
-                    <input type="text" id="estadoIdEstado" name="estadoIdEstado" required>
-                    <br>
-                    <input type="submit" value="Actualizar Estado">
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                        Grupo?</h6>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="idGrupo2" class="col-form-label custom-col-form-label">ID:</label>
+                        <input type="text" class="form-control custom-form-control" id="idGrupo2" name="idGrupo2"
+                               placeholder="ID" required>
+                    </div>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="estadoIdEstado" class="col-form-label custom-col-form-label">Estado:</label>
+                        <input type="text" class="form-control custom-form-control" id="estadoIdEstado"
+                               name="estadoIdEstado" placeholder="Estado" required>
+                    </div>
+                    <div class="modal-footer custom-modal-footer">
+                        <button type="submit" class="btn btn-primary">Modificar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 
 
 

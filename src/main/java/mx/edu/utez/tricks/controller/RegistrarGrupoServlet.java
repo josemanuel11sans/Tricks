@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/RegistrarGrupoServlet")
+@WebServlet(name = "RegistrarGrupoServlet", value = "/RegistrarGrupoServlet")
 public class RegistrarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreGrupo = request.getParameter("nombreGrupo");
