@@ -13,7 +13,7 @@ public class DatabaseConnectionManager {
     private static final String USERNAME = "root";
     //define la contraseña de la base de datos
 
-    private static final String PASSWORD = "Root";
+    private static final String PASSWORD = "";
 
     // Crea una instancia de configuración de HikariCP.
     private static final HikariConfig config = new HikariConfig();
