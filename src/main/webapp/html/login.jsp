@@ -19,6 +19,7 @@
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/estilosLogin.css">
     <link rel="stylesheet" href="../css/estilosAlertas.css">
+    <link rel="stylesheet" href="../css/estilosModal.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css " rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/inicioSesion.svg">
@@ -185,7 +186,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Solicitud de recuperacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Solicitud de Recuperación</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -193,7 +194,7 @@
             <div class="modal-body">
                 <form method="post" action="../solicitudRecuperacion">
                     <div class="form-group">
-                        <input type="email" class="form-control" id="nombreGrupo" name="correo" placeholder="" required>
+                        <input type="email" class="form-control" id="nombreGrupo" name="correo" placeholder=" " required>
                         <label for="nombreGrupo" class="col-form-label">Correo</label>
                     </div>
                     <div class="modal-footer">
@@ -204,6 +205,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="../js/scriptAlertas.js"></script>
