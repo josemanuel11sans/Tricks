@@ -1,3 +1,6 @@
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
@@ -173,7 +176,7 @@
                         ArrayList<Grupo> lista = dao.getAll();
                         for (Grupo g : lista) {
                     %>
-                    <tr style="height: 10px; font-size: 15px" >
+                    <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
                         <td  style="padding: 0; margin: 0" ><%= g.getNombreGrupo() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getCarrera() %></td>
@@ -361,12 +364,12 @@
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
                     <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
                         Grupo?</h6>
-                    <div class="form-group custom-form-group" style="display: none">
+                    <div class="form-group custom-form-group" >
                         <label for="idGrupo2" class="col-form-label custom-col-form-label">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idGrupo2" name="idGrupo2"
                                placeholder="ID" required>
                     </div>
-                    <div class="form-group custom-form-group" style="display: none">
+                    <div class="form-group custom-form-group">
                         <label for="estadoIdEstado" class="col-form-label custom-col-form-label">Estado:</label>
                         <input type="text" class="form-control custom-form-control" id="estadoIdEstado"
                                name="estadoIdEstado" placeholder="Estado" required>
@@ -503,11 +506,24 @@
         }
 
 
+        document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var folio = this.closest('tr').getAttribute('data-id');
+                document.getElementById('idGrupo2').value = folio;
+
+                var estadoActual = this.getAttribute('data-estado');
+                var estadoContrario = estadoActual === '1' ? '2' : '1';
+                document.getElementById('estadoIdEstado').value = estadoContrario;
+            });
+        });
+
+
 
     </script>
 </div>
 </body>
 </html>
+
 
 
 

@@ -1,8 +1,7 @@
-
-
 package mx.edu.utez.tricks.dao;
 
 import mx.edu.utez.tricks.model.Grupo;
+import mx.edu.utez.tricks.model.Usuario;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -117,5 +116,24 @@ public class GrupoDao {
 
         return isUpdated;
     }
+
+    public boolean actualizarEstado(Grupo grupo) {
+        String query = "UPDATE grupos SET estado = ? WHERE id_grupo = ?";
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, grupo.getEstadoIdEstado());
+            ps.setInt(2, grupo.getIdGrupo());
+
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
+
 

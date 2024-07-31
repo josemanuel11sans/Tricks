@@ -1,6 +1,8 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.tricks.dao.GrupoDao;
+import mx.edu.utez.tricks.dao.UsuarioDao;
 import mx.edu.utez.tricks.model.Grupo;
 
 import jakarta.servlet.ServletException;
@@ -8,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import mx.edu.utez.tricks.model.Usuario;
 
 import java.io.IOException;
 
@@ -15,37 +18,32 @@ import java.io.IOException;
 public class ActualizarEstadoGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtén el parámetro del ID del grupo y del estado
-        String idGrupoStr = request.getParameter("idGrupo");
-        String estadoIdEstadoStr = request.getParameter("estadoIdEstado");
+        int idGrupoStr = Integer.parseInt(request.getParameter("idGrupo2"));
+        int estadoIdEstadoStr = Integer.parseInt(request.getParameter("estadoIdEstado"));
 
-        if (idGrupoStr == null || idGrupoStr.isEmpty() || estadoIdEstadoStr == null || estadoIdEstadoStr.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de grupo y estado son requeridos.");
+
+        Grupo grupo = new Grupo();
+        grupo.setIdGrupo(idGrupoStr);
+        grupo.setEstadoIdEstado(estadoIdEstadoStr);
+
+        GrupoDao dao = new GrupoDao();
+        boolean resultado = dao.actualizarEstado(grupo);
+
+        HttpSession session = request.getSession();
+
+
+        if (grupo == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Grupo no encontrado.");
             return;
         }
 
-        try {
-            int idGrupo = Integer.parseInt(idGrupoStr);
-            int estadoIdEstado = Integer.parseInt(estadoIdEstadoStr);
+        grupo.setEstadoIdEstado(estadoIdEstadoStr);
+        boolean isUpdated = dao.actualizarEstado(grupo);
 
-            GrupoDao grupoDao = new GrupoDao();
-            Grupo grupo = grupoDao.getGrupoById(idGrupo);
-
-            if (grupo == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Grupo no encontrado.");
-                return;
-            }
-
-            grupo.setEstadoIdEstado(estadoIdEstado);
-            boolean isUpdated = grupoDao.updateGrupo(grupo);
-
-            if (isUpdated) {
-                response.sendRedirect("success.jsp");
-            } else {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el grupo.");
-            }
-
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de grupo y estado deben ser números.");
+        if (isUpdated) {
+            response.sendRedirect("html/verGrupos.jsp?success=true");
+        } else {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el grupo.");
         }
     }
 
@@ -53,3 +51,4 @@ public class ActualizarEstadoGrupoServlet extends HttpServlet {
         doPost(request, response);
     }
 }
+
