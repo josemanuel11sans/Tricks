@@ -360,16 +360,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body custom-modal-body">
+            <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
                     <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
                         Grupo?</h6>
                     <div class="form-group custom-form-group" >
-                        <label for="idGrupo2" class="col-form-label custom-col-form-label">ID:</label>
+                        <label for="idGrupo2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idGrupo2" name="idGrupo2"
                                placeholder="ID" required>
                     </div>
-                    <div class="form-group custom-form-group">
+                    <div class="form-group custom-form-group" style="display: none">
                         <label for="estadoIdEstado" class="col-form-label custom-col-form-label">Estado:</label>
                         <input type="text" class="form-control custom-form-control" id="estadoIdEstado"
                                name="estadoIdEstado" placeholder="Estado" required>
