@@ -29,6 +29,7 @@ public class GrupoDao {
                 g.setApellidoDocente(rs.getString("apellido"));
                 g.setCarrera(rs.getString("carrera"));
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
+                g.setEstadoIdEstado(rs.getInt("estadoIdEstado"));
                 lista.add(g);
             }
 

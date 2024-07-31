@@ -59,6 +59,14 @@ public class CargarMasivaAspirantesServlet extends HttpServlet {
                             HistorialDao historialDao = new HistorialDao();
                             boolean isInserted = historialDao.insert(historial);
 
+                            if (isInserted) {
+                                response.sendRedirect("html/verAspirantes.jsp?success=true");
+                                session.setAttribute("alerta", "exito");
+                            } else {
+                                response.sendRedirect("error.jsp?error=historial_insertion_failed");
+                                session.setAttribute("alerta", "falloRegistro");
+                            }
+
                         } else {
                             mensajeError = "No podemos procesar ese tipo de archivo";
                         }
@@ -114,7 +122,6 @@ public class CargarMasivaAspirantesServlet extends HttpServlet {
 
             }
         }
-
         libro.close();
     }
 
