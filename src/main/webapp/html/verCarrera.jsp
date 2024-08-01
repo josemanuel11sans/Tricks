@@ -120,12 +120,12 @@
                     <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" id="nombreCarrera" name="nombreCarrera" required>
+                        <input type="text" class="form-control" placeholder="" id="nombreCarrera" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
                         <label for="idDivisionAcademica" class="col-form-label">División Académica:</label>
-                        <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica" required>
-                            <option value="">Seleccione una división</option>
+                        <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica"  required>
+                            <option value=""></option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
