@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: juani
-  Date: 7/5/2024
-  Time: 2:33 p. m.
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -35,7 +28,7 @@
                             <div class="icon-container mb-2">
                                 <i class="fas fa-users icon-custom"></i>
                             </div>
-                            <h5 class="card-title card-title-custom">Gupos asignados</h5>
+                            <h5 class="card-title card-title-custom">Grupos asignados</h5>
                             <p class="card-text card-text-custom">3</p>
                         </div>
                     </div>
@@ -43,12 +36,25 @@
                 <div class="col-md-6 col-sm-12 mb-3">
                     <div class="card text-white bg-success card-custom">
                         <div class="card-body text-left" style="width: 100%;">
-                            <h5 class="card-title">Mauro bahena castro</h5>
-                            <p class="card-text">docente@ejemplo.com</p>
-                            <p class="card-text"> Información adicional sobre el docente.</p>
-                            <!-- este boton muestra el modal de cambiar contraseña   -->
+                            <%
+                                String userName = null;
+                                String userApellido = null;
+                                String userEmail = null;
+
+
+                                    userName = (String) session.getAttribute("username");
+                                    userApellido = (String) session.getAttribute("userApellido");
+                                    userEmail = (String) session.getAttribute("userEmail");
+
+                            %>
+                            <h5 id="teacher-name" class="card-title"><%= (userName != null) ? userName : "NOMBRE" %>
+                                <%= (userApellido != null) ? userApellido : " APELLIDO" %>
+                            </h5>
+                            <p id="teacher-email" class="card-text"><%= (userEmail != null) ? userEmail : "CORREO" %></p>
+                            <p class="card-text">Información adicional sobre el docente.</p>
+                            <!-- Este botón muestra el modal de cambiar contraseña -->
                             <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                                    data-target="#cambairContrasena">
+                                    data-target="#cambiarContrasena">
                                 Cambiar contraseña
                             </button>
                         </div>
@@ -61,9 +67,8 @@
         </div>
     </div>
 
-
-    <!-- modal cambiar contraseña -->
-    <div class="modal fade" id="cambairContrasena" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal cambiar contraseña -->
+    <div class="modal fade" id="cambiarContrasena" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -74,29 +79,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-
                     <form>
-
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="contraseñaAnterior" name="ContraseñaAnterior" placeholder="" required>
-                                <label for="contraseñaAnterior" class="col-form-label">Contraseña anterior</label>
-                        </div>
-
                         <div class="form-group">
-                            <input type="text" class="form-control" id="contraseñaNueva" name="ContraseñaNueva" placeholder="" required>
+                            <input type="password" class="form-control" id="contraseñaAnterior" name="ContraseñaAnterior" placeholder="" required>
+                            <label for="contraseñaAnterior" class="col-form-label">Contraseña anterior</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="contraseñaNueva" name="ContraseñaNueva" placeholder="" required>
                             <label for="contraseñaNueva" class="col-form-label">Contraseña nueva</label>
                         </div>
-
                         <div class="form-group">
-                            <input type="text" class="form-control" id="confirmarContraseña" name="confirmarContraseña" placeholder="" required>
+                            <input type="password" class="form-control" id="confirmarContraseña" name="confirmarContraseña" placeholder="" required>
                             <label for="confirmarContraseña" class="col-form-label">Confirma la contraseña</label>
                         </div>
-
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Crear</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -105,9 +104,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="../js/scripDocente.js"></script>
-        <script src="../js/script.js"></script>
+    <script src="../js/scripDocente.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="informacionDinamica.js"></script>
 
 </body>
-
 </html>
