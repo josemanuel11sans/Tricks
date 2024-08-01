@@ -34,7 +34,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    overflow: hidden;
+    overflow: auto !important;
     transition: all 0.35s ease-in-out;
     background-color: #081E33;
     min-width: 0;
@@ -341,3 +341,18 @@ a.sidebar-link:hover {
     width: 100px; /* Tamaño del ícono */
     height: 100px; /* Tamaño del ícono */
 }
+
+/* Estilo para el icono de ayuda de los home Docente */
+#ayudaD {
+    width: 35px; /* Ancho del ícono */
+    height: 35px; /* Alto del ícono */
+    transition: all 0.3s ease; /* Transición suave para todas las propiedades */
+    filter: brightness(1); /* Color verde original del ícono */
+}
+
+#ayudaD:hover {
+    animation: bounce 0.5s; /* Animación de salto */
+    animation-iteration-count: infinite; /* Repetir la animación infinitamente */
+    filter: brightness(0.7); /* Oscurecer el color del ícono al pasar el ratón */
+}
+

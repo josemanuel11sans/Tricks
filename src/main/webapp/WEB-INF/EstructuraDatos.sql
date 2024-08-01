@@ -1,3 +1,6 @@
+Base
+
+
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tricks
@@ -214,8 +217,7 @@ CREATE TABLE `grupos` (
                           PRIMARY KEY (`id_grupo`),
                           KEY `carreras_id_carrera` (`carreras_id_carrera`),
                           KEY `estado_id_estado` (`estado`),
-                          CONSTRAINT `grupos_ibfk_1` FOREIGN KEY (`carreras_id_carrera`) REFERENCES `carreras` (`id_carrera`),
-                          CONSTRAINT `grupos_ibfk_2` FOREIGN KEY (`estado`) REFERENCES `estado` (`id_estado`)
+                          CONSTRAINT `grupos_ibfk_1` FOREIGN KEY (`carreras_id_carrera`) REFERENCES `carreras` (`id_carrera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -334,3 +336,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-07-22 17:23:43
+

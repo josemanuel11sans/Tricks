@@ -46,8 +46,10 @@ public class DocenteServlet extends HttpServlet {
 
         // Validar el rol del usuario
         if (usuario.getRol() == 2) {
-            // Usuario docente
+            // Se almacena la informacion del docente para mostrarla en su inicio
             session.setAttribute("username", usuario.getNombre());
+            session.setAttribute("userEmail", usuario.getMail());
+            session.setAttribute("userApellido", usuario.getApellido());
             resp.sendRedirect("html_docentes/inicioDocente.jsp");
         } else {
             session.setAttribute("alerta", "rolMal");
@@ -55,4 +57,3 @@ public class DocenteServlet extends HttpServlet {
         }
     }
 }
-

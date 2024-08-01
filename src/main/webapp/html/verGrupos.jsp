@@ -1,3 +1,8 @@
+
+
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
@@ -173,7 +178,7 @@
                         ArrayList<Grupo> lista = dao.getAll();
                         for (Grupo g : lista) {
                     %>
-                    <tr style="height: 10px; font-size: 15px" >
+                    <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
                         <td  style="padding: 0; margin: 0" ><%= g.getNombreGrupo() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
                         <td style="padding: 0; margin: 0" ><%= g.getCarrera() %></td>
@@ -196,9 +201,9 @@
 
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (g.getEstadoIdEstado() == 1) { %>
-                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } else { %>
-                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } %>
 
                         </td >
@@ -235,26 +240,13 @@
             <div class="modal-body">
                 <form method="post" action="../RegistrarGrupoServlet">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                         <label for="nombreGrupo" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
-                        <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=""></option>
-                            <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
-                            %>
-                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <%
-                                }
-                            %>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="carrera" class="col-form-label">Carrera:</label>
-                        <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value="">Seleccionar</option>
+                        <select class="custom-select" id="carrera" name="carrera"  placeholder=" " required>
+                            <option value=""></option>
                             <% for (Carrera carrera : carreraList) { %>
                             <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>"><%= carrera.getNombreCarrera() %></option>
                             <% } %>
@@ -264,15 +256,9 @@
                         <label for="docente" class="col-form-label">Docente asignado:</label>
                         <select class="custom-select" id="docente" name="docente" required>
                             <option value="">Seleccionar</option>
-
-                            <%
-                                for (Grupo user : lista) {
-                            %>
-                            <option value="<%= user.getNombreDocente() %>"></option>
-                            <%
-                                }
-                            %>
-
+                            <% for (Grupo user : lista) { %>
+                            <option><%= user.getNombreDocente() %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -357,12 +343,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body custom-modal-body">
+            <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
                     <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
                         Grupo?</h6>
-                    <div class="form-group custom-form-group" style="display: none">
-                        <label for="idGrupo2" class="col-form-label custom-col-form-label">ID:</label>
+                    <div class="form-group custom-form-group" style="display: none" >
+                        <label for="idGrupo2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idGrupo2" name="idGrupo2"
                                placeholder="ID" required>
                     </div>
@@ -503,11 +489,25 @@
         }
 
 
+        document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var folio = this.closest('tr').getAttribute('data-id');
+                document.getElementById('idGrupo2').value = folio;
+
+                var estadoActual = this.getAttribute('data-estado');
+                var estadoContrario = estadoActual === '1' ? '2' : '1';
+                document.getElementById('estadoIdEstado').value = estadoContrario;
+            });
+        });
+
+
 
     </script>
 </div>
 </body>
 </html>
+
+
 
 
 
