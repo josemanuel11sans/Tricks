@@ -23,34 +23,29 @@ public class DocenteServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        // Validar primero el correo
         if (!dao.emailExists(mailDoc)) {
             session.setAttribute("alerta", "correoMal");
             resp.sendRedirect("html/login.jsp");
             return;
         }
 
-        // Validar la combinación de correo y contraseña
         if (usuario == null || usuario.getNombre() == null) {
             session.setAttribute("alerta", "contraMal");
             resp.sendRedirect("html/login.jsp");
             return;
         }
 
-        // Validar el estado del usuario
         if (usuario.getEstado() == 2) {
             session.setAttribute("alerta", "estadoInactivo");
             resp.sendRedirect("html/login.jsp");
             return;
         }
 
-        // Validar el rol del usuario
         if (usuario.getRol() == 2) {
-            // Se almacena la informacion del docente para mostrarla en su inicio
             session.setAttribute("username", usuario.getNombre());
             session.setAttribute("userEmail", usuario.getMail());
             session.setAttribute("userApellido", usuario.getApellido());
-            resp.sendRedirect("html_docentes/inicioDocente.jsp");
+            resp.sendRedirect("html_docentes/inicioDocente.jsp"); // Redirige a inicioDocente.jsp
         } else {
             session.setAttribute("alerta", "rolMal");
             resp.sendRedirect("html/login.jsp");

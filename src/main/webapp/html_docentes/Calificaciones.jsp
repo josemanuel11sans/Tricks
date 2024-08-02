@@ -81,7 +81,7 @@
             </li>
             </li>
             <li class="sidebar-item">
-                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/CursosAsignados.jsp" class="sidebar-link">
+                <a href="http://localhost:8080/tricks_war/html_docentes/CursosAsignados.jsp" class="sidebar-link">
                     <i class="fa-solid fa-circle-info"></i>
                     <span>Cursos</span>
                 </a>
