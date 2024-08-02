@@ -160,7 +160,7 @@
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
-                        <label for="nombreCarreraModificar" class="col-form-label">Nombre de la Carrera:</label>
+                        <label for="nombreCarreraModificar" class="col-form-label"></label>
                         <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
