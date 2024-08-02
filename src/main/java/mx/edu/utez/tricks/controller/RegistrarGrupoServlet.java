@@ -22,13 +22,13 @@ public class RegistrarGrupoServlet extends HttpServlet {
         grupo.setNombreGrupo(nombreGrupo);
         grupo.setCarrera(carrera);
         grupo.setDivisionAcademica(division);
-        grupo.setNombreDocente(docente);  // Corregido
+        grupo.setNombreDocente(docente);
 
         GrupoDao dao = new GrupoDao();
         boolean isInserted = dao.insert(grupo);
 
         if (isInserted) {
-            response.sendRedirect("html/verGrupo.jsp");
+            response.sendRedirect("html/verGrupos.jsp?success=true");
         } else {
             response.sendRedirect("../error.jsp");
         }

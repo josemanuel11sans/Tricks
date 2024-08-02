@@ -32,10 +32,6 @@ public class ActualizarEstadoGrupoServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
 
-        if (grupo == null) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Grupo no encontrado.");
-            return;
-        }
 
         grupo.setEstadoIdEstado(estadoIdEstadoStr);
         boolean isUpdated = dao.actualizarEstado(grupo);
