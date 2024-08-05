@@ -1,14 +1,15 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: Joseb
-  Date: 01/07/2024
-  Time: 08:38 p. m.
-  To change this template use File | Settings | File Templates.
+ Created by IntelliJ IDEA.
+ User: Joseb
+ Date: 01/07/2024
+ Time: 08:38 p. m.
+ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
+
 
 <html>
 <head>
@@ -22,15 +23,41 @@
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
+
+
+    <style>
+        .activo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: green;
+            cursor: pointer;
+        }
+
+
+        .inactivo{
+            width: 15px;
+            height: 15px;
+            border-radius: 100%;
+            background-color: red;
+            cursor: pointer;
+        }
+        td{
+            vertical-align: middle !important;
+        }
+    </style>
 </head>
+
 
 <body>
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
+
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
+
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -51,7 +78,9 @@
                     </button>
                 </div>
 
+
             </div><br>
+
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -70,17 +99,22 @@
                         List<DivisionesAcademicas> lista = dao.getAllDivisiones();
                         for (DivisionesAcademicas division : lista) {
                     %>
-                    <tr data-id-division="<%= division.getIdDivision() %>" style="height: 10px; font-size: 15px">
+                    <tr data-id="<%= division.getIdDivision() %>" style="height: 10px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= division.getNombreDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getCoordinadorDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getSiglas() %></td>
+
+
+
+
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (division.getEstado() == 1) { %>
-                            <div class="activo" data-id="<%= division.getIdDivision() %>" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoDivision" data-whatever="ModificarEstadoDivision"></div>
                             <% } else { %>
-                            <div class="inactivo" data-id="<%= division.getIdDivision() %>" data-estado="0" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
+                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDivision" data-whatever="ModificarEstadoDivision"></div>
                             <% } %>
                         </td>
+
 
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
@@ -104,6 +138,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <!-- Modal para Agregar división -->
@@ -138,6 +174,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal para Modificar división -->
 <div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -176,24 +213,35 @@
 
 
 
+
+
+
 <!-- Modal para modifcar  estado -->
-<div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h6 id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">
-                    ¿Estás seguro de cambiar el estado de la división?
-                </h6>
-                <form action="../ActualizarDivisionServlet" method="post">
-                    <div class="form-group" style="display: none;">
-                        <label for="idDivision" class="col-form-label">ID de la División:</label>
-                        <input type="text" class="form-control" id="idDivision" name="idDivision">
+<div class="modal fade" id="modificarEstadoDivision" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content custom-modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body custom-modal-body" >
+                <form action="../ActualizarEstadoDivisionServlet" method="post">
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                        Grupo?</h6>
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="idDivison2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
+                        <input type="text" class="form-control custom-form-control" id="idDivison2" name="idDivision2"
+                               placeholder="ID" required>
                     </div>
-                    <div class="form-group" style="display: none;">
-                        <label for="estadoDivision" class="col-form-label">Estado de la División:</label>
-                        <input type="text" class="form-control" id="estadoDivision" name="estadoDivision">
+                    <div class="form-group custom-form-group" style="display: none">
+                        <label for="estadoIdDivision" class="col-form-label custom-col-form-label">Estado:</label>
+                        <input type="text" class="form-control custom-form-control" id="estadoIdDivision"
+                               name="estadoIdDivision" placeholder="Estado" required>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer custom-modal-footer">
                         <button type="submit" class="btn btn-primary">Modificar</button>
                     </div>
                 </form>
@@ -201,6 +249,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -211,6 +260,7 @@
             var siglas = button.data('siglas');
             var coordinador = button.data('coordinador');
 
+
             // Actualizar los campos del modal con los datos actuales
             $('#idDivision').val(idDivision);
             $('#nombreDivision').val(nombre);
@@ -220,15 +270,18 @@
     });
 </script>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
         var filterCareer = document.getElementById('filterCareer');
         var filterDivision = document.getElementById('filterDivision');
 
+
         filterName.addEventListener('input', filterTable);
         filterCareer.addEventListener('change', filterTable);
         filterDivision.addEventListener('change', filterTable);
+
 
         function filterTable() {
             var filterNameValue = filterName.value.toLowerCase();
@@ -237,6 +290,7 @@
             var table = document.getElementById('example');
             var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
+
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var name = cells[0].textContent.toLowerCase();   // Columna "Nombre"
@@ -244,9 +298,11 @@
                 var siglas = cells[2].textContent.toLowerCase();   // Columna "Siglas"
                 var estado = cells[3].querySelector('div') ? cells[3].querySelector('div').getAttribute('data-estado').toLowerCase() : ''; // Columna "Estado"
 
+
                 var nameMatch = filterNameValue === '' || name.includes(filterNameValue) || coordinator.includes(filterNameValue) || siglas.includes(filterNameValue);
                 var careerMatch = filterCareerValue === '' || estado === filterCareerValue;
                 var divisionMatch = filterDivisionValue === '' || estado === filterDivisionValue;
+
 
                 if (nameMatch && careerMatch && divisionMatch) {
                     rows[i].style.display = '';
@@ -256,12 +312,14 @@
             }
         }
 
+
         // Inicializar DataTables
         $('#example').DataTable({
             "paging": true,
             "searching": false, // Desactivar la búsqueda integrada de DataTables ya que usaremos un filtro personalizado
             "info": false
         });
+
 
         // Configurar el modal de modificar estado
         $('#modificarEstado').on('show.bs.modal', function(event) {
@@ -272,6 +330,7 @@
             $('#estadoDivision').val(estado === '1' ? '2' : '1');
         });
 
+
         // Configurar el modal de modificar division
         $('#modificarDivisionModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
@@ -281,8 +340,26 @@
             $('#coordinadorDivision').val(button.data('coordinador'));
         });
 
+
+    });
+
+
+
+
+    document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var folio = this.closest('tr').getAttribute('data-id');
+            document.getElementById('idDivison2').value = folio;
+
+
+            var estadoActual = this.getAttribute('data-estado');
+            var estadoContrario = estadoActual === '1' ? '2' : '1';
+            document.getElementById('estadoIdDivision').value = estadoContrario;
+        });
     });
 </script>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -291,5 +368,6 @@
 <script src="../js/script.js"></script>
 <script src="../js/scriptDocentes.js"></script>
 </body>
+
 
 </html>

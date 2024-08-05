@@ -2,9 +2,9 @@ package mx.edu.utez.tricks.controller;
 
 
 import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.tricks.dao.DivisionesAcademicasDAO;
+import mx.edu.utez.tricks.dao.CarreraDao;
 import mx.edu.utez.tricks.dao.UsuarioDao;
-import mx.edu.utez.tricks.model.DivisionesAcademicas;
+import mx.edu.utez.tricks.model.Carrera;
 
 
 import jakarta.servlet.ServletException;
@@ -18,23 +18,23 @@ import mx.edu.utez.tricks.model.Usuario;
 import java.io.IOException;
 
 
-@WebServlet(name = "ActualizarEstadoDivisionServlet", value = "/ActualizarEstadoDivisionServlet")
-public class ActualizarEstadoDivisionServlet extends HttpServlet {
+@WebServlet(name = "ActualizarEstadoCarreraServlet", value = "/ActualizarEstadoCarreraServlet")
+public class ActualizarEstadoCarreraServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtén el parámetro del ID del grupo y del estado
-        int idDivisionStr = Integer.parseInt(request.getParameter("idDivision2"));
-        int estadoIdDivisionStr = Integer.parseInt(request.getParameter("estadoIdDivision"));
+        int idCarreraStr = Integer.parseInt(request.getParameter("idCarrera2"));
+        int estadoIdCarreraStr = Integer.parseInt(request.getParameter("estadoIdCarrera"));
 
 
 
 
-        DivisionesAcademicas grupo = new DivisionesAcademicas();
-        grupo.setIdDivision(idDivisionStr);
-        grupo.setEstado(estadoIdDivisionStr);
+        Carrera carrera = new Carrera();
+        carrera.setIdCarrera(idCarreraStr);
+        carrera.setIdEstado(estadoIdCarreraStr);
 
 
-        DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
-        boolean resultado = dao.actualizarEstado(grupo);
+        CarreraDao dao = new CarreraDao();
+        boolean resultado = dao.actualizarEstado(carrera);
 
 
         HttpSession session = request.getSession();
@@ -44,12 +44,12 @@ public class ActualizarEstadoDivisionServlet extends HttpServlet {
 
 
 
-        grupo.setEstado(estadoIdDivisionStr);
-        boolean isUpdated = dao.actualizarEstado(grupo);
+        carrera.setIdEstado(estadoIdCarreraStr);
+        boolean isUpdated = dao.actualizarEstado(carrera);
 
 
         if (isUpdated) {
-            response.sendRedirect("html/verDivision.jsp?success=true");
+            response.sendRedirect("html/verCarrera.jsp?success=true");
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el grupo.");
         }
@@ -60,3 +60,5 @@ public class ActualizarEstadoDivisionServlet extends HttpServlet {
         doPost(request, response);
     }
 }
+
+
