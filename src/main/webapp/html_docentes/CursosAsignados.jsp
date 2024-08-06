@@ -2,9 +2,7 @@
 <%@ page import="mx.edu.utez.tricks.dao.GruposAsignadosDao" %>
 <%@ page import="mx.edu.utez.tricks.model.GrupoAsignado" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.tricks.model.Grupo" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -85,19 +83,10 @@
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <input type="text" id="filterName" class="form-control" placeholder="Carrera">
+                    <input type="text" id="filterName" class="form-control" placeholder="Nombre del Grupo">
                 </div>
-                <div class="col-md-2">
-                    <select class="custom-select" id="filterDivision" required>
-                        <option value="">Grupo</option>
-                        <%
-                            GrupoDao dao2 = new GrupoDao();
-                            ArrayList<Grupo> lista = dao2.getAll();
-                            for (Grupo g : lista) {
-                        %>
-                        <option value="<%= g.getNombreGrupo() %>"><%= g.getNombreGrupo() %></option>
-                        <% } %>
-                    </select>
+                <div class="col-md-3">
+                    <input type="text" id="filterCarrera" class="form-control" placeholder="Carrera">
                 </div>
             </div><br>
 
@@ -158,14 +147,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
-        var filterDivision = document.getElementById('filterDivision');
+        var filterCarrera = document.getElementById('filterCarrera');
 
         filterName.addEventListener('input', filterTable);
-        filterDivision.addEventListener('change', filterTable);
+        filterCarrera.addEventListener('input', filterTable);
 
         function filterTable() {
             var filterNameValue = filterName.value.toLowerCase();
-            var filterDivisionValue = filterDivision.value.toLowerCase();
+            var filterCarreraValue = filterCarrera.value.toLowerCase();
             var table = document.getElementById('example');
             var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -174,18 +163,16 @@
                 var grupo = cells[0].textContent.toLowerCase();
                 var carrera = cells[1].textContent.toLowerCase();
 
-                var nameMatch = carrera.includes(filterNameValue);
-                var divisionMatch = filterDivisionValue === '' || grupo === filterDivisionValue;
+                var nameMatch = grupo.includes(filterNameValue);
+                var carreraMatch = carrera.includes(filterCarreraValue);
 
-                if (nameMatch && divisionMatch) {
+                if (nameMatch && carreraMatch) {
                     rows[i].style.display = '';
                 } else {
                     rows[i].style.display = 'none';
                 }
             }
         }
-
-        // Mantener los eventos existentes para los botones
     });
 </script>
 
