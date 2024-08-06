@@ -98,7 +98,7 @@
 
     <div class="main">
         <div class="container mt-4 text-left">
-            <h1 class="mb-4 text-light">Calificaciones</h1>
+            <h1 class="mb-4 text-light">Alumnos</h1>
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">

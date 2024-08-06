@@ -98,7 +98,7 @@
                         <th>Carrera</th>
                         <th>Estado</th>
                         <th>Asistencia</th>
-                        <th>Calificacion</th>
+                        <th>Alumnos</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
