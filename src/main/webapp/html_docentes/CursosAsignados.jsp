@@ -83,14 +83,10 @@
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
-<<<<<<< HEAD
-                    <input type="text" id="filterName" class="form-control" placeholder="Carrera O Grupo">
-=======
                     <input type="text" id="filterName" class="form-control" placeholder="Nombre del Grupo">
                 </div>
                 <div class="col-md-3">
                     <input type="text" id="filterCarrera" class="form-control" placeholder="Carrera">
->>>>>>> a2db99b2fc1df91fcb5bec9697cff3fab2dc73d5
                 </div>
             </div><br>
 
@@ -101,11 +97,8 @@
                         <th>Grupo</th>
                         <th>Carrera</th>
                         <th>Asistencia</th>
-<<<<<<< HEAD
                         <th>Aspirantes</th>
-=======
-                        <th>Alumnos</th>
->>>>>>> a2db99b2fc1df91fcb5bec9697cff3fab2dc73d5
+
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
