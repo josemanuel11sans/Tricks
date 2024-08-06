@@ -5,12 +5,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.tricks.dao.CarreraDao;
 import mx.edu.utez.tricks.dao.DivisionesAcademicasDAO;
+import mx.edu.utez.tricks.dao.HistorialDao;
 import mx.edu.utez.tricks.model.Carrera;
 import mx.edu.utez.tricks.model.DivisionesAcademicas;
+import mx.edu.utez.tricks.model.Historial;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "RegistrarCarreraServlet", value = "/RegistrarCarreraServlet")
@@ -21,8 +25,6 @@ public class RegistrarCarreraServlet extends HttpServlet {
 
         if (action.equals("agregar")) {
             agregarCarrera(req, resp);
-        } else if (action.equals("actualizar")) {
-            actualizarCarrera(req, resp);
         }
     }
 
@@ -32,28 +34,28 @@ public class RegistrarCarreraServlet extends HttpServlet {
         int idEstado = Integer.parseInt(req.getParameter("idEstado"));
 
         Carrera carrera = new Carrera(0, nombreCarrera, idDivisionAcademica, idEstado);
-        CarreraDao dao = new CarreraDao();
-        boolean resultado = dao.agregarCarrera(carrera);
+        CarreraDao carreraDao = new CarreraDao();
+        boolean resultado = carreraDao.agregarCarrera(carrera);
 
         if (resultado) {
+            // Insertar en el historial
+            HttpSession session = req.getSession();
+            Date fechaCreacion = new Date(); // Fecha y hora actuales
+            HistorialDao historialDao = new HistorialDao();
+            Historial historial = new Historial();
+            historial.setDescripcion("Se agregó la carrera " + nombreCarrera);
+            historial.setFecha_creacion(fechaCreacion);
+            historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+
+            // Manejar el historial en un bloque separado
+            try {
+                historialDao.insert(historial);
+            } catch (Exception e) {
+                e.printStackTrace(); // Imprime el error en caso de fallo
+                // Aquí puedes manejar el error de manera específica si lo deseas
+            }
+
             resp.sendRedirect("html/verCarrera.jsp");
-        } else {
-            resp.sendRedirect("../error.jsp");
-        }
-    }
-
-    private void actualizarCarrera(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int idCarrera = Integer.parseInt(req.getParameter("idCarrera"));
-        String nombreCarrera = req.getParameter("nombreCarrera");
-        int idDivisionAcademica = Integer.parseInt(req.getParameter("idDivisionAcademica"));
-        int idEstado = Integer.parseInt(req.getParameter("idEstado"));
-
-        Carrera carrera = new Carrera(idCarrera, nombreCarrera, idDivisionAcademica, idEstado);
-        CarreraDao dao = new CarreraDao();
-        boolean resultado = dao.actualizarCarrera(carrera);
-
-        if (resultado) {
-            resp.sendRedirect("html/Carrera.jsp");
         } else {
             resp.sendRedirect("../error.jsp");
         }

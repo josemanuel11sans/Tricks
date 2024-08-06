@@ -15,15 +15,11 @@
     <title>Carreras</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconCarrera.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-
-
-
-
     <style>
         .activo{
             width: 15px;
@@ -102,10 +98,6 @@
                     <tr style="height: 10px; font-size: 15px" data-id="<%= carrera.getIdCarrera() %>">
                         <td style="padding: 0; margin: 0"><%= carrera.getNombreCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= carrera.getNombreDivision() %></td>
-
-
-
-
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (carrera.getIdEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoCarrera" data-whatever="ModificarEstadoCarrera"></div>
@@ -113,10 +105,6 @@
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoCarrera" data-whatever="ModificarEstadoCarrera"></div>
                             <% } %>
                         </td>
-
-
-
-
                         <td style="padding: 0; margin: 0">
                             <!-- Botón para modificar carrera -->
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
@@ -139,9 +127,6 @@
     </div>
 </div>
 
-
-
-
 <!-- Modal registrar nueva carrera -->
 <div class="modal fade" id="registrarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -157,8 +142,8 @@
                     <input type="hidden" name="action" value="agregar">
                     <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
+                        <input type="text" class="form-control" placeholder=" " id="nombreCarrera" name="nombreCarrera" required>
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
-                        <input type="text" class="form-control" placeholder="" id="nombreCarrera" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
                         <label for="idDivisionAcademica" class="col-form-label">División Académica:</label>
@@ -181,9 +166,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <!-- Modal modificar carrera -->
 <div class="modal fade" id="modificarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -218,18 +200,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Modificar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
-
-
-
 
 <!-- Modal modificar estado -->
 <div class="modal fade" id="modificarEstadoCarrera" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
@@ -265,13 +241,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
 <script>
     $(document).ready(function() {
         $('#modificarEstadoModal').on('show.bs.modal', function(event) {
@@ -300,9 +269,6 @@
         });
     });
 </script>
-
-
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -375,11 +341,6 @@
             });
         });
     });
-
-
-
-
-
 
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {

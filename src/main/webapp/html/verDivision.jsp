@@ -18,13 +18,11 @@
     <title>Divsiones Academicas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconDivision.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-
-
     <style>
         .activo{
             width: 15px;
@@ -33,8 +31,6 @@
             background-color: green;
             cursor: pointer;
         }
-
-
         .inactivo{
             width: 15px;
             height: 15px;
@@ -58,7 +54,6 @@
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
 
-
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
@@ -77,10 +72,7 @@
                         Agregar division
                     </button>
                 </div>
-
-
             </div><br>
-
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -103,10 +95,6 @@
                         <td style="padding: 0; margin: 0"><%= division.getNombreDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getCoordinadorDivision() %></td>
                         <td style="padding: 0; margin: 0"><%= division.getSiglas() %></td>
-
-
-
-
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (division.getEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoDivision" data-whatever="ModificarEstadoDivision"></div>
@@ -114,8 +102,6 @@
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDivision" data-whatever="ModificarEstadoDivision"></div>
                             <% } %>
                         </td>
-
-
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
@@ -139,9 +125,6 @@
     </div>
 </div>
 
-
-
-
 <!-- Modal para Agregar división -->
 <div class="modal fade" id="registrarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -155,15 +138,15 @@
             <div class="modal-body">
                 <form action="../RegistrarDivisionServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="">
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder=" ">
                         <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder="">
+                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder=" ">
                         <label for="siglas" class="col-form-label">Siglas:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder="">
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder=" ">
                         <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
                     </div>
                     <div class="modal-footer">
@@ -174,7 +157,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal para Modificar división -->
 <div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,19 +172,18 @@
                 <form action="../ActualizarDivisionServlet" method="post">
                     <div class="form-group">
                         <input type="hidden" id="idDivision" name="idDivision">
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder="">
+                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder=" ">
                         <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder="">
+                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder=" ">
                         <label for="siglas" class="col-form-label">Siglas:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder="">
+                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder=" ">
                         <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
@@ -210,11 +191,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 
 <!-- Modal para modifcar  estado -->
 <div class="modal fade" id="modificarEstadoDivision" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
@@ -269,7 +245,6 @@
         });
     });
 </script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -344,8 +319,6 @@
     });
 
 
-
-
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
@@ -359,15 +332,11 @@
     });
 </script>
 
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/scriptDocentes.js"></script>
 </body>
-
 
 </html>
