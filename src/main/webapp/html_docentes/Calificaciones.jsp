@@ -63,38 +63,7 @@
 <body>
 <!-- menu lateral docente calificaciones -->
 <div class="wrapper" style="height: 100vh;">
-    <aside id="sidebar">
-        <div class="d-flex">
-            <button class="toggle-btn" type="button">
-                <img src="../img_svg/logo.svg" alt="Toggle">
-            </button>
-            <div class="sidebar-logo">
-                <a href="#">TRICKS</a>
-            </div>
-        </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a href="http://localhost:8080/tricks_war_exploded/html_docentes/inicioDocente.jsp" class="sidebar-link">
-                    <i class="fas fa-house"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            </li>
-            <li class="sidebar-item">
-                <a href="http://localhost:8080/tricks_war/html_docentes/CursosAsignados.jsp" class="sidebar-link">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <span>Cursos</span>
-                </a>
-            </li>
-
-        </ul>
-        <div class="sidebar-footer background-color">
-            <a href="#" class="sidebar-link">
-                <i class="fas fa-right-from-bracket"></i>
-                <span>Salir</span>
-            </a>
-        </div>
-    </aside>
+    <jsp:include page="../componentes/menuLateralDocente.jsp" />
 
     <div class="main">
         <div class="container mt-4 text-left">

@@ -5,24 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docentes</title>
+    <title>Inicio Docente</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
+    <link rel="stylesheet" href="../css/relojStilo.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos asignados</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="../img_svg/docente.svg">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-    <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -40,7 +32,9 @@
                                 <i class="fas fa-users icon-custom"></i>
                             </div>
                             <h5 class="card-title card-title-custom">Grupos asignados</h5>
-                            <p class="card-text card-text-custom">3</p>
+                            <p class="card-text card-text-custom">
+                                <%= (session.getAttribute("numeroDeGrupos") != null) ? session.getAttribute("numeroDeGrupos") : "0" %>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -64,6 +58,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div id="reloj" class="card text-white bg-info card-custom">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Hora actual</h5>
+                            <p id="hora-actual" class="card-text reloj-grande">00:00:00</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-5">
@@ -84,11 +86,8 @@
                                     "La educación no solo forma mentes, sino también corazones y espíritus. Los mejores maestros son aquellos que no solo instruyen, sino que también inspiran, alientan y apoyan a sus alumnos en cada paso de su viaje educativo, ayudándolos a convertirse en personas completas y conscientes de su impacto en el mundo. - Anónimo"
                             };
 
-                            // Obtén el día del año actual
                             LocalDate fechaActual = LocalDate.now();
                             int diaDelAno = fechaActual.getDayOfYear();
-
-                            // Usa el día del año para indexar el arreglo
                             int indice = diaDelAno % frases.length;
                             String fraseDelDia = frases[indice];
                         %>
@@ -142,10 +141,6 @@
     <script src="../js/scripDocente.js"></script>
     <script src="../js/script.js"></script>
     <script src="informacionDinamica.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="../js/script.js"></script>
-
+    <script src="../js/Reloj.js"></script>
 </body>
 </html>

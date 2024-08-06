@@ -1,0 +1,19 @@
+blockquote {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1em;
+    border-left: 5px solid #007bff;
+    padding-left: 15px;
+    margin: 20px 0;
+}
+.reloj-grande {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 0;
+}
+#reloj .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}

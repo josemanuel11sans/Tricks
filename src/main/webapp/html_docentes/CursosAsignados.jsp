@@ -85,19 +85,7 @@
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <input type="text" id="filterName" class="form-control" placeholder="Carrera">
-                </div>
-                <div class="col-md-2">
-                    <select class="custom-select" id="filterDivision" required>
-                        <option value="">Grupo</option>
-                        <%
-                            GrupoDao dao2 = new GrupoDao();
-                            ArrayList<Grupo> lista = dao2.getAll();
-                            for (Grupo g : lista) {
-                        %>
-                        <option value="<%= g.getNombreGrupo() %>"><%= g.getNombreGrupo() %></option>
-                        <% } %>
-                    </select>
+                    <input type="text" id="filterName" class="form-control" placeholder="Carrera O Grupo">
                 </div>
             </div><br>
 
@@ -107,9 +95,8 @@
                     <tr>
                         <th>Grupo</th>
                         <th>Carrera</th>
-                        <th>Estado</th>
                         <th>Asistencia</th>
-                        <th>Calificacion</th>
+                        <th>Aspirantes</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
@@ -121,12 +108,6 @@
                     <tr style="height: 10px; font-size: 15px">
                         <td style="padding: 0; margin: 0"><%= grupo.getNombreGrupo() %></td>
                         <td style="padding: 0; margin: 0"><%= grupo.getCarrera() %></td>
-                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
-                            <% if (grupo.getEstado() == 1) { %>
-                            <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
-                            <% } else { %>
-                            <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
-                            <% } %>
                         </td>
                         <td style="padding: 0; margin: 0"  >
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
