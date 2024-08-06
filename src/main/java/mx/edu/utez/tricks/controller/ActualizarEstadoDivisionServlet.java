@@ -1,71 +1,63 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.http.HttpSession;
+import mx.edu.utez.tricks.dao.DivisionesAcademicasDAO;
+import mx.edu.utez.tricks.dao.HistorialDao;
+import mx.edu.utez.tricks.model.DivisionesAcademicas;
+import mx.edu.utez.tricks.model.Historial;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.tricks.dao.DivisionesAcademicasDAO;
-import mx.edu.utez.tricks.model.DivisionesAcademicas;
-import mx.edu.utez.tricks.model.Historial;
-import mx.edu.utez.tricks.dao.HistorialDao;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "ActualizarEstadoDivisionServlet", value = "/ActualizarEstadoDivisionServlet")
 public class ActualizarEstadoDivisionServlet extends HttpServlet {
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idDivisionStr = request.getParameter("idDivision");
-        String estadoStr = request.getParameter("estadoDivision");
-
-        if (idDivisionStr == null || idDivisionStr.isEmpty() || estadoStr == null || estadoStr.isEmpty()) {
-            response.sendRedirect("error.jsp?error=invalid_parameters");
-            return;
-        }
-
-        int idDivision = 0;
-        int estado = 0;
-
         try {
-            idDivision = Integer.parseInt(idDivisionStr);
-            estado = Integer.parseInt(estadoStr);
-        } catch (NumberFormatException e) {
-            response.sendRedirect("error.jsp?error=invalid_number_format");
-            return;
-        }
+            // Obtén el parámetro del ID de la división y del estado
+            int idDivision = Integer.parseInt(request.getParameter("idDivision2"));
+            int estadoIdDivision = Integer.parseInt(request.getParameter("estadoIdDivision"));
 
-        DivisionesAcademicas division = new DivisionesAcademicas();
-        division.setIdDivision(idDivision);
-        division.setEstado(estado);
-
-        DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
-        boolean resultado = dao.actualizarEstado(division);
-
-        if (resultado) {
-            Historial historial = new Historial();
-            historial.setDescripcion("Se actualizó el estado de la división con ID " + idDivision);
-            historial.setFecha_creacion(new java.sql.Timestamp(System.currentTimeMillis()));
+            DivisionesAcademicas division = new DivisionesAcademicas();
+            division.setIdDivision(idDivision);
+            division.setEstado(estadoIdDivision);
+            DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
             HttpSession session = request.getSession();
-            historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 
-            HistorialDao historialDao = new HistorialDao();
-            boolean isInserted = false;
-            try {
-                isInserted = historialDao.insert(historial);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            boolean isUpdated = dao.actualizarEstado(division);
 
-            if (isInserted) {
-                response.sendRedirect("html/verDivisiones.jsp?success=true");
+            if (isUpdated) {
+                java.util.Date fechaCreacion = new java.util.Date(); // Fecha y hora actuales
+                HistorialDao historialDao = new HistorialDao();
+                Historial historial = new Historial();
+
+                String estadoDescripcion = (estadoIdDivision == 1) ? "activo" : "inactivo";
+                historial.setDescripcion("Se actualizó el estado de la división académica con ID: " + idDivision + " a estado " + estadoDescripcion);
+                historial.setFecha_creacion(fechaCreacion);
+                historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
+
+                boolean isHistorialInserted = historialDao.insert(historial);
+
+                if (isHistorialInserted) {
+                    response.sendRedirect("html/verDivision.jsp?success=true");
+                } else {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo registrar la actualización en el historial.");
+                }
             } else {
-                response.sendRedirect("error.jsp?error=insertion_failed");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el estado de la división.");
             }
-        } else {
-            response.sendRedirect("error.jsp?error=update_failed");
+        } catch (NumberFormatException | SQLException e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ocurrió un error al procesar la solicitud.");
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 }
