@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
@@ -6,7 +7,11 @@
 <%@ page import="java.util.List" %>
 
 
+
+
 <html lang="en">
+
+
 
 
 <head>
@@ -17,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconCarrera.svg">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/estilosAlertas.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
@@ -28,6 +34,8 @@
             background-color: green;
             cursor: pointer;
         }
+
+
 
 
         .inactivo{
@@ -45,6 +53,89 @@
 <body>
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
+
+
+    <%
+        String tipoAlerta = (String) session.getAttribute("alerta");
+        String mensajeAlerta = "";
+
+
+        if (tipoAlerta != null) {
+            switch (tipoAlerta) {
+                case "exito":
+                    mensajeAlerta = "Registro exitoso.";
+                    break;
+                case "nombreExistente":
+                    mensajeAlerta = "El nombre ya está registrado.";
+                    break;
+                case "curpExistente":
+                    mensajeAlerta = "El curp ya está registrado.";
+                    break;
+                case "falloRegistro":
+                    mensajeAlerta = "No se pudo registrar la carrera.";
+                    break;
+                case "actualizacionExitosa":
+                    mensajeAlerta = "Modificación exitosa.";
+                    break;
+                case "actualizacionExitosaEsta":
+                    mensajeAlerta = "Modificación de estado exitosa.";
+                    break;
+                case "falloActualizacion":
+                    mensajeAlerta = "No se pudo modificar al docente.";
+                    break;
+                case "error":
+                    mensajeAlerta = "Se produjo un error.";
+                    break;
+                default:
+                    mensajeAlerta = "";
+                    break;
+            }
+
+
+            if (!mensajeAlerta.isEmpty()) {
+                String iconoAlerta = "";
+
+
+                switch (tipoAlerta) {
+                    case "exito":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosa":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosaEsta":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "falloActualizacion":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "falloRegistro":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "error":
+                        iconoAlerta = "fa-times-circle";
+                        break;
+                    default:
+                        iconoAlerta = "fa-info-circle";
+                        break;
+                }
+    %>
+
+
+    <div class="alerta alerta-dismissible mostrar" role="alert">
+        <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+        <span class="texto"><%= mensajeAlerta %></span>
+        <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <%
+                session.removeAttribute("alerta");
+            }
+        }
+    %>
+
+
 
 
     <div class="main">
@@ -76,6 +167,8 @@
                     </button>
                 </div>
             </div><br>
+
+
 
 
             <!-- Tabla de carreras -->
@@ -127,6 +220,7 @@
     </div>
 </div>
 
+
 <!-- Modal registrar nueva carrera -->
 <div class="modal fade" id="registrarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -166,6 +260,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal modificar carrera -->
 <div class="modal fade" id="modificarCarreraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -207,6 +302,7 @@
     </div>
 </div>
 
+
 <!-- Modal modificar estado -->
 <div class="modal fade" id="modificarEstadoCarrera" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
      aria-hidden="true">
@@ -241,6 +337,7 @@
     </div>
 </div>
 
+
 <script>
     $(document).ready(function() {
         $('#modificarEstadoModal').on('show.bs.modal', function(event) {
@@ -248,10 +345,14 @@
             var idCarrera = button.data('id'); // Extraer la información de atributos data-*
 
 
+
+
             // Actualiza los campos del modal.
             var modal = $(this);
             modal.find('.modal-body #idCarreraEstado').val(idCarrera);
         });
+
+
 
 
         // Este código abre el modal de modificar carrera con los datos correspondientes
@@ -262,6 +363,8 @@
             var idDivisionAcademica = button.data('iddivision');
 
 
+
+
             var modal = $(this);
             modal.find('.modal-body #idCarrera').val(idCarrera);
             modal.find('.modal-body #nombreCarreraModificar').val(nombreCarrera);
@@ -270,15 +373,20 @@
     });
 </script>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
         var filterDivision = document.querySelector('select.custom-select');
 
 
+
+
         // Agregar eventos para aplicar los filtros
         filterName.addEventListener('input', filterTable);
         filterDivision.addEventListener('change', filterTable);
+
+
 
 
         function filterTable() {
@@ -288,14 +396,20 @@
             var rows = table.querySelector('tbody').getElementsByTagName('tr');
 
 
+
+
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var nombreCarrera = cells[0].textContent.toLowerCase();  // Columna "Nombre de la Carrera"
                 var divisionAcademica = cells[1].textContent.toLowerCase(); // Columna "División Académica"
 
 
+
+
                 var nameMatch = filterNameValue === '' || nombreCarrera.includes(filterNameValue);
                 var divisionMatch = filterDivisionValue === '' || divisionAcademica.includes(filterDivisionValue);
+
+
 
 
                 if (nameMatch && divisionMatch) {
@@ -307,6 +421,8 @@
         }
 
 
+
+
         // Añadir eventos a los botones para capturar el valor del id y el estado de la carrera
         document.querySelectorAll('.activo, .inactivo').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -314,11 +430,15 @@
                 document.getElementById('idCarrera2').value = idCarrera;
 
 
+
+
                 var estadoActual = this.getAttribute('data-estado');
                 var estadoContrario = estadoActual === '1' ? '2' : '1';
                 document.getElementById('estadoCarrera').value = estadoContrario;
             });
         });
+
+
 
 
         // Evento para modal de modificar carrera
@@ -329,9 +449,13 @@
                 var idDivisionAcademica = button.getAttribute('data-idDivision');
 
 
+
+
                 document.getElementById('idCarrera').value = idCarrera;
                 document.getElementById('nombreCarreraModificar').value = nombreCarrera;
                 document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
+
+
 
 
                 // Llenar el estado en el modal de modificar
@@ -342,10 +466,13 @@
         });
     });
 
+
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
             document.getElementById('idCarrera2').value = folio;
+
+
 
 
             var estadoActual = this.getAttribute('data-estado');
@@ -355,7 +482,11 @@
     });
 
 
+
+
 </script>
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

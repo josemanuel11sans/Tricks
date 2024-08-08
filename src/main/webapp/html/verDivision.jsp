@@ -1,14 +1,18 @@
+
+
 <%--
- Created by IntelliJ IDEA.
- User: Joseb
- Date: 01/07/2024
- Time: 08:38 p. m.
- To change this template use File | Settings | File Templates.
+Created by IntelliJ IDEA.
+User: Joseb
+Date: 01/07/2024
+Time: 08:38 p. m.
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
+
+
 
 
 <html>
@@ -20,6 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconDivision.svg">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/estilosAlertas.css">
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
@@ -45,14 +50,100 @@
 </head>
 
 
+
+
 <body>
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
 
+    <%
+        String tipoAlerta = (String) session.getAttribute("alerta");
+        String mensajeAlerta = "";
+
+
+        if (tipoAlerta != null) {
+            switch (tipoAlerta) {
+                case "exito":
+                    mensajeAlerta = "Registro exitoso.";
+                    break;
+                case "nombreExistente":
+                    mensajeAlerta = "El nombre ya está registrado.";
+                    break;
+                case "curpExistente":
+                    mensajeAlerta = "El curp ya está registrado.";
+                    break;
+                case "falloRegistro":
+                    mensajeAlerta = "No se pudo registrar la carrera.";
+                    break;
+                case "actualizacionExitosa":
+                    mensajeAlerta = "Modificación exitosa.";
+                    break;
+                case "actualizacionExitosaEsta":
+                    mensajeAlerta = "Modificación de estado exitosa.";
+                    break;
+                case "falloActualizacion":
+                    mensajeAlerta = "No se pudo modificar al docente.";
+                    break;
+                case "error":
+                    mensajeAlerta = "Se produjo un error.";
+                    break;
+                default:
+                    mensajeAlerta = "";
+                    break;
+            }
+
+
+            if (!mensajeAlerta.isEmpty()) {
+                String iconoAlerta = "";
+
+
+                switch (tipoAlerta) {
+                    case "exito":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosa":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosaEsta":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "falloActualizacion":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "falloRegistro":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "error":
+                        iconoAlerta = "fa-times-circle";
+                        break;
+                    default:
+                        iconoAlerta = "fa-info-circle";
+                        break;
+                }
+    %>
+
+
+    <div class="alerta alerta-dismissible mostrar" role="alert">
+        <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+        <span class="texto"><%= mensajeAlerta %></span>
+        <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <%
+                session.removeAttribute("alerta");
+            }
+        }
+    %>
+
+
+
+
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
+
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
@@ -73,6 +164,7 @@
                     </button>
                 </div>
             </div><br>
+
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -125,6 +217,7 @@
     </div>
 </div>
 
+
 <!-- Modal para Agregar división -->
 <div class="modal fade" id="registrarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -157,6 +250,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal para Modificar división -->
 <div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -191,6 +285,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal para modifcar  estado -->
 <div class="modal fade" id="modificarEstadoDivision" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
@@ -227,6 +322,8 @@
 </div>
 
 
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         $('#modificarDivisionModal').on('show.bs.modal', function(event) {
@@ -235,6 +332,8 @@
             var nombre = button.data('nombre');
             var siglas = button.data('siglas');
             var coordinador = button.data('coordinador');
+
+
 
 
             // Actualizar los campos del modal con los datos actuales
@@ -246,6 +345,7 @@
     });
 </script>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
@@ -253,9 +353,13 @@
         var filterDivision = document.getElementById('filterDivision');
 
 
+
+
         filterName.addEventListener('input', filterTable);
         filterCareer.addEventListener('change', filterTable);
         filterDivision.addEventListener('change', filterTable);
+
+
 
 
         function filterTable() {
@@ -266,6 +370,8 @@
             var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
 
+
+
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var name = cells[0].textContent.toLowerCase();   // Columna "Nombre"
@@ -274,9 +380,13 @@
                 var estado = cells[3].querySelector('div') ? cells[3].querySelector('div').getAttribute('data-estado').toLowerCase() : ''; // Columna "Estado"
 
 
+
+
                 var nameMatch = filterNameValue === '' || name.includes(filterNameValue) || coordinator.includes(filterNameValue) || siglas.includes(filterNameValue);
                 var careerMatch = filterCareerValue === '' || estado === filterCareerValue;
                 var divisionMatch = filterDivisionValue === '' || estado === filterDivisionValue;
+
+
 
 
                 if (nameMatch && careerMatch && divisionMatch) {
@@ -288,12 +398,16 @@
         }
 
 
+
+
         // Inicializar DataTables
         $('#example').DataTable({
             "paging": true,
             "searching": false, // Desactivar la búsqueda integrada de DataTables ya que usaremos un filtro personalizado
             "info": false
         });
+
+
 
 
         // Configurar el modal de modificar estado
@@ -306,6 +420,8 @@
         });
 
 
+
+
         // Configurar el modal de modificar division
         $('#modificarDivisionModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
@@ -316,13 +432,19 @@
         });
 
 
+
+
     });
+
+
 
 
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
             document.getElementById('idDivison2').value = folio;
+
+
 
 
             var estadoActual = this.getAttribute('data-estado');
@@ -332,11 +454,13 @@
     });
 </script>
 
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/script.js"></script>
 <script src="../js/scriptDocentes.js"></script>
 </body>
+
 
 </html>
