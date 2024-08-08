@@ -37,8 +37,10 @@ public class ActualizarEstadoGrupoServlet extends HttpServlet {
         boolean isUpdated = dao.actualizarEstado(grupo);
 
         if (isUpdated) {
+            session.setAttribute("alerta", "actualizacionExitosaEsta");
             response.sendRedirect("html/verGrupos.jsp?success=true");
         } else {
+            session.setAttribute("alerta", "falloActualizacion");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo actualizar el grupo.");
         }
     }

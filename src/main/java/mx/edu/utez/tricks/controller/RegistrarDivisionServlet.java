@@ -44,17 +44,21 @@ public class RegistrarDivisionServlet extends HttpServlet {
                 historial.setFecha_creacion(fechaCreacion);
                 historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
 
+
                 boolean isHistorialInserted = historialDao.insert(historial);
 
                 if (isHistorialInserted) {
                     // Redirige a una página de éxito
+                    session.setAttribute("alerta", "exito");
                     resp.sendRedirect("html/verDivision.jsp");
                 } else {
                     // Manejo de error si el registro en el historial falla
+                    session.setAttribute("alerta", "error");
                     resp.sendRedirect("../error.jsp");
                 }
             } else {
                 // Redirige a una página de error si la división no se pudo agregar
+                session.setAttribute("alerta", "falloActualizacion");
                 resp.sendRedirect("../error.jsp");
             }
         } catch (SQLException e) {
