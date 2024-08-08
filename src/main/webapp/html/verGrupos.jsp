@@ -114,6 +114,87 @@
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
+    <%
+        String tipoAlerta = (String) session.getAttribute("alerta");
+        String mensajeAlerta = "";
+
+
+        if (tipoAlerta != null) {
+            switch (tipoAlerta) {
+                case "exito":
+                    mensajeAlerta = "Registro exitoso.";
+                    break;
+                case "nombreExistente":
+                    mensajeAlerta = "El nombre ya está registrado.";
+                    break;
+                case "curpExistente":
+                    mensajeAlerta = "El curp ya está registrado.";
+                    break;
+                case "falloRegistro":
+                    mensajeAlerta = "No se pudo registrar el Grupo.";
+                    break;
+                case "actualizacionExitosa":
+                    mensajeAlerta = "Modificación exitosa.";
+                    break;
+                case "actualizacionExitosaEsta":
+                    mensajeAlerta = "Modificación de estado exitosa.";
+                    break;
+                case "falloActualizacion":
+                    mensajeAlerta = "No se pudo modificar el Grupo.";
+                    break;
+                case "error":
+                    mensajeAlerta = "Se produjo un error.";
+                    break;
+                default:
+                    mensajeAlerta = "";
+                    break;
+            }
+
+
+            if (!mensajeAlerta.isEmpty()) {
+                String iconoAlerta = "";
+
+
+                switch (tipoAlerta) {
+                    case "exito":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosa":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "actualizacionExitosaEsta":
+                        iconoAlerta = "fa-check-circle";
+                        break;
+                    case "falloActualizacion":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "falloRegistro":
+                        iconoAlerta = "fa-exclamation-triangle";
+                        break;
+                    case "error":
+                        iconoAlerta = "fa-times-circle";
+                        break;
+                    default:
+                        iconoAlerta = "fa-info-circle";
+                        break;
+                }
+    %>
+
+
+    <div class="alerta alerta-dismissible mostrar" role="alert">
+        <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+        <span class="texto"><%= mensajeAlerta %></span>
+        <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <%
+                session.removeAttribute("alerta");
+            }
+        }
+    %>
+
+
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Grupos</h1>
@@ -129,9 +210,9 @@
                         <%
                             CarreraDao carreraDao = new CarreraDao();
                             List<Carrera> carreraList = carreraDao.getAllCarreras();
-                            for (Carrera carrera : carreraList ) {
+                            for (Carrera carrera : carreraList) {
                         %>
-                        <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                        <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                         <%
                             }
                         %>
@@ -145,19 +226,19 @@
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
                             for (DivisionesAcademicas division : listaDivisiones) {
                         %>
-                        <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
+                        <option value="<%= division.getNombreDivision() %>"><%= division.getNombreDivision() %></option>
                         <%
                             }
                         %>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarGrupo">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
                         Registrar grupo
                     </button>
                 </div>
-            </div><br>
+            </div>
+            <br>
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -179,16 +260,15 @@
                         for (Grupo g : lista) {
                     %>
                     <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
-                        <td  style="padding: 0; margin: 0" ><%= g.getNombreGrupo() %></td>
-                        <td style="padding: 0; margin: 0" ><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
-                        <td style="padding: 0; margin: 0" ><%= g.getCarrera() %></td>
-                        <td style="padding: 0; margin: 0" ><%= g.getDivisionAcademica() %></td>
-
-                        <td style="padding: 0; margin: 0"  >
+                        <td style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
+                        <td style="padding: 0; margin: 0"><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
+                        <td style="padding: 0; margin: 0"><%= g.getCarrera() %></td>
+                        <td style="padding: 0; margin: 0"><%= g.getDivisionAcademica() %></td>
+                        <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
                                     data-target="#asignarMasivo"
-                                    onclick="setGrupoInfoMasivo(${grupo.idGrupo}, '${grupo.nombreGrupo}')">
+                                    onclick="setGrupoInfoMasivo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
                                 <i class="fas fa-users"></i>
                             </button>
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
@@ -197,20 +277,15 @@
                                     onclick="setGrupoInfo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
                                 <i class="fas fa-user-plus"></i>
                             </button>
-
-
+                        </td>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (g.getEstadoIdEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } else { %>
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoGrupo" data-whatever="ModificarEstadoGrupo"></div>
                             <% } %>
-
-                        </td >
-
-
-
-                        <td style="padding: 0; margin: 0"  >
+                        </td>
+                        <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
                                     data-target="#modificarGrupo" data-whatever="Modificar"
@@ -223,11 +298,36 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal registrar grupo -->
+            <script>
+                document.getElementById('filterName').addEventListener('keyup', filterTable);
+                document.getElementById('filterCareer').addEventListener('change', filterTable);
+                document.getElementById('filterDivision').addEventListener('change', filterTable);
+
+                function filterTable() {
+                    var nameFilter = document.getElementById('filterName').value.toLowerCase();
+                    var careerFilter = document.getElementById('filterCareer').value.toLowerCase();
+                    var divisionFilter = document.getElementById('filterDivision').value.toLowerCase();
+
+                    var rows = document.getElementById('aspirantesTableBody').getElementsByTagName('tr');
+
+                    for (var i = 0; i < rows.length; i++) {
+                        var groupName = rows[i].getElementsByTagName('td')[0].textContent.toLowerCase();
+                        var career = rows[i].getElementsByTagName('td')[2].textContent.toLowerCase();
+                        var division = rows[i].getElementsByTagName('td')[3].textContent.toLowerCase();
+
+                        if ((nameFilter === "" || groupName.includes(nameFilter)) &&
+                            (careerFilter === "" || career.includes(careerFilter)) &&
+                            (divisionFilter === "" || division.includes(divisionFilter))) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                }
+            </script>
+
+            <!-- Modal registrar grupo -->
 <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
