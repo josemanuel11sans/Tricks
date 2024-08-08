@@ -194,6 +194,7 @@ To change this template use File | Settings | File Templates.
                             <div class="inactivo" data-estado="2" data-toggle="modal" data-target="#modificarEstadoDivision" data-whatever="ModificarEstadoDivision"></div>
                             <% } %>
                         </td>
+
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
@@ -206,6 +207,7 @@ To change this template use File | Settings | File Templates.
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
+
                     </tr>
                     <%
                         }
@@ -452,6 +454,27 @@ To change this template use File | Settings | File Templates.
             document.getElementById('estadoIdDivision').value = estadoContrario;
         });
     });
+
+    // Evento para modal de modificar división
+    document.querySelectorAll('.btn-modificar').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Obtener los atributos de los datos de la división
+            var idDivision = button.getAttribute('data-id');
+            var nombreDivision = button.getAttribute('data-nombre');
+            var siglas = button.getAttribute('data-siglas');
+            var coordinadorDivision = button.getAttribute('data-coordinador');
+
+            // Asignar los valores a los campos del modal
+            document.getElementById('idDivision').value = idDivision;
+            document.getElementById('nombreDivision').value = nombreDivision;
+            document.getElementById('siglas').value = siglas;
+            document.getElementById('coordinadorDivision').value = coordinadorDivision;
+
+        });
+    });
+
+
+
 </script>
 
 

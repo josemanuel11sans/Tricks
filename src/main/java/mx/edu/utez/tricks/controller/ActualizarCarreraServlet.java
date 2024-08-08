@@ -52,8 +52,10 @@ public class ActualizarCarreraServlet extends HttpServlet {
                 // Puedes manejar el error aquí si lo deseas
             }
 
+            session.setAttribute("alerta", "exito");
             resp.sendRedirect("html/verCarrera.jsp?success=true");
         } else {
+            session.setAttribute("alerta", "error");
             resp.sendRedirect("../error.jsp");
         }
     }

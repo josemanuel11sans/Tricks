@@ -32,6 +32,7 @@ public class RegistrarCarreraServlet extends HttpServlet {
         String nombreCarrera = req.getParameter("nombreCarrera");
         int idDivisionAcademica = Integer.parseInt(req.getParameter("idDivisionAcademica"));
         int idEstado = Integer.parseInt(req.getParameter("idEstado"));
+        HttpSession session = req.getSession();
 
         Carrera carrera = new Carrera(0, nombreCarrera, idDivisionAcademica, idEstado);
         CarreraDao carreraDao = new CarreraDao();
@@ -39,7 +40,6 @@ public class RegistrarCarreraServlet extends HttpServlet {
 
         if (resultado) {
             // Insertar en el historial
-            HttpSession session = req.getSession();
             Date fechaCreacion = new Date(); // Fecha y hora actuales
             HistorialDao historialDao = new HistorialDao();
             Historial historial = new Historial();
@@ -55,8 +55,10 @@ public class RegistrarCarreraServlet extends HttpServlet {
                 // Aquí puedes manejar el error de manera específica si lo deseas
             }
 
+            session.setAttribute("alerta", "exito");
             resp.sendRedirect("html/verCarrera.jsp");
         } else {
+            session.setAttribute("alerta", "error");
             resp.sendRedirect("../error.jsp");
         }
     }
