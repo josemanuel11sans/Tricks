@@ -113,6 +113,7 @@
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
+
     <jsp:include page="../componentes/menuLateral.jsp" />
 
     <%
@@ -605,6 +606,8 @@
 
     </script>
 </div>
+        </div>
+        <script src="../js/script.js"></script>
 </body>
 </html>
 
