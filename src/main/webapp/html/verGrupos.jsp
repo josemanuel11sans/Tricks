@@ -214,7 +214,7 @@
                             List<Carrera> carreraList = carreraDao.getAllCarreras();
                             for (Carrera carrera : carreraList) {
                         %>
-                        <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getIdCarrera() %></option>
+                        <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                         <%
                             }
                         %>
