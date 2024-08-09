@@ -213,7 +213,7 @@
                             List<Carrera> carreraList = carreraDao.getAllCarreras();
                             for (Carrera carrera : carreraList) {
                         %>
-                        <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                        <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getIdCarrera() %></option>
                         <%
                             }
                         %>
@@ -227,7 +227,7 @@
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
                             for (DivisionesAcademicas division : listaDivisiones) {
                         %>
-                        <option value="<%= division.getNombreDivision() %>"><%= division.getNombreDivision() %></option>
+                        <option value="<%= division.getSiglas() %>"><%= division.getSiglas() %></option>
                         <%
                             }
                         %>
