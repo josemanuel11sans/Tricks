@@ -602,8 +602,31 @@
 
 
     </script>
+
+    <script>
+        // JavaScript para ocultar automáticamente la alerta después de 5 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerta = document.querySelector('.alerta');
+
+            if (alerta.classList.contains('mostrar')) {
+                setTimeout(function() {
+                    alerta.classList.add('ocultar');
+                }, 5000); // 5000 ms = 5 segundos
+
+                // Remover la alerta del DOM después de la transición (opcional)
+                alerta.addEventListener('transitionend', function() {
+                    if (alerta.classList.contains('ocultar')) {
+                        alerta.remove();
+                    }
+                });
+            }
+        });
+
+    </script>
+
 </div>
         </div>
+        <script src="../js/scriptAlertas.js"></script>
         <script src="../js/script.js"></script>
 </body>
 </html>
