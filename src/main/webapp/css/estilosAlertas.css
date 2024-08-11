@@ -1,12 +1,12 @@
 .alerta {
     position: fixed;
-    bottom: 15px;
+    top: 15px; /* Cambiado de 'bottom' a 'top' para mostrar en la parte superior */
     right: 15px;
     width: auto;
     max-width: 400px;
     z-index: 1050;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-20px); /* Cambiado de '20px' a '-20px' para que se deslice desde arriba */
     transition: opacity 0.5s ease, transform 0.5s ease;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -20,12 +20,12 @@
 
 .alerta.mostrar {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); /* Asegura que la alerta esté en su posición correcta cuando se muestre */
 }
 
 .alerta.ocultar {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-20px); /* Desliza hacia arriba cuando se oculta */
 }
 
 .alerta .btn-cerrar {
