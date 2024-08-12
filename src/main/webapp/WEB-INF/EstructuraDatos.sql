@@ -201,7 +201,7 @@ DROP TABLE IF EXISTS `grupos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `grupos` (
-                          `id_grupo` int NOT NULL,
+                          `id_grupo` int NOT NULL AUTO_INCREMENT,
                           `nombre_grupo` varchar(100) DEFAULT NULL,
                           `carreras_id_carrera` int DEFAULT NULL,
                           `estado` int DEFAULT NULL,
