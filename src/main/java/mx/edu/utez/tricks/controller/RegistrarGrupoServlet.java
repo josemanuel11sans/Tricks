@@ -15,13 +15,11 @@ public class RegistrarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreGrupo = request.getParameter("nombreGrupo");
         String carrera = request.getParameter("nombreCarrera");
-        String division = request.getParameter("nombreDivision");
         String docente = request.getParameter("nombreDocente");
 
         Grupo grupo = new Grupo();
         grupo.setNombreGrupo(nombreGrupo);
         grupo.setCarrera(carrera);
-        grupo.setDivisionAcademica(division);
         grupo.setNombreDocente(docente);
 
         GrupoDao dao = new GrupoDao();

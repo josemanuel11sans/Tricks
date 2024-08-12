@@ -342,24 +342,21 @@
             <div class="modal-body">
                 <form method="post" action="../RegistrarGrupoServlet">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                        <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="carrera" class="col-form-label">Carrera:</label>
                         <select class="custom-select" id="carrera" name="carrera"  placeholder=" " required>
-                            <option value=""></option>
+                            <option value="">Carrera</option>
                             <% for (Carrera carrera : carreraList) { %>
-                            <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>"><%= carrera.getNombreCarrera() %></option>
+                            <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>" id="nombreCarrera" name="nombreCarrera"><%= carrera.getNombreCarrera() %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="docente" class="col-form-label">Docente asignado:</label>
                         <select class="custom-select" id="docente" name="docente" required>
-                            <option value="">Seleccionar</option>
+                            <option value="">Docente Asignado</option>
                             <% for (Grupo user : lista) { %>
-                            <option><%= user.getNombreDocente() %></option>
+                            <option value="<%= user.getNombreDocente() %>" id="nombreDocente" name="nombreDocente"><%= user.getNombreDocente() %></option>
                             <% } %>
                         </select>
                     </div>
@@ -605,8 +602,31 @@
 
 
     </script>
+
+    <script>
+        // JavaScript para ocultar automáticamente la alerta después de 5 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerta = document.querySelector('.alerta');
+
+            if (alerta.classList.contains('mostrar')) {
+                setTimeout(function() {
+                    alerta.classList.add('ocultar');
+                }, 5000); // 5000 ms = 5 segundos
+
+                // Remover la alerta del DOM después de la transición (opcional)
+                alerta.addEventListener('transitionend', function() {
+                    if (alerta.classList.contains('ocultar')) {
+                        alerta.remove();
+                    }
+                });
+            }
+        });
+
+    </script>
+
 </div>
         </div>
+        <script src="../js/scriptAlertas.js"></script>
         <script src="../js/script.js"></script>
 </body>
 </html>
