@@ -2,6 +2,7 @@ package mx.edu.utez.tricks.model;
 
 public class GrupoAsignado {
     private String nombreGrupo;
+    private int idGrupo;
     private String carrera;
     private int estado;
     private int idUsuario;
@@ -36,5 +37,13 @@ public class GrupoAsignado {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
     }
 }

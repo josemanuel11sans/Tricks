@@ -13,11 +13,7 @@ import java.util.List;
 public class GruposAsignadosDao {
     public List<GrupoAsignado> getGruposAsignadosPorDocente(String email) {
         List<GrupoAsignado> grupos = new ArrayList<>();
-        String query = "SELECT g.nombre_grupo, c.nombre_carrera, g.estado, u.id_usuario " +
-                "FROM grupos g " +
-                "JOIN carreras c ON g.carreras_id_carrera = c.id_carrera " +
-                "JOIN usuarios u ON g.id_grupo = u.grupos_id_grupo " +
-                "WHERE u.mail = ?";
+        String query = "SELECT g.nombre_grupo, c.nombre_carrera, g.estado, u.id_usuario, g.id_grupo FROM grupos g JOIN carreras c ON g.carreras_id_carrera = c.id_carrera JOIN usuarios u ON g.id_usuario = u.id_usuario WHERE u.mail = ?;";
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -31,6 +27,7 @@ public class GruposAsignadosDao {
                 grupo.setCarrera(rs.getString("nombre_carrera"));
                 grupo.setEstado(rs.getInt("estado"));
                 grupo.setIdUsuario(rs.getInt("id_usuario"));
+                grupo.setIdGrupo(rs.getInt("id_grupo"));
                 grupos.add(grupo);
             }
         } catch (SQLException e) {

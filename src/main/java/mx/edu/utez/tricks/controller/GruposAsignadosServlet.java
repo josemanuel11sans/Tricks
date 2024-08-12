@@ -30,4 +30,6 @@ public class GruposAsignadosServlet extends HttpServlet {
         request.setAttribute("gruposAsignados", gruposAsignados);
         request.getRequestDispatcher("html_docentes/CursosAsignados.jsp").forward(request, response);
     }
+
+
 }

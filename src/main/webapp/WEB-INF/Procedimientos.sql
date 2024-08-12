@@ -74,3 +74,20 @@ FROM aspirantes a
                    ON g.id_grupo = a.grupos_id_grupo;
 END //
 DELIMITER ;
+
+
+//procedimiento para ver los alumnos conforme el id del grupo
+DELIMITER //
+
+CREATE PROCEDURE GetAlumnosPorGrupo(IN grupo_id INT)
+BEGIN
+SELECT a.folio_aspirante, a.nombre, a.apellido, c.nombre_carrera, a.estado,
+       COALESCE(cal.calificacion, 0) as calificacion
+FROM aspirantes a
+         JOIN grupos g ON a.grupos_id_grupo = g.id_grupo
+         JOIN carreras c ON g.carreras_id_carrera = c.id_carrera
+         LEFT JOIN calificaciones cal ON a.folio_aspirante = cal.aspirante_folio_aspirante
+WHERE g.id_grupo = grupo_id;
+END //
+
+DELIMITER ;
