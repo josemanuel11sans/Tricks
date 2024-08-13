@@ -23,8 +23,9 @@ SELECT
     usuarios.apellido as apellido,
     carreras.nombre_carrera AS carrera,
     divisiones_academicas.siglas as  divisionAcademica,
-    grupos.estado as estadoIdEstado
-
+    grupos.estado as estadoIdEstado,
+    grupos.carreras_id_carrera as carreras_id_carrera,
+    usuarios.id_usuario as id_usuario
 FROM
     grupos
         JOIN
@@ -33,7 +34,7 @@ FROM
     divisiones_academicas ON carreras.divisiones_academicas_id_division = divisiones_academicas.id_division
         LEFT JOIN
     usuarios ON grupos.id_grupo = usuarios.grupos_id_grupo
-        LEFT JOIN
+        JOIN
     aspirantes ON grupos.id_grupo = aspirantes.grupos_id_grupo
 GROUP BY
     grupos.id_grupo, usuarios.id_usuario, carreras.id_carrera, divisiones_academicas.id_division;
