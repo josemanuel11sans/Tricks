@@ -193,8 +193,8 @@
     <%
                 session.removeAttribute("alerta");
             }
-        }
-    %>
+    }
+%>
 
 
     <div class="main">
@@ -346,15 +346,15 @@
                     </div>
                     <div class="form-group">
                         <select class="custom-select" id="carrera" name="carrera" required>
-                            <% for (Carrera carrera : carreraList) { %>
+                            <% for (Carrera carrera : carreraList) {%>
                             <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="form-group">
                         <select class="custom-select" required id="docente" name="docente">
-                            <% for (Grupo docente : lista) { %>
-                            <option value="<%= docente.getIdDocente() %>"><%= docente.getNombreDocente() %></option>
+                            <%for (Grupo g : lista) { %>
+                            <option value="<%= g.getIdDocente() %>"><%= g.getNombreDocente() %> <%=g.getApellidoDocente()%></option>
                             <% } %>
                         </select>
                     </div>
@@ -628,8 +628,3 @@
         <script src="../js/script.js"></script>
 </body>
 </html>
-
-
-
-
-
