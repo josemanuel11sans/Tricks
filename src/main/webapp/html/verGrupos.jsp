@@ -353,8 +353,10 @@
                     </div>
                     <div class="form-group">
                         <select class="custom-select" required id="docente" name="docente">
-                            <%for (Grupo g : lista) { %>
-                            <option value="<%= g.getIdDocente() %>"><%= g.getNombreDocente() %> <%=g.getApellidoDocente()%></option>
+                            <%UsuarioDao daoUsuario = new UsuarioDao();
+                                ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
+                                for (Usuario u : listaUsuario) { %>
+                            <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
                             <% } %>
                         </select>
                     </div>
