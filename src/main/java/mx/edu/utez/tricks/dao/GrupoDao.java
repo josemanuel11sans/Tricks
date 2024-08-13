@@ -30,8 +30,6 @@ public class GrupoDao {
                 g.setCarrera(rs.getString("carrera"));
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
                 g.setEstadoIdEstado(rs.getInt("estadoIdEstado"));
-                g.setIdCarrera(rs.getInt("carreras_id_carrera"));
-                g.setIdDocente(rs.getInt("id_usuario"));
                 lista.add(g);
             }
 
@@ -73,7 +71,7 @@ public class GrupoDao {
 
     // Insertar un nuevo grupo
     public boolean agregarGrupo(Grupo grupo){
-        String query = "INSERT INTO grupos (nombre_grupo, carreras_id_carrera, id_usuario) VALUES (?, ?, ?)";
+        String query = "INSERT INTO grupos (nombre_grupo, carreras_id_carrera, id_usuario, estado) VALUES (?, ?, ?, 1)";
         boolean isInserted = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -87,6 +85,10 @@ public class GrupoDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("Código de error SQL: " + e.getErrorCode());
+            System.out.println("Estado SQL: " + e.getSQLState());
+            return false;
         }
 
         return isInserted;

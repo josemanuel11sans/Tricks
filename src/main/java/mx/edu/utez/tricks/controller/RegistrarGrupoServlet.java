@@ -17,7 +17,6 @@ public class RegistrarGrupoServlet extends HttpServlet {
         String nombreGrupo = request.getParameter("nombreGrupo");
         int carrera = Integer.parseInt(request.getParameter("carrera")); // debe coincidir con el name del select
         int docente = Integer.parseInt(request.getParameter("docente")); // debe coincidir con el name del select
-
         HttpSession session = request.getSession();
 
         Grupo grupo = new Grupo();

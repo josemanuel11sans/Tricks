@@ -16,28 +16,10 @@ END //
     DELIMITER //
 CREATE PROCEDURE verGrupos()
 BEGIN
-SELECT
-    grupos.id_grupo AS idGrupo,
-    grupos.nombre_grupo AS nombreGrupo,
-    usuarios.nombre as nombre,
-    usuarios.apellido as apellido,
-    carreras.nombre_carrera AS carrera,
-    divisiones_academicas.siglas as  divisionAcademica,
-    grupos.estado as estadoIdEstado,
-    grupos.carreras_id_carrera as carreras_id_carrera,
-    usuarios.id_usuario as id_usuario
-FROM
-    grupos
-        JOIN
-    carreras ON grupos.carreras_id_carrera = carreras.id_carrera
-        JOIN
-    divisiones_academicas ON carreras.divisiones_academicas_id_division = divisiones_academicas.id_division
-        LEFT JOIN
-    usuarios ON grupos.id_grupo = usuarios.grupos_id_grupo
-        JOIN
-    aspirantes ON grupos.id_grupo = aspirantes.grupos_id_grupo
-GROUP BY
-    grupos.id_grupo, usuarios.id_usuario, carreras.id_carrera, divisiones_academicas.id_division;
+SELECT g.id_grupo AS idGrupo, g.nombre_grupo as nombreGrupo, u.nombre, u.apellido as apellido, g.estado as estadoIdEstado, c.nombre_carrera AS carrera, d.siglas as  divisionAcademica FROM grupos g
+                                                                                                                                                                                                INNER JOIN usuarios u ON g.id_usuario = u.id_usuario
+                                                                                                                                                                                                INNER JOIN carreras c ON g.carreras_id_carrera = c.id_carrera
+                                                                                                                                                                                                INNER JOIN divisiones_academicas d ON c.divisiones_academicas_id_division = d.id_division;
 END //
         DELIMITER ;
 
