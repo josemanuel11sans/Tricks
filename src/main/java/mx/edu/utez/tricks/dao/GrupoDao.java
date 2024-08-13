@@ -30,6 +30,8 @@ public class GrupoDao {
                 g.setCarrera(rs.getString("carrera"));
                 g.setDivisionAcademica(rs.getString("divisionAcademica"));
                 g.setEstadoIdEstado(rs.getInt("estadoIdEstado"));
+                g.setIdCarrera(rs.getInt("carreras_id_carrera"));
+                g.setIdDocente(rs.getInt("id_usuario"));
                 lista.add(g);
             }
 
@@ -70,19 +72,16 @@ public class GrupoDao {
     }
 
     // Insertar un nuevo grupo
-    public boolean insert(Grupo grupo) {
-        String query = "INSERT INTO grupo (nombreGrupo, nombre, apellido, carrera, divisionAcademica, estadoIdEstado) VALUES (?, ?, ?, ?, ?, ?)";
+    public boolean agregarGrupo(Grupo grupo){
+        String query = "INSERT INTO grupos (nombre_grupo, carreras_id_carrera, id_usuario) VALUES (?, ?, ?)";
         boolean isInserted = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, grupo.getNombreGrupo());
-            ps.setString(2, grupo.getNombreDocente());
-            ps.setString(3, grupo.getApellidoDocente());
-            ps.setString(4, grupo.getCarrera());
-            ps.setString(5, grupo.getDivisionAcademica());
-            ps.setInt(6, grupo.getEstadoIdEstado());
+            ps.setInt(2, grupo.getIdCarrera());
+            ps.setInt(3, grupo.getIdDocente());
 
             isInserted = ps.executeUpdate() > 0;
 

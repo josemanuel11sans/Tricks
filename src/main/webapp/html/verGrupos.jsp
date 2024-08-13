@@ -263,7 +263,7 @@
                     %>
                     <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
                         <td style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
-                        <td style="padding: 0; margin: 0"><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
+                        <td style="padding: 0; margin: 0"><%= g.getNombreDocente()%> <%= g.getApellidoDocente()%></td>
                         <td style="padding: 0; margin: 0"><%= g.getCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getDivisionAcademica() %></td>
                         <td style="padding: 0; margin: 0">
@@ -345,18 +345,16 @@
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <select class="custom-select" id="carrera" name="carrera"  placeholder=" " required>
-                            <option value="">Carrera</option>
+                        <select class="custom-select" id="carrera" name="carrera" required>
                             <% for (Carrera carrera : carreraList) { %>
-                            <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>" id="nombreCarrera" name="nombreCarrera"><%= carrera.getNombreCarrera() %></option>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="custom-select" id="docente" name="docente" required>
-                            <option value="">Docente Asignado</option>
-                            <% for (Grupo user : lista) { %>
-                            <option value="<%= user.getNombreDocente() %>" id="nombreDocente" name="nombreDocente"><%= user.getNombreDocente() %></option>
+                        <select class="custom-select" required id="docente" name="docente">
+                            <% for (Grupo docente : lista) { %>
+                            <option value="<%= docente.getIdDocente() %>"><%= docente.getNombreDocente() %></option>
                             <% } %>
                         </select>
                     </div>

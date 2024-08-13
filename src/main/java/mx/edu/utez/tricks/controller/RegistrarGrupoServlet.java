@@ -1,5 +1,6 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.tricks.dao.GrupoDao;
 import mx.edu.utez.tricks.model.Grupo;
 
@@ -14,16 +15,18 @@ import java.io.IOException;
 public class RegistrarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreGrupo = request.getParameter("nombreGrupo");
-        String carrera = request.getParameter("nombreCarrera");
-        String docente = request.getParameter("nombreDocente");
+        int carrera = Integer.parseInt(request.getParameter("carrera")); // debe coincidir con el name del select
+        int docente = Integer.parseInt(request.getParameter("docente")); // debe coincidir con el name del select
+
+        HttpSession session = request.getSession();
 
         Grupo grupo = new Grupo();
         grupo.setNombreGrupo(nombreGrupo);
-        grupo.setCarrera(carrera);
-        grupo.setNombreDocente(docente);
+        grupo.setIdCarrera(carrera);
+        grupo.setIdDocente(docente);
 
         GrupoDao dao = new GrupoDao();
-        boolean isInserted = dao.insert(grupo);
+        boolean isInserted = dao.agregarGrupo(grupo);
 
         if (isInserted) {
             response.sendRedirect("html/verGrupos.jsp?success=true");
