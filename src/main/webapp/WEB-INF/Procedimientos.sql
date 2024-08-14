@@ -17,7 +17,7 @@ END //
 CREATE PROCEDURE verGrupos()
 BEGIN
 SELECT g.id_grupo AS idGrupo, g.nombre_grupo as nombreGrupo, u.nombre, u.apellido as apellido, g.estado as estadoIdEstado, c.nombre_carrera AS carrera, d.siglas as  divisionAcademica FROM grupos g
-                                                                                                                                                                                                INNER JOIN usuarios u ON g.id_usuario = u.id_usuario
+                                                                                                                                                                                                LEFT JOIN usuarios u ON g.id_usuario = u.id_usuario
                                                                                                                                                                                                 INNER JOIN carreras c ON g.carreras_id_carrera = c.id_carrera
                                                                                                                                                                                                 INNER JOIN divisiones_academicas d ON c.divisiones_academicas_id_division = d.id_division;
 END //
