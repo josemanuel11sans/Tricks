@@ -50,7 +50,7 @@
                                 <%= (userApellido != null) ? userApellido : " APELLIDO" %>
                             </h5>
                             <p id="teacher-email" class="card-text"><%= (userEmail != null) ? userEmail : "CORREO" %></p>
-                            <p class="card-text">Información adicional sobre el docente.</p>
+                            <p class="card-text"></p><br>
                             <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                                     data-target="#cambiarContrasena">
                                 Cambiar contraseña
