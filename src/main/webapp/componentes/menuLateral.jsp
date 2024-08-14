@@ -62,3 +62,110 @@
     </div>
 
 </aside>
+
+<button class="hamburger" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</button>
+<style>
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    .sidebar-nav {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar-item {
+        margin: 15px 0;
+    }
+
+    .sidebar-link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar-link i {
+        margin-right: 10px;
+    }
+
+
+    /* Estilos para móviles */
+    @media (max-width: 768px) {
+        #sidebar {
+            width: 100%;
+            height: auto;
+            transform: translateY(-100%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            display: block;
+        }
+
+        .hamburger {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .sidebar-nav {
+            display: none;
+            flex-direction: column;
+        }
+
+        .sidebar-footer {
+            display: none;
+        }
+
+        #sidebar.open {
+            transform: translateY(0);
+        }
+
+        #sidebar.open .sidebar-nav {
+            display: flex;
+        }
+
+        #sidebar.open .sidebar-footer {
+            display: block;
+        }
+    }
+</style>
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+    }
+    const hamBurger = document.querySelector(".toggle-btn");
+    function addHamburgerEventListener() {
+        if (window.innerWidth < 768) {
+            hamBurger.addEventListener("click", toggleSidebar);
+        } else {
+            hamBurger.removeEventListener("click", toggleSidebar); // Remueve el event listener si la resolución es menor o igual a 768px
+        }
+    }
+    function toggleSidebar() {
+        document.querySelector("#sidebar").classList.toggle("expand");
+    }
+    addHamburgerEventListener();
+    window.addEventListener("resize", addHamburgerEventListener);
+
+</script>

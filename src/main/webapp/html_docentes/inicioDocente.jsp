@@ -113,7 +113,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="post">
+
                         <div class="form-group">
                             <input type="password" class="form-control" id="contraseñaAnterior" name="ContraseñaAnterior" placeholder="" required>
                             <label for="contraseñaAnterior" class="col-form-label">Contraseña anterior</label>
