@@ -193,8 +193,8 @@
     <%
                 session.removeAttribute("alerta");
             }
-        }
-    %>
+    }
+%>
 
 
     <div class="main">
@@ -263,7 +263,7 @@
                     %>
                     <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
                         <td style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
-                        <td style="padding: 0; margin: 0"><%= g.getNombreDocente() + " " + g.getApellidoDocente() %></td>
+                        <td style="padding: 0; margin: 0"><%= g.getNombreDocente()%> <%= g.getApellidoDocente()%></td>
                         <td style="padding: 0; margin: 0"><%= g.getCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getDivisionAcademica() %></td>
                         <td style="padding: 0; margin: 0">
@@ -345,18 +345,18 @@
                         <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <select class="custom-select" id="carrera" name="carrera"  placeholder=" " required>
-                            <option value="">Carrera</option>
-                            <% for (Carrera carrera : carreraList) { %>
-                            <option value="<%= carrera.getIdCarrera() %>" data-division="<%= carrera.getIdDivisionAcademica() %>" id="nombreCarrera" name="nombreCarrera"><%= carrera.getNombreCarrera() %></option>
+                        <select class="custom-select" id="carrera" name="carrera" required>
+                            <% for (Carrera carrera : carreraList) {%>
+                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="custom-select" id="docente" name="docente" required>
-                            <option value="">Docente Asignado</option>
-                            <% for (Grupo user : lista) { %>
-                            <option value="<%= user.getNombreDocente() %>" id="nombreDocente" name="nombreDocente"><%= user.getNombreDocente() %></option>
+                        <select class="custom-select" required id="docente" name="docente">
+                            <%UsuarioDao daoUsuario = new UsuarioDao();
+                                ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
+                                for (Usuario u : listaUsuario) { %>
+                            <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
                             <% } %>
                         </select>
                     </div>
@@ -527,8 +527,10 @@
                         </p>
                     </div>
                     <div class="modal-footer modal-footer-custom">
-                        <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
-                        <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
+                        <a href="#" class="btn-link btn-link-custom" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
+                            Ejemplo de formato
+                        </a>
+                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn-link btn-link-custom" download>Descargar formato</a>
                         <button type="submit" class="btn btn-custom">Asignar</button>
                     </div>
                 </form>
@@ -628,10 +630,6 @@
         </div>
         <script src="../js/scriptAlertas.js"></script>
         <script src="../js/script.js"></script>
+        <script src="../js/verAspirantes.js"></script>
 </body>
 </html>
-
-
-
-
-

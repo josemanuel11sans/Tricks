@@ -8,11 +8,13 @@ public class Grupo {
     private String apellidoDocente;
     private String carrera;
     private String divisionAcademica;
+    private int idCarrera;
+    private int idDocente;
 
     public Grupo() {
     }
 
-    public Grupo(int idGrupo, int estadoIdEstado, String nombreGrupo, String nombreDocente, String apellidoDocente, String carrera, String divisionAcademica) {
+    public Grupo(int idGrupo, int estadoIdEstado, String nombreGrupo, String nombreDocente, String apellidoDocente, String carrera, String divisionAcademica, int idCarrera, int idDocente) {
         this.idGrupo = idGrupo;
         this.estadoIdEstado = estadoIdEstado;
         this.nombreGrupo = nombreGrupo;
@@ -20,6 +22,8 @@ public class Grupo {
         this.apellidoDocente = apellidoDocente;
         this.carrera = carrera;
         this.divisionAcademica = divisionAcademica;
+        this.idCarrera = idCarrera;
+        this.idDocente = idDocente;
     }
 
     public int getIdGrupo() {
@@ -77,5 +81,9 @@ public class Grupo {
     public void setDivisionAcademica(String divisionAcademica) {
         this.divisionAcademica = divisionAcademica;
     }
+    public int getIdCarrera(){return idCarrera;}
+    public void setIdCarrera(int idCarrera){this.idCarrera = idCarrera;}
+    public int getIdDocente(){return idDocente;}
+    public void setIdDocente(int idDocente){this.idDocente = idDocente;}
 }
 

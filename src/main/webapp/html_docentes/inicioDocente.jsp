@@ -113,7 +113,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="post">
+
                         <div class="form-group">
                             <input type="password" class="form-control" id="contraseñaAnterior" name="ContraseñaAnterior" placeholder="" required>
                             <label for="contraseñaAnterior" class="col-form-label">Contraseña anterior</label>
@@ -127,7 +128,7 @@
                             <label for="confirmarContraseña" class="col-form-label">Confirma la contraseña</label>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Crear</button>
+                            <button type="submit" class="btn btn-primary">Cambiar</button>
                         </div>
                     </form>
                 </div>

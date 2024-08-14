@@ -117,8 +117,8 @@
 
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
-                <div class="col-md-3">
-                    <input type="text" id="filterName" class="form-control" placeholder="Nombre o Matricula">
+                <div class="col-md-2">
+                    <input type="text" id="filterName" class="form-control" placeholder="Buscar">
                 </div>
                 <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterDivision" required>

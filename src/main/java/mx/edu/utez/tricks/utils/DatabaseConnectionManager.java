@@ -12,9 +12,13 @@ public class DatabaseConnectionManager {
     //define el  username de la base de datos
     private static final String USERNAME = "root";
     //define la contraseña de la base de datos
+<<<<<<< HEAD
 
     private static final String PASSWORD = "root";
 
+=======
+    private static final String PASSWORD = "root";
+>>>>>>> 1ffdade221fd69c90befae4d9ff420cbef290d80
     // Crea una instancia de configuración de HikariCP.
     private static final HikariConfig config = new HikariConfig();
     //Declara el HikariDataSource que gestionará el pool de conexiones.

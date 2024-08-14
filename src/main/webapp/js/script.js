@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Menú
-  const hamBurger = document.querySelector(".toggle-btn");
-
-  hamBurger.addEventListener("click", function () {
-    document.querySelector("#sidebar").classList.toggle("expand");
-  });
-
   // Modals
   $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
