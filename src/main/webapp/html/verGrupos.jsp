@@ -290,8 +290,8 @@
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarGrupo" data-whatever="Modificar"
-                                    onclick="window.location.href='modificarGrupo?id=<%= g.getIdGrupo() %>'">
+                                    data-target="#modificarGrupo"
+                                    onclick="llenarModalActualizarGrupo(<%= g.getIdGrupo() %>, '<%= g.getNombreGrupo() %>', <%= g.getIdCarrera() %>, <%= g.getIdDocente() %>)">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -370,64 +370,58 @@
     </div>
 </div>
 
-<!-- Modal modificar grupo -->
-<div class="modal fade" id="modificarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar grupo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="../ModificarGrupoServlet">
-                    <div class="form-group">
-                        <label for="nombreGrupo" class="col-form-label">Nuevo nombre:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="divisionAcademica" class="col-form-label">División académica:</label>
-                        <select class="custom-select" id="divisionAcademica" name="divisionAcademica" required>
-                            <option value=" "></option>
-                            <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
-                            %>
-                            <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
-                            <%
-                                }
-                            %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="carrera" class="col-form-label">Carrera:</label>
-                        <select class="custom-select" id="carrera" name="carrera" required>
-                            <option value=" "></option>
-                            <%
-                                for ( Carrera carrera : carreraList) {
-                            %>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <%
-                                }
-                            %>
 
-                        </select>
+            <!-- Modal actualizar grupo -->
+            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Actualizar grupo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="../ActualizarGrupoServlet">
+                                <input type="hidden" id="idGrupo" name="idGrupo">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" id="carrera" name="carrera" required>
+                                        <% for (Carrera carrera : carreraList) { %>
+                                        <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" required id="docente" name="docente">
+                                        <% for (Usuario u : listaUsuario) { %>
+                                        <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="docente" class="col-form-label">Docente asignado:</label>
-                        <select class="custom-select" id="docente" name="docente" required>
-                            <option value=" "></option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+
+            <SCRIPT>
+                function llenarModalActualizarGrupo(idGrupo, nombreGrupo, carreraId, docenteId) {
+                    $('#idGrupo').val(idGrupo);
+                    $('#nombreGrupo').val(nombreGrupo);
+                    $('#carrera').val(carreraId);
+                    $('#docente').val(docenteId);
+
+                    $('#actualizarGrupoModal').modal('show');
+                }
+            </SCRIPT>
+
 
 
 
@@ -539,7 +533,7 @@
         </div>
     </div>
     <!-- Bootstrap y scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></SCRIPT>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script>

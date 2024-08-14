@@ -95,29 +95,31 @@ public class GrupoDao {
     }
 
     // Actualizar un grupo existente
-    public boolean updateGrupo(Grupo grupo) {
-        String query = "UPDATE grupo SET nombreGrupo = ?, nombre = ?, apellido = ?, carrera = ?, divisionAcademica = ?, estadoIdEstado = ? WHERE idGrupo = ?";
+    public boolean actualizarGrupo(Grupo grupo) {
+        String query = "UPDATE grupos SET nombre_grupo = ?, carreras_id_carrera = ?, id_usuario = ? WHERE id_grupo = ?";
         boolean isUpdated = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setString(1, grupo.getNombreGrupo());
-            ps.setString(2, grupo.getNombreDocente());
-            ps.setString(3, grupo.getApellidoDocente());
-            ps.setString(4, grupo.getCarrera());
-            ps.setString(5, grupo.getDivisionAcademica());
-            ps.setInt(6, grupo.getEstadoIdEstado());
-            ps.setInt(7, grupo.getIdGrupo());
+            ps.setInt(2, grupo.getIdCarrera());
+            ps.setInt(3, grupo.getIdDocente());
+            ps.setInt(4, grupo.getIdGrupo());
 
             isUpdated = ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("Código de error SQL: " + e.getErrorCode());
+            System.out.println("Estado SQL: " + e.getSQLState());
+            return false;
         }
 
         return isUpdated;
     }
+
 
     public boolean actualizarEstado(Grupo grupo) {
         String query = "UPDATE grupos SET estado = ? WHERE id_grupo = ?";
