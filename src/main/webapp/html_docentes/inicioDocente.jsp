@@ -127,7 +127,7 @@
                             <label for="confirmarContraseña" class="col-form-label">Confirma la contraseña</label>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Crear</button>
+                            <button type="submit" class="btn btn-primary">Cambiar</button>
                         </div>
                     </form>
                 </div>

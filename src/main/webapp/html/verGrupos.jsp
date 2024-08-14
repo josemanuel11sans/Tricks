@@ -527,8 +527,10 @@
                         </p>
                     </div>
                     <div class="modal-footer modal-footer-custom">
-                        <a href="#" class="btn-link btn-link-custom">Ejemplo de formato</a>
-                        <a href="#" class="btn-link btn-link-custom">Descargar formato</a>
+                        <a href="#" class="btn-link btn-link-custom" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
+                            Ejemplo de formato
+                        </a>
+                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn-link btn-link-custom" download>Descargar formato</a>
                         <button type="submit" class="btn btn-custom">Asignar</button>
                     </div>
                 </form>
@@ -628,5 +630,6 @@
         </div>
         <script src="../js/scriptAlertas.js"></script>
         <script src="../js/script.js"></script>
+        <script src="../js/verAspirantes.js"></script>
 </body>
 </html>
