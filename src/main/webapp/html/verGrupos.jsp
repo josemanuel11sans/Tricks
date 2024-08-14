@@ -385,10 +385,12 @@
                             <form method="post" action="../ActualizarGrupoServlet">
                                 <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
+                                    <a>Nuevo nombre del grupo: </a>
                                     <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
+                                        <option value="">Seleccione la nueva division academica: </option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -396,6 +398,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" required id="docente" name="docente">
+                                        <option value="">Seleccione el nuevo docente: </option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
@@ -411,7 +414,7 @@
                 </div>
             </div>
 
-            <SCRIPT>
+            <script>
                 function llenarModalActualizarGrupo(idGrupo, nombreGrupo, carreraId, docenteId) {
                     $('#idGrupo').val(idGrupo);
                     $('#nombreGrupo').val(nombreGrupo);
@@ -420,7 +423,7 @@
 
                     $('#actualizarGrupoModal').modal('show');
                 }
-            </SCRIPT>
+            </script>
 
 
 
@@ -533,7 +536,7 @@
         </div>
     </div>
     <!-- Bootstrap y scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></SCRIPT>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script>
