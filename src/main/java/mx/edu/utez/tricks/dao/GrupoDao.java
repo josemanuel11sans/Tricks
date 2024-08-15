@@ -138,6 +138,23 @@ public class GrupoDao {
             return false;
         }
     }
+
+    public boolean nombreExistente(String nombreGrupo) {
+        String query = "SELECT COUNT(*) FROM grupos WHERE nombre_grupo = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, nombreGrupo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; // Devuelve verdadero si el folio ya existe
+            }
+        } catch (SQLException a) {
+            throw new RuntimeException("Error al verificar la existencia del grupo", a);
+        }
+        return false; // Devuelve falso si la matrícula no existe
+    }
 }
 
 

@@ -4,16 +4,10 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="mx.edu.utez.tricks.dao.GrupoDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.tricks.model.Grupo" %>
-<%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.tricks.dao.DivisionesAcademicasDAO" %>
-<%@ page import="mx.edu.utez.tricks.dao.CarreraDao" %>
-<%@ page import="mx.edu.utez.tricks.model.Carrera" %>
-<%@ page import="mx.edu.utez.tricks.model.Usuario" %>
-<%@ page import="mx.edu.utez.tricks.dao.UsuarioDao" %>
+<%@ page import="mx.edu.utez.tricks.dao.*" %>
+<%@ page import="mx.edu.utez.tricks.model.*" %>
 
 
 <html>
@@ -127,10 +121,7 @@
                     mensajeAlerta = "Registro exitoso.";
                     break;
                 case "nombreExistente":
-                    mensajeAlerta = "El nombre ya está registrado.";
-                    break;
-                case "curpExistente":
-                    mensajeAlerta = "El curp ya está registrado.";
+                    mensajeAlerta = "El nombre ya esta registrado.";
                     break;
                 case "falloRegistro":
                     mensajeAlerta = "No se pudo registrar el Grupo.";
@@ -142,7 +133,7 @@
                     mensajeAlerta = "Modificación de estado exitosa.";
                     break;
                 case "falloActualizacion":
-                    mensajeAlerta = "No se pudo modificar el Grupo.";
+                    mensajeAlerta = "No se pudo modificar el grupo.";
                     break;
                 case "error":
                     mensajeAlerta = "Se produjo un error.";
@@ -353,7 +344,7 @@
                     </div>
                     <div class="form-group">
                         <select class="custom-select" required id="docente" name="docente">
-                            <%UsuarioDao daoUsuario = new UsuarioDao();
+                            <% UsuarioDao daoUsuario = new UsuarioDao();
                                 ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
                                 for (Usuario u : listaUsuario) { %>
                             <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
@@ -484,8 +475,11 @@
                     <div class="form-group">
                         <label for="folioAspirante">Folio del aspirante:</label>
                         <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
-                            <option value="folio1">Aspirante1</option>
-                            <option value="folio2">Aspirante2</option>
+                            <% AspiranteDAO dao2 = new AspiranteDAO();
+                                List<Aspirante> aspirantes = dao2.getAllAspirantes();
+                                for (Aspirante aspirante : aspirantes) { %>
+                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -517,7 +511,7 @@
                     <div class="form-group">
                         <p>
                             <label for="archivoCargaMasiva">Asignación masiva</label>
-                        <hr>
+                        <br>
                         <label class="btn-files">Selecciona tus archivos
                             <input type="file" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" />
                         </label>
@@ -628,5 +622,5 @@
         <script src="../js/scriptAlertas.js"></script>
         <script src="../js/script.js"></script>
         <script src="../js/verAspirantes.js"></script>
-</body>
+    </body>
 </html>
