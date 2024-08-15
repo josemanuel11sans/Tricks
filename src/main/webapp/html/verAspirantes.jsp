@@ -296,8 +296,14 @@
 <div class="modal fade" id="modificarEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
         <div class="modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-                <h6 class="" id="exampleModalLabel" style="margin-top: 20px; margin-bottom: 0; text-align: center;">¿Estas seguro de cambiar el estado del aspirante?</h6>
+                <h6 class="" id="exampleModalLabel">¿Estas seguro de cambiar el estado del aspirante?</h6>
                 <form action="../ActualizarEstadoServlet" method="post">
                     <div class="form-group" style="display: none">
                         <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
