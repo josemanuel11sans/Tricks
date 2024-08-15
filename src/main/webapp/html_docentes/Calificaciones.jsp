@@ -134,10 +134,17 @@
                                      data-estado="<%= alumno.getEstado() %>" style="cursor: auto"></div>
                             </td>
                             <td style="padding: 0; margin: 0; text-align: center;">
+                                <% if ( alumno.getEstado() == 1 ) {%>
                                 <input type="number" name="calificaciones[<%= alumno.getFolio() %>]" class="form-control calificacion-input"
                                        value="<%= alumno.getCalificacion() %>"
                                        min="0" max="10" step="0.1"
                                        style="height: 25px; font-size: 15px; width: 50%; margin: 0 auto;">
+                                <% }else{%>
+                                <input type="number" name="calificaciones[<%= alumno.getFolio() %>]" class="form-control calificacion-input"
+                                       value="<%= alumno.getCalificacion() %>"
+                                       min="0" max="10" step="0.1"
+                                       style="height: 25px; font-size: 15px; width: 50%; margin: 0 auto;" disabled>
+                                <%}%>
                             </td>
                         </tr>
                         <%
