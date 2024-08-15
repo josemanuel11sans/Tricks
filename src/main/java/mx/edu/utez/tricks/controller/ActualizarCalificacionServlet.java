@@ -55,11 +55,9 @@ public class ActualizarCalificacionServlet extends HttpServlet {
         // Enviar respuesta
         if (actualizadas) {
             response.setStatus(HttpServletResponse.SC_OK);
-            session.setAttribute("alerta", "exito");
             response.getWriter().write("Calificaciones actualizadas.");
         } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            session.setAttribute("alerta", "error");
             response.getWriter().write("Error al actualizar algunas calificaciones.");
         }
 
