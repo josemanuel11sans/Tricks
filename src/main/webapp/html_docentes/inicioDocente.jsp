@@ -93,7 +93,7 @@
         </div>
 
         <div style="position: fixed; bottom: 20px; right: 20px;">
-            <img src="../img_svg/ayuda.svg" id="ayudaD" style="cursor: pointer;" alt="Ayuda">
+            <img src="../img_svg/ayuda.svg" id="ayudaD" style="cursor: pointer; color: white" alt="Ayuda">
         </div>
 
         <div class="sidebar-footer background-color" title="Salir" style="position: fixed; bottom: 20px; left: 20px;">

@@ -361,3 +361,9 @@ a.sidebar-link:hover {
     animation-iteration-count: infinite; /* Repetir la animación infinitamente */
     filter: brightness(0.7); /* Oscurecer el color del ícono al pasar el ratón */
 }
+
+@media (max-width: 768px) {
+    h2{
+        font-size: 3rem !important;
+    }
+}

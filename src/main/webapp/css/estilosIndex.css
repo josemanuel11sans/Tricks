@@ -174,8 +174,24 @@ body{
 .texto1{
     font-size: 3vh;
 }
-@media only screen and (max-width: 999px) {
+@media only screen and (max-width: 768px) {
 
+    body{
+        overflow-x: hidden;
+    }
+
+    *{
+        max-width: 100vw;
+    }
+
+    #margen{
+        padding: 0;
+    }
+
+    .fondoPimario {
+        width: 50%;
+        height: 100vh;
+    }
 
     #cambiar{
         flex-direction: column;

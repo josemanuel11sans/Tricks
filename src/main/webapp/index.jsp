@@ -158,7 +158,7 @@
 <!-- Feature Section -->
 <section class="feature-section fade-in">
   <div class="container">
-    <h2 style="color: #fff; font-family: varela-regular; font-size: 4rem;">Funcionalidades Clave</h2>
+    <h2 style="color: #fff; font-family: varela-regular;">Funcionalidades Clave</h2>
     <br>
     <div class="row justify-content-center">
       <div class="col-md-4 col-sm-6">
