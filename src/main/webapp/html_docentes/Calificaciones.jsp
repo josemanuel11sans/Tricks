@@ -129,7 +129,7 @@
                             <td style="padding: 0; margin: 0"><%= alumno.getFolio() %></td>
                             <td style="padding: 0; margin: 0"><%= alumno.getNombre() %></td>
                             <td style="padding: 0; margin: 0"><%= alumno.getCarrera() %></td>
-                            <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                            <td class="d-flex justify-content-center align-items-center" style="margin: 0; ">
                                 <div class="<%= alumno.getEstado() == 1 ? "activo" : "inactivo" %>"
                                      data-estado="<%= alumno.getEstado() %>"></div>
                             </td>
