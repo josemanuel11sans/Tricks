@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -18,6 +19,7 @@ public class ActualizarCalificacionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlumnoDao dao = new AlumnoDao();
         boolean actualizadas = true;
+        HttpSession session = request.getSession();
 
         // Iterar sobre todos los parámetros del formulario
         Enumeration<String> parameterNames = request.getParameterNames();
@@ -53,9 +55,11 @@ public class ActualizarCalificacionServlet extends HttpServlet {
         // Enviar respuesta
         if (actualizadas) {
             response.setStatus(HttpServletResponse.SC_OK);
+            session.setAttribute("alerta", "exito");
             response.getWriter().write("Calificaciones actualizadas.");
         } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            session.setAttribute("alerta", "error");
             response.getWriter().write("Error al actualizar algunas calificaciones.");
         }
 

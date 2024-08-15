@@ -74,6 +74,54 @@
     </style>
 </head>
 <body>
+
+<%
+    String tipoAlerta = (String) session.getAttribute("alerta");
+    String mensajeAlerta = "";
+
+    if (tipoAlerta != null) {
+        switch (tipoAlerta) {
+            case "exito":
+                mensajeAlerta = "Calificaciones actualizada.";
+                break;
+            case "error":
+                mensajeAlerta = "Se produjo un error.";
+                break;
+            default:
+                mensajeAlerta = "";
+                break;
+        }
+
+        if (!mensajeAlerta.isEmpty()) {
+            String iconoAlerta = "";
+
+            switch (tipoAlerta) {
+                case "exito":
+                    iconoAlerta = "fa-check-circle";
+                    break;
+                case "error":
+                    iconoAlerta = "fa-times-circle";
+                    break;
+                default:
+                    iconoAlerta = "fa-info-circle";
+                    break;
+            }
+%>
+<div class="alerta alerta-dismissible mostrar" role="alert">
+    <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+    <span class="texto"><%= mensajeAlerta %></span>
+    <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+</div>
+<%
+            session.removeAttribute("alerta");
+        }
+    }
+%>
+
+
+
 <div class="wrapper" style="height: 100vh;">
     <li class="sidebar-item" title="Inicio" style="position: absolute; top: 3%; left: 20px;">
         <a href="../html_docentes/inicioDocente.jsp" class="sidebar-link">
