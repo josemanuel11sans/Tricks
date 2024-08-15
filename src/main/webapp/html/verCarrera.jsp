@@ -68,9 +68,6 @@
                 case "nombreExistente":
                     mensajeAlerta = "El nombre ya está registrado.";
                     break;
-                case "curpExistente":
-                    mensajeAlerta = "El curp ya está registrado.";
-                    break;
                 case "falloRegistro":
                     mensajeAlerta = "No se pudo registrar la carrera.";
                     break;
@@ -91,10 +88,8 @@
                     break;
             }
 
-
             if (!mensajeAlerta.isEmpty()) {
                 String iconoAlerta = "";
-
 
                 switch (tipoAlerta) {
                     case "exito":
@@ -134,8 +129,6 @@
             }
         }
     %>
-
-
 
 
     <div class="main">

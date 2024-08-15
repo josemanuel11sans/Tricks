@@ -49,7 +49,7 @@ public class ActualizarDivisionServlet extends HttpServlet {
                 boolean isHistorialInserted = historialDao.insert(historial);
 
                 if (isHistorialInserted) {
-                    session.setAttribute("alerta", "exito");
+                    session.setAttribute("alerta", "actualizacionExitosa");
                     resp.sendRedirect("html/verDivision.jsp"); // Redirige a una página de éxito
                 } else {
                     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "No se pudo registrar la actualización en el historial.");

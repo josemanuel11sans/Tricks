@@ -56,11 +56,9 @@ To change this template use File | Settings | File Templates.
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
-
     <%
         String tipoAlerta = (String) session.getAttribute("alerta");
         String mensajeAlerta = "";
-
 
         if (tipoAlerta != null) {
             switch (tipoAlerta) {
@@ -70,11 +68,11 @@ To change this template use File | Settings | File Templates.
                 case "nombreExistente":
                     mensajeAlerta = "El nombre ya está registrado.";
                     break;
-                case "curpExistente":
-                    mensajeAlerta = "El curp ya está registrado.";
+                case "siglasExistente":
+                    mensajeAlerta = "Las siglas ya están registradas.";
                     break;
                 case "falloRegistro":
-                    mensajeAlerta = "No se pudo registrar la carrera.";
+                    mensajeAlerta = "No se pudo registrar la división.";
                     break;
                 case "actualizacionExitosa":
                     mensajeAlerta = "Modificación exitosa.";
@@ -83,7 +81,7 @@ To change this template use File | Settings | File Templates.
                     mensajeAlerta = "Modificación de estado exitosa.";
                     break;
                 case "falloActualizacion":
-                    mensajeAlerta = "No se pudo modificar al docente.";
+                    mensajeAlerta = "No se pudo modificar la carrera.";
                     break;
                 case "error":
                     mensajeAlerta = "Se produjo un error.";
@@ -93,25 +91,17 @@ To change this template use File | Settings | File Templates.
                     break;
             }
 
-
             if (!mensajeAlerta.isEmpty()) {
                 String iconoAlerta = "";
 
-
                 switch (tipoAlerta) {
                     case "exito":
-                        iconoAlerta = "fa-check-circle";
-                        break;
                     case "actualizacionExitosa":
-                        iconoAlerta = "fa-check-circle";
-                        break;
                     case "actualizacionExitosaEsta":
                         iconoAlerta = "fa-check-circle";
                         break;
-                    case "falloActualizacion":
-                        iconoAlerta = "fa-exclamation-triangle";
-                        break;
                     case "falloRegistro":
+                    case "falloActualizacion":
                         iconoAlerta = "fa-exclamation-triangle";
                         break;
                     case "error":
@@ -123,7 +113,6 @@ To change this template use File | Settings | File Templates.
                 }
     %>
 
-
     <div class="alerta alerta-dismissible mostrar" role="alert">
         <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
         <span class="texto"><%= mensajeAlerta %></span>
@@ -131,12 +120,12 @@ To change this template use File | Settings | File Templates.
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
     </div>
+
     <%
                 session.removeAttribute("alerta");
             }
         }
     %>
-
 
 
 
@@ -324,45 +313,15 @@ To change this template use File | Settings | File Templates.
 </div>
 
 
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        $('#modificarDivisionModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Botón que activó el modal
-            var idDivision = button.data('id');
-            var nombre = button.data('nombre');
-            var siglas = button.data('siglas');
-            var coordinador = button.data('coordinador');
-
-
-
-
-            // Actualizar los campos del modal con los datos actuales
-            $('#idDivision').val(idDivision);
-            $('#nombreDivision').val(nombre);
-            $('#siglas').val(siglas);
-            $('#coordinadorDivision').val(coordinador);
-        });
-    });
-</script>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var filterName = document.getElementById('filterName');
         var filterCareer = document.getElementById('filterCareer');
         var filterDivision = document.getElementById('filterDivision');
 
-
-
-
         filterName.addEventListener('input', filterTable);
         filterCareer.addEventListener('change', filterTable);
         filterDivision.addEventListener('change', filterTable);
-
-
-
 
         function filterTable() {
             var filterNameValue = filterName.value.toLowerCase();
@@ -371,9 +330,6 @@ To change this template use File | Settings | File Templates.
             var table = document.getElementById('example');
             var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-
-
-
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var name = cells[0].textContent.toLowerCase();   // Columna "Nombre"
@@ -381,15 +337,9 @@ To change this template use File | Settings | File Templates.
                 var siglas = cells[2].textContent.toLowerCase();   // Columna "Siglas"
                 var estado = cells[3].querySelector('div') ? cells[3].querySelector('div').getAttribute('data-estado').toLowerCase() : ''; // Columna "Estado"
 
-
-
-
                 var nameMatch = filterNameValue === '' || name.includes(filterNameValue) || coordinator.includes(filterNameValue) || siglas.includes(filterNameValue);
                 var careerMatch = filterCareerValue === '' || estado === filterCareerValue;
                 var divisionMatch = filterDivisionValue === '' || estado === filterDivisionValue;
-
-
-
 
                 if (nameMatch && careerMatch && divisionMatch) {
                     rows[i].style.display = '';
@@ -399,18 +349,12 @@ To change this template use File | Settings | File Templates.
             }
         }
 
-
-
-
         // Inicializar DataTables
         $('#example').DataTable({
             "paging": true,
             "searching": false, // Desactivar la búsqueda integrada de DataTables ya que usaremos un filtro personalizado
             "info": false
         });
-
-
-
 
         // Configurar el modal de modificar estado
         $('#modificarEstado').on('show.bs.modal', function(event) {
@@ -421,9 +365,6 @@ To change this template use File | Settings | File Templates.
             $('#estadoDivision').val(estado === '1' ? '2' : '1');
         });
 
-
-
-
         // Configurar el modal de modificar division
         $('#modificarDivisionModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
@@ -433,69 +374,44 @@ To change this template use File | Settings | File Templates.
             $('#coordinadorDivision').val(button.data('coordinador'));
         });
 
-
-
-
     });
-
-
-
 
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
             document.getElementById('idDivison2').value = folio;
-
-
-
-
             var estadoActual = this.getAttribute('data-estado');
             var estadoContrario = estadoActual === '1' ? '2' : '1';
             document.getElementById('estadoIdDivision').value = estadoContrario;
         });
     });
 
-    // Evento para modal de modificar división
-    document.querySelectorAll('.btn-modificar').forEach(function(button) {
-        button.addEventListener('click', function() {
-            // Obtener los atributos de los datos de la división
-            var idDivision = button.getAttribute('data-id');
-            var nombreDivision = button.getAttribute('data-nombre');
-            var siglas = button.getAttribute('data-siglas');
-            var coordinadorDivision = button.getAttribute('data-coordinador');
+    // Rellanar campos al modificar
+    document.addEventListener('DOMContentLoaded', function () {
+        // Captura los botones de modificar en la tabla
+        const btnsModificar = document.querySelectorAll('.btn-modificar');
 
-            // Asignar los valores a los campos del modal
-            document.getElementById('idDivision').value = idDivision;
-            document.getElementById('nombreDivision').value = nombreDivision;
-            document.getElementById('siglas').value = siglas;
-            document.getElementById('coordinadorDivision').value = coordinadorDivision;
+        // Itera sobre los botones de modificar y añade un evento click a cada uno
+        btnsModificar.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Obtiene los valores de los atributos data-* del botón seleccionado
+                const id = this.getAttribute('data-id');
+                const nombre = this.getAttribute('data-nombre');
+                const siglas = this.getAttribute('data-siglas');
+                const coordinador = this.getAttribute('data-coordinador');
+                const estado = this.getAttribute('data-estado');
 
+                // Rellena los campos del modal con los valores obtenidos
+                document.getElementById('idDivision').value = id;
+                document.getElementById('nombreDivision').value = nombre;
+                document.getElementById('siglas').value = siglas;
+                document.getElementById('coordinadorDivision').value = coordinador;
+
+                // Puedes realizar alguna acción específica con el estado si lo necesitas
+                console.log("Estado actual: " + estado);
+            });
         });
     });
-
-
-
-</script>
-
-<script>
-    // JavaScript para ocultar automáticamente la alerta después de 5 segundos
-    document.addEventListener('DOMContentLoaded', function() {
-        const alerta = document.querySelector('.alerta');
-
-        if (alerta.classList.contains('mostrar')) {
-            setTimeout(function() {
-                alerta.classList.add('ocultar');
-            }, 5000); // 5000 ms = 5 segundos
-
-            // Remover la alerta del DOM después de la transición (opcional)
-            alerta.addEventListener('transitionend', function() {
-                if (alerta.classList.contains('ocultar')) {
-                    alerta.remove();
-                }
-            });
-        }
-    });
-
 </script>
 
 <script>
