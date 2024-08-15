@@ -75,7 +75,11 @@
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
-    <jsp:include page="../componentes/menuLateralDocente.jsp" />
+    <li class="sidebar-item" title="Inicio" style="position: absolute; top: 3%; left: 20px;">
+        <a href="../html_docentes/inicioDocente.jsp" class="sidebar-link">
+            <i class="fas fa-house"></i>
+        </a>
+    </li>
     <div class="main">
         <div class="container mt-4 text-left">
             <h1 class="mb-4 text-light">Aspirantes del grupo</h1>

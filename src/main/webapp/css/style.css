@@ -356,3 +356,8 @@ a.sidebar-link:hover {
     filter: brightness(0.7); /* Oscurecer el color del ícono al pasar el ratón */
 }
 
+#password:hover {
+    animation: bounce 0.5s; /* Animación de salto */
+    animation-iteration-count: infinite; /* Repetir la animación infinitamente */
+    filter: brightness(0.7); /* Oscurecer el color del ícono al pasar el ratón */
+}
