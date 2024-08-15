@@ -127,4 +127,35 @@ public class DivisionesAcademicasDAO {
             return false;
         }
     }
+
+    public boolean existeNombre(String nombreDivision) {
+        boolean existe = false;
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM divisiones_academicas WHERE nombreDivision = ?")) {
+            stmt.setString(1, nombreDivision);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                existe = rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
+
+    public boolean existeSiglas(String siglas) {
+        boolean existe = false;
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM divisiones_academicas WHERE siglas = ?")) {
+            stmt.setString(1, siglas);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                existe = rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
+
 }

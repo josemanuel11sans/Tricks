@@ -34,8 +34,18 @@ public class RegistrarCarreraServlet extends HttpServlet {
         int idEstado = Integer.parseInt(req.getParameter("idEstado"));
         HttpSession session = req.getSession();
 
-        Carrera carrera = new Carrera(0, nombreCarrera, idDivisionAcademica, idEstado);
         CarreraDao carreraDao = new CarreraDao();
+
+        // Verificar si la carrera ya existe
+        boolean carreraExiste = carreraDao.existeCarrera(nombreCarrera);
+
+        if (carreraExiste) {
+            session.setAttribute("alerta", "nombreExistente");
+            resp.sendRedirect("html/verCarrera.jsp");
+            return; // Salir del método si la carrera ya existe
+        }
+
+        Carrera carrera = new Carrera(0, nombreCarrera, idDivisionAcademica, idEstado);
         boolean resultado = carreraDao.agregarCarrera(carrera);
 
         if (resultado) {
@@ -76,3 +86,4 @@ public class RegistrarCarreraServlet extends HttpServlet {
         req.getRequestDispatcher("html/registrarCarrera.jsp").forward(req, resp);
     }
 }
+

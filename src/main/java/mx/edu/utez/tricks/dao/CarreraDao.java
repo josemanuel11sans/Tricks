@@ -117,4 +117,25 @@ public class CarreraDao {
             return false;
         }
     }
+
+    public boolean existeCarrera(String nombreCarrera) {
+        boolean existe = false;
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            String query = "SELECT COUNT(*) FROM carreras WHERE nombre_carrera = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, nombreCarrera);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                existe = true;
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return existe;
+    }
+
 }

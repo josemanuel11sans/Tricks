@@ -20,19 +20,33 @@ public class RegistrarDivisionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             // Recibiendo parámetros del formulario
-            String nombre = req.getParameter("nombreDivision");
+            String nombreDivision = req.getParameter("nombreDivision");
             String siglas = req.getParameter("siglas");
             String coordinador = req.getParameter("coordinadorDivision");
             HttpSession session = req.getSession();
 
             // Creando una instancia de DivisionesAcademicas con los datos recibidos
             DivisionesAcademicas division = new DivisionesAcademicas();
-            division.setNombreDivision(nombre);
+            division.setNombreDivision(nombreDivision);
             division.setSiglas(siglas);
             division.setCoordinadorDivision(coordinador);
 
             // Agregando la división
             DivisionesAcademicasDAO dao = new DivisionesAcademicasDAO();
+
+            // Verificación de existencia de nombre y siglas
+            if (dao.existeNombre(nombreDivision)) {
+                session.setAttribute("alerta", "nombreExistente");
+                resp.sendRedirect("html/registrarDivision.jsp");
+                return;
+            }
+
+            if (dao.existeSiglas(siglas)) {
+                session.setAttribute("alerta", "siglasExistente");
+                resp.sendRedirect("html/registrarDivision.jsp");
+                return;
+            }
+
             boolean resultado = dao.agregarDivision(division);
 
             // Insertar en el historial si la división fue agregada exitosamente
@@ -43,7 +57,6 @@ public class RegistrarDivisionServlet extends HttpServlet {
                 historial.setDescripcion("Se registró la división académica con siglas: " + siglas);
                 historial.setFecha_creacion(fechaCreacion);
                 historial.setUsuarioIdusuario(Integer.parseInt(session.getAttribute("idUsuarioSession").toString()));
-
 
                 boolean isHistorialInserted = historialDao.insert(historial);
 
