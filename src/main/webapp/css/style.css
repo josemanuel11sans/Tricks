@@ -78,6 +78,11 @@ body {
     font-weight: 600;
 }
 
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
 #sidebar.expand .sidebar-logo,
 #sidebar.expand a.sidebar-link span {
     animation: fadeIn .25s ease;
