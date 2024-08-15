@@ -93,53 +93,56 @@
                 <div class="col-md-3">
                     <input type="text" id="filterFolio" class="form-control" placeholder="Buscar por Folio">
                 </div>
+                <div class="col-md-3">
+                    <button type="button" id="updateCalificacionesBtn" class="btn btn-primary">Calificar</button>
+                </div>
             </div>
 
             <!-- Tabla de alumnos -->
             <div class="container-xxl tabla">
-                <table id="alumnosTable" class="table table-striped" style="width:100%">
-                    <thead class="thead-light">
-                    <tr>
-                        <th>Folio</th>
-                        <th>Nombre</th>
-                        <th>Carrera</th>
-                        <th>Estado</th>
-                        <th>Calificación</th>
-                    </tr>
-                    </thead>
-                    <tbody id="aspirantesTableBody">
-                    <%
-                        String grupoIdStr = request.getParameter("grupoId");
-                        int grupoId = Integer.parseInt(grupoIdStr);
-                        AlumnoDao dao = new AlumnoDao();
-                        List<Alumno> alumnos = dao.getAlumnosPorGrupo(grupoId);
+                <form id="calificacionesForm">
+                    <table id="alumnosTable" class="table table-striped" style="width:100%">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Folio</th>
+                            <th>Nombre</th>
+                            <th>Carrera</th>
+                            <th>Estado</th>
+                            <th>Calificación</th>
+                        </tr>
+                        </thead>
+                        <tbody id="aspirantesTableBody">
+                        <%
+                            String grupoIdStr = request.getParameter("grupoId");
+                            int grupoId = Integer.parseInt(grupoIdStr);
+                            AlumnoDao dao = new AlumnoDao();
+                            List<Alumno> alumnos = dao.getAlumnosPorGrupo(grupoId);
 
-                        if (alumnos != null) {
-                            for (Alumno alumno : alumnos) {
-                    %>
-                    <tr style="height: 10px; font-size: 15px">
-                        <td style="padding: 0; margin: 0"><%= alumno.getFolio() %></td>
-                        <td style="padding: 0; margin: 0"><%= alumno.getNombre() %></td>
-                        <td style="padding: 0; margin: 0"><%= alumno.getCarrera() %></td>
-                        <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
-                            <div class="<%= alumno.getEstado() == 1 ? "activo" : "inactivo" %>"
-                                 data-estado="<%= alumno.getEstado() %>"></div>
-                        </td>
-                        <td style="padding: 0; margin: 0">
-                            <input type="number" class="form-control calificacion-input"
-                                   value="<%= alumno.getCalificacion() %>"
-                                   min="0" max="10" step="0.1"
-                                   data-folio="<%= alumno.getFolio() %>"
-                                   onchange="actualizarCalificacion(this)"
-                                   style="height: 25px; font-size: 15px; width: 100%;">
-                        </td>
-                    </tr>
-                    <%
+                            if (alumnos != null) {
+                                for (Alumno alumno : alumnos) {
+                        %>
+                        <tr style="height: 10px; font-size: 15px">
+                            <td style="padding: 0; margin: 0"><%= alumno.getFolio() %></td>
+                            <td style="padding: 0; margin: 0"><%= alumno.getNombre() %></td>
+                            <td style="padding: 0; margin: 0"><%= alumno.getCarrera() %></td>
+                            <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
+                                <div class="<%= alumno.getEstado() == 1 ? "activo" : "inactivo" %>"
+                                     data-estado="<%= alumno.getEstado() %>"></div>
+                            </td>
+                            <td style="padding: 0; margin: 0; text-align: center;">
+                                <input type="number" name="calificaciones[<%= alumno.getFolio() %>]" class="form-control calificacion-input"
+                                       value="<%= alumno.getCalificacion() %>"
+                                       min="0" max="10" step="0.1"
+                                       style="height: 25px; font-size: 15px; width: 50%; margin: 0 auto;">
+                            </td>
+                        </tr>
+                        <%
+                                }
                             }
-                        }
-                    %>
-                    </tbody>
-                </table>
+                        %>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </div>
@@ -151,47 +154,32 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../js/filtroCalificacion.js"></script>
 <script>
-    function actualizarCalificacion(input) {
-        var folio = $(input).data('folio');
-        var calificacion = $(input).val();
-
-        $.ajax({
-            url: 'ActualizarCalificacionServlet',
-            method: 'POST',
-            data: { folio: folio, calificacion: calificacion },
-            success: function(response) {
-                console.log('Calificación actualizada con éxito');
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al actualizar la calificación:', error);
-            }
-        });
-    }
-
     $(document).ready(function() {
-        $("#filterFolio, #filterCalificacion").on("keyup change", function() {
-            var folioFilter = $("#filterFolio").val().toLowerCase();
-            var calificacionFilter = $("#filterCalificacion").val();
+        $('#updateCalificacionesBtn').click(function() {
+            var formData = $('#calificacionesForm').serialize(); // Serializa todos los datos del formulario
 
-            $("#aspirantesTableBody tr").filter(function() {
-                var folio = $(this).find("td:eq(0)").text().toLowerCase();
-                var calificacion = parseFloat($(this).find(".calificacion-input").val()) || 0;
-
-                var folioMatch = folio.indexOf(folioFilter) > -1;
-                var calificacionMatch = true;
-
-                if (calificacionFilter === "0-5") {
-                    calificacionMatch = calificacion >= 0 && calificacion <= 5;
-                } else if (calificacionFilter === "6-7") {
-                    calificacionMatch = calificacion >= 6 && calificacion <= 7;
-                } else if (calificacionFilter === "8-10") {
-                    calificacionMatch = calificacion >= 8 && calificacion <= 10;
+            $.ajax({
+                url: '/tricks_war_exploded/ActualizarCalificacionesServlet',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    alert('Calificaciones actualizadas con éxito');
+                },
+                error: function(xhr, status, error) {
+                    alert('Error al actualizar las calificaciones: ' + xhr.responseText);
                 }
-
-                $(this).toggle(folioMatch && calificacionMatch);
             });
         });
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../js/verAspirantes.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/scriptAlertas.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

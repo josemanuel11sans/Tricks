@@ -48,4 +48,32 @@ public class AlumnoDao {
         }
         return alumnos2; // Retorna la lista de alumnos obtenidos
     }
+// Método existente para obtener alumnos por grupo
+
+    /**
+     * Actualiza la calificación de un alumno.
+     *
+     * @param folio        El folio del alumno.
+     * @param calificacion La nueva calificación.
+     * @return true si la calificación se actualizó correctamente, false en caso contrario.
+     */
+    public boolean actualizarCalificacion(String folio, double calificacion) {
+        String query = "UPDATE calificaciones SET calificacion = ? WHERE aspirante_folio_aspirante = ?";
+        boolean actualizado = false;
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setDouble(1, calificacion);
+            stmt.setString(2, folio);
+
+            int filasAfectadas = stmt.executeUpdate();
+            actualizado = (filasAfectadas > 0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return actualizado;
+    }
 }
