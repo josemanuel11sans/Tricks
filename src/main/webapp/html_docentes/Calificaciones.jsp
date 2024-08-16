@@ -83,10 +83,10 @@
     if (tipoAlerta != null) {
         switch (tipoAlerta) {
             case "exito":
-                mensajeAlerta = "Calificaciones modificadas correctamente.";
+                mensajeAlerta = "Calificaciones registradas.";
                 break;
             case "error":
-                mensajeAlerta = "Error al modificar calificaciones.";
+                mensajeAlerta = "Error al registrar calificaciones.";
                 break;
             default:
                 mensajeAlerta = "";
