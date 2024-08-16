@@ -239,7 +239,8 @@
                         window.location.reload();
                     } else {
                         // Muestra un mensaje de error si la actualización falló
-                        alert('Error al actualizar las calificaciones.');
+                        //alert('Error al actualizar las calificaciones.');
+                        window.location.reload();
                     }
                 },
                 error: function(xhr, status, error) {
