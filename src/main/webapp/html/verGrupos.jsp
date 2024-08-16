@@ -341,7 +341,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="">División acádemica: </option>
+                                        <option value="" disabled selected>División acádemica: </option>
                                         <% for (Carrera carrera : carreraList) {%>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -349,7 +349,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" required id="docente" name="docente">
-                                        <option value="">Docente: </option>
+                                        <option value="" disabled selected>Docente: </option>
                                         <% UsuarioDao daoUsuario = new UsuarioDao();
                                             ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
                                             for (Usuario u : listaUsuario) { %>
@@ -404,8 +404,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="carrera" class="col-form-label"></label>
-                                    <select class="custom-select" id="carrera" name="carrera" data-label="División académica" required>
-                                        <option value="">Seleccione una nueva división académica:</option>
+                                    <select class="custom-select" id="carrera" name="carrera" required>
+                                        <option value="" selected>División Académica:</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -413,8 +413,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="docente" class="col-form-label"></label>
-                                    <select class="custom-select" id="docente" name="docente" data-label="Docente" required>
-                                        <option value="">Seleccione un docente: </option>
+                                    <select class="custom-select" id="docente" name="docente" required>
+                                        <option value="" selected>Docente:</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
