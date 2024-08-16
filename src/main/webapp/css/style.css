@@ -378,3 +378,7 @@ a.sidebar-link:hover {
 .desva {
     background: radial-gradient(circle, #107863, #081E33) !important;
 }
+
+button:focus{
+    outline: none;
+}
