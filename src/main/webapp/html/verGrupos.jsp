@@ -505,10 +505,6 @@
             <div class="modal-body modal-body-custom">
                 <form action="../uploadexcel" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="grupoNombreMasivo">Grupo:</label>
-                        <input type="text" class="form-control form-control-custom" id="grupoNombreMasivo" name="grupoNombreMasivo" value="" readonly>
-                    </div>
-                    <div class="form-group">
                         <p>
                             <label for="archivoCargaMasiva">Asignación masiva</label>
                         <br>
@@ -518,11 +514,11 @@
                         </p>
                     </div>
                     <div class="modal-footer modal-footer-custom">
-                        <a href="#" class="btn-link btn-link-custom" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
+                        <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
                         </a>
-                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn-link btn-link-custom" download>Descargar formato</a>
-                        <button type="submit" class="btn btn-custom">Asignar</button>
+                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn btnFormatos" download>Descargar formato</a>
+                        <button type="submit" class="btn btn-primary">Asignar</button>
                     </div>
                 </form>
 

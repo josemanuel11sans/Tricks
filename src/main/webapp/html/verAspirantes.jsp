@@ -337,7 +337,7 @@
                     <div class="form-group">
                         <input type="file" class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
                         <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
-                    </div>
+
                     <div class="modal-footer modal-footer-custom">
                         <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/ejemploAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
@@ -346,6 +346,7 @@
                             Descargar formato
                         </a>
                         <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
                     </div>
                 </form>
             </div>
