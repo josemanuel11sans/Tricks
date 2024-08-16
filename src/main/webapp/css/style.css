@@ -382,3 +382,11 @@ a.sidebar-link:hover {
 button:focus{
     outline: none;
 }
+
+@media (max-width: 750px) {
+
+    .tabla{
+        max-height: 52vh!important;
+    }
+
+}
