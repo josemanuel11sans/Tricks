@@ -191,7 +191,7 @@
             <div class="row mb-3">
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Selecciona una carrera</option>
@@ -205,7 +205,7 @@
                             }
                         %>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Selecciona una división</option>
@@ -219,7 +219,7 @@
                             }
                         %>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
                         Registrar grupo
