@@ -1,5 +1,3 @@
-
-
 <%--
 Created by IntelliJ IDEA.
 User: Joseb

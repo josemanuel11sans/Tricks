@@ -1,8 +1,3 @@
-
-
-
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
@@ -320,54 +315,58 @@
                 }
             </script>
 
-            <!-- Modal registrar grupo -->
-<div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar grupo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="../RegistrarGrupoServlet">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder="Nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <select class="custom-select" id="carrera" name="carrera" required>
-                            <% for (Carrera carrera : carreraList) {%>
-                            <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                            <% } %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select class="custom-select" required id="docente" name="docente">
-                            <% UsuarioDao daoUsuario = new UsuarioDao();
-                                ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
-                                for (Usuario u : listaUsuario) { %>
-                            <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
-                            <% } %>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-
-            <!-- Modal actualizar grupo -->
-            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <!-- Modal registrar grupo nuevo -->
+            <div class="modal fade" id="registrarGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Actualizar grupo</h5>
+                            <h5 class="modal-title">Registrar Grupo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="../RegistrarGrupoServlet">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
+                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" id="carrera" name="carrera" required>
+                                        <option value="">División acádemica: </option>
+                                        <% for (Carrera carrera : carreraList) {%>
+                                        <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" required id="docente" name="docente">
+                                        <option value="">Docente: </option>
+                                        <% UsuarioDao daoUsuario = new UsuarioDao();
+                                            ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
+                                            for (Usuario u : listaUsuario) { %>
+                                        <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registrar Docente</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -376,12 +375,12 @@
                             <form method="post" action="../ActualizarGrupoServlet">
                                 <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
-                                    <a>Nuevo nombre del grupo: </a>
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
+                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="">Seleccione la nueva division academica: </option>
+                                        <option value="">División acádemica: </option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -389,14 +388,13 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" required id="docente" name="docente">
-                                        <option value="">Seleccione el nuevo docente: </option>
+                                        <option value="">Docente: </option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                 </div>
                             </form>
@@ -452,6 +450,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 
