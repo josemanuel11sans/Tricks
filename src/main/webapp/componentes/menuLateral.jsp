@@ -107,6 +107,10 @@
             height: 100%;
             display: block;
         }
+        #sidebar:not(.expand) .sidebar-logo,
+        #sidebar:not(.expand) a.sidebar-link span {
+            display: inline-block;
+        }
 
         .hamburger {
             position: fixed;
@@ -156,7 +160,7 @@
     }
     const hamBurger = document.querySelector(".toggle-btn");
     function addHamburgerEventListener() {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth > 768) {
             hamBurger.addEventListener("click", toggleSidebar);
         } else {
             hamBurger.removeEventListener("click", toggleSidebar); // Remueve el event listener si la resolución es menor o igual a 768px
