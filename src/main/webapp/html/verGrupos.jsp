@@ -248,13 +248,14 @@
                         for (Grupo g : lista) {
                     %>
                     <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
-                        <td style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
+                        <td id="nombre" style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getNombreDocente()%> <%= g.getApellidoDocente()%></td>
                         <td style="padding: 0; margin: 0"><%= g.getCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getDivisionAcademica() %></td>
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
+
                                     data-target="#asignarMasivo"
                                     onclick="setGrupoInfoMasivo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
                                 <i class="fas fa-users"></i>
@@ -276,6 +277,9 @@
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-modificar" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
+                                    datagrupo="<%=g.getNombreGrupo()%>"
+                                    datadiv="<%= g.getDivisionAcademica()%>"
+                                    datadoc="<%= g.getNombreDocente()%>"
                                     data-target="#modificarGrupo"
                                     onclick="llenarModalActualizarGrupo(<%= g.getIdGrupo() %>, '<%= g.getNombreGrupo() %>', <%= g.getIdCarrera() %>, <%= g.getIdDocente() %>)">
                                 <i class="fas fa-edit"></i>
@@ -286,6 +290,7 @@
                     </tbody>
                 </table>
             </div>
+
 
             <script>
                 document.getElementById('filterName').addEventListener('keyup', filterTable);
@@ -359,6 +364,25 @@
                     </div>
                 </div>
             </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Evento para modal de modificar carrera
+                    document.querySelectorAll('.btn-modificar').forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var nombre = button.getAttribute('nombre');
+                            var nombreCarrera = button.getAttribute('data-nombre');
+                            var idDivisionAcademica = button.getAttribute('data-idDivision');
+
+
+                            document.getElementById('nombreGrupo').value = nombre;
+                            document.getElementById('nombreCarreraModificar').value = nombreCarrera;
+                            document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
+
+                        });
+                    });
+
+                }
+            </script>
 
 
             <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -366,7 +390,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Registrar Docente</h5>
+                            <h5 class="modal-title">Modificar grupo</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -467,18 +491,20 @@
             </div>
             <div class="modal-body">
                 <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
-                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="">
+                    <input type="hidden" id="IdGrupo" name="IdGrupo" value=""  >
                     <div class="form-group">
-                        <label for="nombreGrupo">Grupo seleccionado:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                        <!--<label for="nombreGrupo">Grupo seleccionado:</label>-->
+                        <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
                     </div>
                     <div class="form-group">
                         <label for="folioAspirante">Folio del aspirante:</label>
+
                         <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
+                            <option> Selecciona id </option>
                             <% AspiranteDAO dao2 = new AspiranteDAO();
                                 List<Aspirante> aspirantes = dao2.getAllAspirantes();
                                 for (Aspirante aspirante : aspirantes) { %>
-                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></option>
+                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
                             <% } %>
                         </select>
                     </div>
@@ -529,6 +555,25 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Evento para modal de modificar carrera
+            document.querySelectorAll('.btn-modificar').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var aatagrupo = button.getAttribute('datagrupo');
+                    var datadiv = button.getAttribute('datadiv');
+                    var datadoc = button.getAttribute('datadoc');
+
+
+                    document.getElementById('nombreGrupo').value = aatagrupo;
+                    document.getElementById('carrera').value = datadiv;
+                    document.getElementById('docente').value = datadoc;
+
+                });
+            });
+
+        }
+    </script>
     <!-- Bootstrap y scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
