@@ -139,6 +139,7 @@
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
                 </div>
+                <br><br>
                 <div class="col-md-3">
                     <select class="custom-select" required>
                         <option value="">División académica</option>
@@ -153,6 +154,7 @@
                         %>
                     </select>
                 </div>
+                <br><br>
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">

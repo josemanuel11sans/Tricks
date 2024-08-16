@@ -119,7 +119,7 @@
             <div class="row mb-3">
                 <div class="col-md-2">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar">
-                </div>
+                </div><br><br>
                 <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Grupo</option>
@@ -140,14 +140,14 @@
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirante" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar aspirante
                         <i class="fa-solid fa-user fa-lg"></i>
                     </button>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirantes" style="display: flex; justify-content: space-evenly; align-items: center">
