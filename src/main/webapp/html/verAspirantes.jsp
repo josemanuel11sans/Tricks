@@ -223,19 +223,19 @@
             <div class="modal-body">
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante"  maxlength="10" placeholder="">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="">
+                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" maxlength="50" placeholder="">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="">
+                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante"  maxlength="50" placeholder="">
                         <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="">
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante"  maxlength="25" placeholder="">
                         <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">
