@@ -181,7 +181,7 @@
             var formData = $('#calificacionesForm').serialize(); // Serializa todos los datos del formulario
 
             $.ajax({
-                url: '/tricks_war_exploded/ActualizarCalificacionesServlet',
+                url: '../ActualizarCalificacionesServlet',
                 method: 'POST',
                 data: formData,
                 success: function(response) {

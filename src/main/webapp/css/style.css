@@ -116,10 +116,12 @@ a.sidebar-link {
 .dropdown-item i {
     font-size: 1.1rem;
     margin-right: .75rem;
+    color: white;
 }
 
 a.sidebar-link:hover {
     background-color: #081E33;
+    color: white;
 }
 
 .sidebar-item {
