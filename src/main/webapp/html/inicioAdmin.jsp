@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--desacivar estos comentario en caso de ser requerido NOTA ES UNA CDN-->
+    <!--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+    <script src="../js/sweetalert2.js"></script>
 </head>
 <body>
 <div class="wrapper" style="height: 100vh;">
