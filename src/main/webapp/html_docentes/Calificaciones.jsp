@@ -89,13 +89,22 @@
                 <div class="col-md-3">
                     <select class="custom-select" id="filterCalificacion">
                         <option value="">Calificación...</option>
-                        <option value="0-5">0-5</option>
-                        <option value="6-7">6-7</option>
-                        <option value="8-10">8-10</option>
+                        <option value="0-5">0-6</option>
+                        <option value="6-7">6.1-8</option>
+                        <option value="8-10">8.1-10</option>
                     </select>
+
+
                 </div>
                 <div class="col-md-3">
                     <input type="text" id="filterFolio" class="form-control" placeholder="Buscar por Folio">
+                </div>
+                <div class="col-md-3">
+                    <select class="custom-select" id="filterEstado">
+                        <option value="">Estado...</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <button type="button" id="updateCalificacionesBtn" class="btn btn-primary">Calificar</button>
@@ -119,8 +128,10 @@
                         <%
                             String grupoIdStr = request.getParameter("grupoId");
                             int grupoId = Integer.parseInt(grupoIdStr);
+                            String estadoStr = request.getParameter("estado");
+                            Integer estado = (estadoStr != null && !estadoStr.isEmpty()) ? Integer.parseInt(estadoStr) : null;
                             AlumnoDao dao = new AlumnoDao();
-                            List<Alumno> alumnos = dao.getAlumnosPorGrupo(grupoId);
+                            List<Alumno> alumnos = dao.getAlumnosPorGrupo(grupoId, estado);
 
                             if (alumnos != null) {
                                 for (Alumno alumno : alumnos) {
@@ -174,23 +185,30 @@
                 method: 'POST',
                 data: formData,
                 success: function(response) {
-                    alert('Calificaciones actualizadas con éxito');
+
                 },
                 error: function(xhr, status, error) {
                     alert('Error al actualizar las calificaciones: ' + xhr.responseText);
                 }
             });
         });
+
+        $('#filterEstado').change(function() {
+            var estado = $(this).val();
+            var grupoId = '<%= grupoIdStr %>'; // Obtén el ID del grupo
+            window.location.href = "Calificaciones.jsp?grupoId=" + grupoId + "&estado=" + estado;
+        });
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../js/verAspirantes.js"></script>
-<script src="../js/script.js"></script>
-<script src="../js/scriptAlertas.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("filterEstado").addEventListener("change", function() {
+        var estado = this.value;
+        var grupoId = new URLSearchParams(window.location.search).get('grupoId');
+        var url = '/tricks_war_exploded/html_docentes/Calificaciones.jsp?grupoId=' + grupoId + '&estado=' + estado;
 
+        window.location.href = url;
+    });
+});
+</script>
 </body>
 </html>

@@ -5,13 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.http.HttpSession;
+import mx.edu.utez.tricks.dao.AlumnoDao;
 
 import java.io.IOException;
 import java.util.Enumeration;
-
-import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.tricks.dao.AlumnoDao;
 
 @WebServlet(name = "ActualizarCalificacionesServlet", urlPatterns = {"/ActualizarCalificacionesServlet"})
 public class ActualizarCalificacionServlet extends HttpServlet {
@@ -52,15 +50,6 @@ public class ActualizarCalificacionServlet extends HttpServlet {
             }
         }
 
-        // Enviar respuesta
-        if (actualizadas) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().write("Calificaciones actualizadas.");
-        } else {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Error al actualizar algunas calificaciones.");
-        }
 
-
-}
+    }
 }
