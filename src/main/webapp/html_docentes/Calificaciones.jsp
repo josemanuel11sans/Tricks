@@ -74,6 +74,55 @@
     </style>
 </head>
 <body>
+
+<!-- Alertas de validaciones -->
+<%
+    String tipoAlerta = (String) session.getAttribute("alerta");
+    String mensajeAlerta = "";
+
+    if (tipoAlerta != null) {
+        switch (tipoAlerta) {
+            case "exito":
+                mensajeAlerta = "Calificaciones modificadas correctamente.";
+                break;
+            case "error":
+                mensajeAlerta = "Error al modificar calificaciones.";
+                break;
+            default:
+                mensajeAlerta = "";
+                break;
+        }
+
+        if (!mensajeAlerta.isEmpty()) {
+            String iconoAlerta = "";
+
+            switch (tipoAlerta) {
+                case "exito":
+                    iconoAlerta = "fa-check-circle";
+                    break;
+                case "error":
+                    iconoAlerta = "fa-times-circle";
+                    break;
+                default:
+                    iconoAlerta = "fa-info-circle";
+                    break;
+            }
+%>
+<div class="alerta alerta-dismissible mostrar" role="alert">
+    <i class="fa <%= iconoAlerta %> icono" aria-hidden="true"></i>
+    <span class="texto"><%= mensajeAlerta %></span>
+    <button type="button" class="btn-cerrar" data-bs-dismiss="alert" aria-label="Close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+</div>
+<%
+            session.removeAttribute("alerta");
+        }
+    }
+%>
+
+
+
 <div class="wrapper desva" style="height: 100vh;">
     <li class="sidebar-item" title="Inicio" style="position: absolute; top: 3%; left: 20px;">
         <a href="../html_docentes/inicioDocente.jsp" class="sidebar-link">
@@ -185,7 +234,13 @@
                 method: 'POST',
                 data: formData,
                 success: function(response) {
-
+                    if (response.trim() === "exito") {
+                        // Recarga la página automáticamente después de una actualización exitosa
+                        window.location.reload();
+                    } else {
+                        // Muestra un mensaje de error si la actualización falló
+                        alert('Error al actualizar las calificaciones.');
+                    }
                 },
                 error: function(xhr, status, error) {
                     alert('Error al actualizar las calificaciones: ' + xhr.responseText);
@@ -199,6 +254,7 @@
             window.location.href = "Calificaciones.jsp?grupoId=" + grupoId + "&estado=" + estado;
         });
     });
+
 </script>
 <script>document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("filterEstado").addEventListener("change", function() {
@@ -210,5 +266,28 @@
     });
 });
 </script>
+
+<script>
+    // JavaScript para ocultar automáticamente la alerta después de 5 segundos
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerta = document.querySelector('.alerta');
+
+        if (alerta.classList.contains('mostrar')) {
+            setTimeout(function() {
+                alerta.classList.add('ocultar');
+            }, 5000); // 5000 ms = 5 segundos
+
+            // Remover la alerta del DOM después de la transición (opcional)
+            alerta.addEventListener('transitionend', function() {
+                if (alerta.classList.contains('ocultar')) {
+                    alerta.remove();
+                }
+            });
+        }
+    });
+
+</script>
+
+<script src="../js/scriptAlertas.js"></script>
 </body>
 </html>

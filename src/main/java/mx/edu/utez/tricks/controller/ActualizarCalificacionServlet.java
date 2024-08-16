@@ -50,6 +50,13 @@ public class ActualizarCalificacionServlet extends HttpServlet {
             }
         }
 
-
+        // Configurar la alerta en la sesión dependiendo del resultado
+        if (actualizadas) {
+            session.setAttribute("alerta", "exito");
+            response.getWriter().write("exito");
+        } else {
+            session.setAttribute("alerta", "error");
+            response.getWriter().write("error");
+        }
     }
 }
