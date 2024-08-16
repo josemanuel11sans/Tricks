@@ -275,13 +275,14 @@
                             <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    datagrupo="<%=g.getNombreGrupo()%>"
-                                    datadiv="<%= g.getDivisionAcademica()%>"
-                                    datadoc="<%= g.getNombreDocente()%>"
-                                    data-target="#modificarGrupo"
-                                    onclick="llenarModalActualizarGrupo(<%= g.getIdGrupo() %>, '<%= g.getNombreGrupo() %>', <%= g.getIdCarrera() %>, <%= g.getIdDocente() %>)">
+                            <button class="btn btnIcono btn-modificar"
+                                    data-toggle="modal"
+                                    data-target="#actualizarGrupoModal"
+                                    data-id="<%= g.getIdGrupo() %>"
+                                    data-nombre="<%= g.getNombreGrupo() %>"
+                                    data-idcarrera="<%= g.getIdCarrera() %>"
+                                    data-iddocente="<%= g.getIdDocente() %>"
+                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -385,8 +386,7 @@
             </script>
 
 
-            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -399,20 +399,22 @@
                             <form method="post" action="../ActualizarGrupoServlet">
                                 <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                                    <label for="nombreGrupo" class="col-form-label"></label>
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="">División acádemica: </option>
+                                    <label for="carrera" class="col-form-label"></label>
+                                    <select class="custom-select" id="carrera" name="carrera" data-label="División académica" required>
+                                        <option value="">Seleccione una nueva división académica:</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" required id="docente" name="docente">
-                                        <option value="">Docente: </option>
+                                    <label for="docente" class="col-form-label"></label>
+                                    <select class="custom-select" id="docente" name="docente" data-label="Docente" required>
+                                        <option value="">Seleccione un docente: </option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
@@ -426,19 +428,6 @@
                     </div>
                 </div>
             </div>
-
-            <script>
-                function llenarModalActualizarGrupo(idGrupo, nombreGrupo, carreraId, docenteId) {
-                    $('#idGrupo').val(idGrupo);
-                    $('#nombreGrupo').val(nombreGrupo);
-                    $('#carrera').val(carreraId);
-                    $('#docente').val(docenteId);
-
-                    $('#actualizarGrupoModal').modal('show');
-                }
-            </script>
-
-
 
 
 <!-- Modificar estado del grupo -->
@@ -660,6 +649,47 @@
             }
         });
 
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#actualizarGrupoModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var nombre = button.data('nombre');
+                var idCarrera = button.data('idcarrera');
+                var idDocente = button.data('iddocente');
+
+                var modal = $(this);
+                modal.find('#idGrupo').val(id);
+                modal.find('#nombreGrupo').val(nombre);
+
+                // Seleccionar la carrera correcta
+                modal.find('#carrera').val(idCarrera);
+
+                // Seleccionar el docente correcto
+                modal.find('#docente').val(idDocente);
+
+                // Actualizar las etiquetas de los select
+                updateSelectLabel(modal.find('#carrera'));
+                updateSelectLabel(modal.find('#docente'));
+            });
+
+            // Función para actualizar la etiqueta del select
+            function updateSelectLabel(selectElement) {
+                var selectedOption = selectElement.find('option:selected');
+                var label = selectElement.prev('label');
+                var labelText = selectElement.data('label') || selectElement.attr('name');
+                if (selectedOption.val()) {
+                    label.text(labelText + ': ' + selectedOption.text());
+                } else {
+                    label.text(labelText + ':');
+                }
+            }
+
+            $('#carrera, #docente').change(function() {
+                updateSelectLabel($(this));
+            });
+        });
     </script>
 
 </div>
