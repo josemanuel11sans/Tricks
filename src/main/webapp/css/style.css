@@ -389,4 +389,7 @@ button:focus{
         max-height: 52vh!important;
     }
 
+    .modal-content{
+        margin: 0 5px;
+    }
 }
