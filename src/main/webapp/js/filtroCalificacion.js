@@ -13,11 +13,11 @@ $(document).ready(function() {
             var calificacionMatch = true;
 
             if (calificacionFilter === "0-5") {
-                calificacionMatch = calificacion >= 0 && calificacion <= 5;
+                calificacionMatch = calificacion >= 0 && calificacion <= 6;
             } else if (calificacionFilter === "6-7") {
-                calificacionMatch = calificacion >= 6 && calificacion <= 7;
+                calificacionMatch = calificacion > 6 && calificacion <= 8;
             } else if (calificacionFilter === "8-10") {
-                calificacionMatch = calificacion >= 8 && calificacion <= 10;
+                calificacionMatch = calificacion > 8 && calificacion <= 10;
             }
 
             $(this).toggle(folioMatch && calificacionMatch); // Mostrar u ocultar la fila según el filtro
