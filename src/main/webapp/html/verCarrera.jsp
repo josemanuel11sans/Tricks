@@ -276,8 +276,8 @@
                         <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
-                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label">Division Academica</label>
+                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" placeholder="Division Academica" required>
                             <option value="">cd </option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
