@@ -116,7 +116,7 @@
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #333;
+            background-color: transparent;
             color: white;
             border: none;
             font-size: 24px;

@@ -368,6 +368,10 @@ a.sidebar-link:hover {
     h2{
         font-size: 3rem !important;
     }
+
+    .tabla{
+        margin-bottom: 20px;
+    }
 }
 
 /* Desvanecido de docentes*/
