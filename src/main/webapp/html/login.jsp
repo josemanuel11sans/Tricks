@@ -130,9 +130,9 @@
                                             <button type="submit" class="btn btn-block w-60">Acceder</button>
                                             <br>
                                             <div class="container d-flex align-items-center justify-content-center">
-                                                <a  type="button" class="link"  data-toggle="modal" data-target="#registrarGrupo">
+                                               <!-- <a  type="button" class="link"  data-toggle="modal" data-target="#registrarGrupo">
                                                     ¿Olvidaste tu contraseña?
-                                                </a>
+                                                </a>-->
                                             </div>
                                         </form>
                                     </div>

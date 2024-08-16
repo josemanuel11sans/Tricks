@@ -67,11 +67,16 @@
     <i class="fas fa-bars"></i>
 </button>
 <style>
+
     #sidebar {
         position: fixed;
         top: 0;
         left: 0;
         height: 100%;
+        *{
+            list-style: none;
+            text-decoration: none !important;
+        }
     }
 
     .sidebar-nav {
@@ -96,7 +101,7 @@
 
 
     /* Estilos para móviles */
-    @media (max-width: 768px) {
+    @media (max-width: 750px) {
         #sidebar {
             width: 100%;
             height: auto;
@@ -107,12 +112,16 @@
             height: 100%;
             display: block;
         }
+        #sidebar:not(.expand) .sidebar-logo,
+        #sidebar:not(.expand) a.sidebar-link span {
+            display: inline-block;
+        }
 
         .hamburger {
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #333;
+            background-color: transparent;
             color: white;
             border: none;
             font-size: 24px;
@@ -156,7 +165,7 @@
     }
     const hamBurger = document.querySelector(".toggle-btn");
     function addHamburgerEventListener() {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth > 768) {
             hamBurger.addEventListener("click", toggleSidebar);
         } else {
             hamBurger.removeEventListener("click", toggleSidebar); // Remueve el event listener si la resolución es menor o igual a 768px

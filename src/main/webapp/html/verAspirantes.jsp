@@ -119,7 +119,7 @@
             <div class="row mb-3">
                 <div class="col-md-2">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar">
-                </div>
+                </div><br><br>
                 <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Grupo</option>
@@ -140,14 +140,14 @@
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirante" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar aspirante
                         <i class="fa-solid fa-user fa-lg"></i>
                     </button>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirantes" style="display: flex; justify-content: space-evenly; align-items: center">
@@ -223,19 +223,19 @@
             <div class="modal-body">
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante" placeholder="">
+                        <input type="text" class="form-control" id="folioAspirante" name="folioAspirante"  maxlength="10" placeholder="">
                         <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" placeholder="">
+                        <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" maxlength="50" placeholder="">
                         <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante" placeholder="">
+                        <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante"  maxlength="50" placeholder="">
                         <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante" placeholder="">
+                        <input type="text" class="form-control" id="curpAspirante" name="curpAspirante"  maxlength="25" placeholder="">
                         <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
                     </div>
                     <div class="form-group">

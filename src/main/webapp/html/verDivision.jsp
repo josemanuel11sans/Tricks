@@ -54,7 +54,7 @@ To change this template use File | Settings | File Templates.
 <div class="wrapper" style="height: 100vh;">
     <jsp:include page="../componentes/menuLateral.jsp" />
 
-    <%
+    <% //estos mandan las alertas
         String tipoAlerta = (String) session.getAttribute("alerta");
         String mensajeAlerta = "";
 
@@ -137,6 +137,7 @@ To change this template use File | Settings | File Templates.
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
                 </div>
+                <br><br>
                 <div class="col-md-2">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Estatus</option>
@@ -144,12 +145,14 @@ To change this template use File | Settings | File Templates.
                         <option value="2">Inactivo</option>
                     </select>
                 </div>
+                <br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarDivisionModal">
                         Agregar division
                     </button>
                 </div>
+
             </div><br>
 
 

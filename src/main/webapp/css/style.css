@@ -116,12 +116,12 @@ a.sidebar-link {
 .dropdown-item i {
     font-size: 1.1rem;
     margin-right: .75rem;
-    color: white;
+
 }
 
 a.sidebar-link:hover {
     background-color: #081E33;
-    color: white;
+
 }
 
 .sidebar-item {
@@ -177,7 +177,7 @@ a.sidebar-link:hover {
     width: 40px;
 }
 
-@media (min-width: 768px) {}
+@media (min-width: 850px) {}
 
 /*Tabla de información*/
 .container {
@@ -368,9 +368,28 @@ a.sidebar-link:hover {
     h2{
         font-size: 3rem !important;
     }
+
+    .tabla{
+        margin-bottom: 20px;
+    }
 }
 
 /* Desvanecido de docentes*/
 .desva {
     background: radial-gradient(circle, #107863, #081E33) !important;
+}
+
+button:focus{
+    outline: none;
+}
+
+@media (max-width: 750px) {
+
+    .tabla{
+        max-height: 52vh!important;
+    }
+
+    .modal-content{
+        margin: 0 5px;
+    }
 }

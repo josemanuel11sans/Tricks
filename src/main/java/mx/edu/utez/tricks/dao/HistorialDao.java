@@ -19,7 +19,7 @@ public class HistorialDao {
     // Método para ver la información de un docente en la tabla
     public ArrayList<Historial> getAll() {
         ArrayList<Historial> lista = new ArrayList<>();
-        String query = " select * from historial";
+        String query = " select * from historial order by fecha_creacion desc";
         try {
             con = DatabaseConnectionManager.getConnection();
             ps = con.prepareStatement(query);

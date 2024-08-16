@@ -1,5 +1,6 @@
 package mx.edu.utez.tricks.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -58,5 +59,8 @@ public class ActualizarCalificacionServlet extends HttpServlet {
             session.setAttribute("alerta", "error");
             response.getWriter().write("error");
         }
+       // RequestDispatcher dispatcher = request.getRequestDispatcher("html/Calificaciones.jsp");
+        //dispatcher.forward(request, response);
+        //response.sendRedirect("html/Calificaciones.jsp");
     }
 }

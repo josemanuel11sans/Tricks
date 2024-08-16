@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--desactiva este comentario si no funciona el js de sweet alert para ques e conecte a la cdn -->
+    <!--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+    <script src="../js/sweetalert2.js"></script>
 </head>
 
 <body>

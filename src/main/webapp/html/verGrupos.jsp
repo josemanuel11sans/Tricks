@@ -191,7 +191,7 @@
             <div class="row mb-3">
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterCareer" required>
                         <option value="">Selecciona una carrera</option>
@@ -205,7 +205,7 @@
                             }
                         %>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Selecciona una división</option>
@@ -219,7 +219,7 @@
                             }
                         %>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
                         Registrar grupo
@@ -248,13 +248,14 @@
                         for (Grupo g : lista) {
                     %>
                     <tr style="height: 10px; font-size: 15px" data-id="<%= g.getIdGrupo() %>">
-                        <td style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
+                        <td id="nombre" style="padding: 0; margin: 0"><%= g.getNombreGrupo() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getNombreDocente()%> <%= g.getApellidoDocente()%></td>
                         <td style="padding: 0; margin: 0"><%= g.getCarrera() %></td>
                         <td style="padding: 0; margin: 0"><%= g.getDivisionAcademica() %></td>
                         <td style="padding: 0; margin: 0">
                             <button class="btn btnIcono btn-aspirantes" data-toggle="modal"
                                     style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
+
                                     data-target="#asignarMasivo"
                                     onclick="setGrupoInfoMasivo('<%= g.getIdGrupo() %>', '<%= g.getNombreGrupo() %>')">
                                 <i class="fas fa-users"></i>
@@ -274,10 +275,14 @@
                             <% } %>
                         </td>
                         <td style="padding: 0; margin: 0">
-                            <button class="btn btnIcono btn-modificar" data-toggle="modal"
-                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px"
-                                    data-target="#modificarGrupo"
-                                    onclick="llenarModalActualizarGrupo(<%= g.getIdGrupo() %>, '<%= g.getNombreGrupo() %>', <%= g.getIdCarrera() %>, <%= g.getIdDocente() %>)">
+                            <button class="btn btnIcono btn-modificar"
+                                    data-toggle="modal"
+                                    data-target="#actualizarGrupoModal"
+                                    data-id="<%= g.getIdGrupo() %>"
+                                    data-nombre="<%= g.getNombreGrupo() %>"
+                                    data-idcarrera="<%= g.getIdCarrera() %>"
+                                    data-iddocente="<%= g.getIdDocente() %>"
+                                    style="height: 25px; font-size: 15px; margin: 5px; width: 25px">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
@@ -286,6 +291,7 @@
                     </tbody>
                 </table>
             </div>
+
 
             <script>
                 document.getElementById('filterName').addEventListener('keyup', filterTable);
@@ -335,7 +341,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="">División acádemica: </option>
+                                        <option value="" disabled selected>División acádemica: </option>
                                         <% for (Carrera carrera : carreraList) {%>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -343,7 +349,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" required id="docente" name="docente">
-                                        <option value="">Docente: </option>
+                                        <option value="" disabled selected>Docente: </option>
                                         <% UsuarioDao daoUsuario = new UsuarioDao();
                                             ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
                                             for (Usuario u : listaUsuario) { %>
@@ -359,14 +365,32 @@
                     </div>
                 </div>
             </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Evento para modal de modificar carrera
+                    document.querySelectorAll('.btn-modificar').forEach(function (button) {
+                        button.addEventListener('click', function () {
+                            var nombre = button.getAttribute('nombre');
+                            var nombreCarrera = button.getAttribute('data-nombre');
+                            var idDivisionAcademica = button.getAttribute('data-idDivision');
 
 
-            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+                            document.getElementById('nombreGrupo').value = nombre;
+                            document.getElementById('nombreCarreraModificar').value = nombreCarrera;
+                            document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
+
+                        });
+                    });
+
+                }
+            </script>
+
+
+            <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Registrar Docente</h5>
+                            <h5 class="modal-title">Modificar grupo</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -375,12 +399,12 @@
                             <form method="post" action="../ActualizarGrupoServlet">
                                 <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
-                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                                    <label for="nombreGrupo" class="col-form-label"></label>
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="">División acádemica: </option>
+                                        <option value="" selected>División Académica:</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -388,7 +412,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="custom-select" required id="docente" name="docente">
-                                        <option value="">Docente: </option>
+                                        <option value="" selected>Docente:</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
@@ -402,19 +426,6 @@
                     </div>
                 </div>
             </div>
-
-            <script>
-                function llenarModalActualizarGrupo(idGrupo, nombreGrupo, carreraId, docenteId) {
-                    $('#idGrupo').val(idGrupo);
-                    $('#nombreGrupo').val(nombreGrupo);
-                    $('#carrera').val(carreraId);
-                    $('#docente').val(docenteId);
-
-                    $('#actualizarGrupoModal').modal('show');
-                }
-            </script>
-
-
 
 
 <!-- Modificar estado del grupo -->
@@ -467,18 +478,20 @@
             </div>
             <div class="modal-body">
                 <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
-                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="">
+                    <input type="hidden" id="IdGrupo" name="IdGrupo" value=""  >
                     <div class="form-group">
-                        <label for="nombreGrupo">Grupo seleccionado:</label>
-                        <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                        <!--<label for="nombreGrupo">Grupo seleccionado:</label>-->
+                        <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
                     </div>
                     <div class="form-group">
                         <label for="folioAspirante">Folio del aspirante:</label>
+
                         <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
+                            <option> Selecciona id </option>
                             <% AspiranteDAO dao2 = new AspiranteDAO();
                                 List<Aspirante> aspirantes = dao2.getAllAspirantes();
                                 for (Aspirante aspirante : aspirantes) { %>
-                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></option>
+                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
                             <% } %>
                         </select>
                     </div>
@@ -525,6 +538,26 @@
             </div>
         </div>
     </div>
+    <script>
+        /*
+        document.addEventListener('DOMContentLoaded', function () {
+            // Evento para modal de modificar carrera
+            document.querySelectorAll('.btn-modificar').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var aatagrupo = button.getAttribute('datagrupo');
+                    var datadiv = button.getAttribute('datadiv');
+                    var datadoc = button.getAttribute('datadoc');
+
+
+                    document.getElementById('nombreGrupo').value = aatagrupo;
+                    document.getElementById('carrera').value = datadiv;
+                    document.getElementById('docente').value = datadoc;
+
+                });
+            });
+        }
+         */
+    </script>
     <!-- Bootstrap y scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -587,9 +620,6 @@
                 document.getElementById('estadoIdEstado').value = estadoContrario;
             });
         });
-
-
-
     </script>
 
     <script>
@@ -611,6 +641,47 @@
             }
         });
 
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#actualizarGrupoModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var nombre = button.data('nombre');
+                var idCarrera = button.data('idcarrera');
+                var idDocente = button.data('iddocente');
+
+                var modal = $(this);
+                modal.find('#idGrupo').val(id);
+                modal.find('#nombreGrupo').val(nombre);
+
+                // Seleccionar la carrera correcta
+                modal.find('#carrera').val(idCarrera);
+
+                // Seleccionar el docente correcto
+                modal.find('#docente').val(idDocente);
+
+                // Actualizar las etiquetas de los select
+                updateSelectLabel(modal.find('#carrera'));
+                updateSelectLabel(modal.find('#docente'));
+            });
+
+            // Función para actualizar la etiqueta del select
+            function updateSelectLabel(selectElement) {
+                var selectedOption = selectElement.find('option:selected');
+                var label = selectElement.prev('label');
+                var labelText = selectElement.data('label') || selectElement.attr('name');
+                if (selectedOption.val()) {
+                    label.text(labelText + ': ' + selectedOption.text());
+                } else {
+                    label.text(labelText + ':');
+                }
+            }
+
+            $('#carrera, #docente').change(function() {
+                updateSelectLabel($(this));
+            });
+        });
     </script>
 
 </div>

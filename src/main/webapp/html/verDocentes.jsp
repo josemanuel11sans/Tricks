@@ -114,14 +114,14 @@
             <div class="row mb-3">
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <select id="filterState" class="custom-select" required>
                         <option value="">Estado</option>
                         <option value="Activo">Activo</option>
                         <option value="NoActivo">No Activo</option>
                     </select>
-                </div>
+                </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
                         Registrar Docente

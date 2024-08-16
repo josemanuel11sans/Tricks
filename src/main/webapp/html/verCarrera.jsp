@@ -139,6 +139,7 @@
                 <div class="col-md-3">
                     <input type="text" id="filterName" class="form-control" placeholder="Buscar por nombre">
                 </div>
+                <br><br>
                 <div class="col-md-3">
                     <select class="custom-select" required>
                         <option value="">División académica</option>
@@ -153,6 +154,7 @@
                         %>
                     </select>
                 </div>
+                <br><br>
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">
@@ -165,7 +167,7 @@
 
 
             <!-- Tabla de carreras -->
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl table-responsive tabla" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
                     <tr  align="center">
@@ -274,8 +276,8 @@
                         <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
-                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label">Division Academica</label>
+                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" placeholder="Division Academica" required>
                             <option value="">cd </option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
