@@ -67,11 +67,16 @@
     <i class="fas fa-bars"></i>
 </button>
 <style>
+
     #sidebar {
         position: fixed;
         top: 0;
         left: 0;
         height: 100%;
+        *{
+            list-style: none;
+            text-decoration: none !important;
+        }
     }
 
     .sidebar-nav {
@@ -96,7 +101,7 @@
 
 
     /* Estilos para móviles */
-    @media (max-width: 768px) {
+    @media (max-width: 750px) {
         #sidebar {
             width: 100%;
             height: auto;

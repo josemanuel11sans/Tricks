@@ -403,7 +403,6 @@
                                     <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="carrera" class="col-form-label"></label>
                                     <select class="custom-select" id="carrera" name="carrera" required>
                                         <option value="" selected>División Académica:</option>
                                         <% for (Carrera carrera : carreraList) { %>
@@ -412,8 +411,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="docente" class="col-form-label"></label>
-                                    <select class="custom-select" id="docente" name="docente" required>
+                                    <select class="custom-select" required id="docente" name="docente">
                                         <option value="" selected>Docente:</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
@@ -545,6 +543,7 @@
         </div>
     </div>
     <script>
+        /*
         document.addEventListener('DOMContentLoaded', function () {
             // Evento para modal de modificar carrera
             document.querySelectorAll('.btn-modificar').forEach(function (button) {
@@ -560,8 +559,8 @@
 
                 });
             });
-
         }
+         */
     </script>
     <!-- Bootstrap y scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -625,9 +624,6 @@
                 document.getElementById('estadoIdEstado').value = estadoContrario;
             });
         });
-
-
-
     </script>
 
     <script>

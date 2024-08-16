@@ -167,7 +167,7 @@
 
 
             <!-- Tabla de carreras -->
-            <div class="container-xxl table-responsive" style="background-color: #fff; border-radius: 20px;">
+            <div class="container-xxl table-responsive tabla" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
                     <thead class="thead-light">
                     <tr  align="center">
