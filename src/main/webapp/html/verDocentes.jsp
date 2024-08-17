@@ -140,7 +140,7 @@
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Estado</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
@@ -235,7 +235,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Docente</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -266,7 +266,7 @@
                         <label for="contraMod" class="col-form-label">Contraseña:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -281,14 +281,14 @@
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body">
                 <form action="../ModificarEstadoDocServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado del
                         docente?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idDocente2" class="col-form-label custom-col-form-label">Matrícula:</label>
@@ -301,7 +301,7 @@
                                name="estadoDocente" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
