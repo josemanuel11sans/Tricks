@@ -147,7 +147,7 @@
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">
-                        Agregar Carrera
+                        Registrar Carrera
                     </button>
                 </div>
             </div><br>
