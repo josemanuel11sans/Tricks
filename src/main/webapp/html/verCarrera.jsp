@@ -146,8 +146,9 @@
                 <br><br>
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar Carrera
+                        <i class="fa-solid fa-graduation-cap"></i>
                     </button>
                 </div>
             </div><br>
@@ -160,7 +161,7 @@
                         <th>Nombre</th>
                         <th>División Académica</th>
                         <th>Estado</th> <!-- Nuevo encabezado de columna -->
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -207,7 +208,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Agregar Carrera</h5>
+                <h5 class="modal-title">Registrar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -248,7 +249,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Carrera</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -276,7 +277,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Modificar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
             </form>
         </div>
@@ -290,15 +291,14 @@
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoCarreraServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
-                        Grupo?</h6>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado de la carrera?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idCarrera2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idCarrera2" name="idCarrera2"
@@ -310,7 +310,7 @@
                                name="estadoIdCarrera" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
