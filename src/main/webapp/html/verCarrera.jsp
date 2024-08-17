@@ -213,8 +213,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../RegistrarCarreraServlet" method="post">
-                <div class="modal-body">
+            <div class="modal-body">
+                <form action="../RegistrarCarreraServlet" method="post">
                     <input type="hidden" name="action" value="agregar">
                     <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
@@ -234,11 +234,11 @@
                             %>
                         </select>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -254,8 +254,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../ActualizarCarreraServlet" method="post">
-                <div class="modal-body">
+            <div class="modal-body">
+                <form action="../ActualizarCarreraServlet" method="post">
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
@@ -275,11 +275,11 @@
                             %>
                         </select>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

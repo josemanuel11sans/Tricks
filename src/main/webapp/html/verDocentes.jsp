@@ -123,8 +123,9 @@
                     </select>
                 </div><br><br>
                 <div class="col-md-3">
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar Docente
+                        <i class="fa-solid fa-chalkboard-user"></i>
                     </button>
                 </div>
             </div>

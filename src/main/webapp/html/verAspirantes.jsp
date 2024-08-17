@@ -144,14 +144,14 @@
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirante" style="display: flex; justify-content: space-evenly; align-items: center">
-                        Registrar aspirante
+                        Registrar Aspirante
                         <i class="fa-solid fa-user fa-lg"></i>
                     </button>
                 </div><br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
                             data-target="#registrarAspirantes" style="display: flex; justify-content: space-evenly; align-items: center">
-                        Registrar aspirantes
+                        Registrar Aspirantes
                         <i class="fa-solid fa-users fa-lg"></i>
                     </button>
                 </div>
@@ -215,7 +215,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registro de Aspirante</h5>
+                <h5 class="modal-title">Registrar Aspirante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -224,23 +224,23 @@
                 <form action="../RegistrarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante" name="folioAspirante"  maxlength="10" placeholder="">
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante" name="nombreAspirante" maxlength="50" placeholder="">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante" name="apellidosAspirante"  maxlength="50" placeholder="">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante" name="curpAspirante"  maxlength="25" placeholder="">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
@@ -256,7 +256,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Actualizar Aspirante</h5>
+                <h5 class="modal-title">Editar Aspirante</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -265,23 +265,23 @@
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
-                        <label for="folioAspirante" class="col-form-label">Folio del Aspirante:</label>
+                        <label for="folioAspirante" class="col-form-label">Folio:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
-                        <label for="nombreAspirante" class="col-form-label">Nombre del Aspirante:</label>
+                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos del Aspirante:</label>
+                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
-                        <label for="curpAspirante" class="col-form-label">CURP del Aspirante:</label>
+                        <label for="curpAspirante" class="col-form-label">CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
-                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento del Aspirante:</label>
+                        <label for="fechaNacimientoAspirante" class="col-form-label">Fecha de Nacimiento:</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -297,13 +297,13 @@
     <div class="modal-dialog" role="document" style="max-height: 100vh !important; margin: 40vh auto;">
         <div class="modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h6 class="" id="exampleModalLabel">¿Estas seguro de cambiar el estado del aspirante?</h6>
+                <h6 class="" id="exampleModalLabel">¿Estás seguro de actualizar el estado del aspirante?</h6>
                 <form action="../ActualizarEstadoServlet" method="post">
                     <div class="form-group" style="display: none">
                         <label for="folioAspirante2" class="col-form-label">Folio del Aspirante:</label>
@@ -314,7 +314,7 @@
                         <input type="text" class="form-control" id="estadoAspirante" name="estadoAspirante">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -327,7 +327,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content modal-content-custom">
             <div class="modal-header modal-header-custom">
-                <h5 class="modal-title modal-title-custom" id="exampleModalLabel">Registrar aspirantes</h5>
+                <h5 class="modal-title modal-title-custom">Registrar Aspirantes</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -337,7 +337,7 @@
                     <div class="form-group">
                         <input type="file" class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
                         <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
-
+                    </div>
                     <div class="modal-footer modal-footer-custom">
                         <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/ejemploAspirantes.png', 'Ejemplo de formato'); return false;">
                             Ejemplo de formato
@@ -346,7 +346,6 @@
                             Descargar formato
                         </a>
                         <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
                     </div>
                 </form>
             </div>
