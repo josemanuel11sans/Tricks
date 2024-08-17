@@ -5,15 +5,7 @@
 <%@ page import="mx.edu.utez.tricks.model.Carrera" %>
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
-
-
-
-
 <html lang="en">
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,9 +26,6 @@
             background-color: green;
             cursor: pointer;
         }
-
-
-
 
         .inactivo{
             width: 15px;
@@ -163,9 +152,6 @@
                 </div>
             </div><br>
 
-
-
-
             <!-- Tabla de carreras -->
             <div class="container-xxl table-responsive tabla" style="background-color: #fff; border-radius: 20px;">
                 <table class="table">
@@ -221,7 +207,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Carrera</h5>
+                <h5 class="modal-title">Agregar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -272,13 +258,13 @@
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
-                        <label for="nombreCarreraModificar" class="col-form-label"></label>
-                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
+                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" placeholder=" " required>
+                        <label for="nombreCarreraModificar" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label">Division Academica</label>
-                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" placeholder="Division Academica" required>
-                            <option value="">cd </option>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
+                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
+                            <option value="">División Acádemica</option>
                             <%
                                 for (DivisionesAcademicas division : listaDivisiones) {
                             %>
@@ -338,32 +324,20 @@
         $('#modificarEstadoModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que abrió el modal
             var idCarrera = button.data('id'); // Extraer la información de atributos data-*
-
-
-
-
             // Actualiza los campos del modal.
             var modal = $(this);
             modal.find('.modal-body #idCarreraEstado').val(idCarrera);
         });
-
-
-
 
         // Este código abre el modal de modificar carrera con los datos correspondientes
         $('#modificarCarreraModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que abrió el modal
             var idCarrera = button.data('id');
             var nombreCarrera = button.data('nombre');
-            var idDivisionAcademica = button.data('iddivision');
-
-
-
 
             var modal = $(this);
             modal.find('.modal-body #idCarrera').val(idCarrera);
             modal.find('.modal-body #nombreCarreraModificar').val(nombreCarrera);
-            modal.find('.modal-body #idDivisionAcademicaModificar').val(idDivisionAcademica);
         });
     });
 </script>
@@ -374,15 +348,9 @@
         var filterName = document.getElementById('filterName');
         var filterDivision = document.querySelector('select.custom-select');
 
-
-
-
         // Agregar eventos para aplicar los filtros
         filterName.addEventListener('input', filterTable);
         filterDivision.addEventListener('change', filterTable);
-
-
-
 
         function filterTable() {
             var filterNameValue = filterName.value.toLowerCase();
@@ -390,22 +358,12 @@
             var table = document.querySelector('table');
             var rows = table.querySelector('tbody').getElementsByTagName('tr');
 
-
-
-
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var nombreCarrera = cells[0].textContent.toLowerCase();  // Columna "Nombre de la Carrera"
                 var divisionAcademica = cells[1].textContent.toLowerCase(); // Columna "División Académica"
-
-
-
-
                 var nameMatch = filterNameValue === '' || nombreCarrera.includes(filterNameValue);
                 var divisionMatch = filterDivisionValue === '' || divisionAcademica.includes(filterDivisionValue);
-
-
-
 
                 if (nameMatch && divisionMatch) {
                     rows[i].style.display = '';
@@ -415,17 +373,11 @@
             }
         }
 
-
-
-
         // Añadir eventos a los botones para capturar el valor del id y el estado de la carrera
         document.querySelectorAll('.activo, .inactivo').forEach(function(button) {
             button.addEventListener('click', function() {
                 var idCarrera = this.closest('tr').getAttribute('data-id');
                 document.getElementById('idCarrera2').value = idCarrera;
-
-
-
 
                 var estadoActual = this.getAttribute('data-estado');
                 var estadoContrario = estadoActual === '1' ? '2' : '1';
@@ -433,25 +385,14 @@
             });
         });
 
-
-
-
         // Evento para modal de modificar carrera
         document.querySelectorAll('.btn-modificar').forEach(function(button) {
             button.addEventListener('click', function() {
                 var idCarrera = button.getAttribute('data-id');
                 var nombreCarrera = button.getAttribute('data-nombre');
-                var idDivisionAcademica = button.getAttribute('data-idDivision');
-
-
-
 
                 document.getElementById('idCarrera').value = idCarrera;
                 document.getElementById('nombreCarreraModificar').value = nombreCarrera;
-                document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
-
-
-
 
                 // Llenar el estado en el modal de modificar
                 var estado = this.closest('tr').querySelector('.activo, .inactivo').getAttribute('data-estado');
@@ -461,23 +402,15 @@
         });
     });
 
-
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
             document.getElementById('idCarrera2').value = folio;
-
-
-
-
             var estadoActual = this.getAttribute('data-estado');
             var estadoContrario = estadoActual === '1' ? '2' : '1';
             document.getElementById('estadoIdCarrera').value = estadoContrario;
         });
     });
-
-
-
 
 </script>
 
