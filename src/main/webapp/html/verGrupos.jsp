@@ -4,7 +4,6 @@
 <%@ page import="mx.edu.utez.tricks.dao.*" %>
 <%@ page import="mx.edu.utez.tricks.model.*" %>
 
-
 <html>
 <head>
     <meta charset="UTF-8">
@@ -43,22 +42,6 @@
             justify-content: center;
         }
 
-        .form-control-custom {
-            background-color: #fff;
-            color: black;
-            border: none;
-            border-radius: 4px;
-            padding: 0.5rem 1rem;
-        }
-
-        .btn-custom {
-            background-color: dodgerblue;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: bold;
-        }
         .btn-files {
             background-color: gray;
             color: white;
@@ -68,18 +51,6 @@
             font-weight: bold;
         }
 
-        .btn-link-custom {
-            background-color: purple;
-            color: white;
-            border-radius: 4px;
-            border: none;
-            padding: 0.5rem 1.5rem;
-            font-weight: bold;
-        }
-
-        .btn-link-custom:hover {
-            text-decoration: none;
-        }
         .activo{
             width: 15px;
             height: 15px;
@@ -180,7 +151,7 @@
                 session.removeAttribute("alerta");
             }
     }
-%>
+    %>
 
 
     <div class="main">
@@ -194,7 +165,7 @@
                 </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterCareer" required>
-                        <option value="">Selecciona una carrera</option>
+                        <option value="">Carrera</option>
                         <%
                             CarreraDao carreraDao = new CarreraDao();
                             List<Carrera> carreraList = carreraDao.getAllCarreras();
@@ -208,7 +179,7 @@
                 </div><br><br>
                 <div class="col-md-3">
                     <select class="custom-select" id="filterDivision" required>
-                        <option value="">Selecciona una división</option>
+                        <option value="">División Académica</option>
                         <%
                             DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
@@ -221,8 +192,9 @@
                     </select>
                 </div><br><br>
                 <div class="col-md-3">
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
-                        Registrar grupo
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo" style="display: flex; justify-content: space-evenly; align-items: center">
+                        Registrar Grupo
+                        <i class="fa-solid fa-users-rectangle"></i>
                     </button>
                 </div>
             </div>
@@ -238,7 +210,7 @@
                         <th>División</th>
                         <th>Asignar aspirantes</th>
                         <th>Estado</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
@@ -390,7 +362,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modificar grupo</h5>
+                            <h5 class="modal-title">Editar grupo</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -399,20 +371,22 @@
                             <form method="post" action="../ActualizarGrupoServlet">
                                 <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
-                                    <label for="nombreGrupo" class="col-form-label"></label>
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
+                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" id="carrera" name="carrera" required>
-                                        <option value="" selected>División Académica:</option>
+                                    <label for="idDiviMod" class="col-form-label"></label>
+                                    <select class="custom-select" id="idDiviMod" name="idDiviMod" required>
+                                        <option value="">División Académica:</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select class="custom-select" required id="docente" name="docente">
-                                        <option value="" selected>Docente:</option>
+                                    <label for="idDocMod" class="col-form-label"></label>
+                                    <select class="custom-select" required id="idDocMod" name="docente">
+                                        <option value="">Docente:</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
@@ -434,14 +408,14 @@
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoGrupoServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado del
                         Grupo?</h6>
                     <div class="form-group custom-form-group" style="display: none" >
                         <label for="idGrupo2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
@@ -454,7 +428,7 @@
                                name="estadoIdEstado" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
