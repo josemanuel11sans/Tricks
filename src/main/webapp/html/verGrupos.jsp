@@ -442,26 +442,25 @@
 
 <!-- Modal asignar aspirante -->
 <div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Asignar aspirante al grupo</h5>
+                <h5 class="modal-title">Asignar Aspirante al Grupo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="assignAspirantForm" action="AsignarAspiranteServlet" method="post">
-                    <input type="hidden" id="IdGrupo" name="IdGrupo" value=""  >
+                <form action="../AsignarAspiranteServlet" method="post">
+                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="" >
                     <div class="form-group">
-                        <!--<label for="nombreGrupo">Grupo seleccionado:</label>-->
+                        <label for="nombreGrupo">Grupo seleccionado:</label>
                         <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="folioAspirante">Folio del aspirante:</label>
-
+                        <label class="col-form-label" for="folioAspirante"></label>
                         <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
-                            <option> Selecciona id </option>
+                            <option>Folio del aspirante:</option>
                             <% AspiranteDAO dao2 = new AspiranteDAO();
                                 List<Aspirante> aspirantes = dao2.getAllAspirantes();
                                 for (Aspirante aspirante : aspirantes) { %>
@@ -470,8 +469,7 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Asignar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
             </div>
