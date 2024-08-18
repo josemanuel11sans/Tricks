@@ -123,6 +123,7 @@
                 <div class="col-md-1.5" style="padding: 0 15px">
                     <select class="custom-select" id="filterDivision" required>
                         <option value="">Grupo</option>
+                        <option value="No asignado" style="color: red">No asignado</option>
                         <%
                             GrupoDao dao2 = new GrupoDao();
                             ArrayList<Grupo> lista = dao2.getAll();
@@ -130,7 +131,6 @@
                         %>
                         <option value="<%= g.getNombreGrupo() %>"><%= g.getNombreGrupo() %></option>
                         <% } %>
-                        <option value="null">null</option>
                     </select>
 
                 </div>
@@ -180,7 +180,11 @@
                         <td style="padding: 0; margin: 0"><%= aspirante.getFolioAspirante() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getNombre() %> <%= aspirante.getApellidos() %></td>
                         <td style="padding: 0; margin: 0"><%= aspirante.getCurp() %></td>
+                        <%if(aspirante.getGrupo2() == null){%>
+                        <td style="padding: 0; margin: 0; color: red">No asignado</td>
+                        <%}else{%>
                         <td style="padding: 0; margin: 0"><%= aspirante.getGrupo2() %></td>
+                        <%}%>
                         <td class="d-flex justify-content-center align-items-center" style="margin: 0;">
                             <% if (aspirante.getEstado() == 1) { %>
                             <div class="activo" data-estado="1" data-toggle="modal" data-target="#modificarEstado" data-whatever="ModificarEstado"></div>
@@ -264,20 +268,20 @@
             <div class="modal-body">
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
-                        <label for="folioAspirante" class="col-form-label" maxlength="10">Folio:</label>
+                        <input type="text" class="form-control" id="folioAspirante3" maxlength="10"  name="folioAspirante" readonly>
+                        <label for="folioAspirante" class="col-form-label" >Folio:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
-                        <label for="nombreAspirante" class="col-form-label"  maxlength="50" >Nombre:</label>
+                        <input type="text" class="form-control" id="nombreAspirante3" maxlength="50" name="nombreAspirante">
+                        <label for="nombreAspirante" class="col-form-label"   >Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
-                        <label for="apellidosAspirante" class="col-form-label"  maxlength="50" >Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidosAspirante3" maxlength="50" name="apellidosAspirante">
+                        <label for="apellidosAspirante" class="col-form-label"   >Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
-                        <label for="curpAspirante" class="col-form-label"  maxlength="25" >CURP:</label>
+                        <input type="text" class="form-control" id="curpAspirante3" maxlength="25" name="curpAspirante">
+                        <label for="curpAspirante" class="col-form-label"   >CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
