@@ -123,8 +123,9 @@
                     </select>
                 </div><br><br>
                 <div class="col-md-3">
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo">
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarGrupo" style="display: flex; justify-content: space-evenly; align-items: center">
                         Registrar Docente
+                        <i class="fa-solid fa-chalkboard-user"></i>
                     </button>
                 </div>
             </div>
@@ -139,7 +140,7 @@
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Estado</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody id="aspirantesTableBody">
@@ -199,26 +200,27 @@
             <div class="modal-body">
                 <form action="../RegistrarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder=" "
+                        <input type="number" class="form-control" id="idDocente" name="idDocente" maxlength="10" minlength="3"   placeholder=" "
                                required>
                         <label for="idDocente" class="col-form-label">Matrícula:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder=" " required>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="50" placeholder=" " required>
                         <label for="nombre" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder=" " required>
+                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="50" placeholder=" " required>
                         <label for="apellido" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="mail" name="mail" placeholder=" " required>
+                        <input type="email" class="form-control" id="mail" name="mail" maxlength="50" placeholder=" " required>
                         <label for="mail" class="col-form-label">Correo Electrónico:</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="contra" name="contra" placeholder=" " required>
+                        <input type="password" class="form-control" id="contra" name="contra" minlength="4"  placeholder=" " required>
                         <label for="contra" class="col-form-label">Contraseña:</label>
                     </div>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
@@ -234,7 +236,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Docente</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Docente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -242,30 +244,30 @@
             <div class="modal-body">
                 <form action="../ModificarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" "
+                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente"  maxlength="10" minlength="3"   placeholder=" "
                                readonly>
                         <label for="idDocenteMod" class="col-form-label">ID Docente:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreMod" name="nombre" placeholder=" " required>
+                        <input type="text" class="form-control" id="nombreMod" name="nombre"  maxlength="50" placeholder=" " required>
                         <label for="nombreMod" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" "
+                        <input type="text" class="form-control" id="apellidoMod" name="apellido"  maxlength="50" placeholder=" "
                                required>
                         <label for="apellidoMod" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" " required>
+                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" "  maxlength="50" required>
                         <label for="mailMod" class="col-form-label">Correo Electrónico:</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder=" "
+                        <input type="password" class="form-control" id="contraMod" name="contra"  minlength="4" placeholder=" "
                                required>
                         <label for="contraMod" class="col-form-label">Contraseña:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -280,14 +282,14 @@
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body">
                 <form action="../ModificarEstadoDocServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado del
                         docente?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idDocente2" class="col-form-label custom-col-form-label">Matrícula:</label>
@@ -300,7 +302,7 @@
                                name="estadoDocente" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>

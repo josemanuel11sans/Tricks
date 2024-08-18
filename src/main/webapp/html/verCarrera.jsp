@@ -5,15 +5,7 @@
 <%@ page import="mx.edu.utez.tricks.model.Carrera" %>
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
-
-
-
-
 <html lang="en">
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,9 +26,6 @@
             background-color: green;
             cursor: pointer;
         }
-
-
-
 
         .inactivo{
             width: 15px;
@@ -146,25 +135,23 @@
                         <%
                             DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
-                            for (DivisionesAcademicas division : listaDivisiones) {
+                            for (DivisionesAcademicas division : listaDivisiones) {if(division.getEstado() == 1){
                         %>
                         <option value="<%= division.getSiglas() %>"><%= division.getSiglas() %></option>
                         <%
-                            }
+                                } }
                         %>
                     </select>
                 </div>
                 <br><br>
                 <div class="col-md-3">
                     <!-- Botón para abrir modal de agregar carrera -->
-                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal">
-                        Agregar Carrera
+                    <button type="button" class="btn btnIcono w-100" data-toggle="modal" data-target="#registrarCarreraModal" style="display: flex; justify-content: space-evenly; align-items: center">
+                        Registrar Carrera
+                        <i class="fa-solid fa-graduation-cap"></i>
                     </button>
                 </div>
             </div><br>
-
-
-
 
             <!-- Tabla de carreras -->
             <div class="container-xxl table-responsive tabla" style="background-color: #fff; border-radius: 20px;">
@@ -174,7 +161,7 @@
                         <th>Nombre</th>
                         <th>División Académica</th>
                         <th>Estado</th> <!-- Nuevo encabezado de columna -->
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -221,17 +208,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Carrera</h5>
+                <h5 class="modal-title">Registrar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../RegistrarCarreraServlet" method="post">
-                <div class="modal-body">
+            <div class="modal-body">
+                <form action="../RegistrarCarreraServlet" method="post">
                     <input type="hidden" name="action" value="agregar">
                     <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder=" " id="nombreCarrera" name="nombreCarrera" required>
+                        <input type="text" class="form-control" placeholder=" " id="nombreCarrera" maxlength="100" name="nombreCarrera" required>
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
                     </div>
                     <div class="form-group">
@@ -239,19 +226,19 @@
                         <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica"  required>
                             <option value="">División Académica:</option>
                             <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
+                                for (DivisionesAcademicas division : listaDivisiones) {if (division.getEstado() == 1){
                             %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
                             <%
-                                }
+                                    }}
                             %>
                         </select>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -262,37 +249,37 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar Carrera</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar Carrera</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../ActualizarCarreraServlet" method="post">
-                <div class="modal-body">
+            <div class="modal-body">
+                <form action="../ActualizarCarreraServlet" method="post">
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
-                        <label for="nombreCarreraModificar" class="col-form-label"></label>
-                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" required>
+                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" maxlength="100" placeholder=" " required>
+                        <label for="nombreCarreraModificar" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <label for="idDivisionAcademicaModificar" class="col-form-label">Division Academica</label>
-                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" placeholder="Division Academica" required>
-                            <option value="">cd </option>
+                        <label for="idDivisionAcademicaModificar" class="col-form-label"></label>
+                        <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
+                            <option value="">División Acádemica</option>
                             <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
+                                for (DivisionesAcademicas division : listaDivisiones) { if(division.getEstado() == 1){
                             %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
                             <%
-                                }
+                                    }}
                             %>
                         </select>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Modificar</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -304,15 +291,14 @@
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoCarreraServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
-                        Grupo?</h6>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado de la carrera?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idCarrera2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idCarrera2" name="idCarrera2"
@@ -324,7 +310,7 @@
                                name="estadoIdCarrera" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -338,32 +324,20 @@
         $('#modificarEstadoModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que abrió el modal
             var idCarrera = button.data('id'); // Extraer la información de atributos data-*
-
-
-
-
             // Actualiza los campos del modal.
             var modal = $(this);
             modal.find('.modal-body #idCarreraEstado').val(idCarrera);
         });
-
-
-
 
         // Este código abre el modal de modificar carrera con los datos correspondientes
         $('#modificarCarreraModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que abrió el modal
             var idCarrera = button.data('id');
             var nombreCarrera = button.data('nombre');
-            var idDivisionAcademica = button.data('iddivision');
-
-
-
 
             var modal = $(this);
             modal.find('.modal-body #idCarrera').val(idCarrera);
             modal.find('.modal-body #nombreCarreraModificar').val(nombreCarrera);
-            modal.find('.modal-body #idDivisionAcademicaModificar').val(idDivisionAcademica);
         });
     });
 </script>
@@ -374,15 +348,9 @@
         var filterName = document.getElementById('filterName');
         var filterDivision = document.querySelector('select.custom-select');
 
-
-
-
         // Agregar eventos para aplicar los filtros
         filterName.addEventListener('input', filterTable);
         filterDivision.addEventListener('change', filterTable);
-
-
-
 
         function filterTable() {
             var filterNameValue = filterName.value.toLowerCase();
@@ -390,22 +358,12 @@
             var table = document.querySelector('table');
             var rows = table.querySelector('tbody').getElementsByTagName('tr');
 
-
-
-
             for (var i = 0; i < rows.length; i++) {
                 var cells = rows[i].getElementsByTagName('td');
                 var nombreCarrera = cells[0].textContent.toLowerCase();  // Columna "Nombre de la Carrera"
                 var divisionAcademica = cells[1].textContent.toLowerCase(); // Columna "División Académica"
-
-
-
-
                 var nameMatch = filterNameValue === '' || nombreCarrera.includes(filterNameValue);
                 var divisionMatch = filterDivisionValue === '' || divisionAcademica.includes(filterDivisionValue);
-
-
-
 
                 if (nameMatch && divisionMatch) {
                     rows[i].style.display = '';
@@ -415,17 +373,11 @@
             }
         }
 
-
-
-
         // Añadir eventos a los botones para capturar el valor del id y el estado de la carrera
         document.querySelectorAll('.activo, .inactivo').forEach(function(button) {
             button.addEventListener('click', function() {
                 var idCarrera = this.closest('tr').getAttribute('data-id');
                 document.getElementById('idCarrera2').value = idCarrera;
-
-
-
 
                 var estadoActual = this.getAttribute('data-estado');
                 var estadoContrario = estadoActual === '1' ? '2' : '1';
@@ -433,25 +385,14 @@
             });
         });
 
-
-
-
         // Evento para modal de modificar carrera
         document.querySelectorAll('.btn-modificar').forEach(function(button) {
             button.addEventListener('click', function() {
                 var idCarrera = button.getAttribute('data-id');
                 var nombreCarrera = button.getAttribute('data-nombre');
-                var idDivisionAcademica = button.getAttribute('data-idDivision');
-
-
-
 
                 document.getElementById('idCarrera').value = idCarrera;
                 document.getElementById('nombreCarreraModificar').value = nombreCarrera;
-                document.getElementById('idDivisionAcademicaModificar').value = idDivisionAcademica;
-
-
-
 
                 // Llenar el estado en el modal de modificar
                 var estado = this.closest('tr').querySelector('.activo, .inactivo').getAttribute('data-estado');
@@ -461,23 +402,15 @@
         });
     });
 
-
     document.querySelectorAll('.btn-modificar, .activo, .inactivo').forEach(function(button) {
         button.addEventListener('click', function() {
             var folio = this.closest('tr').getAttribute('data-id');
             document.getElementById('idCarrera2').value = folio;
-
-
-
-
             var estadoActual = this.getAttribute('data-estado');
             var estadoContrario = estadoActual === '1' ? '2' : '1';
             document.getElementById('estadoIdCarrera').value = estadoContrario;
         });
     });
-
-
-
 
 </script>
 

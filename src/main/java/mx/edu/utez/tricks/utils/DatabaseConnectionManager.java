@@ -8,12 +8,15 @@ import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
     //define la rita de la base de daos
-    private static final String JDBC_URL = "jdbc:mysql://localhost/tricks";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1/tricks";
     //define el  username de la base de datos
     private static final String USERNAME = "root";
     //define la contraseña de la base de datos
     private static final String PASSWORD = "root";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d252964ac6aac58e062906fd1c5b99e76d57bda3
     // Crea una instancia de configuración de HikariCP.
     private static final HikariConfig config = new HikariConfig();
     //Declara el HikariDataSource que gestionará el pool de conexiones.

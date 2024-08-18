@@ -10,14 +10,11 @@ To change this template use File | Settings | File Templates.
 <%@ page import="mx.edu.utez.tricks.model.DivisionesAcademicas" %>
 <%@ page import="java.util.List" %>
 
-
-
-
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divsiones Academicas</title>
+    <title>Divisiones Académicas</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="../img_svg/faviconDivision.svg">
@@ -46,9 +43,6 @@ To change this template use File | Settings | File Templates.
         }
     </style>
 </head>
-
-
-
 
 <body>
 <div class="wrapper" style="height: 100vh;">
@@ -125,13 +119,9 @@ To change this template use File | Settings | File Templates.
         }
     %>
 
-
-
     <div class="main">
         <div class="container mt-4 text-left">
-            <h1 class="mb-4 text-light">Divisiones Acádemicas</h1>
-
-
+            <h1 class="mb-4 text-light">Divisiones Académicas</h1>
             <!-- Filtros y botón de registrar -->
             <div class="row mb-3">
                 <div class="col-md-3">
@@ -148,13 +138,13 @@ To change this template use File | Settings | File Templates.
                 <br><br>
                 <div class="col-md-3">
                     <button type="button" class="btn btnIcono w-100" data-toggle="modal"
-                            data-target="#registrarDivisionModal">
-                        Agregar division
+                            data-target="#registrarDivisionModal" style="display: flex; justify-content: space-evenly; align-items: center">
+                        Registrar División
+                        <i class="fa-solid fa-school-flag"></i>
                     </button>
                 </div>
 
             </div><br>
-
 
             <div class="container-xxl tabla">
                 <table class="table" id="example">
@@ -164,7 +154,7 @@ To change this template use File | Settings | File Templates.
                         <th>Coordinador</th>
                         <th>Siglas</th>
                         <th>Estado</th>
-                        <th>Modificar</th>
+                        <th>Editar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -197,7 +187,6 @@ To change this template use File | Settings | File Templates.
                                 <i class="fas fa-edit"></i>
                             </button>
                         </td>
-
                     </tr>
                     <%
                         }
@@ -215,7 +204,7 @@ To change this template use File | Settings | File Templates.
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar División</h5>
+                <h5 class="modal-title">Registrar División</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -224,7 +213,7 @@ To change this template use File | Settings | File Templates.
                 <form action="../RegistrarDivisionServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder=" ">
-                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <label for="nombreDivision" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="siglas" name="siglas" placeholder=" ">
@@ -235,7 +224,7 @@ To change this template use File | Settings | File Templates.
                         <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
                 </form>
             </div>
@@ -243,13 +232,12 @@ To change this template use File | Settings | File Templates.
     </div>
 </div>
 
-
 <!-- Modal para Modificar división -->
 <div class="modal fade" id="modificarDivisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modificar División</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar División</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -258,15 +246,15 @@ To change this template use File | Settings | File Templates.
                 <form action="../ActualizarDivisionServlet" method="post">
                     <div class="form-group">
                         <input type="hidden" id="idDivision" name="idDivision">
-                        <input type="text" class="form-control" id="nombreDivision" name="nombreDivision" placeholder=" ">
-                        <label for="nombreDivision" class="col-form-label">Nombre de la División:</label>
+                        <input type="text" class="form-control" id="nombreDivisionM" name="nombreDivision" placeholder=" ">
+                        <label for="nombreDivision" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="siglas" name="siglas" placeholder=" ">
+                        <input type="text" class="form-control" id="siglasM" name="siglas" placeholder=" ">
                         <label for="siglas" class="col-form-label">Siglas:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="coordinadorDivision" name="coordinadorDivision" placeholder=" ">
+                        <input type="text" class="form-control" id="coordinadorDivisionM" name="coordinadorDivision" placeholder=" ">
                         <label for="coordinadorDivision" class="col-form-label">Coordinador:</label>
                     </div>
                     <div class="modal-footer">
@@ -278,22 +266,20 @@ To change this template use File | Settings | File Templates.
     </div>
 </div>
 
-
 <!-- Modal para modifcar  estado -->
 <div class="modal fade" id="modificarEstadoDivision" tabindex="-1" role="dialog" aria-labelledby="customModalLabel"
      aria-hidden="true">
     <div class="modal-dialog custom-modal-dialog" role="document">
         <div class="modal-content custom-modal-content">
             <div class="modal-header custom-modal-header">
-                <h5 class="modal-title custom-modal-title">Modificar Estado</h5>
+                <h5 class="modal-title custom-modal-title">Estado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body custom-modal-body" >
                 <form action="../ActualizarEstadoDivisionServlet" method="post">
-                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de cambiar el estado del
-                        Grupo?</h6>
+                    <h6 class="custom-modal-text" id="customModalLabel">¿Estás seguro de actualizar el estado de la división académica?</h6>
                     <div class="form-group custom-form-group" style="display: none">
                         <label for="idDivison2" class="col-form-label custom-col-form-label" style="display: none">ID:</label>
                         <input type="text" class="form-control custom-form-control" id="idDivison2" name="idDivision2"
@@ -305,14 +291,13 @@ To change this template use File | Settings | File Templates.
                                name="estadoIdDivision" placeholder="Estado" required>
                     </div>
                     <div class="modal-footer custom-modal-footer">
-                        <button type="submit" class="btn btn-primary">Modificar</button>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -404,9 +389,9 @@ To change this template use File | Settings | File Templates.
 
                 // Rellena los campos del modal con los valores obtenidos
                 document.getElementById('idDivision').value = id;
-                document.getElementById('nombreDivision').value = nombre;
-                document.getElementById('siglas').value = siglas;
-                document.getElementById('coordinadorDivision').value = coordinador;
+                document.getElementById('nombreDivisionM').value = nombre;
+                document.getElementById('siglasM').value = siglas;
+                document.getElementById('coordinadorDivisionM').value = coordinador;
 
                 // Puedes realizar alguna acción específica con el estado si lo necesitas
                 console.log("Estado actual: " + estado);
@@ -443,6 +428,5 @@ To change this template use File | Settings | File Templates.
 <script src="../js/script.js"></script>
 <script src="../js/scriptDocentes.js"></script>
 </body>
-
 
 </html>
