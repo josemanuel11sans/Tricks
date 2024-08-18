@@ -200,26 +200,27 @@
             <div class="modal-body">
                 <form action="../RegistrarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocente" name="idDocente" placeholder=" "
+                        <input type="number" class="form-control" id="idDocente" name="idDocente" maxlength="10" minlength="3"   placeholder=" "
                                required>
                         <label for="idDocente" class="col-form-label">Matrícula:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder=" " required>
+                        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="50" placeholder=" " required>
                         <label for="nombre" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder=" " required>
+                        <input type="text" class="form-control" id="apellido" name="apellido" maxlength="50" placeholder=" " required>
                         <label for="apellido" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="mail" name="mail" placeholder=" " required>
+                        <input type="email" class="form-control" id="mail" name="mail" maxlength="50" placeholder=" " required>
                         <label for="mail" class="col-form-label">Correo Electrónico:</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="contra" name="contra" placeholder=" " required>
+                        <input type="password" class="form-control" id="contra" name="contra" minlength="4"  placeholder=" " required>
                         <label for="contra" class="col-form-label">Contraseña:</label>
                     </div>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
@@ -243,25 +244,25 @@
             <div class="modal-body">
                 <form action="../ModificarDocenteServlet" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente" placeholder=" "
+                        <input type="text" class="form-control" id="idDocenteMod" name="idDocente"  maxlength="10" minlength="3"   placeholder=" "
                                readonly>
                         <label for="idDocenteMod" class="col-form-label">ID Docente:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreMod" name="nombre" placeholder=" " required>
+                        <input type="text" class="form-control" id="nombreMod" name="nombre"  maxlength="50" placeholder=" " required>
                         <label for="nombreMod" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="apellidoMod" name="apellido" placeholder=" "
+                        <input type="text" class="form-control" id="apellidoMod" name="apellido"  maxlength="50" placeholder=" "
                                required>
                         <label for="apellidoMod" class="col-form-label">Apellidos:</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" " required>
+                        <input type="email" class="form-control" id="mailMod" name="mail" placeholder=" "  maxlength="50" required>
                         <label for="mailMod" class="col-form-label">Correo Electrónico:</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="contraMod" name="contra" placeholder=" "
+                        <input type="password" class="form-control" id="contraMod" name="contra"  minlength="4" placeholder=" "
                                required>
                         <label for="contraMod" class="col-form-label">Contraseña:</label>
                     </div>
