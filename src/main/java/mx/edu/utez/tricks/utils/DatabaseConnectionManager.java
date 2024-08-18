@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
     //define la rita de la base de daos
-    private static final String JDBC_URL = "jdbc:mysql://localhost/tricks";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1/tricks";
     //define el  username de la base de datos
     private static final String USERNAME = "root";
     //define la contraseña de la base de datos

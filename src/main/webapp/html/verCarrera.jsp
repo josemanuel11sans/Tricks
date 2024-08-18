@@ -135,11 +135,11 @@
                         <%
                             DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
-                            for (DivisionesAcademicas division : listaDivisiones) {
+                            for (DivisionesAcademicas division : listaDivisiones) {if(division.getEstado() == 1){
                         %>
                         <option value="<%= division.getSiglas() %>"><%= division.getSiglas() %></option>
                         <%
-                            }
+                                } }
                         %>
                     </select>
                 </div>
@@ -218,7 +218,7 @@
                     <input type="hidden" name="action" value="agregar">
                     <input type="hidden" id="idEstado" name="idEstado" value="1"> <!-- Puedes cambiar el valor según sea necesario -->
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder=" " id="nombreCarrera" name="nombreCarrera" required>
+                        <input type="text" class="form-control" placeholder=" " id="nombreCarrera" maxlength="100" name="nombreCarrera" required>
                         <label for="nombreCarrera" class="col-form-label">Nombre de la Carrera:</label>
                     </div>
                     <div class="form-group">
@@ -226,11 +226,11 @@
                         <select class="custom-select" id="idDivisionAcademica" name="idDivisionAcademica"  required>
                             <option value="">División Académica:</option>
                             <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
+                                for (DivisionesAcademicas division : listaDivisiones) {if (division.getEstado() == 1){
                             %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
                             <%
-                                }
+                                    }}
                             %>
                         </select>
                     </div>
@@ -259,7 +259,7 @@
                     <input type="hidden" name="action" value="actualizar">
                     <input type="hidden" id="idCarrera" name="idCarrera">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" placeholder=" " required>
+                        <input type="text" class="form-control" id="nombreCarreraModificar" name="nombreCarrera" maxlength="100" placeholder=" " required>
                         <label for="nombreCarreraModificar" class="col-form-label">Nombre:</label>
                     </div>
                     <div class="form-group">
@@ -267,11 +267,11 @@
                         <select class="custom-select" id="idDivisionAcademicaModificar" name="idDivisionAcademica" required>
                             <option value="">División Acádemica</option>
                             <%
-                                for (DivisionesAcademicas division : listaDivisiones) {
+                                for (DivisionesAcademicas division : listaDivisiones) { if(division.getEstado() == 1){
                             %>
                             <option value="<%= division.getIdDivision() %>"><%= division.getNombreDivision() %></option>
                             <%
-                                }
+                                    }}
                             %>
                         </select>
                     </div>

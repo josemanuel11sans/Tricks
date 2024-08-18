@@ -169,11 +169,11 @@
                         <%
                             CarreraDao carreraDao = new CarreraDao();
                             List<Carrera> carreraList = carreraDao.getAllCarreras();
-                            for (Carrera carrera : carreraList) {
+                            for (Carrera carrera : carreraList) {if (carrera.getIdEstado() ==1 ){
                         %>
                         <option value="<%= carrera.getNombreCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                         <%
-                            }
+                            }}
                         %>
                     </select>
                 </div><br><br>
@@ -183,11 +183,11 @@
                         <%
                             DivisionesAcademicasDAO divisionesAcademicasDAO = new DivisionesAcademicasDAO();
                             List<DivisionesAcademicas> listaDivisiones = divisionesAcademicasDAO.getAllDivisiones();
-                            for (DivisionesAcademicas division : listaDivisiones) {
+                            for (DivisionesAcademicas division : listaDivisiones) { if (division.getEstado() == 1 ){
                         %>
                         <option value="<%= division.getSiglas() %>"><%= division.getSiglas() %></option>
                         <%
-                            }
+                            }}
                         %>
                     </select>
                 </div><br><br>
@@ -314,9 +314,9 @@
                                 <div class="form-group">
                                     <select class="custom-select" id="carrera" name="carrera" required>
                                         <option value="" disabled selected>División acádemica: </option>
-                                        <% for (Carrera carrera : carreraList) {%>
+                                        <% for (Carrera carrera : carreraList) { if (carrera.getIdEstado() == 1){%>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                                        <% } %>
+                                        <% }} %>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -324,9 +324,9 @@
                                         <option value="" disabled selected>Docente: </option>
                                         <% UsuarioDao daoUsuario = new UsuarioDao();
                                             ArrayList<Usuario> listaUsuario = daoUsuario.getAll();
-                                            for (Usuario u : listaUsuario) { %>
+                                            for (Usuario u : listaUsuario) { if (u.getEstado() == 1){%>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%=u.getApellido()%></option>
-                                        <% } %>
+                                        <% }} %>
                                     </select>
                                 </div>
                                 <div class="modal-footer">
@@ -369,36 +369,29 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" action="../ActualizarGrupoServlet">
-                                <input type="hidden" id="idGrupo" name="idGrupo"> <!-- Este campo debe ser llenado con el ID del grupo a editar -->
-
-                                <!-- Nombre del Grupo -->
+                                <input type="hidden" id="idGrupo" name="idGrupo">
                                 <div class="form-group">
-                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                     <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
+                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                 </div>
-
-                                <!-- División Académica -->
                                 <div class="form-group">
-                                    <label for="idDiviMod" class="col-form-label">División Académica:</label>
-                                    <select class="custom-select" id="idDiviMod" name="carrera" required> <!-- Cambié el name a "carrera" -->
-                                        <option value="">Selecciona una división</option>
-                                        <% for (Carrera carrera : carreraList) { %>
+                                    <label for="idDiviMod" class="col-form-label"></label>
+                                    <select class="custom-select" id="idDiviMod" name="idDiviMod" required>
+                                        <option value="">División Académica:</option>
+                                        <% for (Carrera carrera : carreraList) { if(carrera.getIdEstado() == 1){ %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
-                                        <% } %>
+                                        <% }} %>
                                     </select>
                                 </div>
-
-                                <!-- Docente -->
                                 <div class="form-group">
-                                    <label for="idDocMod" class="col-form-label">Docente:</label>
+                                    <label for="idDocMod" class="col-form-label"></label>
                                     <select class="custom-select" required id="idDocMod" name="docente">
-                                        <option value="">Selecciona un docente</option>
-                                        <% for (Usuario u : listaUsuario) { %>
+                                        <option value="">Docente:</option>
+                                        <% for (Usuario u : listaUsuario) { if (u.getEstado() == 1){%>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
-                                        <% } %>
+                                        <% }} %>
                                     </select>
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                 </div>
@@ -407,7 +400,6 @@
                     </div>
                 </div>
             </div>
-
 
 
 <!-- Modificar estado del grupo -->
@@ -471,9 +463,9 @@
                             <option>Folio del aspirante:</option>
                             <% AspiranteDAO dao2 = new AspiranteDAO();
                                 List<Aspirante> aspirantes = dao2.getAllAspirantes();
-                                for (Aspirante aspirante : aspirantes) { %>
+                                for (Aspirante aspirante : aspirantes) { if(aspirante.getEstado() == 1){ %>
                             <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
-                            <% } %>
+                            <% }} %>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -636,21 +628,21 @@
                 modal.find('#nombreGrupo').val(nombre);
 
                 // Seleccionar la carrera correcta
-                modal.find('#idDiviMod').val(idCarrera);
+                modal.find('#carrera').val(idCarrera);
 
                 // Seleccionar el docente correcto
-                modal.find('#idDocMod').val(idDocente);
+                modal.find('#docente').val(idDocente);
 
                 // Actualizar las etiquetas de los select
-                updateSelectLabel(modal.find('#idDiviMod'));
-                updateSelectLabel(modal.find('#idDocMod'));
+                updateSelectLabel(modal.find('#carrera'));
+                updateSelectLabel(modal.find('#docente'));
             });
 
             // Función para actualizar la etiqueta del select
             function updateSelectLabel(selectElement) {
                 var selectedOption = selectElement.find('option:selected');
                 var label = selectElement.prev('label');
-                var labelText = selectElement.data('label') || label.text();
+                var labelText = selectElement.data('label') || selectElement.attr('name');
                 if (selectedOption.val()) {
                     label.text(labelText + ': ' + selectedOption.text());
                 } else {
@@ -658,12 +650,11 @@
                 }
             }
 
-            $('#idDiviMod, #idDocMod').change(function() {
+            $('#carrera, #docente').change(function() {
                 updateSelectLabel($(this));
             });
         });
     </script>
-
 
 </div>
         </div>
