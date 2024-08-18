@@ -505,39 +505,35 @@
     </div>
 </div>
 
-<!-- Modal para carga masiva de datos -->
-<div class="modal fade" id="asignarMasivo" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content modal-content-custom">
-            <div class="modal-header modal-header-custom">
-                <h5 class="modal-title modal-title-custom" id="exampleModalLabel">Asignar aspirantes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-body-custom">
-                <form action="../uploadexcel" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <p>
-                            <label for="archivoCargaMasiva">Asignación masiva</label>
-                        <br>
-                        <label class="btn-files">Selecciona tus archivos
-                            <input type="file" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" />
-                        </label>
-                        </p>
-                    </div>
-                    <div class="modal-footer modal-footer-custom">
-                        <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
-                            Ejemplo de formato
-                        </a>
-                        <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn btnFormatos" download>Descargar formato</a>
-                        <button type="submit" class="btn btn-primary">Asignar</button>
-                    </div>
-                </form>
+            <!-- Modal para carga masiva de datos -->
+            <div class="modal fade" id="asignarMasivo" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content modal-content-custom">
+                        <div class="modal-header modal-header-custom">
+                            <h5 class="modal-title modal-title-custom" id="exampleModalLabel">Asignar aspirantes</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body modal-body-custom">
+                            <form action="../uploadexcel" method="post" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <input type="file"  class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
+                                                <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
+                                </div>
+                                <div class="modal-footer modal-footer-custom">
+                                    <a href="#" class="btn btnFormatos" onclick="openImagePopup('../img/asignarAspirantes.png', 'Ejemplo de formato'); return false;">
+                                        Ejemplo de formato
+                                    </a>
+                                    <a href="../formatos/FormatoAsignacionMasiva.xlsx" class="btn btnFormatos" download>Descargar formato
+                                    </a>
+                                    <button type="submit" class="btn btn-custom">Asignar</button>
+                                </div>
+                            </form>
 
-            </div>
-        </div>
-    </div>
+                        </div>
+                    </div>
+                </div>
     <script>
         /*
         document.addEventListener('DOMContentLoaded', function () {

@@ -13,7 +13,10 @@ import java.util.List;
 public class GruposAsignadosDao {
     public List<GrupoAsignado> getGruposAsignadosPorDocente(String email) {
         List<GrupoAsignado> grupos = new ArrayList<>();
-        String query = "SELECT g.nombre_grupo, c.nombre_carrera, g.estado, u.id_usuario, g.id_grupo FROM grupos g JOIN carreras c ON g.carreras_id_carrera = c.id_carrera JOIN usuarios u ON g.id_usuario = u.id_usuario WHERE u.mail = ?;";
+        String query = "SELECT g.nombre_grupo, c.nombre_carrera, g.estado, u.id_usuario, g.id_grupo " +
+                "FROM grupos g JOIN carreras c ON g.carreras_id_carrera = c.id_carrera " +
+                "JOIN usuarios u ON g.id_usuario = u.id_usuario " +
+                "WHERE u.mail = ? AND g.estado = 1;";  // Filtra solo los grupos activos
 
         try (Connection conn = DatabaseConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {

@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="../css/estilosModal.css">
     <link rel="stylesheet" href="../css/estilosTabla.css">
     <script src="https://kit.fontawesome.com/8f2cb0ebcf.js" crossorigin="anonymous"></script>
-    <!--desactiva este comentario si no funciona el js de sweet alert para ques e conecte a la cdn -->
-    <!--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/sweetalert2.js"></script>
 </head>
 
@@ -54,8 +53,9 @@
                         GruposAsignadosDao dao = new GruposAsignadosDao();
                         List<GrupoAsignado> gruposAsignados = dao.getGruposAsignadosPorDocente((String) session.getAttribute("userEmail"));
 
-                        // Iterar sobre la lista de grupos asignados y mostrar los datos en la tabla
+                        // Iterar sobre la lista de grupos asignados y mostrar solo los activos en la tabla
                         for (GrupoAsignado grupo : gruposAsignados) {
+                            if (grupo.getEstado() == 1) { // Solo mostrar grupos activos
                     %>
                     <tr style="height: 20px; font-size: 15px" data-id="<%= grupo.getIdGrupo() %>"> <!-- Cada fila representa un grupo -->
                         <td style="padding: 0; margin: 0"><%= grupo.getNombreGrupo() %></td> <!-- Nombre del grupo -->
@@ -79,7 +79,10 @@
                             </button>
                         </td>
                     </tr>
-                    <% } %> <!-- Fin del bucle for -->
+                    <%
+                            } // Fin del if que verifica el estado del grupo
+                        } // Fin del bucle for
+                    %>
                     </tbody>
                 </table>
             </div>
