@@ -265,19 +265,19 @@
                 <form action="../ActualizarAspiranteServlet" method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" id="folioAspirante3" name="folioAspirante" readonly>
-                        <label for="folioAspirante" class="col-form-label">Folio:</label>
+                        <label for="folioAspirante" class="col-form-label" maxlength="10">Folio:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nombreAspirante3" name="nombreAspirante">
-                        <label for="nombreAspirante" class="col-form-label">Nombre:</label>
+                        <label for="nombreAspirante" class="col-form-label"  maxlength="50" >Nombre:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="apellidosAspirante3" name="apellidosAspirante">
-                        <label for="apellidosAspirante" class="col-form-label">Apellidos:</label>
+                        <label for="apellidosAspirante" class="col-form-label"  maxlength="50" >Apellidos:</label>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="curpAspirante3" name="curpAspirante">
-                        <label for="curpAspirante" class="col-form-label">CURP:</label>
+                        <label for="curpAspirante" class="col-form-label"  maxlength="25" >CURP:</label>
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="fechaNacimientoAspirante3" name="fechaNacimientoAspirante">
