@@ -369,29 +369,36 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" action="../ActualizarGrupoServlet">
-                                <input type="hidden" id="idGrupo" name="idGrupo">
+                                <input type="hidden" id="idGrupo" name="idGrupo"> <!-- Este campo debe ser llenado con el ID del grupo a editar -->
+
+                                <!-- Nombre del Grupo -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                                     <label for="nombreGrupo" class="col-form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                                 </div>
+
+                                <!-- División Académica -->
                                 <div class="form-group">
-                                    <label for="idDiviMod" class="col-form-label"></label>
-                                    <select class="custom-select" id="idDiviMod" name="idDiviMod" required>
-                                        <option value="">División Académica:</option>
+                                    <label for="idDiviMod" class="col-form-label">División Académica:</label>
+                                    <select class="custom-select" id="idDiviMod" name="carrera" required> <!-- Cambié el name a "carrera" -->
+                                        <option value="">Selecciona una división</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
                                     </select>
                                 </div>
+
+                                <!-- Docente -->
                                 <div class="form-group">
-                                    <label for="idDocMod" class="col-form-label"></label>
+                                    <label for="idDocMod" class="col-form-label">Docente:</label>
                                     <select class="custom-select" required id="idDocMod" name="docente">
-                                        <option value="">Docente:</option>
+                                        <option value="">Selecciona un docente</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
                                     </select>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
                                 </div>
@@ -400,6 +407,7 @@
                     </div>
                 </div>
             </div>
+
 
 
 <!-- Modificar estado del grupo -->
@@ -628,21 +636,21 @@
                 modal.find('#nombreGrupo').val(nombre);
 
                 // Seleccionar la carrera correcta
-                modal.find('#carrera').val(idCarrera);
+                modal.find('#idDiviMod').val(idCarrera);
 
                 // Seleccionar el docente correcto
-                modal.find('#docente').val(idDocente);
+                modal.find('#idDocMod').val(idDocente);
 
                 // Actualizar las etiquetas de los select
-                updateSelectLabel(modal.find('#carrera'));
-                updateSelectLabel(modal.find('#docente'));
+                updateSelectLabel(modal.find('#idDiviMod'));
+                updateSelectLabel(modal.find('#idDocMod'));
             });
 
             // Función para actualizar la etiqueta del select
             function updateSelectLabel(selectElement) {
                 var selectedOption = selectElement.find('option:selected');
                 var label = selectElement.prev('label');
-                var labelText = selectElement.data('label') || selectElement.attr('name');
+                var labelText = selectElement.data('label') || label.text();
                 if (selectedOption.val()) {
                     label.text(labelText + ': ' + selectedOption.text());
                 } else {
@@ -650,11 +658,12 @@
                 }
             }
 
-            $('#carrera, #docente').change(function() {
+            $('#idDiviMod, #idDocMod').change(function() {
                 updateSelectLabel($(this));
             });
         });
     </script>
+
 
 </div>
         </div>
