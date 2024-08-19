@@ -13,24 +13,33 @@ import java.io.IOException;
 @WebServlet(name = "ActualizarGrupoServlet", value = "/ActualizarGrupoServlet")
 public class ActualizarGrupoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
-        String nombreGrupo = request.getParameter("nombreGrupo");
-        int carrera = Integer.parseInt(request.getParameter("carrera"));
-        int docente = Integer.parseInt(request.getParameter("docente"));
+        try {
+            // Validar y parsear los parámetros
+            int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
+            String nombreGrupo = request.getParameter("nombreGrupo");
+            int carrera = Integer.parseInt(request.getParameter("carrera"));
+            int docente = Integer.parseInt(request.getParameter("docente"));
 
-        Grupo grupo = new Grupo();
-        grupo.setIdGrupo(idGrupo);
-        grupo.setNombreGrupo(nombreGrupo);
-        grupo.setIdCarrera(carrera);
-        grupo.setIdDocente(docente);
+            // Crear objeto Grupo con los valores obtenidos
+            Grupo grupo = new Grupo();
+            grupo.setIdGrupo(idGrupo);
+            grupo.setNombreGrupo(nombreGrupo);
+            grupo.setIdCarrera(carrera);
+            grupo.setIdDocente(docente);
 
-        GrupoDao dao = new GrupoDao();
-        boolean isUpdated = dao.actualizarGrupo(grupo);
+            // Actualizar en la base de datos
+            GrupoDao dao = new GrupoDao();
+            boolean isUpdated = dao.actualizarGrupo(grupo);
 
-        if (isUpdated) {
-            response.sendRedirect("html/verGrupos.jsp?success=true");
-        } else {
-            response.sendRedirect("../error.jsp");
+            // Redirigir según el resultado de la actualización
+            if (isUpdated) {
+                response.sendRedirect("html/verGrupos.jsp?success=true");
+            } else {
+                response.sendRedirect("../error.jsp");
+            }
+        } catch (NumberFormatException e) {
+            // Manejo de excepciones si los parámetros no son válidos
+            response.sendRedirect("../error.jsp?message=Invalid+input+data");
         }
     }
 
