@@ -488,7 +488,7 @@
                             </button>
                         </div>
                         <div class="modal-body modal-body-custom">
-                            <form action="../uploadexcel" method="post" enctype="multipart/form-data">
+                            <form action="../asignargrupo" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <input type="file"  class="form-control form-control-custom" id="archivoCargaMasiva" name="archivoCargaMasiva" accept=".xlsx" value="" placeholder=" ">
                                                 <label for="archivoCargaMasiva" class="col-form-label">Asignación masiva</label>
