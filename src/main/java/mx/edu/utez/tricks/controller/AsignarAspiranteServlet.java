@@ -25,30 +25,13 @@ public class AsignarAspiranteServlet extends HttpServlet {
 
         // Instancias de los DAOs
         GrupoDao grupoDao = new GrupoDao();
-        AspiranteDAO aspiranteDao = new AspiranteDAO();
 
+        Grupo grupo = new Grupo(idGrupo, folioAspirante);
         // Obtener el grupo por ID
-        Grupo grupo = grupoDao.getGrupoById(idGrupo);
-        if (grupo == null) {
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-            session.setAttribute("alerta", "error");
-            return;
-        }
-
-        // Obtener el aspirante por folio
-        Aspirante aspirante = aspiranteDao.getAspiranteByFolio(folioAspirante);
-        if (aspirante == null) {
-            request.setAttribute("error", "Aspirante no encontrado");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-            return;
-        }
-
-
-        boolean asignado = grupoDao.asignarAspiranteAGrupo(grupo, aspirante); // Método implementado en GrupoDao
-
-        if (asignado) {
+        boolean resultado = grupoDao.asignarAspiranteAGrupo(grupo);
+        if (resultado) {
             session.setAttribute("alerta", "exito");
-            request.getRequestDispatcher("verGrupos.jsp");
+            response.sendRedirect("html/verAspirantes.jsp?success=true");
         } else {
             request.setAttribute("error", "No se pudo asignar el aspirante al grupo");
             request.getRequestDispatcher("error.jsp");

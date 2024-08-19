@@ -158,15 +158,15 @@ public class GrupoDao {
     }
 
     // Asignar un aspirante a un grupo
-    public boolean asignarAspiranteAGrupo(Grupo grupo, Aspirante aspirante) {
-        String query = "INSERT INTO grupo_aspirantes (id_grupo, folio_aspirante) VALUES (?, ?)";
+    public boolean asignarAspiranteAGrupo(Grupo grupo) {
+        String query = "UPDATE aspirantes SET grupos_id_grupo = ? WHERE folio_aspirante = ?";
         boolean isAssigned = false;
 
         try (Connection con = DatabaseConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(query)) {
 
             ps.setInt(1, grupo.getIdGrupo());
-            ps.setString(2, aspirante.getFolioAspirante());
+            ps.setString(2, grupo.getNombreGrupo());
             isAssigned = ps.executeUpdate() > 0;
 
         } catch (SQLException e) {

@@ -26,6 +26,11 @@ public class Grupo {
         this.idDocente = idDocente;
     }
 
+    public Grupo(int idGrupo, String nombreGrupo) {
+        this.idGrupo = idGrupo;
+        this.nombreGrupo = nombreGrupo;
+    }
+
     public int getIdGrupo() {
         return idGrupo;
     }
