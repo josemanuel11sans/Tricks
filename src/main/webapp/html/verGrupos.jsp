@@ -372,8 +372,8 @@
 
                                 <!-- Nombre del Grupo -->
                                 <div class="form-group">
+                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
                                     <label for="nombreGrupo" class="col-form-label">Nombre:</label>
-                                    <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" placeholder=" " required>
                                 </div>
 
                                 <!-- División Académica -->
