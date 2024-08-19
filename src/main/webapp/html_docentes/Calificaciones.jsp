@@ -158,9 +158,13 @@
                 <div class="col-md-3 d-flex align-items-center">
                     <button type="button" id="updateCalificacionesBtn" class="btn btn-primary mr-2">Calificar</button>
                     <td style="padding: 0; margin: 0">
-                    <button class="btn btn-primary d-flex justify-content-center align-items-center" style="width: 38px; height: 38px;">
-                        <i class="fas fa-download"></i>
-                    </button>
+                        <form method="post" action="../pdf">
+                            <td style="padding: 0; margin: 0">
+                                <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center" style="width: 38px; height: 38px;">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </td>
+                        </form>
                     </td>
                 </div>
             </div>
