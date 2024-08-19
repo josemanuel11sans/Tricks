@@ -171,4 +171,34 @@ public class AspiranteDAO {
 
         return aspirante;
     }
+
+    public Aspirante getAspiranteByFolio(String folioAspirante) {
+        String query = "SELECT * FROM aspirantes WHERE folio_aspirante = ?";
+        Aspirante aspirante = null;
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, folioAspirante);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                aspirante = new Aspirante();
+                aspirante.setFolioAspirante(rs.getString("folio_aspirante"));
+                aspirante.setNombre(rs.getString("nombre"));
+                aspirante.setApellidos(rs.getString("apellido"));
+                aspirante.setCurp(rs.getString("curp"));
+                aspirante.setEstado(rs.getInt("estado"));
+                aspirante.setFechaNacimiento(rs.getDate("fecha_nac"));
+                aspirante.setGrupo(rs.getInt("grupos_id_grupo"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return aspirante;
+    }
 }
+
+
+

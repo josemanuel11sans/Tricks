@@ -104,9 +104,16 @@
                 case "error":
                     mensajeAlerta = "Se produjo un error.";
                     break;
+                     case "asignarpirante":
+                    mensajeAlerta = "Aspirante asignado correctamente";
+                    break;
+                     case "errorasignarpirante":
+                    mensajeAlerta = "Error al asignar aspirante";
+                    break;
                 default:
                     mensajeAlerta = "";
                     break;
+
             }
 
 
@@ -132,6 +139,12 @@
                         break;
                     case "error":
                         iconoAlerta = "fa-times-circle";
+                        break;
+                        case "asignarpirante":
+                            iconoAlerta = "fa-check-circle";
+                        break;
+                        case "errorasignarpirante":
+                            iconoAlerta = "fa-times-circle";
                         break;
                     default:
                         iconoAlerta = "fa-info-circle";
@@ -357,6 +370,7 @@
                 }
             </script>
 
+            <!-- Modal para editar grupo -->
             <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -368,19 +382,18 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" action="../ActualizarGrupoServlet">
-                                <input type="hidden" id="idGrupo" name="idGrupo"> <!-- Este campo debe ser llenado con el ID del grupo a editar -->
+                                <input type="hidden" id="idGrupo" name="idGrupo">
 
                                 <!-- Nombre del Grupo -->
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
-                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                 </div>
 
                                 <!-- División Académica -->
                                 <div class="form-group">
-                                    <label for="idDiviMod" class="col-form-label">División Académica:</label>
-                                    <select class="custom-select" id="idDiviMod" name="carrera" required> <!-- Cambié el name a "carrera" -->
-                                        <option value="">Selecciona una división</option>
+                                    <label for="idDiviMod" class="col-form-label"></label>
+                                    <select class="custom-select" id="idDiviMod" name="carrera" required>
+                                        <option value="" for="idDiviMod">Seleccione su carrera</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -389,14 +402,15 @@
 
                                 <!-- Docente -->
                                 <div class="form-group">
-                                    <label for="idDocMod" class="col-form-label">Docente:</label>
+                                    <label for="idDocMod" class="col-form-label"></label>
                                     <select class="custom-select" required id="idDocMod" name="docente">
-                                        <option value="">Selecciona un docente</option>
+                                        <option value="" for="idDocMod">Seleccione a su docente</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
                                     </select>
                                 </div>
+
 
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -447,41 +461,40 @@
 
 
 <!-- Modal asignar aspirante -->
-<div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Asignar Aspirante al Grupo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Asignar Aspirante al Grupo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../AsignarAspiranteServlet" method="post" >
+                                <input type="text" id="IdGrupo" name="IdGrupo" value="" style="display: none">
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="folioAspirante"></label>
+                                    <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
+                                        <option>Folio del aspirante:</option>
+                                        <% AspiranteDAO dao2 = new AspiranteDAO();
+                                            List<Aspirante> aspirantes = dao2.getAllAspirantes();
+                                            for (Aspirante aspirante : aspirantes) { if(aspirante.getEstado() == 1){ %>
+                                        <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
+                                        <% }} %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="../AsignarAspiranteServlet" method="post">
-                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="" >
-                    <div class="form-group">
-                        <label for="nombreGrupo">Grupo seleccionado:</label>
-                        <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label" for="folioAspirante"></label>
-                        <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
-                            <option>Folio del aspirante:</option>
-                            <% AspiranteDAO dao2 = new AspiranteDAO();
-                                List<Aspirante> aspirantes = dao2.getAllAspirantes();
-                                for (Aspirante aspirante : aspirantes) { if(aspirante.getEstado() == 1){ %>
-                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
-                            <% }} %>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
             <!-- Modal para carga masiva de datos -->
             <div class="modal fade" id="asignarMasivo" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">
@@ -629,11 +642,11 @@
                 modal.find('#idGrupo').val(id);
                 modal.find('#nombreGrupo').val(nombre);
 
-                // Seleccionar la carrera correcta
-                modal.find('#idDiviMod').val(idCarrera);
+                // Seleccionar la carrera correcta, o la opción por defecto si no hay una seleccionada
+                modal.find('#idDiviMod').val(idCarrera || '');
 
-                // Seleccionar el docente correcto
-                modal.find('#idDocMod').val(idDocente);
+                // Seleccionar el docente correcto, o la opción por defecto si no hay uno seleccionado
+                modal.find('#idDocMod').val(idDocente || '');
 
                 // Actualizar las etiquetas de los select
                 updateSelectLabel(modal.find('#idDiviMod'));
@@ -646,9 +659,9 @@
                 var label = selectElement.prev('label');
                 var labelText = selectElement.data('label') || label.text();
                 if (selectedOption.val()) {
-                    label.text(labelText + ': ' + selectedOption.text());
+                    label.text();
                 } else {
-                    label.text(labelText + ':');
+                    label.text(labelText);
                 }
             }
 
@@ -656,6 +669,7 @@
                 updateSelectLabel($(this));
             });
         });
+
     </script>
 
 </div>
