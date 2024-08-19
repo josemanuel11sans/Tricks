@@ -104,9 +104,16 @@
                 case "error":
                     mensajeAlerta = "Se produjo un error.";
                     break;
+                     case "asignarpirante":
+                    mensajeAlerta = "Aspirante asignado correctamente";
+                    break;
+                     case "errorasignarpirante":
+                    mensajeAlerta = "Error al asignar aspirante";
+                    break;
                 default:
                     mensajeAlerta = "";
                     break;
+
             }
 
 
@@ -132,6 +139,12 @@
                         break;
                     case "error":
                         iconoAlerta = "fa-times-circle";
+                        break;
+                        case "asignarpirante":
+                            iconoAlerta = "fa-check-circle";
+                        break;
+                        case "errorasignarpirante":
+                            iconoAlerta = "fa-times-circle";
                         break;
                     default:
                         iconoAlerta = "fa-info-circle";

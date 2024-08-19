@@ -30,11 +30,11 @@ public class AsignarAspiranteServlet extends HttpServlet {
         // Obtener el grupo por ID
         boolean resultado = grupoDao.asignarAspiranteAGrupo(grupo);
         if (resultado) {
-            session.setAttribute("alerta", "exito");
-            response.sendRedirect("html/verAspirantes.jsp?success=true");
+            session.setAttribute("alerta", "asignarpirante");
+            response.sendRedirect("html/verGrupos.jsp?success=true");
         } else {
-            request.setAttribute("error", "No se pudo asignar el aspirante al grupo");
-            request.getRequestDispatcher("error.jsp");
+            session.setAttribute("alerta", "errorasignarpirante");
+            request.getRequestDispatcher("verGrupos.jsp");
         }
     }
 }
