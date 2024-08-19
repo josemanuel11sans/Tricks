@@ -378,9 +378,8 @@
 
                                 <!-- División Académica -->
                                 <div class="form-group">
-                                    <label for="idDiviMod" class="col-form-label">División Académica:</label>
                                     <select class="custom-select" id="idDiviMod" name="carrera" required> <!-- Cambié el name a "carrera" -->
-                                        <option value="">Selecciona una división</option>
+                                        <option value="" selected disabled="disabled">Selecciona una división</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -389,9 +388,8 @@
 
                                 <!-- Docente -->
                                 <div class="form-group">
-                                    <label for="idDocMod" class="col-form-label">Docente:</label>
                                     <select class="custom-select" required id="idDocMod" name="docente">
-                                        <option value="">Selecciona un docente</option>
+                                        <option selected value="" disabled="disabled">Selecciona un docente</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
