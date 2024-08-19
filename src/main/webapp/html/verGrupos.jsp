@@ -461,7 +461,6 @@
                             <form action="../AsignarAspiranteServlet" method="post" >
                                 <input type="text" id="IdGrupo" name="IdGrupo" value="" style="display: none">
                                 <div class="form-group">
-                                    <label for="nombreGrupo">Grupo seleccionado:</label>
                                     <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
                                 </div>
                                 <div class="form-group">
