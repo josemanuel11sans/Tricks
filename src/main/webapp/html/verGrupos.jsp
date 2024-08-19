@@ -357,6 +357,7 @@
                 }
             </script>
 
+            <!-- Modal para editar grupo -->
             <div class="modal fade" id="actualizarGrupoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -368,18 +369,18 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" action="../ActualizarGrupoServlet">
-                                <input type="hidden" id="idGrupo" name="idGrupo"> <!-- Este campo debe ser llenado con el ID del grupo a editar -->
+                                <input type="hidden" id="idGrupo" name="idGrupo">
 
                                 <!-- Nombre del Grupo -->
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="nombreGrupo" name="nombreGrupo" required>
-                                    <label for="nombreGrupo" class="col-form-label">Nombre:</label>
                                 </div>
 
                                 <!-- División Académica -->
                                 <div class="form-group">
-                                    <select class="custom-select" id="idDiviMod" name="carrera" required> <!-- Cambié el name a "carrera" -->
-                                        <option value="" selected disabled="disabled">Selecciona una división</option>
+                                    <label for="idDiviMod" class="col-form-label"></label>
+                                    <select class="custom-select" id="idDiviMod" name="carrera" required>
+                                        <option value="" for="idDiviMod">Seleccione su carrera</option>
                                         <% for (Carrera carrera : carreraList) { %>
                                         <option value="<%= carrera.getIdCarrera() %>"><%= carrera.getNombreCarrera() %></option>
                                         <% } %>
@@ -388,13 +389,15 @@
 
                                 <!-- Docente -->
                                 <div class="form-group">
+                                    <label for="idDocMod" class="col-form-label"></label>
                                     <select class="custom-select" required id="idDocMod" name="docente">
-                                        <option selected value="" disabled="disabled">Selecciona un docente</option>
+                                        <option value="" for="idDocMod">Seleccione a su docente</option>
                                         <% for (Usuario u : listaUsuario) { %>
                                         <option value="<%= u.getId_usuario() %>"><%= u.getNombre() %> <%= u.getApellido() %></option>
                                         <% } %>
                                     </select>
                                 </div>
+
 
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -627,11 +630,11 @@
                 modal.find('#idGrupo').val(id);
                 modal.find('#nombreGrupo').val(nombre);
 
-                // Seleccionar la carrera correcta
-                modal.find('#idDiviMod').val(idCarrera);
+                // Seleccionar la carrera correcta, o la opción por defecto si no hay una seleccionada
+                modal.find('#idDiviMod').val(idCarrera || '');
 
-                // Seleccionar el docente correcto
-                modal.find('#idDocMod').val(idDocente);
+                // Seleccionar el docente correcto, o la opción por defecto si no hay uno seleccionado
+                modal.find('#idDocMod').val(idDocente || '');
 
                 // Actualizar las etiquetas de los select
                 updateSelectLabel(modal.find('#idDiviMod'));
@@ -644,9 +647,9 @@
                 var label = selectElement.prev('label');
                 var labelText = selectElement.data('label') || label.text();
                 if (selectedOption.val()) {
-                    label.text(labelText + ': ' + selectedOption.text());
+                    label.text();
                 } else {
-                    label.text(labelText + ':');
+                    label.text(labelText);
                 }
             }
 
@@ -654,6 +657,7 @@
                 updateSelectLabel($(this));
             });
         });
+
     </script>
 
 </div>
