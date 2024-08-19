@@ -448,41 +448,41 @@
 
 
 <!-- Modal asignar aspirante -->
-<div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Asignar Aspirante al Grupo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="modal fade" id="asignarIndividual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Asignar Aspirante al Grupo</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../AsignarAspiranteServlet" method="post" >
+                                <input type="text" id="IdGrupo" name="IdGrupo" value="" style="display: none">
+                                <div class="form-group">
+                                    <label for="nombreGrupo">Grupo seleccionado:</label>
+                                    <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="folioAspirante"></label>
+                                    <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
+                                        <option>Folio del aspirante:</option>
+                                        <% AspiranteDAO dao2 = new AspiranteDAO();
+                                            List<Aspirante> aspirantes = dao2.getAllAspirantes();
+                                            for (Aspirante aspirante : aspirantes) { if(aspirante.getEstado() == 1){ %>
+                                        <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
+                                        <% }} %>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Registrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="../AsignarAspiranteServlet" method="post">
-                    <input type="hidden" id="IdGrupo" name="IdGrupo" value="" >
-                    <div class="form-group">
-                        <label for="nombreGrupo">Grupo seleccionado:</label>
-                        <input type="hidden" class="form-control" id="nombreGrupo" name="nombreGrupo" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label" for="folioAspirante"></label>
-                        <select class="custom-select" id="folioAspirante" name="folioAspirante" required>
-                            <option>Folio del aspirante:</option>
-                            <% AspiranteDAO dao2 = new AspiranteDAO();
-                                List<Aspirante> aspirantes = dao2.getAllAspirantes();
-                                for (Aspirante aspirante : aspirantes) { if(aspirante.getEstado() == 1){ %>
-                            <option value="<%= aspirante.getFolioAspirante() %>"><%= aspirante.getFolioAspirante() %> </option>
-                            <% }} %>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
             <!-- Modal para carga masiva de datos -->
             <div class="modal fade" id="asignarMasivo" tabindex="-1" role="dialog" aria-labelledby="cargaMasivaLabel" aria-hidden="true">

@@ -1,7 +1,7 @@
 package mx.edu.utez.tricks.dao;
 
 import mx.edu.utez.tricks.model.Grupo;
-import mx.edu.utez.tricks.model.Usuario;
+import mx.edu.utez.tricks.model.Aspirante;
 import mx.edu.utez.tricks.utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -70,7 +70,7 @@ public class GrupoDao {
     }
 
     // Insertar un nuevo grupo
-    public boolean agregarGrupo(Grupo grupo){
+    public boolean agregarGrupo(Grupo grupo) {
         String query = "INSERT INTO grupos (nombre_grupo, carreras_id_carrera, id_usuario, estado) VALUES (?, ?, ?, 1)";
         boolean isInserted = false;
 
@@ -120,7 +120,7 @@ public class GrupoDao {
         return isUpdated;
     }
 
-
+    // Actualizar el estado de un grupo
     public boolean actualizarEstado(Grupo grupo) {
         String query = "UPDATE grupos SET estado = ? WHERE id_grupo = ?";
 
@@ -139,6 +139,7 @@ public class GrupoDao {
         }
     }
 
+    // Verificar si el nombre del grupo ya existe
     public boolean nombreExistente(String nombreGrupo) {
         String query = "SELECT COUNT(*) FROM grupos WHERE nombre_grupo = ?";
         try (Connection con = DatabaseConnectionManager.getConnection();
@@ -148,13 +149,37 @@ public class GrupoDao {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);
-                return count > 0; // Devuelve verdadero si el folio ya existe
+                return count > 0; // Devuelve verdadero si el nombre ya existe
             }
         } catch (SQLException a) {
             throw new RuntimeException("Error al verificar la existencia del grupo", a);
         }
-        return false; // Devuelve falso si la matrícula no existe
+        return false; // Devuelve falso si el nombre no existe
+    }
+
+    // Asignar un aspirante a un grupo
+    public boolean asignarAspiranteAGrupo(Grupo grupo, Aspirante aspirante) {
+        String query = "INSERT INTO grupo_aspirantes (id_grupo, folio_aspirante) VALUES (?, ?)";
+        boolean isAssigned = false;
+
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, grupo.getIdGrupo());
+            ps.setString(2, aspirante.getFolioAspirante());
+            isAssigned = ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("Código de error SQL: " + e.getErrorCode());
+            System.out.println("Estado SQL: " + e.getSQLState());
+            return false;
+        }
+
+        return isAssigned;
     }
 }
+
 
 
