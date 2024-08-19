@@ -19,7 +19,7 @@ public class pdf extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Obtener la ubicación y los bytes del reporte
-        String report = "/WEB-INF/FormatoListaCalificaciones1.jasper";
+        String report = "/WEB-INF/Coffee_Landscape_6.jasper";
         File file = new File(getServletContext().getRealPath(report));
         InputStream input = new FileInputStream(file);
 
